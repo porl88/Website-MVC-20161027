@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFEC4F14-A2C1-4A7E-9118-6234F96E629F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVC.Core</RootNamespace>
+    <AssemblyName>MVC.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\ConfigSettings.cs" />
+    <Compile Include="Configuration\EmailConfig.cs" />
+    <Compile Include="Configuration\ISystemSettings.cs" />
+    <Compile Include="Configuration\SystemSettings.cs" />
+    <Compile Include="Configuration\WebsiteConfig.cs" />
+    <Compile Include="Data\EntityFramework\IRepository.cs" />
+    <Compile Include="Data\EntityFramework\IUnitOfWork.cs" />
+    <Compile Include="Data\EntityFramework\Repository.cs" />
+    <Compile Include="Data\EntityFramework\UnitOfWork.cs" />
+    <Compile Include="Data\EntityFramework\WebsiteDbContext.cs" />
+    <Compile Include="Entities\Account\User.cs" />
+    <Compile Include="Entities\Article\Article.cs" />
+    <Compile Include="Entities\Article\ArticleVersion.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Culture\Currency.cs" />
+    <Compile Include="Entities\Culture\Language.cs" />
+    <Compile Include="Entities\Location\Address.cs" />
+    <Compile Include="Entities\Location\Country.cs" />
+    <Compile Include="Entities\Media\ImageData.cs" />
+    <Compile Include="Entities\Shop\Basket.cs" />
+    <Compile Include="Entities\Shop\BasketItem.cs" />
+    <Compile Include="Entities\Shop\CreditCard.cs" />
+    <Compile Include="Entities\Shop\CreditCardType.cs" />
+    <Compile Include="Entities\Shop\Order.cs" />
+    <Compile Include="Entities\Website\IPageItem.cs" />
+    <Compile Include="Entities\Website\Page.cs" />
+    <Compile Include="Entities\Website\PageField.cs" />
+    <Compile Include="Entities\Website\PageItem\RichText.cs" />
+    <Compile Include="Entities\Website\PageItem\PlainText.cs" />
+    <Compile Include="Entities\Website\PageVersion.cs" />
+    <Compile Include="Entities\Website\Website.cs" />
+    <Compile Include="Exceptions\EmailExceptionHandler.cs" />
+    <Compile Include="Exceptions\IExceptionHandler.cs" />
+    <Compile Include="Exceptions\NullExceptionHandler.cs" />
+    <Compile Include="Helpers\EntityFrameworkHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing\MockRepository.cs" />
+    <Compile Include="Testing\MockUnitOfWork.cs" />
+    <Compile Include="Testing\DatabaseInitialiazer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\XML\Countries.xml" />
+    <Content Include="Exceptions\exception-email.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

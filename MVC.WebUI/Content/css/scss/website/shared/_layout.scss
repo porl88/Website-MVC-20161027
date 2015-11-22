@@ -1,0 +1,120 @@
+﻿/***********************************************************************************************************************************************/
+/* ADDS BASIC STYLING FOR SITE */
+/***********************************************************************************************************************************************/
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #EEE;
+}
+
+.page {
+    position: relative;
+    min-width: 320px;
+    max-width: 1000px;
+    min-height: 100%;
+    margin: 0 auto;
+    background-color: #FFF;
+}
+
+.page-header {
+    position: relative;
+    height: 6rem;
+
+    nav {
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+    }
+
+    form[role="search"] {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    a:link {
+        color: #FFF;
+    }
+
+    a:active {
+        color: yellow;
+    }
+
+    a:visited {
+        color: #FFF;
+    }
+}
+
+main {
+    padding: 1rem;
+    padding-bottom: 3rem;
+}
+
+.page-footer {
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    width: 100%;
+    min-width: 320px;
+    max-width: 1000px;
+    padding: 1em;
+    background-color: #FFF;
+    
+    nav {
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+/***********************************************************************************************************************************************/
+/* BOOTSTRAP - WOULD NORMALL BY IN A SEPARATE FILE */
+/***********************************************************************************************************************************************/
+a:link {
+    color: #000;
+}
+
+a:active {
+    color: red;
+}
+
+a:visited {
+    color: gray;
+}
+
+article {
+    & > h1:first-of-type {
+        margin: 1em 0;
+        margin-top: 0;
+        padding: 0.5em 1em;
+        font-size: 1.3em;
+        color: #FFF;
+        background-color: #000;
+    }
+
+    & > p {
+        margin-bottom: 0.8em;
+        line-height: 1.2;
+        text-align: justify;
+    }
+}
+
+nav {
+    font-size: 0.9rem;
+
+    li {
+        display: inline;
+        padding-right: 0.3em;
+    }
+
+    li:last-child {
+        padding-right: 0;
+    }
+}

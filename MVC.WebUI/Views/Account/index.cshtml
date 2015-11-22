@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "My Account";
+}
+
+<h1>My Account</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+	<section class="alert success">
+		<p>@TempData["SuccessMessage"]</p>
+	</section>
+}
+
+<ul>
+	<li>@Html.ActionLink("Change Password", "change-password")</li>
+</ul>

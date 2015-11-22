@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CSS Class Styling Demo</title>
+	<link rel="stylesheet" href="/content/css/reset.css" />
+	<link rel="stylesheet" href="/content/css/bootstrap.css" />
+	<style>
+		html {
+			font-size: 16px;
+		}
+
+		body {
+			width: 1000px;
+			margin: 0 auto;
+		}
+
+		article {
+			padding: 2rem;
+		}
+
+		article > h1 {
+			font-size: 1.3rem;
+			font-weight: bold;
+			margin: 1rem 0;
+		}
+
+		.section {
+			margin-bottom: 3rem;
+		}
+
+		.section > h1 {
+			font-size: 1.2rem;
+			margin: 1rem 0;
+		}
+
+		.section > h2 {
+			font-size: 1.1rem;
+			margin: 1rem 0;
+		}
+
+		.alert {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<article>
+		<h1>CSS Bootstrap</h1>
+
+		<section class="section">
+			<h1>Layouts</h1>
+
+			<h2><code>.layout-table</code></h2>
+			<div class="layout-table">
+				<div class="left-col">
+					LEFT COL
+				</div>
+				<div class="right-col">
+					RIGHT COL
+				</div>
+			</div>
+
+			<h2><code>.dl-table</code></h2>
+			<dl class="dl-table">
+				<dt>Item 1</dt>
+				<dd>Description 1</dd>
+				<dt>Item 2</dt>
+				<dd>Description 2</dd>
+				<dt>Item 3</dt>
+				<dd>Description 3</dd>
+			</dl>
+		</section>
+
+		<section class="section">
+			<h1>Alerts</h1>
+
+			<h2><code>.alert</code></h2>
+			<section class="alert" hidden="hidden">
+				<h2>Alert Title</h2>
+				<p>Ipsum Lorem fjdfdfdkf dfd fd fdjf</p>
+			</section>
+
+			<h2><code>.alert.error</code></h2>
+			<section class="alert error" hidden="hidden">
+				<h2>Alert Title</h2>
+				<p>Ipsum Lorem fjdfdfdkf dfd fd fdjf</p>
+			</section>
+
+			<h2><code>.alert.success</code></h2>
+			<section class="alert success" hidden="hidden">
+				<h2>Alert Title</h2>
+				<p>Ipsum Lorem fjdfdfdkf dfd fd fdjf</p>
+			</section>
+
+			<h2><code>.alert.compact</code></h2>
+			<section class="alert compact" hidden="hidden">
+				<h2>Alert Title</h2>
+				<p>Ipsum Lorem fjdfdfdkf dfd fd fdjf</p>
+			</section>
+
+			<h2><code>.validation-summary-errors</code></h2>
+			<div class="validation-summary-errors" hidden="hidden">
+				<ul>
+					<li>Error 1</li>
+					<li>Error 2</li>
+					<li>Error 3</li>
+				</ul>
+			</div>
+
+		</section>
+
+		<section class="section">
+			<h1>Breadcrumb</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Account</a></li>
+					<li>Change Password</li>
+				</ol>
+			</nav>
+		</section>
+
+		<section class="section">
+			<h1>Buttons</h1>
+
+			<h2><code>.btn-menu</code></h2>
+			<button type="button" class="btn-menu">Menu Button</button>
+		</section>
+
+		<section class="section">
+			<h1>Pre-Formatted Text</h1>
+
+			<h2><code>pre.code</code></h2>
+			<pre class="code">Here is some pre-formatted text used for code</pre>
+
+			<h2><code>p > code</code></h2>
+			<p>Here is some <code>code</code> markup.</p>
+		</section>
+
+	</article>
+</body>
+</html>

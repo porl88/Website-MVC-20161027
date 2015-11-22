@@ -1,0 +1,11 @@
+﻿@model WebUI.Models.Article.EditArticleViewModel
+@{
+	ViewBag.Title = "Edit Article: " + Model.Title;
+}
+
+@Html.Partial("_Breadcrumb")
+
+<section>
+	<h1>Edit Article: @Model.Title</h1>
+	@{ Html.RenderPartial("_EditArticleForm"); }
+</section>

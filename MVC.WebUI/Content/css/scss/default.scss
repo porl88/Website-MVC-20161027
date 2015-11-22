@@ -1,0 +1,129 @@
+﻿/***********************************************************************************************************************************************/
+/* DEFAULT STYLE SHEET - SETS ALL THE DEFAULT STYLING FOR THE SITE */
+/***********************************************************************************************************************************************/
+
+/* ROOT ELEMENT *********************************************************************************************************************************************************************************************/
+
+html {
+	color: ORANGE;
+	font-family: Verdana, Geneva, sans-serif; /* web safe fonts: http://cssfontstack.com/ */
+	font-size: 100%; /* http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/ */
+	font-size-adjust: 0.545; /* http://fontdeck.com/support/fontsizeadjust */
+}
+
+/* UNIVERSAL PSEUDO-ELEMENTS *********************************************************************************************************************************************************************************************/
+
+::-moz-selection {
+	background-color: #FE4902;
+	background-color: LIME;
+	color: #FFF;
+}
+
+::selection {
+	background-color: #FE4902;
+	background-color: LIME;
+	color: #FFF;
+}
+
+:target {
+	background-color: #DDEEFF;
+}
+
+
+/* ANCHOR ELEMENT *********************************************************************************************************************************************************************************************/
+
+/*
+	ORDER:
+	1. a:link - link must have an href for this to work
+	2. a:visited
+	3. a:focus
+	4. a:hover
+	5. a:active
+*/
+
+/* input[type="image"] is included so that it behaves like a link when the image is missing */
+
+/* links without an href value */
+a {
+	color: RED;
+}
+
+	a:link,
+	input[type="image"] {
+		color: LIME;
+		text-decoration: underline;
+	}
+
+	/* input[type="image"] does not appear to suport :visited */
+	a:visited {
+		color: YELLOW;
+	}
+
+	a:focus,
+	a:hover,
+	input[type="image"]:focus,
+	input[type="image"]:hover {
+		color: PINK;
+		text-decoration: none;
+	}
+
+	a:active,
+	input[type="image"]:active {
+		color: RED;
+		cursor: wait;
+	}
+
+/* FORM ELEMENTS *********************************************************************************************************************************************************************************************/
+
+/*
+	input types:
+		button, checkbox, color, date, datetime, datetime-local, email, file,
+		hidden, image, month, number, password, radio, range, reset, search,
+		submit, tel, text, time, url, week
+
+	other field elements:
+		button, select, textarea
+*/
+
+/* Text Fields */
+textarea,
+select,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="number"],
+input[type="time"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="week"],
+input[type="month"] {
+	border: 1px solid LIME;
+	background-color: #FFF;
+}
+
+	input:focus, textarea:focus, select:focus {
+		border-color: PINK;
+	}
+
+
+/* HTML5 attribute styling http://html5doctor.com/css3-pseudo-classes-and-html5-forms/ */
+/*
+		valid/invalid			- used with HTML5 validation attributes
+		required/optional		- used with HTML5 'required' attribute 
+		in-range/out-of-range	- used with HTML5 input types that allow a range of values - 'min', 'max' - e.g type="number"
+		read-only/read-write	- used with readonly attribute
+	*/
+
+/*input:required:valid {
+		background-color: #BFFEBF;
+		border-color: #35aa47;
+	}
+
+	input:invalid {
+		background-color: #FEBFBF;
+		border-color: #CC0000;
+	}*/

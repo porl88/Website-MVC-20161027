@@ -1,0 +1,34 @@
+﻿@model WebUI.Models.Account.LoginViewModel
+@using Domain.Helpers
+@{
+	ViewBag.Title = "Login";
+}
+
+<article>
+	<h1>Login</h1>
+	@if (TempData["SuccessMessage"] != null)
+	{
+		<section class="alert success">
+			<p>@TempData["SuccessMessage"]</p>
+		</section>
+	}
+    @Html.ValidationSummary()
+	@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+	{
+		@Html.AntiForgeryToken()
+		<ol>
+			<li>
+				@Html.LabelFor(m => m.UserName)
+				@Html.TextBoxFor(m => m.UserName, new { required = "required", autofocus = "autofocus" })
+				@Html.ValidationMessageFor(m => m.UserName)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Password)
+				@Html.PasswordFor(m => m.Password, new { required = "required" })
+				@Html.ValidationMessageFor(m => m.Password)
+			</li>
+		</ol>
+		@Html.ActionLink("Forgotten Password", "request-password")
+		<button>Login</button>
+	}
+</article>

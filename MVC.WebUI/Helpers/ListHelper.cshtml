@@ -1,0 +1,13 @@
+﻿@using System.Text
+@helper ListHelper(string separator, params string[] items) {
+    // for outputting a list of items - does not output anything if the item is missing
+    // param: separator - e.g. "<li>{0}</li> or {0}<br />"
+	// example uses: listing an address
+    foreach (var item in items)
+    {
+        if (!string.IsNullOrWhiteSpace(item))
+        {
+            Html.Raw(string.Format(separator, item));
+        }
+    }
+}

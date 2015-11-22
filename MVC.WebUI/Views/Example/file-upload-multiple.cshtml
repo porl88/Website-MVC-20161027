@@ -1,0 +1,53 @@
+﻿@{
+	ViewBag.Title = "File Upload - Multiple";
+}
+
+@*http://haacked.com/archive/2010/07/16/uploading-files-with-aspnetmvc.aspx/*@
+
+<article>
+	<h1>File Upload - Multiple</h1>
+
+	<h2>Using multiple <code>input</code> fields</h2>
+	<p>All fields must have the same name.</p>
+
+	<form action="/example/file-upload-multiple" method="post" enctype="multipart/form-data">
+		<label for="file1">Filename:</label>
+		<input type="file" name="files" id="file1" />
+		<label for="file2">Filename:</label>
+		<input type="file" name="files" id="file2" />
+		<button>Submit</button>
+	</form>
+
+	<h2>Using the <code>multiple</code> attribute</h2>
+
+	<form action="/example/file-upload-multiple" method="post" enctype="multipart/form-data">
+		<label for="files">Filename:</label>
+		<input type="file" name="files" id="files" multiple="multiple" />
+		<button>Submit</button>
+	</form>
+
+	@if (ViewBag.Files != null)
+	{
+		<table>
+			<thead>
+				<tr>
+					<th>File Name</th>
+					<th>Mime Type</th>
+					<th>File Size</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var file in (IEnumerable<HttpPostedFileBase>)ViewBag.Files)
+				{
+					<tr>
+						<td>@file.FileName</td>
+						<td>@file.ContentType</td>
+						<td>@file.ContentLength</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+
+</article>
+

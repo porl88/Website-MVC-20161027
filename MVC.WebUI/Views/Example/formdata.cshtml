@@ -1,0 +1,73 @@
+﻿@{
+	ViewBag.Title = "File Upload - AJAX - FormData";
+}
+
+@*
+	https://developer.mozilla.org/en-US/docs/Web/API/FormData
+	https://developer.mozilla.org/en-US/docs/Web/Guide/Using_FormData_Objects
+*@
+
+<article>
+	<h1>File Upload - AJAX - FormData</h1>
+
+	<form id="form" action="/example/file-upload-multiple" method="post" enctype="multipart/form-data">
+		<label for="fileName">Filename:</label>
+		<input type="text" id="fileName" name="fileName" />
+		<label for="files">Upload File(s):</label>
+		<input type="file" name="files" id="files" multiple="multiple" />
+		<button>Submit</button>
+	</form>
+
+	<script>
+
+		addEventListener('DOMContentLoaded', function () {
+			var doc = document;
+			var form = doc.getElementById('form');
+			if (form) {
+				form.addEventListener('submit', postForm);
+			}
+		});
+
+		function postForm(e) {
+			e.preventDefault();
+			var doc = document;
+			var form = doc.getElementById('form');
+			if (form) {
+				var formData = new FormData(form);
+				var request = new XMLHttpRequest();
+				request.open('POST', '/api/file');
+				request.onreadystatechange = function () {
+					if (request.readyState === 4) {
+						alert(request.status + ' | ' + request.statusText + ' | ' + request.responseType + ' | ' + request.responseText)
+					}
+				};
+				request.send(formData);
+			}
+		}
+
+	</script>
+
+	@if (TempData["files"] != null)
+	{
+		<table>
+			<thead>
+				<tr>
+					<th>File Name</th>
+					<th>Mime Type</th>
+					<th>File Size</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var file in (IEnumerable<HttpPostedFileBase>)TempData["files"])
+				{
+					<tr>
+						<td>@file.FileName</td>
+						<td>@file.ContentType</td>
+						<td>@file.ContentLength</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+
+</article>

@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>CSS Reset Test Sheet</title>
+
+	<link rel="stylesheet" href="reset.css" />
+	<link rel="stylesheet" href="default.css" />
+
+	<style>
+		.title {
+			font-family: Verdana;
+			font-weight: bold;
+			margin-top: 2em;
+			margin-bottom: 0.5em;
+			text-decoration: underline;
+			color: #000;
+		}
+
+		h1.title {
+			font-size: 1.5em;
+		}
+
+		h2.title {
+			font-size: 1.3em;
+		}
+
+		h3.title {
+			font-size: 1.1em;
+		}
+	</style>
+</head>
+<body title="body">
+	<h1 class="title">CSS Reset Test Sheet</h1>
+
+	<h2 class="title">Block-Level Elements</h2>
+    <h1>Here is an H1 element</h1>
+    <h2>Here is an H2 element</h2>
+    <h3>Here is an H3 element</h3>
+    <h4>Here is an H4 element</h4>
+    <h5>Here is an H5 element</h5>
+    <h6>Here is an H6 element</h6>
+    <div>Here is a div element</div>
+	<p>Here is a paragraph element</p>
+    <blockquote>Here is a blockquote element</blockquote>
+    <hr />
+    <pre>Here is a pre element</pre>
+    <address>Here is an address element</address>
+    <output>Here is an output element</output>
+
+    <h2 class="title">Inline Elements</h2>
+    <p>Here is an <em>Emphasis (em)</em> element</p>
+    <p>Here is an <i>Italic (i)</i> element</p>
+    <p>Here is a <strong>Strong (strong)</strong> element</p>
+    <p>Here is a <b>Bold (b)</b> element</p>
+    <p>Here is a <mark>Mark (mark)</mark> element</p>
+    <p>Here is an <u>Underline (u)</u> element</p>
+    <p>Here is a <s>Strikethrough (s)</s> element</p>
+    <p>Here is a <small>Smallprint (small)</small> element</p>
+    <p>Here is a <cite>Citation (cite)</cite> element</p>
+	<p>Here is a <q>Quotation (q)</q> element</p>
+	<p>Here is a <dfn>Definition (dfn)</dfn> element</p>
+	<p>Here is an <abbr>Abbreviation (abbr)</abbr> element</p>
+	<p>Here is a <data>Data (data)</data> element</p>
+	<p>Here is a <time>Time (time)</time> element</p>
+	<p>Here is a <code>Code (code)</code> element</p>
+	<p>Here is a <var>Variable (var)</var> element</p>
+	<p>Here is a <samp>Sample (samp)</samp> element</p>
+	<p>Here is a <kbd>Keyboard Input (kbd)</kbd> element</p>
+	<p>Here is a <sup>Superscript (sup)</sup> element - x<sup>2</sup></p>
+	<p>Here is a <sub>Subscript (sub)</sub> element - O<sub>2</sub> and H<sub>2</sub>O</p>
+	<p>Here is a <ruby>Ruby (ruby)</ruby> element</p>
+	<p>Here is a <bdi>BDI (bdi)</bdi> element</p>
+	<p>Here is a <bdo>BDO (bdo)</bdo> element</p>
+	<p>Here is a <span>Span (span)</span> element</p>
+
+  
+	<h2 class="title">Anchor Element</h2>
+	<p><a href="#">Here is an anchor element</a></p>
+	<p><a href="KKKK">Here is an anchor element</a></p>
+	<p><a>Here is an anchor element with no href</a></p>
+
+	<h2 class="title">List Elements</h2>
+	<ul>
+		<li>Unordered List Item 1</li>
+		<li>Unordered List Item 2</li>
+		<li>Unordered List Item 3</li>
+	</ul>
+	<ol>
+		<li>Ordered List Item 1</li>
+		<li>Ordered List Item 2</li>
+		<li>Ordered List Item 3</li>
+	</ol>
+	<dl>
+		<dt>Description list term 1</dt>
+		<dd>Description list definition 1</dd>
+		<dt>Description list term 2</dt>
+		<dd>Description list definition 2</dd>
+		<dt>Description list term 3</dt>
+		<dd>Description list definition 3</dd>
+	</dl>
+	<h2 class="title">Form Elements</h2>
+	<form action="_reset-test.html" method="get">
+		<fieldset>
+			<legend>Here is the legend</legend>
+
+			<h3 class="title">Text Input</h3>
+			<input type="text" value="Text input element" /><br />
+			<input type="password" value="Password input element" /><br />
+			<input type="email" value="Email input element" /><br />
+			<input type="tel" value="Tel input element" /><br />
+			<input type="url" value="URL input element" /><br />
+			<input type="search" value="Search input element" /><br />
+			<input type="number" placeholder="Number input element" /><br />
+
+			<h3 class="title">Date / Time</h3>
+			<input type="time" /><br />
+			<input type="date" /><br />
+			<input type="datetime" /><br />
+			<input type="datetime-local" /><br />
+			<input type="week" /><br />
+			<input type="month" /><br />
+
+			<h3 class="title">Checkbox / Radio</h3>
+			<input type="radio" value="Radio input element" /><br />
+			<input type="checkbox" value="Checkbox input element" /><br />
+
+			<h3 class="title">Non-Text Input</h3>
+			<input type="range" /><br />
+			<input type="file" /><br />
+			<input type="color" /><br />
+
+			<h3 class="title">Buttons</h3>
+			<input type="image" src="http://static.bbci.co.uk/frameworks/barlesque/2.71.2/orb/4/img/bbc-blocks-dark.png" alt="Input type=image with image" />
+			<input type="image" alt="Input type=image with no image" />
+			<input type="submit" value="Submit input element" />
+			<input type="reset" value="Reset input element" />
+			<input type="button" value="Button input element" />
+			<button>Button</button><br />
+
+			<textarea>Textarea element</textarea><br />
+
+			<select>
+				<option>Select item 1</option>
+				<option>Select item 2</option>
+				<option>Select item 3</option>
+			</select><br />
+
+		</fieldset>
+	</form>
+
+	<h2 class="title">Table Elements</h2>
+	<table>
+		<caption>Here is the caption</caption>
+		<thead>
+			<tr>
+				<th>Table heading 1</th>
+				<th>Table heading 2</th>
+				<th>Table heading 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Table cell 1</td>
+				<td>Table cell 2</td>
+				<td>Table cell 3</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2 class="title">Embedded Elements</h2>
+	<figure>
+		<img src="#" alt="Here is an image element" />
+		<a href="#"><img src="#" alt="Here is an image element wrapped in an anchor element" /></a>
+	</figure>
+
+</body>
+</html>

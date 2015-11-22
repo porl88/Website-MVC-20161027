@@ -1,0 +1,26 @@
+﻿/************************************************************************************************************
+    HACKS
+************************************************************************************************************/
+
+/* http://browserhacks.com */
+
+/* IE 9+, Opera 9.5+, Firefox, Chrome, Safari */
+:root element {
+}
+
+/* IE 10+ */
+:-ms-input-placeholder, :root element {
+}
+
+/* IE 11+ */
+:-ms-fullscreen, :root element {
+}
+
+/* Chrome 28+, Firefox 22+, Opera 12.1+ */
+@supports () {
+}
+
+/* Firefox only */
+@-moz-document url-prefix() {
+
+}

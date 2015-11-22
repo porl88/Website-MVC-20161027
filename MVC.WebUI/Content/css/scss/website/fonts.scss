@@ -1,0 +1,54 @@
+﻿/******************************************************************************************************************************************
+FONTS - custom fonts for site defined by @font-face
+******************************************************************************************************************************************/
+
+/*
+WOFF 2.0 (.woff) supported by Chrome 36+, Opera 23+
+WOFF (.woff) supported by Firefox 3.6+, Internet Explorer 9+, Chrome 6+, Opera 11.10+
+TrueType (.ttf) supported by Firefox 3.5+, Chrome 4+, Safari 3.1+, Opera 10+
+OpenType (.otf) supported by Firefox 3.5+, Chrome 4+, Safari 3.1+, Opera 10+
+Scalable Vector Graphics (.svg) supported by Safari 3+, Opera 9+ (8+)
+Embedded OpenType (.eot) supported by Internet Explorer 4+
+*/
+
+/*
+http://www.fontspring.com/blog/the-new-bulletproof-font-face-syntax
+*/
+
+@font-face {
+	font-family: 'MyWebFont';
+	src: url('webfont.eot'); /* IE9 Compat Modes */
+	src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('webfont.woff') format('woff'), /* Modern Browsers */
+	     url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	     url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+	}
+
+/*
+http://sixrevisions.com/css/font-face-guide/
+http://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/
+
+@font-face {
+	font-family: "MyFontFamily";
+	src:	url("/fonts/MyFontFamily.eot") format("eot");
+	src:	local(‚ò∫'),
+			url("/fonts/MyFontFamily.woff") format("woff"),
+			url("/fonts/MyFontFamily.ttf") format("truetype"),
+			url("/fonts/MyFontFamily.otf"),
+			url("/fonts/MyFontFamily.svg#MyFontFamily") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MyFontFamily";
+	src:	url("/fonts/MyFontFamily-bold.eot") format("eot");
+	src:	local(‚ò∫'),
+			url("/fonts/MyFontFamily-bold.woff") format("woff"),
+			url("/fonts/MyFontFamily-bold.ttf") format("truetype"),
+			url("/fonts/MyFontFamily-bold.otf"),
+			url("/fonts/MyFontFamily-bold.svg#MyFontFamily") format("svg");
+	font-weight: bold;
+	font-style: normal;
+}
+*/

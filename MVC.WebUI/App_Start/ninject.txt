@@ -1,0 +1,57 @@
+﻿USING NINJECT WITH ASP.NET MVC:
+
+Install from Nuget:
+
+    Ninject (base library)
+
+Create dependency resolver that inherits from IDependencyResolver:
+
+	public class NinjectDependencyResolver : IDependencyResolver
+	{
+		private IKernel kernel;
+
+		public NinjectDependencyResolver()
+		{
+			kernel = new StandardKernel();
+			this.AddBindings();
+		}
+
+		public object GetService(Type serviceType)
+		{
+			return kernel.TryGet(serviceType);
+		}
+
+		public IEnumerable<object> GetServices(Type serviceType)
+		{
+			return kernel.GetAll(serviceType);
+		}
+
+		private void AddBindings()
+		{
+		}
+	}
+
+Register Ninject depency resolver in Global.asax:
+
+	DependencyResolver.SetResolver(new NinjectDependencyResolver());
+
+
+
+
+USING NINJECT WITH WEB API:
+
+Install from Nuget:
+
+    Ninject (base library)
+    Ninject.Web.Common
+    Ninject.Web.Common.WebHost
+    Ninject.Web.WebApi.WebHost ("Ninject Web Host for WebApi 2")
+    Ninject.Web.WebApi ("Ninject Integration for WebApi 2")
+
+Install Ninject.Web.WebApi and Ninject.WebApi.WebHost first as they include the other namespaces as dependencies
+
+After you install all of those, you'll find a pre-built NinjectWebCommon class in your App_Start folder. Just add you bindings to the RegisterServices() method.
+
+No need to register anything in Global.asax.
+
+If you want to use both ASP.NET MVC and Web Api, you will need to use both methods at the same time.

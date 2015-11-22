@@ -1,0 +1,37 @@
+﻿@model WebUI.Models.EmailViewModel
+@using Domain.Helpers
+
+<form action="#email" method="post">
+	@Html.AntiForgeryToken()
+	<fieldset>
+		<legend>Send Email</legend>
+		<ol>
+			<li>
+				@Html.LabelFor(m => m.FirstName)
+				@Html.TextBoxFor(m => m.FirstName, new { maxlength = "30", required = "required", pattern = string.Format(" *{0} *", RegexHelper.Name), title = "You need to enter a valid name" })
+				@Html.ValidationMessageFor(m => m.FirstName)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.LastName)
+				@Html.TextBoxFor(m => m.LastName, new { maxlength = "30", required = "required", pattern = string.Format(" *{0} *", RegexHelper.Name), title = "You need to enter a valid name" })
+				@Html.ValidationMessageFor(m => m.LastName)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Email)
+				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = string.Format(" *{0} *", RegexHelper.Email), title = "You need to enter a valid email address" })
+				@Html.ValidationMessageFor(m => m.Email)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Subject)
+				@Html.TextBoxFor(m => m.Subject, new { maxlength = "100", required = "required" })
+				@Html.ValidationMessageFor(m => m.Subject)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Message)
+				@Html.TextAreaFor(m => m.Message, 5, 20, new { maxlength = "2000", required = "required" })
+				@Html.ValidationMessageFor(m => m.Message)
+			</li>
+		</ol>
+		<button>Send</button>
+	</fieldset>
+</form>

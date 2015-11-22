@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Cookies | Help";
+	ViewBag.Browser = Request.Browser.Browser;
+	ViewBag.Website = Request.Url.Host;
+}
+
+<article>
+<h1>Cookies</h1>
+
+<section>
+	<h2>What is a cookie?</h2>
+	<p>When you visit a website, the site may choose to save a cookie on your hard drive or in your computer's memory. The cookie itself is simply a plain text file (.txt) that the site uses to temporarily store information. Most cookies are used purely to help the site work. For example, when you log in, the site needs to save a cookie on your hard drive so that it can check that you are still logged in.</p>
+	<p>A cookie can only store basic text. It cannot run code or contain viruses. Sites that store cookies on your device can only read and write data to the cookies that they have created. They do not have access to any other part of your system or any cookies created by other sites.</p>
+	<p>There are two types of cookie: <dfn>session only cookies</dfn> and <dfn>persistent cookies</dfn>. Session only cookies are stored in your computer's memory and are not saved to the hard drive. They are deleted when your browser is closed down or after your computer has been left idle for a specified amount of time (usually 20-30 minutes). Persistent cookies are saved to your hard drive and do not get deleted when your browser closes. They remain on your hard drive and only get deleted when they reach their expiry date (unless you manually delete them first!).</p>
+	<p>You can delete cookies or block sites from saving cookies on your browser at any time. You just need to go into your browser settings and select the appropriate option. Remember: if you block cookies, then sites you visit may not work properly.</p>
+	<p><a href="http://www.aboutcookies.org/" target="_blank">For more information about cookies, click here</a>.</p>
+</section>
+
+<section>
+	<h2>What is this site's cookie policy?</h2>
+	<p>Cookies are used on this site to provide more functionality. If your browser is not set to accept cookies, then you may find you cannot log in and some of the pages do not work properly.</p>
+	<p>This site does not use tracking cookies or use cookies to collect personal data in any way.</p>
+	<p>This site also uses <dfn>Google Analytics</dfn>, which generates detailed statistics about visits to this website. It includes things like the number of visitors, the types of browsers used, etc. This information is used purely for internal analysis and is not sent on to any 3rd party, unless required to do so by law. <a href="http://www.google.co.uk/intl/en/policies/privacy/" target="_blank">Details of Google's Privacy Policy can be found here</a></p>
+</section>
+
+<section>
+	<h2>How do I enable cookies on my browser?</h2>
+	<p>The following instructions show you how to enable cookies in your browser <em>for this website only</em>. It does not affect how your browser handles cookies for other sites.</p>
+
+@if (ViewBag.Browser == "Chrome") {
+
+<h3>Chrome 19+(?)</h3>
+<ol>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click the Chrome menu icon on the browser toolbar in the top right corner of your browser.</li>
+	<li>From the options in the dropdown list, select <kbd>Settings</kbd>.</li>
+	<li>At the bottom of the page, click on the <kbd>Show advanced settings</kbd> link.</li>
+	<li>Under <samp>Privacy</samp>, click on the <kbd>Content settings&hellip;</kbd> button.</li>
+	<li>Under the <samp>Cookies</samp> tab, click on the <kbd>Manage exceptions&hellip;</kbd> button to open the <samp>Cookie and site data exceptions</samp> dialogue box.</li>
+	<li>Make sure the <kbd>Behaviour</kbd> dropdown is set to <kbd>Allow</kbd>. Then enter <kbd>@ViewBag.Website</kbd> into the <samp>Add new hostname pattern</samp> field and click <kbd>OK</kbd>.</li>
+	<li>Click <kbd>OK</kbd> to save your settings and then close all the dialogue boxes.</li>
+</ol>
+
+<h3>Chrome 1-18(?)</h3>
+<ol>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click on <kbd>Tools</kbd> (with the <samp>Customise and control Google Chrome</samp> spanner icon) on the toolbar at the top right of the browser.</li>
+	<li>From the options in the dropdown list, select <kbd>Options</kbd>.</li>
+	<li>Click on the <kbd>Under the Bonnet</kbd> tab at the top of the <samp>Google Chrome Options</samp> dialogue box.</li>
+	<li>Under <samp>Privacy</samp>, click the <kbd>Content Settings</kbd> button to open the <samp>Content Settings</samp> dialogue box.</li>
+	<li>Select the <samp>Cookies</samp> tab, and click on the <kbd>Exceptions&hellip;</kbd> button to open the <samp>Cookie Exceptions</samp> dialogue box.</li>
+	<li>Click on the <kbd>Add&hellip;</kbd> button at the bottom of the dialogue box and enter <kbd>@ViewBag.Website</kbd> into the <samp>Pattern</samp> field and make sure the <samp>Action</samp> field is set to <kbd>Allow</kbd>.</li>
+	<li>Click <kbd>OK</kbd> to save your settings and then close all the dialogue boxes.</li>
+</ol>
+	
+<p><a href="http://support.google.com/chrome/" target="_blank">Click here for more information about Chrome</a>.</p>
+}
+
+@if (ViewBag.Browser == "Firefox") {
+<h3>Firefox</h3>
+<ol>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click on the <kbd>Firefox</kbd> tab, or <kbd>Tools</kbd> on the toolbar, in the top left corner of the browser.</li>
+	<li>From the options in the dropdown list, select <kbd>Options&hellip;</kbd></li>
+	<li>Click the <kbd>Privacy</kbd> tab at the top of the <samp>Options</samp> dialogue box.</li>
+	<li>Click on the <kbd>Exceptions&hellip;</kbd> button in the Cookies section.</li>
+	<li>When the <samp>Exceptions - Cookies</samp> dialogue box opens, type in <kbd>@ViewBag.Website</kbd> in the <samp>Address of the web site</samp> box.</li>
+	<li>Click on the <kbd>Allow</kbd> button so that the WebSite site is added to the list below.</li>
+	<li>Click <kbd>Close</kbd> to close the <samp>Exceptions - Cookies</samp> dialogue box.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Options</samp> dialogue box and save your settings.</li>
+</ol>
+	
+<p><a href="https://support.mozilla.org/" target="_blank">Click here for more information about Firefox</a>.</p>
+ }
+
+@if (ViewBag.Browser == "IE") {
+<h3>Internet Explorer 7+</h3>
+<ol>
+	<li><strong>Important: </strong> If your computer is part of a network, your organisation’s system administrator might have disabled or even removed settings by using Group Policy. Group Policy is a feature of Windows that lets system administrators manage users' access to Windows features. If you suspect this is the case, contact your system administrator as you may find any changes you make to your settings will get ignored or will not be saved.</li>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click on <kbd>Tools</kbd> on the toolbar at the top right of the browser.</li>
+	<li>From the options in the dropdown list, select <kbd>Internet Options</kbd>.</li>
+	<li>Click the <kbd>Security</kbd> tab at the top of the Internet Options dialogue box.</li>
+	<li>Click the <kbd>Restricted Sites</kbd> logo and make sure the <samp>Restricted Sites</samp> message appears below.</li>
+	<li>Click the <kbd>Sites</kbd> button below the logo. If @ViewBag.Website appears in the list, click on it to highlight it and click the <kbd>Remove</kbd> button to remove it from the <samp>Restricted Sites</samp> list. Once this is done, close the dialogue box.</li>
+	<li>Click the <kbd>Privacy</kbd> tab at the top of the Internet Options dialogue box.</li>
+	<li>Click on the <kbd>Sites</kbd> button.</li>
+	<li>When the <samp>Per Site Privacy Actions</samp> dialogue box opens, type in <kbd>@ViewBag.Website</kbd> in the <samp>Address of website</samp> box.</li>
+	<li>Click on the <kbd>Allow</kbd> button so that the WebSite site is added to the list below.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Per Site Privacy Actions</samp> dialogue box.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Internet Options</samp> dialogue box and save your settings.</li>
+</ol>
+
+
+<h3>Internet Explorer 6</h3>
+<ol>
+	<li><strong>Important: </strong> If your computer is part of a network, your organisation’s system administrator might have disabled or even removed settings by using Group Policy. Group Policy is a feature of Windows that lets system administrators manage users' access to Windows features. If you suspect this is the case, contact your system administrator as you may find any changes you make to your settings will get ignored or will not be saved.</li>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click on <kbd>Tools</kbd> on the toolbar at the top left of the browser.</li>
+	<li>From the options in the dropdown list, select <kbd>Internet Options&hellip;</kbd>.</li>
+	<li>Click the <kbd>Security</kbd> tab at the top of the Internet Options dialogue box.</li>
+	<li>Click the <kbd>Restricted Sites</kbd> logo and make sure the <samp>Restricted Sites</samp> message appears below.</li>
+	<li>Click the <kbd>Sites</kbd> button below the logo. If @ViewBag.Website appears in the list, click on it to highlight it and click the <kbd>Remove</kbd> button to remove it from the <samp>Restricted Sites</samp> list. Once this is done, close the dialogue box.</li>
+	<li>Click the <kbd>Privacy</kbd> tab at the top of the Internet Options dialogue box.</li>
+	<li>Click on the <kbd>Edit&hellip;</kbd> button in the <samp>Web Sites</samp> section.</li>
+	<li>When the <samp>Per Site Privacy Actions</samp> dialogue box opens, type in <kbd>@ViewBag.Website</kbd> in the <samp>Address of website</samp> box.</li>
+	<li>Click on the <kbd>Allow</kbd> button so that the WebSite site is added to the list below.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Per Site Privacy Actions</samp> dialogue box.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Internet Options</samp> dialogue box and save your settings.</li>
+</ol>
+	
+<p><a href="http://support.microsoft.com/" target="_blank">Click here for more information about Internet Explorer</a>.</p>
+
+ }
+
+@if (ViewBag.Browser == "Opera") {
+<h3>Opera</h3>
+<ol>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click on the <kbd>Opera</kbd> tab, or <kbd>Tools</kbd> on the toolbar, in the top left corner of the browser.</li>
+	<li>From the dropdown list, select <kbd>Preferences&hellip;</kbd>. If <kbd>Preferences&hellip;</kbd> is not visible, select <kbd>Settings</kbd>, then select <kbd>Preferences&hellip;</kbd>.</li>
+	<li>Click the <kbd>Advanced</kbd> tab at the top of the <samp>Preferences</samp> dialogue box.</li>
+	<li>Select <kbd>Content</kbd> from the left-hand column.</li>
+	<li>Click on the <kbd>Manage site preferences&hellip;</kbd> button.</li>
+	<li>In the <samp>Server manager</samp> dialogue box, click on the <kbd>Add&hellip;</kbd> button.</li>
+	<li>Select the <kbd>General</kbd> tab (if not already selected) and enter <kbd>@ViewBag.Website</kbd> into the <samp>Site</samp> textbox.</li>
+	<li>Select the <kbd>Cookies</kbd> tab and make sure the <kbd>Accept cookies</kbd> option has been selected and the <kbd>Delete new cookies when exiting Opera</kbd> is deselected.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Site preferences</samp> dialogue box.</li>
+	<li>Click <kbd>Close</kbd> to close the <samp>Server manager</samp> dialogue box.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Preferences</samp> dialogue box.</li>
+</ol>
+	
+<p><a href="http://www.opera.com/support/" target="_blank">For more information about Opera click here</a>.</p>
+ }
+
+@if (ViewBag.Browser == "Safari") {
+<h3>Safari</h3>
+<ol>
+	<li>Check that the software on your PC, such as your firewall or any add-ons you may have installed on your browser, is not preventing cookies from being saved on your hard drive.</li>
+	<li>Click on <kbd>Edit</kbd> on the toolbar at the top left of the browser.</li>
+	<li>From the options in the dropdown list, select <kbd>Preferences</kbd>.</li>
+	<li>In the <samp>Advanced</samp> dialogue box, click on the <kbd>Advanced</kbd> tab.</li>
+	<li>In the <samp>Proxies</samp> section, click <kbd>Change Settings&hellip;</kbd>.</li>
+	<li>Click the <kbd>Privacy</kbd> tab at the top of the <samp>Internet Properties</samp> dialogue box.</li>
+	<li>Click on the <kbd>Sites</kbd> button.</li>
+	<li>When the <samp>Per Site Privacy Actions</samp> dialogue box opens, type in <kbd>@ViewBag.Website</kbd> in the <samp>Address of website</samp> box.</li>
+	<li>Click on the <kbd>Allow</kbd> button so that the WebSite site is added to the list below.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Per Site Privacy Actions</samp> dialogue box.</li>
+	<li>Click <kbd>OK</kbd> to close the <samp>Internet Properties</samp> dialogue box and save your settings.</li>
+</ol>
+	
+<p><a href="http://www.apple.com/support/safari/" target="_blank">For more information about Safari click here</a>.</p>
+ }
+</section>
+
+</article>

@@ -1,0 +1,184 @@
+﻿@{
+	Layout = null;
+	ViewBag.Title = "Browser Support";
+	ViewBag.Browser = Request.Browser.Browser;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" dir="ltr">
+<head>
+	<title>@ViewBag.Title</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta name="Author" content="Paul Arnold" />
+
+	<link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-itouch-icon" href="/apple-touch-icon.png" />
+
+	<base target="_top" />
+
+	<style type="text/css">
+		/*<[CDATA[*/
+		html, body, #page {
+			height: 100%;
+		}
+
+		body {
+			background-color: #FFF;
+			font-family: Verdana, sans-serif;
+			font-size: 14px;
+			margin: 0;
+			padding: 0;
+		}
+
+		img {
+			border: none;
+		}
+
+		a {
+			color: #000;
+		}
+
+			a:hover {
+				text-decoration: none;
+			}
+
+		#page {
+			width: 800px;
+			margin: auto;
+		}
+
+			#page h1 {
+				font-size: 1.2em;
+				margin: 0;
+				text-align: center;
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+
+		#warning {
+			border: 2px solid red;
+			padding: 20px;
+			background-color: lemonchiffon;
+			margin-top: 50px;
+		}
+
+			#warning p {
+				margin: 0;
+				margin-top: 10px;
+			}
+
+		#download {
+			width: 600px;
+			margin: 6em auto 0 auto;
+			height: 130px;
+		}
+
+			#download div {
+				float: left;
+				width: 200px;
+				text-align: center;
+			}
+
+				#download div img {
+					display: block;
+					margin: auto;
+				}
+
+				#download div p {
+					color: #F00;
+					font-size: 0.9em;
+				}
+
+		#skip {
+			text-align: right;
+			margin-top: 0.8em;
+			margin-bottom: 6em;
+		}
+
+			#skip a {
+				background-color: gold;
+				color: #FFF;
+				font-weight: bold;
+				text-decoration: none;
+				text-transform: uppercase;
+				font-size: 0.9em;
+				padding: 0.5em 0.8em;
+			}
+
+		#reappear {
+			font-size: 0.9em;
+		}
+
+		/*]]>*/
+	</style>
+
+</head>
+<body>
+	<div id="page">
+
+		<a href="/" title="Click here to go to the home page"><img src="/content/images/home-logo.png" alt="Home" /></a>
+
+		<div id="warning">
+			<h1>Your browser is out-of-date and needs upgrading!</h1>
+			<p><strong>You are using an old version of @ViewBag.Browser.Replace("IE", "Internet Explorer") which is not supported by this site.</strong> You may find that pages do not work or even display properly.</p>
+			<p>We advise you to upgrade your browser immediately.</p>
+			<p>You can choose any of the browsers below. They are <strong>FREE</strong>. Just click on one of the links and follow the download instructions.</p>
+		</div>
+
+
+		<div id="download">
+			<div>
+				<a href="http://www.firefox.com/" title="Click here to download the latest version of Firefox" target="_blank">
+					<img src="~/content/images/browser/firefox.png" alt="Firefox" height="83" width="83" />
+				</a>
+				<a href="http://www.firefox.com/" title="Click here to download the latest version of Firefox" target="_blank">Firefox</a>
+			</div>
+			<div>
+				<a href="http://www.google.com/chrome/" title="Click here to download the latest version of Chrome" target="_blank">
+					<img src="~/content/images/browser/chrome.png" alt="Chrome" height="83" width="83" />
+				</a>
+				<a href="http://www.google.com/chrome/" title="Click here to download the latest version of Chrome" target="_blank">Chrome</a>
+				<p>Recommended</p>
+			</div>
+			@if (ViewBag.Browser == "IE")
+			{
+				<div>
+					<a href="http://www.microsoft.com/ie/" title="Click here to download the latest version of Internet Explorer" target="_blank">
+						<img src="~/content/images/browser/ie.png" alt="Internet Explorer" height="83" width="83" />
+					</a>
+					<a href="http://www.microsoft.com/ie/" title="Click here to download the latest version of Internet Explorer" target="_blank">Internet Explorer</a>
+				</div>
+			}
+			else if (ViewBag.Browser == "Safari")
+			{
+				<div>
+					<a href="http://www.apple.com/safari/" title="Click here to download the latest version of Safari" target="_blank">
+						<img src="~/content/images/browser/safari.png" alt="Safari" height="83" width="83" />
+					</a>
+					<a href="http://www.apple.com/safari/" title="Click here to download the latest version of Safari" target="_blank">Safari</a>
+				</div>
+			}
+			else
+			{
+				<div>
+					<a href="http://www.opera.com/" title="Click here to download the latest version of Opera" target="_blank">
+						<img src="~/content/images/browser/opera.png" alt="Opera" height="83" width="83" />
+					</a>
+					<a href="http://www.opera.com/" title="Click here to download the latest version of Opera" target="_blank">Opera</a>
+				</div>
+			}
+		</div>
+		<div id="skip">
+			<a href="/" title="Click if you do not want to upgrade your browser and wish to continue browsing the site">Skip</a>
+		</div>
+		<p id="reappear">Does this page keep re-appearing? You may need to @Html.ActionLink("enable cookies for this browser", "cookies", "help").</p>
+
+	</div>
+
+</body>
+</html>
+

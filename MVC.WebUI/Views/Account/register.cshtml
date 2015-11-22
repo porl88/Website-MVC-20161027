@@ -1,0 +1,37 @@
+﻿@model WebUI.Models.Account.RegisterViewModel
+@using Domain.Helpers
+@{
+    ViewBag.Title = "Register";
+}
+
+<article>
+	<h1>Register</h1>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		<ol>
+			<li>
+				@Html.LabelFor(m => m.UserName)
+				@Html.TextBoxFor(m => m.UserName, new { required = "required", maxlength = "30", autofocus = "autofocus" })
+				@Html.ValidationMessageFor(m => m.UserName)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Email)
+				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = string.Format(" *{0} *", RegexHelper.Email), title = "You need to enter a valid email address" })
+				@Html.ValidationMessageFor(m => m.Email)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Password)
+				@Html.PasswordFor(m => m.Password, new { required = "required", pattern = RegexHelper.PasswordWeak, title = "Your password must be at least 8 characters long and cannot contain spaces" })
+				@Html.ValidationMessageFor(m => m.Password)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.ConfirmPassword)
+				@Html.PasswordFor(m => m.ConfirmPassword, new { required = "required" })
+				@Html.ValidationMessageFor(m => m.ConfirmPassword)
+			</li>
+		</ol>
+		<button>Register</button>
+	}
+</article>

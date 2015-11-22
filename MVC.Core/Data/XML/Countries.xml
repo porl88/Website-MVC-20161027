@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Countries>
+	<Country name="Afghanistan" isoCode="AF" diallingCode="93" continent="Asia" />
+	<Country name="Åland Islands" isoCode="AX" diallingCode="358" continent="Europe" />
+	<Country name="Albania" isoCode="AL" diallingCode="355" continent="Europe" />
+	<Country name="Algeria" isoCode="DZ" diallingCode="213" continent="Africa" />
+	<Country name="American Samoa" isoCode="AS" diallingCode="1-684" continent="North America" />
+	<Country name="Andorra" isoCode="AD" diallingCode="376" continent="Europe" />
+	<Country name="Angola" isoCode="AO" diallingCode="244" continent="Africa" />
+	<Country name="Anguilla" isoCode="AI" diallingCode="1-264" continent="North America" />
+	<Country name="Antigua and Barbuda" isoCode="AG" diallingCode="1-268" continent="North America" />
+	<Country name="Argentina" isoCode="AR" diallingCode="54" continent="South America" />
+	<Country name="Armenia" isoCode="AM" diallingCode="374" continent="Europe" />
+	<Country name="Aruba" isoCode="AW" diallingCode="297" continent="North America" />
+	<Country name="Australia" isoCode="AU" diallingCode="61" continent="Australasia" />
+	<Country name="Austria" isoCode="AT" diallingCode="43" continent="Europe" />
+	<Country name="Azerbaijan" isoCode="AZ" diallingCode="994" continent="Europe" />
+	<Country name="Bahamas" isoCode="BS" diallingCode="1-242" continent="North America" />
+	<Country name="Bahrain" isoCode="BH" diallingCode="973" continent="Asia" />
+	<Country name="Bangladesh" isoCode="BD" diallingCode="880" continent="Asia" />
+	<Country name="Barbados" isoCode="BB" diallingCode="1-246" continent="North America" />
+	<Country name="Belarus" isoCode="BY" diallingCode="375" continent="Europe" />
+	<Country name="Belgium" isoCode="BE" diallingCode="32" continent="Europe" />
+	<Country name="Belize" isoCode="BZ" diallingCode="501" continent="North America" />
+	<Country name="Benin" isoCode="BJ" diallingCode="229" continent="Africa" />
+	<Country name="Bermuda" isoCode="BM" diallingCode="1-441" continent="North America" />
+	<Country name="Bhutan" isoCode="BT" diallingCode="975" continent="Asia" />
+	<Country name="Bolivia" isoCode="BO" diallingCode="591" continent="South America" />
+	<Country name="Bosnia and Herzegovina" isoCode="BA" diallingCode="387" continent="Europe" />
+	<Country name="Botswana" isoCode="BW" diallingCode="267" continent="Africa" />
+	<Country name="Brazil" isoCode="BR" diallingCode="55" continent="South America" />
+	<Country name="British Virgin Islands" isoCode="VG" diallingCode="1-284" continent="North America" />
+	<Country name="Brunei" isoCode="BN" diallingCode="673" continent="Asia" />
+	<Country name="Bulgaria" isoCode="BG" diallingCode="359" continent="Europe" />
+	<Country name="Burkina Faso" isoCode="BF" diallingCode="226" continent="Africa" />
+	<Country name="Burma (Myanmar)" isoCode="MM" diallingCode="95" continent="Asia" />
+	<Country name="Burundi" isoCode="BI" diallingCode="257" continent="Africa" />
+	<Country name="Cambodia" isoCode="KH" diallingCode="855" continent="Africa" />
+	<Country name="Cameroon" isoCode="CM" diallingCode="237" continent="Africa" />
+	<Country name="Canada" isoCode="CA" diallingCode="1" continent="North America" />
+	<Country name="Cape Verde" isoCode="CV" diallingCode="238" continent="Africa" />
+	<Country name="Cayman Islands" isoCode="KY" diallingCode="1-345" continent="North America" />
+	<Country name="Central African Republic" isoCode="CF" diallingCode="237" continent="Africa" />
+	<Country name="Chad" isoCode="TD" diallingCode="235" continent="Africa" />
+	<Country name="Chile" isoCode="CL" diallingCode="56" continent="South America" />
+	<Country name="China" isoCode="CN" diallingCode="86" continent="Asia" />
+	<Country name="Columbia" isoCode="CO" diallingCode="57" continent="South America" />
+	<Country name="Comoros" isoCode="KM" diallingCode="269" continent="Africa" />
+	<Country name="Congo" isoCode="CG" diallingCode="242" continent="Africa" />
+	<Country name="Cook Islands" isoCode="CK" diallingCode="682" continent="Australasia" />
+	<Country name="Costa Rica" isoCode="CR" diallingCode="506" continent="North America" />
+	<Country name="Côte d'Ivoire" isoCode="CI" diallingCode="225" continent="Africa" />
+	<Country name="Croatia" isoCode="HR" diallingCode="385" continent="Europe" />
+	<Country name="Cuba" isoCode="CU" diallingCode="53" continent="North America" />
+	<Country name="Cyprus" isoCode="CY" diallingCode="357" continent="Europe" />
+	<Country name="Czech Republic" isoCode="CZ" diallingCode="420" continent="Europe" />
+	<Country name="Democratic Republic of the Congo" isoCode="CD" diallingCode="243" continent="Africa" />
+	<Country name="Denmark" isoCode="DK" diallingCode="45" continent="Europe" />
+	<Country name="Djibouti" isoCode="DJ" diallingCode="253" continent="Africa" />
+	<Country name="Dominica" isoCode="DM" diallingCode="1-767" continent="North America" />
+	<Country name="Dominican Republic" isoCode="DO" diallingCode="1-809" continent="North America" />
+	<Country name="East Timor (Timor-Leste)" isoCode="TL" diallingCode="670" continent="Asia" />
+	<Country name="Ecuador" isoCode="EC" diallingCode="593" continent="South America" />
+	<Country name="Egypt" isoCode="EG" diallingCode="20" continent="Africa" />
+	<Country name="El Salvador" isoCode="SV" diallingCode="503" continent="North America" />
+	<Country name="Equatorial Guinea" isoCode="GQ" diallingCode="240" continent="Africa" />
+	<Country name="Eritrea" isoCode="ER" diallingCode="291" continent="Africa" />
+	<Country name="Estonia" isoCode="EE" diallingCode="372" continent="Europe" />
+	<Country name="Ethiopia" isoCode="ET" diallingCode="251" continent="Africa" />
+	<Country name="Falkland Islands" isoCode="FK" diallingCode="500" continent="South America" />
+	<Country name="Faroe Islands" isoCode="FO" diallingCode="298" continent="Europe" />
+	<Country name="Fiji" isoCode="FJ" diallingCode="679" continent="Australasia" />
+	<Country name="Finland" isoCode="FI" diallingCode="358" continent="Europe" />
+	<Country name="France" isoCode="FR" diallingCode="33" continent="Europe" />
+	<Country name="French Guiana" isoCode="GF" diallingCode="594" continent="South America" />
+	<Country name="French Polynesia" isoCode="PF" diallingCode="689" continent="Australasia" />
+	<Country name="Gabon" isoCode="GA" diallingCode="241" continent="Africa" />
+	<Country name="Gambia" isoCode="GM" diallingCode="220" continent="Africa" />
+	<Country name="Georgia" isoCode="GE" diallingCode="995" continent="Europe" />
+	<Country name="Germany" isoCode="DE" diallingCode="49" continent="Europe" />
+	<Country name="Ghana" isoCode="GH" diallingCode="233" continent="Africa" />
+	<Country name="Gibraltar" isoCode="GI" diallingCode="350" continent="Europe" />
+	<Country name="Greece" isoCode="GR" diallingCode="30" continent="Europe" />
+	<Country name="Greenland" isoCode="GL" diallingCode="299" continent="North America" />
+	<Country name="Grenada" isoCode="GD" diallingCode="1-473" continent="North America" />
+	<Country name="Guadeloupe" isoCode="GP" diallingCode="590" continent="North America" />
+	<Country name="Guam" isoCode="GU" diallingCode="1-671" continent="Australasia" />
+	<Country name="Guatemala" isoCode="GT" diallingCode="502" continent="North America" />
+	<Country name="Guernsey" isoCode="GG" diallingCode="44" continent="Europe" />
+	<Country name="Guinea" isoCode="GN" diallingCode="224" continent="Africa" />
+	<Country name="Guinea-Bissau" isoCode="GW" diallingCode="245" continent="Africa" />
+	<Country name="Guyana" isoCode="GY" diallingCode="592" continent="South America" />
+	<Country name="Haiti" isoCode="HT" diallingCode="509" continent="North America" />
+	<Country name="Honduras" isoCode="HN" diallingCode="504" continent="North America" />
+	<Country name="Hong Kong" isoCode="HK" diallingCode="852" continent="Asia" />
+	<Country name="Hungary" isoCode="HU" diallingCode="36" continent="Europe" />
+	<Country name="Iceland" isoCode="IS" diallingCode="354" continent="Europe" />
+	<Country name="India" isoCode="IN" diallingCode="91" continent="Asia" />
+	<Country name="Indonesia" isoCode="ID" diallingCode="62" continent="Asia" />
+	<Country name="Iran" isoCode="IR" diallingCode="98" continent="Asia" />
+	<Country name="Iraq" isoCode="IQ" diallingCode="964" continent="Asia" />
+	<Country name="Ireland" isoCode="IE" diallingCode="353" continent="Europe" />
+	<Country name="Isle of Man" isoCode="IM" diallingCode="44" continent="Europe" />
+	<Country name="Israel" isoCode="IL" diallingCode="972" continent="Asia" />
+	<Country name="Italy" isoCode="IT" diallingCode="39" continent="Europe" />
+	<Country name="Jamaica" isoCode="JM" diallingCode="1-876" continent="North America" />
+	<Country name="Japan" isoCode="JP" diallingCode="81" continent="Asia" />
+	<Country name="Jersey" isoCode="JE" diallingCode="44" continent="Europe" />
+	<Country name="Jordan" isoCode="JO" diallingCode="962" continent="Asia" />
+	<Country name="Kazakhstan" isoCode="KZ" diallingCode="7" continent="Europe" />
+	<Country name="Kenya" isoCode="KE" diallingCode="254" continent="Africa" />
+	<Country name="Kiribati" isoCode="KI" diallingCode="686" continent="Australasia" />
+	<Country name="Kuwait" isoCode="KW" diallingCode="965" continent="Asia" />
+	<Country name="Kyrgyzstan" isoCode="KG" diallingCode="996" continent="Asia" />
+	<Country name="Laos" isoCode="LA" diallingCode="856" continent="Asia" />
+	<Country name="Latvia" isoCode="LV" diallingCode="371" continent="Europe" />
+	<Country name="Lebanon" isoCode="LB" diallingCode="961" continent="Asia" />
+	<Country name="Lesotho" isoCode="LS" diallingCode="266" continent="Africa" />
+	<Country name="Liberia" isoCode="LR" diallingCode="231" continent="Africa" />
+	<Country name="Libya" isoCode="LY" diallingCode="218" continent="Africa" />
+	<Country name="Liechtenstein" isoCode="LI" diallingCode="423" continent="Europe" />
+	<Country name="Lithuania" isoCode="LT" diallingCode="370" continent="Europe" />
+	<Country name="Luxembourg" isoCode="LU" diallingCode="352" continent="Europe" />
+	<Country name="Macau" isoCode="MO" diallingCode="853" continent="Africa" />
+	<Country name="Macedonia" isoCode="MK" diallingCode="389" continent="Europe" />
+	<Country name="Madagascar" isoCode="MG" diallingCode="261" continent="Africa" />
+	<Country name="Malawi" isoCode="MW" diallingCode="265" continent="Africa" />
+	<Country name="Malaysia" isoCode="MY" diallingCode="60" continent="Asia" />
+	<Country name="Maldives" isoCode="MV" diallingCode="960" continent="Asia" />
+	<Country name="Mali" isoCode="ML" diallingCode="220" continent="Africa" />
+	<Country name="Malta" isoCode="MT" diallingCode="356" continent="Europe" />
+	<Country name="Marshall Islands" isoCode="MH" diallingCode="692" continent="Australasia" />
+	<Country name="Martinique" isoCode="MQ" diallingCode="596" continent="North America" />
+	<Country name="Mauritania" isoCode="MR" diallingCode="222" continent="Africa" />
+	<Country name="Mauritius" isoCode="MU" diallingCode="230" continent="Africa" />
+	<Country name="Mayotte" isoCode="YT" diallingCode="262" continent="Africa" />
+	<Country name="Mexico" isoCode="MX" diallingCode="52" continent="North America" />
+	<Country name="Micronesia" isoCode="FM" diallingCode="691" continent="Australasia" />
+	<Country name="Moldovia" isoCode="MD" diallingCode="373" continent="Europe" />
+	<Country name="Monaco" isoCode="MC" diallingCode="377" continent="Europe" />
+	<Country name="Mongolia" isoCode="MN" diallingCode="976" continent="Asia" />
+	<Country name="Montenegro" isoCode="ME" diallingCode="382" continent="Europe" />
+	<Country name="Montserrat" isoCode="MS" diallingCode="1-664" continent="North America" />
+	<Country name="Morocco" isoCode="MA" diallingCode="212" continent="Africa" />
+	<Country name="Mozambique" isoCode="MZ" diallingCode="258" continent="Africa" />
+	<Country name="Namibia" isoCode="NA" diallingCode="264" continent="Africa" />
+	<Country name="Nauru" isoCode="NR" diallingCode="674" continent="Australasia" />
+	<Country name="Nepal" isoCode="NP" diallingCode="977" continent="Asia" />
+	<Country name="Netherlands" isoCode="NL" diallingCode="31" continent="Europe" />
+	<Country name="Netherlands Antilles" isoCode="AN" diallingCode="1-869" continent="North America" />
+	<Country name="New Caledonia" isoCode="NC" diallingCode="687" continent="Australasia" />
+	<Country name="New Zealand" isoCode="NZ" diallingCode="64" continent="Australasia" />
+	<Country name="Nicaragua" isoCode="NI" diallingCode="505" continent="North America" />
+	<Country name="Niger" isoCode="NE" diallingCode="227" continent="Africa" />
+	<Country name="Nigeria" isoCode="NG" diallingCode="234" continent="Africa" />
+	<Country name="Niue Island" isoCode="NU" diallingCode="676" continent="Australasia" />
+	<Country name="Norfolk Island" isoCode="NF" diallingCode="6723" continent="Australasia" />
+	<Country name="North Korea" isoCode="KP" diallingCode="850" continent="Asia" />
+	<Country name="Norway" isoCode="NO" diallingCode="47" continent="Europe" />
+	<Country name="Oman" isoCode="OM" diallingCode="968" continent="Asia" />
+	<Country name="Pakistan" isoCode="PK" diallingCode="92" continent="Asia" />
+	<Country name="Palau" isoCode="PW" diallingCode="680" continent="Australasia" />
+	<Country name="Panama" isoCode="PA" diallingCode="507" continent="North America" />
+	<Country name="Papua New Guinea" isoCode="PG" diallingCode="675" continent="Australasia" />
+	<Country name="Paraguay" isoCode="PY" diallingCode="595" continent="South America" />
+	<Country name="Peru" isoCode="PE" diallingCode="51" continent="South America" />
+	<Country name="Philippines" isoCode="PH" diallingCode="63" continent="Asia" />
+	<Country name="Pitairn" isoCode="PN" diallingCode="64" continent="South America" />
+	<Country name="Poland" isoCode="PL" diallingCode="48" continent="Europe" />
+	<Country name="Portugal" isoCode="PT" diallingCode="351" continent="Europe" />
+	<Country name="Puerto Rico" isoCode="PR" diallingCode="1-787" continent="North America" />
+	<Country name="Qatar" isoCode="QA" diallingCode="974" continent="Asia" />
+	<Country name="Réunion" isoCode="RE" diallingCode="262" continent="Africa" />
+	<Country name="Romania" isoCode="RO" diallingCode="40" continent="Europe" />
+	<Country name="Russia" isoCode="RU" diallingCode="7" continent="Europe" />
+	<Country name="Rwanda" isoCode="RW" diallingCode="250" continent="Africa" />
+	<Country name="Saint Barthélemy" isoCode="BL" diallingCode="590" continent="North America" />
+	<Country name="Saint Helena, Ascension and Tristan da Cunha" isoCode="SH" diallingCode="247" continent="Africa" />
+	<Country name="Saint Kitts and Nevis" isoCode="KN" diallingCode="1-869" continent="North America" />
+	<Country name="Saint Lucia" isoCode="LC" diallingCode="1-758" continent="North America" />
+	<Country name="Saint Martin" isoCode="MF" diallingCode="590" continent="North America" />
+	<Country name="Saint Pierre and Miquelon" isoCode="PM" diallingCode="508" continent="North America" />
+	<Country name="Saint Vincent and the Granadines" isoCode="VC" diallingCode="1-784" continent="North America" />
+	<Country name="Samoa" isoCode="WS" diallingCode="685" continent="Australasia" />
+	<Country name="San Marino" isoCode="SM" diallingCode="378" continent="Europe" />
+	<Country name="São Tomé and Príncipe" isoCode="ST" diallingCode="239" continent="Africa" />
+	<Country name="Saudi Arabia" isoCode="SA" diallingCode="966" continent="Asia" />
+	<Country name="Senegal" isoCode="SN" diallingCode="221" continent="Africa" />
+	<Country name="Serbia" isoCode="RS" diallingCode="381" continent="Europe" />
+	<Country name="Seychelles" isoCode="SC" diallingCode="248" continent="Africa" />
+	<Country name="Sierra Leone" isoCode="SL" diallingCode="232" continent="Africa" />
+	<Country name="Singapore" isoCode="SG" diallingCode="65" continent="Asia" />
+	<Country name="Slovakia" isoCode="SK" diallingCode="421" continent="Europe" />
+	<Country name="Slovenia" isoCode="SI" diallingCode="386" continent="Europe" />
+	<Country name="Solomon Islands" isoCode="SB" diallingCode="677" continent="Australasia" />
+	<Country name="Somalia" isoCode="SO" diallingCode="252" continent="Africa" />
+	<Country name="South Africa" isoCode="ZA" diallingCode="27" continent="Africa" />
+	<Country name="South Korea" isoCode="KR" diallingCode="82" continent="Asia" />
+	<Country name="Spain" isoCode="ES" diallingCode="34" continent="Europe" />
+	<Country name="Sri Lanka" isoCode="LK" diallingCode="94" continent="Asia" />
+	<Country name="Sudan" isoCode="SD" diallingCode="249" continent="Africa" />
+	<Country name="Svalbard and Jan Mayen Islands" isoCode="SJ" diallingCode="47" continent="Europe" />
+	<Country name="Swaziland" isoCode="SZ" diallingCode="268" continent="Africa" />
+	<Country name="Sweden" isoCode="SE" diallingCode="46" continent="Europe" />
+	<Country name="Switzerland" isoCode="CH" diallingCode="41" continent="Europe" />
+	<Country name="Syria" isoCode="SY" diallingCode="963" continent="Asia" />
+	<Country name="Taiwan" isoCode="TW" diallingCode="886" continent="Asia" />
+	<Country name="Tajikistan" isoCode="TJ" diallingCode="992" continent="Asia" />
+	<Country name="Tanzania" isoCode="TZ" diallingCode="255" continent="Africa" />
+	<Country name="Thailand" isoCode="TH" diallingCode="66" continent="Asia" />
+	<Country name="Togo" isoCode="TG" diallingCode="228" continent="Africa" />
+	<Country name="Tokelau" isoCode="TK" diallingCode="690" continent="Australasia" />
+	<Country name="Tonga" isoCode="TO" diallingCode="676" continent="Australasia" />
+	<Country name="Trinidad and Tobago" isoCode="TT" diallingCode="1-868" continent="North America" />
+	<Country name="Tunisia" isoCode="TN" diallingCode="216" continent="Africa" />
+	<Country name="Turkey" isoCode="TR" diallingCode="90" continent="Europe" />
+	<Country name="Turkmenistan" isoCode="TM" diallingCode="993" continent="Asia" />
+	<Country name="Turks and Caicos Islands" isoCode="TC" diallingCode="1-649" continent="North America" />
+	<Country name="Tuvalu" isoCode="TV" diallingCode="688" continent="Asia" />
+	<Country name="U.S. Virgin Islands" isoCode="VI" diallingCode="1-340" continent="North America" />
+	<Country name="Uganda" isoCode="UG" diallingCode="256" continent="Africa" />
+	<Country name="Ukraine" isoCode="UA" diallingCode="380" continent="Europe" />
+	<Country name="United Arab Emirates" isoCode="AE" diallingCode="971" continent="Asia" />
+	<Country name="United Kingdom" isoCode="GB" diallingCode="44" continent="Europe" />
+	<Country name="United States" isoCode="US" diallingCode="1" continent="North America" />
+	<Country name="Uruguay" isoCode="UY" diallingCode="598" continent="South America" />
+	<Country name="Uzbekistan" isoCode="UZ" diallingCode="998" continent="Asia" />
+	<Country name="Vanuatu" isoCode="VU" diallingCode="678" continent="Australasia" />
+	<Country name="Vatican City" isoCode="VA" diallingCode="39" continent="Europe" />
+	<Country name="Venezuela" isoCode="VE" diallingCode="58" continent="South America" />
+	<Country name="Vietnam" isoCode="VN" diallingCode="84" continent="Asia" />
+	<Country name="Wallis and Futuna" isoCode="WF" diallingCode="681" continent="Australasia" />
+	<Country name="Yemen" isoCode="YE" diallingCode="967" continent="Asia" />
+	<Country name="Zambia" isoCode="ZM" diallingCode="260" continent="Africa" />
+	<Country name="Zimbabwe" isoCode="ZW" diallingCode="263" continent="Africa" />
+</Countries>

@@ -1,0 +1,796 @@
+@charset "UTF-8";
+/* IMPORTANT: PRESERVE THE NATURAL CASCADE ORDER FROM GENERIC TO SPECIFIC */
+/* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
+/* converts px to rem - need to define a $base-font-size-px variable and use it to set the html font-size value */
+/* http://drublic.de/blog/rem-fallback-sass-less/ */
+/*
+e.g.
+
+@media screen and (max-width: 768px) {
+    #content {
+        font-size: 12px;
+    }
+}
+*/
+/* 
+
+$media-phone: 450px;
+$media-tablet: 768px;
+
+@mixin responsive($width) {
+    @if $width == phone {
+        @media only screen and (max-width: $media-phone) { @content; }
+    }
+    @else if $width == tablet {
+        @media only screen and (max-width: $media-tablet) { @content; }
+    }
+}
+
+
+e.g.
+
+    #content {
+        font-size: 12px;
+        @include responsive(phone) {
+            font-size: 10px;
+        }
+    }
+
+outputs:
+
+    #content {
+        font-size: 12px;
+    }
+
+     @media only screen and (max-width: $media-phone) {
+        font-size: 10px;
+    }
+*/
+/* assumes a default size of 16px - needs to be set in HTML tag when in development */
+/* GENERIC SELECTOR STYLING */
+/***********************************************************************************************************************************************/
+/* RESET STYLE SHEET - RE-SETS ALL THE DEFAULT STYLING FOR THE SITE */
+/***********************************************************************************************************************************************/
+/*
+	* Designed to work with IE8+
+	* Avoid setting properties explicitly wherever possible and instead rely on an element's default inheritance to inherit properties from the root element. Those elements that do not by default inherit, such as margin and padding, are set explicitly. Otherwise values are explicitly set to inherit from the root element. The idea behind this is so that these default settings will be easy to override and will not interfere with 3rd party stylesheets.
+	* This style sheet is just a starting point. It should be adapted to your personal preferences and to your individual site requirements. Ideally you should be creating a reset/default stylesheet that is unique to each site.
+*/
+/* ROOT ELEMENT *********************************************************************************************************************************************************************************************/
+html {
+  font-family: sans-serif;
+  /* web safe fonts: http://cssfontstack.com/ */
+  line-height: 1;
+  /* prefer unitless numbers for line-height values: https://developer.mozilla.org/en-US/docs/Web/CSS/line-height */
+  word-wrap: break-word;
+  /* word-wrap has been renamed to overflow-wrap */
+  overflow-wrap: break-word;
+  /* word-wrap/overflow-wrap does not work with dynamic widths (e.g. percentage widths, tables that are not set to layout="fixed") - you will need to use word-break instead for these */
+  -webkit-font-smoothing: antialiased;
+  /* maxvoltar.com/archive/-webkit-font-smoothing */
+  /* box-sizing (N.B. Opera & IE have never had vendor prefixes) */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* UNIVERSAL ELEMENTS *********************************************************************************************************************************************************************************************/
+*, *:before, *:after {
+  /* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+  -moz-box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+/* UNIVERSAL ATTRIBUTES *********************************************************************************************************************************************************************************************/
+[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+[draggable="true"] {
+  cursor: move;
+  -webkit-user-drag: element;
+  /* enables dragging in Safari */
+}
+
+[hidden] {
+  display: none;
+  /* fix for browsers that do not support the HTML5 hidden attribute */
+}
+
+/* BLOCK-LEVEL ELEMENTS *********************************************************************************************************************************************************************************************/
+body,
+main,
+section,
+article,
+header,
+footer,
+nav,
+aside,
+div,
+h1, h2, h3, h4, h5, h6,
+hr,
+noscript,
+p,
+blockquote,
+pre,
+ol, ul, li,
+dl, dt, dd,
+form, fieldset,
+figure, figcaption,
+address,
+video, audio,
+canvas,
+output {
+  margin: 0;
+  padding: 0;
+  border: none;
+  vertical-align: baseline;
+}
+
+/* HTML5 stying for older browsers - Firefox 3-3.6, Chrome 4-5, Safari 3.1-4.0, Opera 9.0-11.0 */
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6, address {
+  font: inherit;
+}
+
+p {
+  -moz-hyphens: auto;
+  /* Firefox 6+ */
+  -webkit-hyphens: auto;
+  /* Safari 5.1+, IOS Safari 4.3+ */
+  -ms-hyphens: auto;
+  /* IE 10+ */
+  hyphens: auto;
+}
+
+template, dialog {
+  display: none;
+  /* fix for browsers that do not support the HTML5 <template> or <dialog> tags - browser support: Firefox 22+, Chrome 26+, Safari 8+, IOS Safari 8+, Opera 15+ */
+}
+
+/* INLINE ELEMENTS *********************************************************************************************************************************************************************************************/
+a,
+em, i,
+strong, b,
+mark,
+u,
+s,
+small,
+cite,
+q,
+dfn,
+abbr,
+data, time,
+code, var, samp, kbd,
+sub, sup,
+ruby, rt, rp,
+bdi, bdo,
+span {
+  vertical-align: baseline;
+}
+
+code, var, samp, kbd {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85em;
+  font-size: 0.85rem;
+}
+
+abbr {
+  speak: spell-out;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted #333;
+  cursor: help;
+}
+
+/* definition - marks the first occurrence of a term */
+dfn::before {
+  content: open-quote;
+}
+
+dfn::after {
+  content: close-quote;
+}
+
+/* sup & sub - stops them affecting the line-height */
+sup, sub {
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  bottom: 0.5em;
+}
+
+sub {
+  top: 0.5em;
+}
+
+/* LIST ELEMENTS *********************************************************************************************************************************************************************************************/
+ul, ol {
+  list-style: none;
+}
+
+/* TABLE ELEMENTS *********************************************************************************************************************************************************************************************/
+table, thead, tfoot {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  table-layout: auto;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0;
+}
+
+th {
+  font-weight: bold;
+}
+
+caption {
+  caption-side: top;
+}
+
+/* FORM ELEMENTS *********************************************************************************************************************************************************************************************/
+/*
+	input types:
+		button, checkbox, color, date, datetime, datetime-local, email, file,
+		hidden, image, month, number, password, radio, range, reset, search,
+		submit, tel, text, time, url, week
+
+	other field elements:
+		button, select, textarea
+*/
+label[for] {
+  cursor: pointer;
+}
+
+/* all form fields */
+input, textarea, select, button {
+  font-family: inherit;
+  /* do not use font - do not want to inherit line-height */
+  font-size: inherit;
+  outline: none;
+  /* box-sizing - can be deleted if using univeral selector to add box-sizing */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Checkbox/Radio Fields */
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+/* Buttons */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type="image"],
+input[type="file"] {
+  cursor: pointer;
+}
+
+input[readonly] {
+  border: none;
+  background-color: transparent;
+  font: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+/* removes the extra padding and border on buttons and input tags for Firefox browsers
+			   http://css-tricks.com/forums/topic/button-padding-issue/ */
+button::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+textarea {
+  min-height: 1.5em;
+  overflow: auto;
+  /* removes unnecessary scrollbars in IE */
+  resize: vertical;
+}
+
+select {
+  cursor: pointer;
+}
+
+/* EMBEDDED CONTENT *********************************************************************************************************************************************************************************************/
+audio, video,
+iframe, object, embed {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+img {
+  border: none;
+  text-align: center;
+}
+
+/******************************************************************************************************************************************
+FONTS - custom fonts for site defined by @font-face
+******************************************************************************************************************************************/
+/*
+WOFF 2.0 (.woff) supported by Chrome 36+, Opera 23+
+WOFF (.woff) supported by Firefox 3.6+, Internet Explorer 9+, Chrome 6+, Opera 11.10+
+TrueType (.ttf) supported by Firefox 3.5+, Chrome 4+, Safari 3.1+, Opera 10+
+OpenType (.otf) supported by Firefox 3.5+, Chrome 4+, Safari 3.1+, Opera 10+
+Scalable Vector Graphics (.svg) supported by Safari 3+, Opera 9+ (8+)
+Embedded OpenType (.eot) supported by Internet Explorer 4+
+*/
+/*
+http://www.fontspring.com/blog/the-new-bulletproof-font-face-syntax
+*/
+@font-face {
+  font-family: 'MyWebFont';
+  src: url("webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("webfont.eot?#iefix") format("embedded-opentype"), url("webfont.woff") format("woff"), url("webfont.ttf") format("truetype"), url("webfont.svg#svgFontName") format("svg");
+  /* Legacy iOS */
+}
+
+/*
+http://sixrevisions.com/css/font-face-guide/
+http://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/
+
+@font-face {
+	font-family: "MyFontFamily";
+	src:	url("/fonts/MyFontFamily.eot") format("eot");
+	src:	local(‚ò∫'),
+			url("/fonts/MyFontFamily.woff") format("woff"),
+			url("/fonts/MyFontFamily.ttf") format("truetype"),
+			url("/fonts/MyFontFamily.otf"),
+			url("/fonts/MyFontFamily.svg#MyFontFamily") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MyFontFamily";
+	src:	url("/fonts/MyFontFamily-bold.eot") format("eot");
+	src:	local(‚ò∫'),
+			url("/fonts/MyFontFamily-bold.woff") format("woff"),
+			url("/fonts/MyFontFamily-bold.ttf") format("truetype"),
+			url("/fonts/MyFontFamily-bold.otf"),
+			url("/fonts/MyFontFamily-bold.svg#MyFontFamily") format("svg");
+	font-weight: bold;
+	font-style: normal;
+}
+*/
+/*@import 'default.scss';*/
+/* sets default styles for selectors ??? */
+/* FOR SITE-WIDE, REUSABLE CLASSES - KEEP SPECIVITY LOW */
+/***********************************************************************************************************************************************/
+/* BOOTSTRAP - CONTAINS ALL THE SITE-WIDE CLASSES USED THROUGHOUT THE SITE */
+/***********************************************************************************************************************************************/
+/*
+	* Global style sheet containing reusable, overridable classes for styling that is used throughout the site
+	* Use page-specific style sheets to override/add styling that is specific to a single page
+	* Try and keep it for stying simple units of HTML - e.g. buttons, alert boxes - any HTML too complicated will be difficult to maintain/override
+	* Avoid context-specific styling - such as margins, positioning, floating - it is better to add/override these settings in the page-specific style sheets  
+	* Keep specifity low - try and use only classes and generic selectors to make it easy to override styling in the page-specific style sheets
+	* Do not use for adding basic CSS - e.g. floating, align-left, align-right - there is no point adding an extra class for something that is just a single line of CSS - use page-specific styling for this
+*/
+/************************************************************************************************************************************************************************************/
+/* LAYOUTS */
+/************************************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************************************/
+/* Layout Table - using CSS display: table */
+.layout-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.layout-table > .left-col,
+.layout-table > .right-col {
+  display: table-cell;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+/************************************************************************************************************************************************************************************/
+/* DL Table - using <dl> description lists */
+.dl-table {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.dl-table > dt,
+.dl-table > dd {
+  display: block;
+  width: 50%;
+  margin: 0;
+  margin-bottom: 0.3em;
+  box-sizing: border-box;
+}
+
+.dl-table > dt {
+  float: left;
+  clear: both;
+  padding-right: 1em;
+}
+
+.dl-table > dd {
+  float: right;
+}
+
+/************************************************************************************************************************************************************************************/
+/* ALERT MESSAGES */
+/************************************************************************************************************************************************************************************/
+.alert {
+  margin: 1em 0;
+  padding: 1em;
+  color: #000;
+  background-color: #FFFACD;
+  border: 2px solid #CC0000;
+}
+
+.alert h1,
+.alert h2,
+.alert h3,
+.alert h4 {
+  margin-bottom: 0.8em;
+  font-weight: bold;
+}
+
+.alert p {
+  margin-top: 0.8em;
+  margin-bottom: 0;
+}
+
+.alert p:first-child {
+  margin-top: 0;
+}
+
+/* error alerts - shown when something has failed - e.g. form validation, 404 error, etc. */
+.alert.error {
+  background-color: #FFEEEE;
+  border: 2px solid #CC0000;
+}
+
+/* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
+.alert.success {
+  background-color: #EEFFEE;
+  border: 2px solid #336633;
+}
+
+/* compact alert - puts all the text on to one line to save vertical space */
+.alert.compact {
+  text-align: center;
+}
+
+.alert.compact h1,
+.alert.compact h2,
+.alert.compact h3,
+.alert.compact h4,
+.alert.compact p {
+  display: inline;
+}
+
+.alert.compact h1::after,
+.alert.compact h2::after,
+.alert.compact h3::after,
+.alert.compact h4::after {
+  content: ".";
+}
+
+/************************************************************************************************************************************************************************************/
+/* BREADCRUMBS */
+/************************************************************************************************************************************************************************************/
+.breadcrumb li {
+  display: inline-block;
+}
+
+.breadcrumb li::before {
+  content: " > ";
+}
+
+.breadcrumb li:first-child::before {
+  content: none;
+}
+
+/************************************************************************************************************************************************************************************/
+/* BUTTONS */
+/************************************************************************************************************************************************************************************/
+.btn-menu {
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+  background: repeating-linear-gradient(0deg, #000, #000 20%, transparent 20%, transparent 40%);
+  border: none;
+  text-indent: -9999px;
+}
+
+/************************************************************************************************************************************************************************************/
+/* BUILT-IN ASP.NET MVC VALIDATION CLASSES */
+/************************************************************************************************************************************************************************************/
+.validation-summary-errors {
+  margin: 1em 0;
+  padding: 1em;
+  color: #000;
+  background-color: #FFEEEE;
+  border: 2px solid #CC0000;
+}
+
+.validation-summary-errors ul {
+  margin: 0;
+  padding-left: 2em;
+  list-style: circle;
+}
+
+.field-validation-error {
+  color: #CC0000;
+}
+
+/************************************************************************************************************************************************************************************/
+/* PRE-FORMATTED CODE */
+/************************************************************************************************************************************************************************************/
+pre.code {
+  min-width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+  color: #000;
+  background-color: #FFFFEE;
+  border: 1px dotted #CCCC99;
+  overflow: auto;
+  word-wrap: normal;
+  /* word-wrap has been renamed to overflow-wrap */
+  overflow-wrap: normal;
+  resize: horizontal;
+}
+
+pre.code > code:only-of-type {
+  display: block;
+  min-height: 1.2rem;
+  font-weight: normal;
+}
+
+code var {
+  color: #CC0000;
+}
+
+p > code,
+li > code {
+  padding: 2px 4px;
+  font-size: 0.9em;
+  color: #C7254E;
+  background-color: #F9F2F4;
+  border: 1px solid #E1E1E1;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*
+ALTERNATIVELY:    
+@import 'website/_bootstrap/alerts.scss';
+@import 'website/_bootstrap/animation.scss';
+@import 'website/_bootstrap/buttons.scss';
+@import 'website/_bootstrap/headings.scss';
+@import 'website/_bootstrap/tables.scss';
+*/
+/* FOR PAGE-SPECIFIC STYLING - USE THE HIERARCHY PROVIDED BY THE PHYSICAL FILE PATH */
+/***********************************************************************************************************************************************/
+/* ADDS BASIC STYLING FOR SITE */
+/***********************************************************************************************************************************************/
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #EEE;
+}
+
+.page {
+  position: relative;
+  min-width: 320px;
+  max-width: 1000px;
+  min-height: 100%;
+  margin: 0 auto;
+  background-color: #FFF;
+}
+
+.page-header {
+  position: relative;
+  height: 6rem;
+}
+
+.page-header nav {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+}
+
+.page-header form[role="search"] {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.page-header a:link {
+  color: #FFF;
+}
+
+.page-header a:active {
+  color: yellow;
+}
+
+.page-header a:visited {
+  color: #FFF;
+}
+
+main {
+  padding: 1rem;
+  padding-bottom: 3rem;
+}
+
+.page-footer {
+  position: fixed;
+  z-index: 50;
+  bottom: 0;
+  width: 100%;
+  min-width: 320px;
+  max-width: 1000px;
+  padding: 1em;
+  background-color: #FFF;
+}
+
+.page-footer nav {
+  text-align: center;
+}
+
+/***********************************************************************************************************************************************/
+/* BOOTSTRAP - WOULD NORMALL BY IN A SEPARATE FILE */
+/***********************************************************************************************************************************************/
+a:link {
+  color: #000;
+}
+
+a:active {
+  color: red;
+}
+
+a:visited {
+  color: gray;
+}
+
+article > h1:first-of-type {
+  margin: 1em 0;
+  margin-top: 0;
+  padding: 0.5em 1em;
+  font-size: 1.3em;
+  color: #FFF;
+  background-color: #000;
+}
+
+article > p {
+  margin-bottom: 0.8em;
+  line-height: 1.2;
+  text-align: justify;
+}
+
+nav {
+  font-size: 0.9rem;
+}
+
+nav li {
+  display: inline;
+  padding-right: 0.3em;
+}
+
+nav li:last-child {
+  padding-right: 0;
+}
+
+/* THEMES - for basic skins - e.g. change fonts, colours */
+/*@import 'website/_themes/theme1.scss';*/
+/* SPECIAL STYLE SHEETS */
+/*
+*****************************************************************************************************************************************
+ PRINT STYLE SHEET
+ (CSS2.1)
+*****************************************************************************************************************************************
+*/
+@media print {
+  /*
+=========================================================================================================================================
+ DEFAULT STYLES
+=========================================================================================================================================
+*/
+  * {
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+    font-family: Georgia, "Times New Roman", Times, serif !important;
+  }
+  body {
+    font-size: 10pt !important;
+  }
+  table th, table td {
+    border: 1px dotted #000 !important;
+  }
+  input, textarea, select, noscript {
+    display: none !important;
+  }
+  p > a, li > a {
+    font-weight: bold;
+    text-decoration: none;
+  }
+  p > a[href]:after,
+  li > a[href]:after {
+    content: " [http://www.WebSite.com" attr(href) "]";
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 9pt !important;
+  }
+  p > a[href^="http"]:after,
+  li > a[href^="http"]:after {
+    content: " [" attr(href) "]";
+  }
+  p > a[href^="#"]:after,
+  li > a[href^="#"]:after {
+    content: normal;
+  }
+  p > a[href^="http"],
+  li > a[href^="http"],
+  p > a[href$=".doc"],
+  li > a[href$=".doc"],
+  p > a[href$=".pdf"],
+  li > a[href$=".pdf"] {
+    padding: 0;
+  }
+  ul {
+    list-style-type: disc !important;
+    padding-left: 3em !important;
+  }
+  ul > li > ul {
+    list-style-type: circle !important;
+  }
+  kbd, tt, code, pre, samp {
+    font-size: 1em;
+  }
+  /*
+=========================================================================================================================================
+ CLASSES
+=========================================================================================================================================
+*/
+  /* noprint - hides markup that should not be printed */
+  .noprint {
+    display: none !important;
+  }
+}
+
+/*@import 'scss/website/website-ie.scss';*/

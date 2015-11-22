@@ -1,0 +1,31 @@
+﻿/* IMPORTANT: PRESERVE THE NATURAL CASCADE ORDER FROM GENERIC TO SPECIFIC */
+@import '_variables.scss';
+@import '_mixins.scss';
+
+/* GENERIC SELECTOR STYLING */
+@import 'reset.scss';
+@import 'website/fonts.scss';
+/*@import 'default.scss';*/ /* sets default styles for selectors ??? */
+
+/* FOR SITE-WIDE, REUSABLE CLASSES - KEEP SPECIVITY LOW */
+@import 'website/bootstrap.scss';
+
+/*
+ALTERNATIVELY:    
+@import 'website/_bootstrap/alerts.scss';
+@import 'website/_bootstrap/animation.scss';
+@import 'website/_bootstrap/buttons.scss';
+@import 'website/_bootstrap/headings.scss';
+@import 'website/_bootstrap/tables.scss';
+*/
+
+/* FOR PAGE-SPECIFIC STYLING - USE THE HIERARCHY PROVIDED BY THE PHYSICAL FILE PATH */
+@import 'website/shared/_layout.scss';
+
+/* THEMES - for basic skins - e.g. change fonts, colours */
+/*@import 'website/_themes/theme1.scss';*/
+
+/* SPECIAL STYLE SHEETS */
+@import 'print.scss';
+/*@import 'scss/website/website-ie.scss';*/
+

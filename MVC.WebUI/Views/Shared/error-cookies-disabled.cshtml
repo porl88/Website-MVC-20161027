@@ -1,0 +1,11 @@
+﻿@{
+	ViewBag.Title = "Error: Cookies Disabled";
+}
+
+<section class="alert error">
+	<h1>Cookies disabled</h1>
+	<p>It looks like cookies are not enabled on your browser. Cookies are needed if you want to log in and may be required for other services. @Html.ActionLink("If you want to find out how to enable cookies, click here", "Cookies", "Help").</p>
+	<p>If you have cookies enabled and continue to receive this error page, @Html.ActionLink("click here to contact technical support", "Index", "Contact").</p>
+</section>
+
+@Html.Partial("_sitemap")

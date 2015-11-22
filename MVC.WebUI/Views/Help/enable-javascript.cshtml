@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "JavaScript | Help";
+	ViewBag.Browser = Request.Browser.Browser;
+	ViewBag.Website = Request.Url.Host;
+}
+
+<article>
+
+	<h1>JavaScript</h1>
+	
+	<p>JavaScript is used on this site to provide a number of interactive features. Without JavaScript enabled on your browser, these will not work. You may also find that you cannot gain access to certain sections of this site.</p>
+	
+	<h2>How to enable Javascript on your browser</h2>
+
+	@if (ViewBag.Browser == "Chrome") {
+
+	<h3>Chrome 19+(?)</h3>
+	<ol>
+		<li>Click the Chrome menu icon on the browser toolbar in the top right corner of your browser.</li>
+		<li>From the options in the dropdown list, select <kbd>Settings</kbd>.</li>
+		<li>At the bottom of the page, click on the <kbd>Show advanced settings</kbd> link.</li>
+		<li>Under <samp>Privacy</samp>, click on the <kbd>Content settings&hellip;</kbd> button.</li>
+		<li>Under the <samp>JavaScript</samp> tab, make sure the <kbd>Allow all sites to run JavaScript (recommended)</kbd> option is selected.</li>
+		<li>If this is already selected, click on the <kbd>Manage exceptions&hellip;</kbd> button to open the <samp>JavaScript exceptions</samp> dialogue box.</li>
+		<li>Make sure the <kbd>Behaviour</kbd> dropdown is set to <kbd>Allow</kbd>. If @ViewBag.Website already appears in the list then set its <samp>Behaviour</samp> value to <kbd>Allow</kbd>. Otherwise, enter <kbd>@ViewBag.Website</kbd> into the <samp>Add new hostname pattern</samp> field and click <kbd>OK</kbd>.</li>
+		<li>Click <kbd>OK</kbd> to save your settings and then close all the dialogue boxes.</li>
+	</ol>
+
+	<h3>Chrome 1-18(?)</h3>
+	<ol>
+		<li>Click on <kbd>Tools</kbd> (with the <samp>Customise and control Google Chrome</samp> spanner icon) on the toolbar at the top right of the browser.</li>
+		<li>From the options in the dropdown list, select <kbd>Options</kbd>.</li>
+		<li>Click on the <kbd>Under the Bonnet</kbd> tab at the top of the <samp>Google Chrome Options</samp> dialogue box.</li>
+		<li>Under <samp>Privacy</samp>, click the <kbd>Content Settings</kbd> button to open the <samp>Content Settings</samp> dialogue box.</li>
+		<li>Select the <samp>JavaScript</samp> tab, and select the <kbd>Allow all sites to accept JavaScript</kbd> option.</li>
+		<li>Close all the dialogue boxes.</li>
+	</ol>
+
+	<p><a href="http://support.google.com/chrome/" target="_blank">Click here for more information about Chrome</a>.</p>
+	}
+
+	@if (ViewBag.Browser == "Firefox") {
+
+	<h3>Firefox</h3>
+	<ol>
+		<li>Click on the <kbd>Firefox</kbd> tab, or <kbd>Tools</kbd> on the toolbar, in the top left corner of the browser.</li>
+		<li>From the dropdown list, select <kbd>Options&hellip;</kbd>.</li>
+		<li>Select the <kbd>Content</kbd> tab.</li>
+		<li>Select the <kbd>Enable JavaScript</kbd> checkbox so that a tick appears.</li>
+		<li>Select <kbd>OK</kbd> at bottom of the <kbd>Options</kbd> window to save your changes.</li>
+	</ol>
+
+	<p><a href="https://support.mozilla.org/" target="_blank">Click here for more information about Firefox</a>.</p>
+
+	 }
+
+	@if (ViewBag.Browser == "IE") {
+
+	<h3>Internet Explorer</h3>
+	<ol>
+		<li>On the toolbar at the top of the browser, select <kbd>Tools</kbd>.</li>
+		<li>From the dropdown list, select <kbd>Internet Options&hellip;</kbd>.</li>
+		<li>Select the <kbd>Security</kbd> tab.</li>
+		<li>Select the <kbd>Custom Level</kbd> to open up the <kbd>Security Settings</kbd> window.</li>
+		<li>On the <kbd>Security Settings</kbd> window, scroll down to <kbd>Active Scripting</kbd> and select the <kbd>Enable</kbd> radio button.</li>
+		<li>Save your changes by selecting <kbd>OK</kbd> at bottom of the <kbd>Security Settings</kbd> window, and then selecting <kbd>OK</kbd> at bottom of the <kbd>Internet Options</kbd> window.</li>
+	</ol>
+	
+	<p><a href="http://support.microsoft.com/" target="_blank">Click here for more information about Internet Explorer</a>.</p>
+	 
+	}
+
+	@if (ViewBag.Browser == "Opera") {
+
+	<h3>Opera</h3>
+	<ol>
+		<li>Click on the <kbd>Opera</kbd> tab, or <kbd>Tools</kbd> on the toolbar, in the top left corner of the browser.</li>
+		<li>From the dropdown list, select <kbd>Preferences&hellip;</kbd>. If <kbd>Preferences&hellip;</kbd> is not visible, select <kbd>Settings</kbd>, then select <kbd>Preferences&hellip;</kbd>.</li>
+		<li>Select the <kbd>Advanced</kbd> tab.</li>
+		<li>Select the <kbd>Content</kbd> option from the list in the left-hand column.</li>
+		<li>Select the <kbd>Enable JavaScript</kbd> checkbox so that a tick appears.</li>
+		<li>Select <kbd>OK</kbd> at bottom of the <kbd>Preferences</kbd> window to save your changes.</li>
+	</ol>
+
+	<p><a href="http://www.opera.com/support/" target="_blank">For more information about Opera click here</a>.</p>
+	}
+
+	@if (ViewBag.Browser == "Safari") {
+
+	<h3>Safari</h3>
+	<ol>
+		<li>Click on the <samp>Settings</samp> icon on the top right corner of the browser, or select <kbd>Edit</kbd> from the toolbar (if visible).</li>
+		<li>From the dropdown list, select <kbd>Preferences&hellip;</kbd>.</li>
+		<li>Select the <kbd>Security</kbd> tab.</li>
+		<li>Select the <kbd>Enable JavaScript</kbd> checkbox so that a tick appears.</li>
+	</ol>
+
+	<h3>Safari iOS (iPhone/iPod Touch/iPad)</h3>
+	<ol>
+		<li>Close down your browser and open up the main <kbd>Settings</kbd> app for your device.</li>
+		<li>Scroll down and select the <kbd>Safari</kbd> tab.</li>
+		<li>Make sure <kbd>JavaScript</kbd> is switched to <kbd>ON</kbd></li>
+	</ol>
+	
+	<p><a href="http://www.apple.com/support/safari/" target="_blank">For more information about Safari click here</a>.</p>
+	
+	}
+
+</article>

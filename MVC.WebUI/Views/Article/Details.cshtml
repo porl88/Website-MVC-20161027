@@ -1,0 +1,12 @@
+﻿@model Services.Article.Transfer.ArticleDto
+@{
+	ViewBag.Title = Model.Title;
+}
+
+@Html.Partial("_Breadcrumb")
+
+<article itemscope="itemscope" itemtype="http://schema.org/Article">
+	<h1 itemprop="name">@Model.Title</h1>
+	@Html.Raw(Model.Content)
+</article>
+
