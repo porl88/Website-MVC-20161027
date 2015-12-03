@@ -7,7 +7,7 @@
     /// <summary>
     /// Login service. Use when storing credentials in the web.config file.
     /// </summary>
-    public class FormsAuthenticationLoginService : ILoginService
+    public class FormsAuthenticationAdapter : ILoginService
 	{
 		public bool LogIn(string userName, string password)
 		{

@@ -6,7 +6,7 @@
     using Core.Entities.Account;
     using WebMatrix.WebData;
 
-    public class SimpleMembershipService : IAccountService
+    public class SimpleMembershipAdapter : IAccountService
     {
         public string CreateAccount(string email, string password)
         {

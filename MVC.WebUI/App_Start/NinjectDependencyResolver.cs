@@ -35,7 +35,7 @@
 		{
             //this.kernel.Bind<HttpContext>().ToMethod(ctx => HttpContext.Current).InTransientScope();
             //this.kernel.Bind<HttpContextBase>().ToMethod(ctx => new HttpContextWrapper(HttpContext.Current)).InTransientScope();
-            //this.kernel.Bind<IAccountService>().To<SimpleMembershipService>();
+            //this.kernel.Bind<IAccountService>().To<SimpleMembershipAdapter>();
             //this.kernel.Bind<IArticleService>().To<ArticleService>();
             //this.kernel.Bind<IMessageService>().To<EmailService>();
             this.kernel.Bind<IPageService>().To<PageService>();
