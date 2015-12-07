@@ -1,8 +1,10 @@
 ﻿namespace MVC.Core.Testing
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using Data.EntityFramework;
     using Entities;
@@ -34,7 +36,55 @@
 			return await this.entities.AsQueryable().FirstOrDefaultAsync(x => x.Id == id);
 		}
 
-		public virtual T Insert(T entity)
+        public virtual T Get(Expression<Func<T, bool>> filter)
+        {
+            return this.entities.AsQueryable().SingleOrDefault(filter);
+        }
+
+        public async virtual Task<T> GetAsync(Expression<Func<T, bool>> filter)
+        {
+            return await this.entities.AsQueryable().SingleOrDefaultAsync(filter);
+        }
+
+        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            IQueryable<T> query = this.entities.AsQueryable();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            IQueryable<T> query = this.entities.AsQueryable();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
+        }
+
+        public virtual T Insert(T entity)
 		{
 			if (entity.Id > 0)
 			{
@@ -109,5 +159,5 @@
 				this.Delete(entityToRemove);
 			}
 		}
-	}
+    }
 }

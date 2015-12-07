@@ -1,22 +1,31 @@
 ﻿namespace MVC.Core.Data.EntityFramework
 {
-	using System.Linq;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
-	public interface IRepository<T>
-	{
-		IQueryable<T> Get();
+    public interface IRepository<T>
+    {
+        T Get(int id);
 
-		T Get(int id);
+        Task<T> GetAsync(int id);
 
-		Task<T> GetAsync(int id);
+        T Get(Expression<Func<T, bool>> filter);
 
-		T Insert(T entity);
+        Task<T> GetAsync(Expression<Func<T, bool>> filter);
 
-		T Update(T entity);
+        IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
-		void Delete(int id);
+        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
-		void Delete(T entity);
-	}
+        T Insert(T entity);
+
+        T Update(T entity);
+
+        void Delete(int id);
+
+        void Delete(T entity);
+    }
 }

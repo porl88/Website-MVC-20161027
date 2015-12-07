@@ -41,10 +41,10 @@
             this.kernel.Bind<IPageService>().To<PageService>();
 			this.kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 #if DEBUG
-			kernel.Bind<IExceptionHandler>().To<NullExceptionHandler>();
+			this.kernel.Bind<IExceptionHandler>().To<NullExceptionHandler>();
 #else
-			kernel.Bind<IExceptionHandler>().To<EmailExceptionHandler>();
-			kernel.Bind<ISystemSettings>().To<SystemSettings>();
+			this.kernel.Bind<IExceptionHandler>().To<EmailExceptionHandler>();
+			this.kernel.Bind<ISystemSettings>().To<SystemSettings>();
 #endif
 			//kernel.BindFilter<GlobalErrorAttribute>(FilterScope.Action, 0);
 		}

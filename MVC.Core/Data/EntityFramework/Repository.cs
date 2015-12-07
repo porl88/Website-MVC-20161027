@@ -1,11 +1,14 @@
 ﻿namespace MVC.Core.Data.EntityFramework
 {
-	using System;
-	using System.Data.Entity;
-	using System.Linq;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
-	public class Repository<T> : IRepository<T> where T : class
+    // http://www.asp.net/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
+    public class Repository<T> : IRepository<T> where T : class
 	{
 		private readonly DbContext context;
 		private readonly DbSet<T> databaseSet;
@@ -24,27 +27,6 @@
 			this.includes = includes;
 		}
 
-		public virtual IQueryable<T> Get()
-		{
-			if (this.includes.Length == 0)
-			{
-				return this.databaseSet;
-			}
-			else
-			{
-				var query = this.databaseSet.Include(this.includes[0]);
-				if (this.includes.Length > 1)
-				{
-					for (var i = 1; i < this.includes.Length; i++)
-					{
-						query = query.Include(this.includes[i]);
-					}
-				}
-
-				return query;
-			}
-		}
-
 		public virtual T Get(int id)
 		{
 			return this.databaseSet.Find(id);
@@ -55,7 +37,69 @@
 			return await this.databaseSet.FindAsync(id);
 		}
 
-		public virtual T Insert(T entity)
+        public virtual T Get(Expression<Func<T, bool>> filter)
+        {
+            return this.databaseSet.SingleOrDefault(filter);
+        }
+
+        public async virtual Task<T> GetAsync(Expression<Func<T, bool>> filter)
+        {
+            return await this.databaseSet.SingleOrDefaultAsync(filter);
+        }
+
+        public virtual IEnumerable<T> Get(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            IQueryable<T> query = this.databaseSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var include in this.includes)
+            {
+                query = query.Include(include);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
+        }
+
+        public async virtual Task<IEnumerable<T>> GetAsync(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            IQueryable<T> query = this.databaseSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var include in this.includes)
+            {
+                query = query.Include(include);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
+        }
+
+        public virtual T Insert(T entity)
 		{
 			this.databaseSet.Add(entity);
 			this.context.Entry(entity).State = EntityState.Added;
