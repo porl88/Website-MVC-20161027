@@ -1,7 +1,9 @@
 ﻿namespace MVC.Services.Article
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Data.EntityFramework;
     using Core.Entities.Article;
     using Core.Exceptions;
@@ -22,13 +24,13 @@
 			this.exceptionHandler = exceptionHandler;
 		}
 
-		public GetArticleResponse GetArticle(int id, string languageCode = "en-gb")
+		public GetArticleResponse GetArticle(GetArticleRequest request)
 		{
 			var response = new GetArticleResponse();
 
 			try
 			{
-				var article = this.articleVersionRepository.Get().SingleOrDefault(x => x.ArticleId == id && x.LanguageCode == languageCode);
+                var article = this.articleVersionRepository.GetSingle(q => q.Where(x => x.ArticleId == request.ArticleId && x.Language.LanguageCode == request.LanguageCode).SingleOrDefault());
 				if (article != null)
 				{
 					response.Article = new ArticleDto
@@ -52,220 +54,235 @@
 			return response;
 		}
 
-		//public async Task<GetArticleResponse> GetArticleAsync(int id, string languageCode = "en-gb")
-		//{
-		//	var response = new GetArticleResponse();
+        public async Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request)
+        {
+            var response = new GetArticleResponse();
 
-		//	try
-		//	{
-		//		var article = await this.articleVersionRepository.Get().SingleOrDefault(x => x.ArticleId == id && x.LanguageCode == languageCode);
-		//		if (article != null)
-		//		{
-		//			response.Article = new ArticleDto
-		//			{
-		//				Title = article.Title,
-		//				Content = article.Content
-		//			};
-		//			response.Status = ResponseStatus.OK;
-		//		}
-		//		else
-		//		{
-		//			response.Status = ResponseStatus.NotFound;
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+            try
+            {
+                var article = await this.articleVersionRepository.GetSingleAsync(q => q.Where(x => x.ArticleId == request.ArticleId && x.Language.LanguageCode == request.LanguageCode).SingleOrDefault());
+                if (article != null)
+                {
+                    response.Article = new ArticleDto
+                    {
+                        Title = article.Title,
+                        Content = article.Content
+                    };
 
-		//	return response;
-		//}
+                    response.Status = ResponseStatus.OK;
+                }
+                else
+                {
+                    response.Status = ResponseStatus.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-		//public List<ArticleSummaryDto> GetArticleSummaries()
-		//{
-		//	var articles = this.articleVersionRepository.Get();
+            return response;
+        }
 
-		//	return articles.Select(x => new ArticleSummaryDto
-		//	{
-		//		Id = x.Id,
-		//		Title = x.Title,
-		//		Summary = x.Summary
-		//	}).ToList();
-		//}
+        public List<ArticleSummaryDto> GetArticles()
+        {
+            var articles = this.articleVersionRepository.Get();
 
-		//public EditArticleResponse AddArticle(ArticleDto article)
-		//{
-		//	var response = new EditArticleResponse();
+            return articles.Select(x => new ArticleSummaryDto
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Summary = x.Description
+            }).ToList();
+        }
 
-		//	try
-		//	{
-		//		var now = DateTime.Now;
+        public async Task<List<ArticleSummaryDto>> GetArticlesAsync()
+        {
+            var articles = await this.articleVersionRepository.GetAsync();
 
-		//		var newArticle = new ArticleVersion
-		//		{
-		//			Title = article.Title,
-		//			Content = article.Content,
-		//			Created = now,
-		//			Updated = now
-		//		};
+            return articles.Select(x => new ArticleSummaryDto
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Summary = x.Description
+            }).ToList();
+        }
 
-		//		var addedArticle = this.articleVersionRepository.Insert(newArticle);
-		//		this.unitOfWork.Commit();
-		//		response.Status = ResponseStatus.OK;
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+        public EditArticleResponse AddArticle(ArticleDto article)
+        {
+            var response = new EditArticleResponse();
 
-		//	return response;
-		//}
+            try
+            {
+                var now = DateTime.Now;
 
-		//public async Task<EditArticleResponse> AddArticleAsync(ArticleDto article)
-		//{
-		//	var response = new EditArticleResponse();
+                var newArticle = new ArticleVersion
+                {
+                    Title = article.Title,
+                    Content = article.Content,
+                    Created = now,
+                    Updated = now
+                };
 
-		//	try
-		//	{
-		//		var now = DateTime.Now;
+                var addedArticle = this.articleVersionRepository.Insert(newArticle);
+                this.unitOfWork.Commit();
+                response.Status = ResponseStatus.OK;
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-		//		var newArticle = new ArticleVersion
-		//		{
-		//			Title = article.Title,
-		//			Content = article.Content,
-		//			Created = now,
-		//			Updated = now
-		//		};
+            return response;
+        }
 
-		//		var addedArticle = this.articleVersionRepository.Insert(newArticle);
-		//		await this.unitOfWork.CommitAsync();
-		//		response.Status = ResponseStatus.OK;
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+        public async Task<EditArticleResponse> AddArticleAsync(ArticleDto article)
+        {
+            var response = new EditArticleResponse();
 
-		//	return response;
-		//}
+            try
+            {
+                var now = DateTime.Now;
 
-		//public EditArticleResponse UpdateArticle(ArticleDto article)
-		//{
-		//	var response = new EditArticleResponse();
+                var newArticle = new ArticleVersion
+                {
+                    Title = article.Title,
+                    Content = article.Content,
+                    Created = now,
+                    Updated = now
+                };
 
-		//	try
-		//	{
-		//		var dbArticle = this.articleVersionRepository.Get(article.Id);
-		//		if (dbArticle != null)
-		//		{
-		//			dbArticle.Title = article.Title;
-		//			dbArticle.Content = article.Content;
-		//			dbArticle.Updated = DateTime.Now;
-		//			var update = this.articleVersionRepository.Update(dbArticle);
-		//			this.unitOfWork.Commit();
-		//			response.Status = ResponseStatus.OK;
-		//		}
-		//		else
-		//		{
-		//			response.Status = ResponseStatus.NotFound;
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+                var addedArticle = this.articleVersionRepository.Insert(newArticle);
+                await this.unitOfWork.CommitAsync();
+                response.Status = ResponseStatus.OK;
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-		//	return response;
-		//}
+            return response;
+        }
 
-		//public async Task<EditArticleResponse> UpdateArticleAsync(ArticleDto article)
-		//{
-		//	var response = new EditArticleResponse();
+        public EditArticleResponse UpdateArticle(EditArticleRequest request)
+        {
+            var response = new EditArticleResponse();
 
-		//	try
-		//	{
-		//		var dbArticle = this.articleVersionRepository.Get(article.Id);
-		//		if (dbArticle != null)
-		//		{
-		//			dbArticle.Title = article.Title;
-		//			dbArticle.Content = article.Content;
-		//			dbArticle.Updated = DateTime.Now;
-		//			var update = this.articleVersionRepository.Update(dbArticle);
-		//			await this.unitOfWork.CommitAsync();
-		//			response.Status = ResponseStatus.OK;
-		//		}
-		//		else
-		//		{
-		//			response.Status = ResponseStatus.NotFound;
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+            try
+            {
+                var article = request.Article;
+                var dbArticle = this.articleVersionRepository.Get(article.ArticleVersionId);
+                if (dbArticle != null)
+                {
+                    dbArticle.Title = article.Title;
+                    dbArticle.Content = article.Content;
+                    dbArticle.Updated = DateTime.Now;
+                    var update = this.articleVersionRepository.Update(dbArticle);
+                    this.unitOfWork.Commit();
+                    response.Status = ResponseStatus.OK;
+                }
+                else
+                {
+                    response.Status = ResponseStatus.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-		//	return response;
-		//}
+            return response;
+        }
 
-		//public EditArticleResponse DeleteArticle(int id)
-		//{
-		//	var response = new EditArticleResponse();
+        public async Task<EditArticleResponse> UpdateArticleAsync(EditArticleRequest request)
+        {
+            var response = new EditArticleResponse();
 
-		//	try
-		//	{
-		//		var dbArticle = this.articleVersionRepository.Get(id);
-		//		if (dbArticle != null)
-		//		{
-		//			this.articleVersionRepository.Delete(dbArticle);
-		//			this.unitOfWork.Commit();
-		//			response.Title = dbArticle.Title;
-		//			response.Status = ResponseStatus.OK;
-		//		}
-		//		else
-		//		{
-		//			response.Status = ResponseStatus.NotFound;
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+            try
+            {
+                var article = request.Article;
+                var dbArticle = this.articleVersionRepository.Get(article.ArticleVersionId);
+                if (dbArticle != null)
+                {
+                    dbArticle.Title = article.Title;
+                    dbArticle.Content = article.Content;
+                    dbArticle.Updated = DateTime.Now;
+                    var update = this.articleVersionRepository.Update(dbArticle);
+                    await this.unitOfWork.CommitAsync();
+                    response.Status = ResponseStatus.OK;
+                }
+                else
+                {
+                    response.Status = ResponseStatus.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-		//	return response;
-		//}
+            return response;
+        }
 
-		//public async Task<EditArticleResponse> DeleteArticleAsync(int id)
-		//{
-		//	var response = new EditArticleResponse();
+        //public EditArticleResponse DeleteArticle(int id)
+        //{
+        //    var response = new EditArticleResponse();
 
-		//	try
-		//	{
-		//		var dbArticle = this.articleVersionRepository.Get(id);
-		//		if (dbArticle != null)
-		//		{
-		//			this.articleVersionRepository.Delete(dbArticle);
-		//			await this.unitOfWork.CommitAsync();
-		//			response.Title = dbArticle.Title;
-		//			response.Status = ResponseStatus.OK;
-		//		}
-		//		else
-		//		{
-		//			response.Status = ResponseStatus.NotFound;
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		this.exceptionHandler.HandleException(ex);
-		//		response.Status = ResponseStatus.SystemError;
-		//	}
+        //    try
+        //    {
+        //        var dbArticle = this.articleVersionRepository.Get(id);
+        //        if (dbArticle != null)
+        //        {
+        //            this.articleVersionRepository.Delete(dbArticle);
+        //            this.unitOfWork.Commit();
+        //            response.Title = dbArticle.Title;
+        //            response.Status = ResponseStatus.OK;
+        //        }
+        //        else
+        //        {
+        //            response.Status = ResponseStatus.NotFound;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.exceptionHandler.HandleException(ex);
+        //        response.Status = ResponseStatus.SystemError;
+        //    }
 
-		//	return response;
-		//}
-	}
+        //    return response;
+        //}
+
+        //public async Task<EditArticleResponse> DeleteArticleAsync(int id)
+        //{
+        //    var response = new EditArticleResponse();
+
+        //    try
+        //    {
+        //        var dbArticle = this.articleVersionRepository.Get(id);
+        //        if (dbArticle != null)
+        //        {
+        //            this.articleVersionRepository.Delete(dbArticle);
+        //            await this.unitOfWork.CommitAsync();
+        //            response.Title = dbArticle.Title;
+        //            response.Status = ResponseStatus.OK;
+        //        }
+        //        else
+        //        {
+        //            response.Status = ResponseStatus.NotFound;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.exceptionHandler.HandleException(ex);
+        //        response.Status = ResponseStatus.SystemError;
+        //    }
+
+        //    return response;
+        //}
+    }
 }

@@ -58,7 +58,9 @@
     <Compile Include="Article\IArticleService.cs" />
     <Compile Include="Article\Transfer\ArticleDto.cs" />
     <Compile Include="Article\Transfer\ArticleSummaryDto.cs" />
+    <Compile Include="Article\Transfer\EditArticleRequest.cs" />
     <Compile Include="Article\Transfer\EditArticleResponse.cs" />
+    <Compile Include="Article\Transfer\GetArticleRequest.cs" />
     <Compile Include="Article\Transfer\GetArticleResponse.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="Country\ICountryService.cs" />

@@ -6,22 +6,24 @@
 
 	public interface IArticleService
 	{
-		GetArticleResponse GetArticle(int id, string languageCode);
+		GetArticleResponse GetArticle(GetArticleRequest request);
 
-		//Task<GetArticleResponse> GetArticleAsync(int id, string languageCode);
+        Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request);
 
-		//List<ArticleSummaryDto> GetArticleSummaries();
+        List<ArticleSummaryDto> GetArticles();
 
-		//EditArticleResponse AddArticle(ArticleDto article);
+        Task<List<ArticleSummaryDto>> GetArticlesAsync();
 
-		//Task<EditArticleResponse> AddArticleAsync(ArticleDto article);
+        EditArticleResponse AddArticle(ArticleDto article);
 
-		//EditArticleResponse UpdateArticle(ArticleDto article);
+        Task<EditArticleResponse> AddArticleAsync(ArticleDto article);
 
-		//Task<EditArticleResponse> UpdateArticleAsync(ArticleDto article);
+        EditArticleResponse UpdateArticle(EditArticleRequest request);
 
-		//EditArticleResponse DeleteArticle(int id);
+        Task<EditArticleResponse> UpdateArticleAsync(EditArticleRequest request);
 
-		//Task<EditArticleResponse> DeleteArticleAsync(int id);
-	}
+        //EditArticleResponse DeleteArticle(int id);
+
+        //Task<EditArticleResponse> DeleteArticleAsync(int id);
+    }
 }

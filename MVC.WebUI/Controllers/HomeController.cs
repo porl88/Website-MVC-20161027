@@ -24,7 +24,7 @@
             //var languageCode = Thread.CurrentThread.CurrentUICulture.Name.ToLower();
             var homePage = await this.pageService.GetPageAsync(1);
 
-            var model = new HomePageViewModel
+            var model = new HomeIndexViewModel
             {
                 Page = homePage.Page
             };

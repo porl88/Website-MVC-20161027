@@ -2,6 +2,5 @@
 {
 	public class EditArticleResponse : BaseResponse
 	{
-		public string Title { get; set; }
 	}
 }

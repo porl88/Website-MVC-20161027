@@ -2,7 +2,7 @@
 {
     using Services.Page.Transfer;
 
-    public class HomePageViewModel
+    public class HomeIndexViewModel
     {
         public PageDto Page { get; set; }
     }

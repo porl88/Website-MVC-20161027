@@ -1,158 +1,178 @@
-﻿//namespace MVC.WebUI.Controllers
-//{
-//	using System.Net;
-//	using System.Web.Mvc;
-//	using MVC.Services;
-//	using MVC.Services.Article;
-//	using MVC.Services.Article.Transfer;
-//	using MVC.WebUI.Models.Article;
+﻿namespace MVC.WebUI.Controllers
+{
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using MVC.Services;
+    using MVC.Services.Article;
+    using MVC.Services.Article.Transfer;
+    using Models;
 
-//	public class ArticleController : Controller
-//    {
-//		private readonly IArticleService articleService;
+    public class ArticleController : Controller
+    {
+        private readonly IArticleService articleService;
 
-//		public ArticleController(IArticleService articleService)
-//		{
-//			this.articleService = articleService;
-//		}
+        public ArticleController(IArticleService articleService)
+        {
+            this.articleService = articleService;
+        }
 
-//		// GET: /article
-//		public ViewResult Index()
-//		{
-//			var articles = this.articleService.GetArticleSummaries();
-//			return this.View(articles);
-//		}
+        // GET: /article
+        public async Task<ViewResult> Index()
+        {
+            var articles = await this.articleService.GetArticlesAsync();
+            return this.View(articles);
+        }
 
-//        // GET: /article/details
-//        public ActionResult Details(int? id)
-//        {
-//			if (id == null)
-//			{
-//				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//			}
+        // GET: /article/details
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-//			var response = this.articleService.GetArticle((int)id);
+            var request = new GetArticleRequest
+            {
+                ArticleId = (int)id
+            };
 
-//			if (response.Status == ResponseStatus.OK)
-//			{
-//				return this.View(response.Article);
-//			}
-//			else if (response.Status == ResponseStatus.NotFound)
-//			{
-//				return this.HttpNotFound();
-//			}
-//			else
-//			{
-//				return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-//			}
-//        }
+            var response = await this.articleService.GetArticleAsync(request);
 
-//		// GET: /article/add
-//		public ViewResult Add()
-//		{
-//			return this.View();
-//		}
+            if (response.Status == ResponseStatus.OK)
+            {
+                var model = new ArticleDetailsViewModel
+                {
+                    Article = response.Article
+                };
 
-//		// POST: /article/add
-//		[HttpPost, ValidateAntiForgeryToken]
-//		public ActionResult Add(EditArticleViewModel model)
-//		{
-//			if (ModelState.IsValid)
-//			{
-//				var article = new ArticleDto
-//				{
-//					Title = model.Title,
-//					Content = model.Content
-//				};
+                return this.View(model);
+            }
+            else if (response.Status == ResponseStatus.NotFound)
+            {
+                return this.HttpNotFound();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
 
-//				this.articleService.AddArticle(article);
+        //// GET: /article/add
+        //public ViewResult Add()
+        //{
+        //    return this.View();
+        //}
 
-//				TempData["SuccessMessage"] = string.Format("You have successfully added '{0}' as a new article.", article.Title);
+        //// POST: /article/add
+        //[HttpPost, ValidateAntiForgeryToken]
+        //public ActionResult Add(EditArticleViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var article = new ArticleDto
+        //        {
+        //            Title = model.Title,
+        //            Content = model.Content
+        //        };
 
-//				return this.RedirectToAction("Index");
-//			}
+        //        this.articleService.AddArticle(article);
 
-//			return this.View(model);
-//		}
+        //        TempData["SuccessMessage"] = string.Format("You have successfully added '{0}' as a new article.", article.Title);
 
-//		// GET: /article/edit
-//		public ActionResult Edit(int? id)
-//		{
-//			if (id == null)
-//			{
-//				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//			}
+        //        return this.RedirectToAction("Index");
+        //    }
 
-//			var response = this.articleService.GetArticle((int)id);
+        //    return this.View(model);
+        //}
 
-//			if (response.Status == ResponseStatus.OK)
-//			{
-//				var article = new EditArticleViewModel
-//				{
-//					Title = response.Article.Title,
-//					Content = response.Article.Content
-//				};
+        // GET: /article/edit
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-//				return this.View(article);
-//			}
-//			else if (response.Status == ResponseStatus.NotFound)
-//			{
-//				return this.HttpNotFound();
-//			}
-//			else
-//			{
-//				return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-//			}
-//		}
+            var request = new GetArticleRequest
+            {
+                ArticleId = (int)id
+            };
 
-//		// POST: /article/edit
-//		[HttpPost, ValidateAntiForgeryToken]
-//		public ActionResult Edit(int? id, EditArticleViewModel model)
-//		{
-//			if (id == null)
-//			{
-//				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//			}
+            var response = await this.articleService.GetArticleAsync(request);
 
-//			if (ModelState.IsValid)
-//			{
-//				var article = new ArticleDto
-//				{
-//					Id = (int)id,
-//					Title = model.Title,
-//					Content = model.Content
-//				};
+            if (response.Status == ResponseStatus.OK)
+            {
+                var model = new ArticleEditViewModel
+                {
+                    Id = (int)id,
+                    Title = response.Article.Title,
+                    Content = response.Article.Content
+                };
 
-//				this.articleService.UpdateArticle(article);
+                return this.View(model);
+            }
+            else if (response.Status == ResponseStatus.NotFound)
+            {
+                return this.HttpNotFound();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
 
-//				TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", article.Title);
+        // POST: /article/edit
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(int? id, ArticleEditViewModel model)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-//				return this.RedirectToAction("Index");
-//			}
+            if (ModelState.IsValid)
+            {
+                var request = new EditArticleRequest
+                {
+                    Article = new ArticleDto
+                    {
+                        ArticleVersionId = (int)id,
+                        Title = model.Title,
+                        Content = model.Content
+                    }
+                };
 
-//			return this.View(model);
-//		}
+                this.articleService.UpdateArticle(request);
 
-//		// POST: /article/delete
-//		[HttpPost, ValidateAntiForgeryToken]
-//		public RedirectToRouteResult Delete(int id)
-//		{
-//			var response = this.articleService.DeleteArticle(id);
+                TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", article.Title);
 
-//			if (response.Status == ResponseStatus.OK)
-//			{
-//				TempData["SuccessMessage"] = string.Format("You have successfully deleted '{0}'.", response.Title);
-//			}
-//			else if (response.Status == ResponseStatus.NotFound)
-//			{
-//				TempData["FailureMessage"] = "The article you are trying to delete cannot be found.";
-//			}
-//			else
-//			{
-//				TempData["FailureMessage"] = "The article has not deleted successfully. Please try again.";
-//			}
+                return this.RedirectToAction("Index");
+            }
 
-//			return this.RedirectToAction("Index");
-//		}
-//	}
-//}
+            return this.View(model);
+        }
+
+        //// POST: /article/delete
+        //[HttpPost, ValidateAntiForgeryToken]
+        //public RedirectToRouteResult Delete(int id)
+        //{
+        //    var response = this.articleService.DeleteArticle(id);
+
+        //    if (response.Status == ResponseStatus.OK)
+        //    {
+        //        TempData["SuccessMessage"] = string.Format("You have successfully deleted '{0}'.", response.Title);
+        //    }
+        //    else if (response.Status == ResponseStatus.NotFound)
+        //    {
+        //        TempData["FailureMessage"] = "The article you are trying to delete cannot be found.";
+        //    }
+        //    else
+        //    {
+        //        TempData["FailureMessage"] = "The article has not deleted successfully. Please try again.";
+        //    }
+
+        //    return this.RedirectToAction("Index");
+        //}
+    }
+}

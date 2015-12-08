@@ -148,6 +148,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\GlobalErrorAttribute.cs" />
     <Compile Include="Attributes\ValidateHttpReferrerAttribute.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -156,7 +157,8 @@
     </Compile>
     <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Helpers\XmlHelpers.cs" />
-    <Compile Include="Models\HomePageViewModel.cs" />
+    <Compile Include="Models\ArticleDetailsViewModel.cs" />
+    <Compile Include="Models\HomeIndexViewModel.cs" />
     <Compile Include="Modules\CheckBrowserModule.cs" />
     <Compile Include="Modules\ErrorModule.cs" />
     <Compile Include="Modules\SeoRedirectModule.cs" />
@@ -207,6 +209,13 @@
     <Content Include="Content\fonts\sorts-mill-goudy.zip" />
     <Content Include="Content\css\scss\default.scss" />
     <Content Include="Content\css\scss\website\shared\_layout.scss" />
+    <Content Include="Views\Article\Add.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\Article\index-edit.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\_Breadcrumb.cshtml" />
+    <Content Include="Views\Article\_EditArticleForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
