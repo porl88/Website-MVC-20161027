@@ -28,7 +28,7 @@
 
         public virtual async Task<T> GetAsync(int id)
         {
-            return await this.entities.AsQueryable().FirstOrDefaultAsync(x => x.Id == id);
+            return this.Get(id);
         }
 
         public T GetSingle(Func<IQueryable<T>, T> query)
