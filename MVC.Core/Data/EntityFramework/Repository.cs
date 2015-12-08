@@ -1,15 +1,17 @@
-﻿namespace MVC.Core.Data.EntityFramework
+﻿// http://www.asp.net/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
+// http://blogs.msdn.com/b/mrtechnocal/archive/2014/03/16/asynchronous-repositories.aspx
+
+namespace MVC.Core.Data.EntityFramework
 {
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    // http://www.asp.net/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
-    // http://blogs.msdn.com/b/mrtechnocal/archive/2014/03/16/asynchronous-repositories.aspx
     public class Repository<T> : IRepository<T> where T : class
-	{
+    {
         private readonly DbContext context;
         private readonly DbSet<T> databaseSet;
         private readonly string[] includes = new string[0];
@@ -62,31 +64,41 @@
             return await factory.StartNew(() => query(dataset));
         }
 
-        public IEnumerable<T> Get()
+        public IEnumerable<T> Find(Expression<Func<T, bool>> filter = null)
         {
-            var dataset = this.databaseSet;
+            IQueryable<T> dataset = this.databaseSet;
 
-            foreach (var include in this.includes)
+            if (filter != null)
             {
-                dataset.Include(include);
+                dataset = dataset.Where(filter);
             }
 
-            return dataset;
+            foreach (var include in this.includes)
+            {
+                dataset = dataset.Include(include);
+            }
+
+            return dataset.ToList();
         }
 
-        public async Task<IEnumerable<T>> GetAsync()
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> filter = null)
         {
-            var dataset = this.databaseSet;
+            IQueryable<T> dataset = this.databaseSet;
+
+            if (filter != null)
+            {
+                dataset = dataset.Where(filter);
+            }
 
             foreach (var include in this.includes)
             {
-                dataset.Include(include);
+                dataset = dataset.Include(include);
             }
 
             return await dataset.ToListAsync();
         }
 
-        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query)
+        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query = null)
         {
             var dataset = this.databaseSet;
 
@@ -95,10 +107,17 @@
                 dataset.Include(include);
             }
 
-            return query(dataset);
+            if (query == null)
+            {
+                return dataset;
+            }
+            else
+            {
+                return query(dataset);
+            }
         }
 
-        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query)
+        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query = null)
         {
             var dataset = this.databaseSet;
 
@@ -107,7 +126,14 @@
                 dataset.Include(include);
             }
 
-            return await query(dataset).ToListAsync();
+            if (query == null)
+            {
+                return await dataset.ToListAsync();
+            }
+            else
+            {
+                return await query(dataset).ToListAsync();
+            }
         }
 
         public virtual IQueryable<T> Query()

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using Data.EntityFramework;
     using Entities;
@@ -37,27 +38,41 @@
 
         public async Task<T> GetSingleAsync(Func<IQueryable<T>, T> query)
         {
-            return query(this.entities.AsQueryable());
+            return this.GetSingle(query);
         }
 
-        public IEnumerable<T> Get()
+        public IEnumerable<T> Find(Expression<Func<T, bool>> filter = null)
         {
-            return this.entities;
+            if (filter != null)
+            {
+                return this.entities.AsQueryable().Where(filter);
+            }
+            else
+            {
+                return this.entities;
+            }
         }
 
-        public async Task<IEnumerable<T>> GetAsync()
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> filter = null)
         {
-            return this.entities;
+            return this.Find(filter);
         }
 
-        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query)
+        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query = null)
         {
-            return query(this.entities.AsQueryable());
+            if (query == null)
+            {
+                return this.entities.AsQueryable();
+            }
+            else
+            {
+                return query(this.entities.AsQueryable());
+            }
         }
 
-        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query)
+        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query = null)
         {
-            return query(this.entities.AsQueryable());
+            return this.Get(query);
         }
 
         public IQueryable<T> Query()

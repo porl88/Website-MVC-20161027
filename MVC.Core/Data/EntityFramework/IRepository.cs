@@ -16,13 +16,13 @@
 
         Task<T> GetSingleAsync(Func<IQueryable<T>, T> query);
 
-        IEnumerable<T> Get();
+        IEnumerable<T> Find(Expression<Func<T, bool>> filter = null);
 
-        Task<IEnumerable<T>> GetAsync();
+        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> filter = null);
 
-        IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query);
+        IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query = null);
 
-        Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query);
+        Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query = null);
 
         IQueryable<T> Query();
 
