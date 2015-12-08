@@ -4,160 +4,141 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using Data.EntityFramework;
     using Entities;
 
     public class MockRepository<T> : IRepository<T> where T : BaseEntity
-	{
-		private List<T> entities = new List<T>();
+    {
+        private List<T> entities = new List<T>();
 
-		protected List<T> Entities
-		{
-			get
-			{
-				return this.entities;
-			}
-		}
-
-		public virtual IQueryable<T> Get()
-		{
-			return this.entities.AsQueryable();
-		}
-
-		public virtual T Get(int id)
-		{
-			return this.entities.FirstOrDefault(x => x.Id == id);
-		}
-
-		public virtual async Task<T> GetAsync(int id)
-		{
-			return await this.entities.AsQueryable().FirstOrDefaultAsync(x => x.Id == id);
-		}
-
-        public virtual T Get(Expression<Func<T, bool>> filter)
+        protected List<T> Entities
         {
-            return this.entities.AsQueryable().SingleOrDefault(filter);
-        }
-
-        public async virtual Task<T> GetAsync(Expression<Func<T, bool>> filter)
-        {
-            return await this.entities.AsQueryable().SingleOrDefaultAsync(filter);
-        }
-
-        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
-        {
-            IQueryable<T> query = this.entities.AsQueryable();
-
-            if (filter != null)
+            get
             {
-                query = query.Where(filter);
-            }
-
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
-            {
-                return query.ToList();
+                return this.entities;
             }
         }
 
-        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        public virtual T Get(int id)
         {
-            IQueryable<T> query = this.entities.AsQueryable();
+            return this.entities.FirstOrDefault(x => x.Id == id);
+        }
 
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
+        public virtual async Task<T> GetAsync(int id)
+        {
+            return await this.entities.AsQueryable().FirstOrDefaultAsync(x => x.Id == id);
+        }
 
-            if (orderBy != null)
-            {
-                return await orderBy(query).ToListAsync();
-            }
-            else
-            {
-                return await query.ToListAsync();
-            }
+        public T GetSingle(Func<IQueryable<T>, T> query)
+        {
+            return query(this.entities.AsQueryable());
+        }
+
+        public async Task<T> GetSingleAsync(Func<IQueryable<T>, T> query)
+        {
+            return query(this.entities.AsQueryable());
+        }
+
+        public IEnumerable<T> Get()
+        {
+            return this.entities;
+        }
+
+        public async Task<IEnumerable<T>> GetAsync()
+        {
+            return this.entities;
+        }
+
+        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query)
+        {
+            return query(this.entities.AsQueryable());
+        }
+
+        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query)
+        {
+            return query(this.entities.AsQueryable());
+        }
+
+        public IQueryable<T> Query()
+        {
+            return this.entities.AsQueryable();
         }
 
         public virtual T Insert(T entity)
-		{
-			if (entity.Id > 0)
-			{
-				var entityInList = this.entities.FirstOrDefault(x => x.Id == entity.Id);
-				if (entityInList != null)
-				{
-					entityInList = entity;
-				}
-				else
-				{
-					this.entities.Add(entity);
-				}
-			}
-			else
-			{
-				if (this.entities.Count > 0)
-				{
-					entity.Id = this.entities.Max(x => x.Id) + 1;
-				}
-				else
-				{
-					entity.Id = 1;
-				}
+        {
+            if (entity.Id > 0)
+            {
+                var entityInList = this.entities.FirstOrDefault(x => x.Id == entity.Id);
+                if (entityInList != null)
+                {
+                    entityInList = entity;
+                }
+                else
+                {
+                    this.entities.Add(entity);
+                }
+            }
+            else
+            {
+                if (this.entities.Count > 0)
+                {
+                    entity.Id = this.entities.Max(x => x.Id) + 1;
+                }
+                else
+                {
+                    entity.Id = 1;
+                }
 
-				this.entities.Add(entity);
-			}
+                this.entities.Add(entity);
+            }
 
-			return entity;
-		}
+            return entity;
+        }
 
-		public virtual T Update(T entity)
-		{
-			if (entity.Id > 0)
-			{
-				var entityInList = this.entities.FirstOrDefault(x => x.Id == entity.Id);
-				if (entityInList != null)
-				{
-					entityInList = entity;
-				}
-				else
-				{
-					this.entities.Add(entity);
-				}
-			}
-			else
-			{
-				if (this.entities.Count > 0)
-				{
-					entity.Id = this.entities.Max(x => x.Id) + 1;
-				}
-				else
-				{
-					entity.Id = 1;
-				}
+        public virtual T Update(T entity)
+        {
+            if (entity.Id > 0)
+            {
+                var entityInList = this.entities.FirstOrDefault(x => x.Id == entity.Id);
+                if (entityInList != null)
+                {
+                    entityInList = entity;
+                }
+                else
+                {
+                    this.entities.Add(entity);
+                }
+            }
+            else
+            {
+                if (this.entities.Count > 0)
+                {
+                    entity.Id = this.entities.Max(x => x.Id) + 1;
+                }
+                else
+                {
+                    entity.Id = 1;
+                }
 
-				this.entities.Add(entity);
-			}
+                this.entities.Add(entity);
+            }
 
-			return entity;
-		}
+            return entity;
+        }
 
-		public virtual void Delete(T entity)
-		{
-			this.entities.Remove(entity);
-		}
+        public virtual void Delete(T entity)
+        {
+            this.entities.Remove(entity);
+        }
 
-		public virtual void Delete(int id)
-		{
-			var entityToRemove = this.Get().FirstOrDefault(x => x.Id == id);
-			if (entityToRemove != null)
-			{
-				this.Delete(entityToRemove);
-			}
-		}
+        public virtual void Delete(int id)
+        {
+            var entityToRemove = this.Get().FirstOrDefault(x => x.Id == id);
+            if (entityToRemove != null)
+            {
+                this.Delete(entityToRemove);
+            }
+        }
     }
 }

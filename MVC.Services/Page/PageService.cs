@@ -65,7 +65,7 @@
 
             try
             {
-                var pageVersion = await this.pageVersionRepository.GetAsync(x => x.PageId == id && x.LanguageCode == languageCode);
+                var pageVersion = await this.pageVersionRepository.GetSingleAsync(q => q.Where(x => x.PageId == id && x.LanguageCode == languageCode).FirstOrDefault());
                 if (pageVersion != null)
                 {
                     response.Page = new PageDto

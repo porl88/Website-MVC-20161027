@@ -12,13 +12,19 @@
 
         Task<T> GetAsync(int id);
 
-        T Get(Expression<Func<T, bool>> filter);
+        T GetSingle(Func<IQueryable<T>, T> query);
 
-        Task<T> GetAsync(Expression<Func<T, bool>> filter);
+        Task<T> GetSingleAsync(Func<IQueryable<T>, T> query);
 
-        IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
+        IEnumerable<T> Get();
 
-        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
+        Task<IEnumerable<T>> GetAsync();
+
+        IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query);
+
+        Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query);
+
+        IQueryable<T> Query();
 
         T Insert(T entity);
 
