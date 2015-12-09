@@ -20,7 +20,8 @@
         [TestInitialize]
         public void Init()
         {
-            this.articleService = this.CreateMockArticleService();
+            var unitOfWork = this.CreateMockUnitOfWork();
+            this.articleService = new ArticleService(unitOfWork, new NullExceptionHandler());
         }
 
         [TestMethod]
@@ -106,49 +107,62 @@
         }
 
         [TestMethod]
-        public void UpdateArticle()
+        public async Task AddArticleAsync()
         {
             // arrange
-            var articleService = this.CreateMockArticleService();
+            var id = 4;
+            var unitOfWork = this.CreateMockUnitOfWork();
+            var articleService = new ArticleService(unitOfWork, new NullExceptionHandler());
+            var originalNoteCount = unitOfWork.ArticleVersionRepository.Get().Count();
+
             var request = new EditArticleRequest
             {
                 Article = new ArticleDto
                 {
-                    ArticleVersionId = 12,
-                    Title = "Hello",
-                    Content = "XXX"
+                    Title = "New Article",
+                    Content = "ZZZ"
                 }
             };
 
             // act
-            var result = articleService.UpdateArticle(request);
+            var result = await articleService.AddArticleAsync(request);
 
             // assert
             Assert.IsNotNull(result);
 
-            var updatedArticleRequest = articleService.GetArticle(new GetArticleRequest
-            {
-                ArticleId = 1
-            });
+            var addedArticleId = result.Note.Id;
+            Assert.IsTrue(addedNoteId > 0);
 
-            var updatedArticle = updatedArticleRequest.Article;
-            Assert.IsNotNull(updatedArticle);
-            Assert.AreEqual("Hello", updatedArticle.Title);
-            Assert.AreEqual("XXX", updatedArticle.Content);
+            var addedNote = unitOfWork.NoteRepository.Get(addedNoteId);
+            Assert.IsNotNull(addedNote);
+            Assert.AreEqual("New Article", addedNote.Title);
+            Assert.AreEqual("ZZZ", addedNote.Content);
+            Assert.AreEqual(addedNote.Created, addedNote.Updated);
+            Assert.IsTrue(addedNote.Updated > DateTimeOffset.Now.AddMinutes(-1));
+
+            var updatedCount = unitOfWork.NoteRepository.Get();
+            Assert.AreEqual(originalNoteCount + 1, updatedCount.Count());
         }
 
         [TestMethod]
         public async Task UpdateArticleAsync()
         {
             // arrange
-            var articleService = this.CreateMockArticleService();
+            var id = 4;
+            var unitOfWork = this.CreateMockUnitOfWork();
+            var articlesService = new ArticleService(unitOfWork, new NullExceptionHandler());
+            var originalNoteCount = unitOfWork.ArticleVersionRepository.Get().Count();
+            var originalNote = unitOfWork.ArticleVersionRepository.Get(id);
+            var originalNoteCreated = originalNote.Created;
+            var originalNoteUpdated = originalNote.Updated;
+
             var request = new EditArticleRequest
             {
                 Article = new ArticleDto
                 {
-                    ArticleVersionId = 21,
-                    Title = "Goodbye",
-                    Content = "YYY"
+                    Id = id,
+                    Title = "Hello",
+                    Content = "XXX"
                 }
             };
 
@@ -158,21 +172,21 @@
             // assert
             Assert.IsNotNull(result);
 
-            var updatedArticleRequest = articleService.GetArticle(new GetArticleRequest
-            {
-                ArticleId = 2
-            });
+            var updatedNote = unitOfWork.ArticleVersionRepository.Get(id);
+            Assert.IsNotNull(updatedNote);
+            Assert.AreEqual("Hello", updatedNote.Title);
+            Assert.AreEqual("XXX", updatedNote.Content);
+            Assert.AreEqual(originalNoteCreated, updatedNote.Created);
+            Assert.IsTrue(updatedNote.Updated > originalNoteUpdated);
+            Assert.IsTrue(updatedNote.Updated > DateTimeOffset.Now.AddMinutes(-1));
 
-            var updatedArticle = updatedArticleRequest.Article;
-            Assert.IsNotNull(updatedArticle);
-            Assert.AreEqual("Goodbye", updatedArticle.Title);
-            Assert.AreEqual("YYY", updatedArticle.Content);
+            var updatedCount = unitOfWork.ArticleVersionRepository.Get();
+            Assert.AreEqual(originalNoteCount, updatedCount.Count());
         }
 
-        private ArticleService CreateMockArticleService()
+        private MockUnitOfWork CreateMockUnitOfWork()
         {
             var unitOfWork = new MockUnitOfWork();
-            var articleService = new ArticleService(unitOfWork, new NullExceptionHandler());
             var now = DateTimeOffset.Now;
 
             var english = new Language
@@ -269,7 +283,7 @@
                 }
             });
 
-            return articleService;
+            return unitOfWork;
         }
     }
 }

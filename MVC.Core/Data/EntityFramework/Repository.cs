@@ -157,11 +157,11 @@ namespace MVC.Core.Data.EntityFramework
             }
         }
 
-        public virtual T Insert(T entity)
+        public virtual T Insert(T entityToInsert)
         {
-            this.databaseSet.Add(entity);
-            this.context.Entry(entity).State = EntityState.Added;
-            return entity;
+            this.databaseSet.Add(entityToInsert);
+            this.context.Entry(entityToInsert).State = EntityState.Added;
+            return entityToInsert;
         }
 
         public virtual T Update(T entityToUpdate)

@@ -10,20 +10,20 @@
 
         Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request);
 
-        List<ArticleSummaryDto> GetArticles();
+        GetArticlesResponse GetArticles(GetArticlesRequest request = null);
 
-        Task<List<ArticleSummaryDto>> GetArticlesAsync();
+        Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request = null);
 
-        EditArticleResponse AddArticle(ArticleDto article);
+        EditArticleResponse AddArticle(EditArticleRequest request);
 
-        Task<EditArticleResponse> AddArticleAsync(ArticleDto article);
+        Task<EditArticleResponse> AddArticleAsync(EditArticleRequest request);
 
         EditArticleResponse UpdateArticle(EditArticleRequest request);
 
         Task<EditArticleResponse> UpdateArticleAsync(EditArticleRequest request);
 
-        //EditArticleResponse DeleteArticle(int id);
+        EditArticleResponse DeleteArticle(DeleteArticleRequest request);
 
-        //Task<EditArticleResponse> DeleteArticleAsync(int id);
+        Task<EditArticleResponse> DeleteArticleAsync(DeleteArticleRequest request);
     }
 }
