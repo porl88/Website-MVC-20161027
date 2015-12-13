@@ -8,12 +8,13 @@
 	{
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
-			/*
-			 * NB: CustomErrors must be ON in web.config for these to work
+            /*
+			 * NB:  CustomErrors must be ON in web.config for these to work
+             *      Needs to be registerd in the Global.asax file: FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			 */
 
-			// http://community.codesmithtools.com/CodeSmith_Community/b/tdupont/archive/2011/03/01/error-handling-and-customerrors-and-mvc3-oh-my.aspx
-			filters.Add(new HandleErrorAttribute
+            // http://community.codesmithtools.com/CodeSmith_Community/b/tdupont/archive/2011/03/01/error-handling-and-customerrors-and-mvc3-oh-my.aspx
+            filters.Add(new HandleErrorAttribute
 			{
 				ExceptionType = typeof(HttpRequestValidationException),
 				View = "error-request-validation"

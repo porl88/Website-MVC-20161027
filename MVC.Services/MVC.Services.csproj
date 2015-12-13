@@ -46,6 +46,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,14 +55,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\ChangePasswordStatus.cs" />
+    <Compile Include="Account\CreateAccountStatus.cs" />
+    <Compile Include="Account\FormsAuthenticationAdapter.cs" />
+    <Compile Include="Account\IAccountService.cs" />
+    <Compile Include="Account\ILoginService.cs" />
+    <Compile Include="Account\IRolesService.cs" />
+    <Compile Include="Account\IUserService.cs" />
     <Compile Include="Article\ArticleService.cs" />
     <Compile Include="Article\IArticleService.cs" />
     <Compile Include="Article\Transfer\ArticleDto.cs" />
     <Compile Include="Article\Transfer\ArticleSummaryDto.cs" />
+    <Compile Include="Article\Transfer\DeleteArticleRequest.cs" />
     <Compile Include="Article\Transfer\EditArticleRequest.cs" />
     <Compile Include="Article\Transfer\EditArticleResponse.cs" />
     <Compile Include="Article\Transfer\GetArticleRequest.cs" />
     <Compile Include="Article\Transfer\GetArticleResponse.cs" />
+    <Compile Include="Article\Transfer\GetArticlesRequest.cs" />
+    <Compile Include="Article\Transfer\GetArticlesResponse.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="Country\ICountryService.cs" />
     <Compile Include="Crawler\CrawlerService.cs" />

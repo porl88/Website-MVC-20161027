@@ -259,60 +259,60 @@
             return response;
         }
 
-        //public EditArticleResponse DeleteArticle(int id)
-        //{
-        //    var response = new EditArticleResponse();
+        public EditArticleResponse DeleteArticle(int id)
+        {
+            var response = new EditArticleResponse();
 
-        //    try
-        //    {
-        //        var dbArticle = this.articleVersionRepository.Get(id);
-        //        if (dbArticle != null)
-        //        {
-        //            this.articleVersionRepository.Delete(dbArticle);
-        //            this.unitOfWork.Commit();
-        //            response.Title = dbArticle.Title;
-        //            response.Status = ResponseStatus.OK;
-        //        }
-        //        else
-        //        {
-        //            response.Status = ResponseStatus.NotFound;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.exceptionHandler.HandleException(ex);
-        //        response.Status = ResponseStatus.SystemError;
-        //    }
+            try
+            {
+                var dbArticle = this.articleVersionRepository.Get(id);
+                if (dbArticle != null)
+                {
+                    this.articleVersionRepository.Delete(dbArticle);
+                    this.unitOfWork.Commit();
+                    //response.Title = dbArticle.Title;
+                    response.Status = ResponseStatus.OK;
+                }
+                else
+                {
+                    response.Status = ResponseStatus.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-        //    return response;
-        //}
+            return response;
+        }
 
-        //public async Task<EditArticleResponse> DeleteArticleAsync(int id)
-        //{
-        //    var response = new EditArticleResponse();
+        public async Task<EditArticleResponse> DeleteArticleAsync(int id)
+        {
+            var response = new EditArticleResponse();
 
-        //    try
-        //    {
-        //        var dbArticle = this.articleVersionRepository.Get(id);
-        //        if (dbArticle != null)
-        //        {
-        //            this.articleVersionRepository.Delete(dbArticle);
-        //            await this.unitOfWork.CommitAsync();
-        //            response.Title = dbArticle.Title;
-        //            response.Status = ResponseStatus.OK;
-        //        }
-        //        else
-        //        {
-        //            response.Status = ResponseStatus.NotFound;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.exceptionHandler.HandleException(ex);
-        //        response.Status = ResponseStatus.SystemError;
-        //    }
+            try
+            {
+                var dbArticle = this.articleVersionRepository.Get(id);
+                if (dbArticle != null)
+                {
+                    this.articleVersionRepository.Delete(dbArticle);
+                    await this.unitOfWork.CommitAsync();
+                    //response.Title = dbArticle.Title;
+                    response.Status = ResponseStatus.OK;
+                }
+                else
+                {
+                    response.Status = ResponseStatus.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
 
-        //    return response;
-        //}
+            return response;
+        }
     }
 }

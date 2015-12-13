@@ -143,9 +143,9 @@
                     }
                 };
 
-                this.articleService.UpdateArticle(request);
+                var response = this.articleService.UpdateArticle(request);
 
-                TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", article.Title);
+                TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", response.Article.Title);
 
                 return this.RedirectToAction("Index");
             }

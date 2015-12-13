@@ -130,17 +130,17 @@
             // assert
             Assert.IsNotNull(result);
 
-            var addedArticleId = result.Note.Id;
-            Assert.IsTrue(addedNoteId > 0);
+            var addedArticleId = result.Article.Id;
+            Assert.IsTrue(addedArticleId > 0);
 
-            var addedNote = unitOfWork.NoteRepository.Get(addedNoteId);
-            Assert.IsNotNull(addedNote);
-            Assert.AreEqual("New Article", addedNote.Title);
-            Assert.AreEqual("ZZZ", addedNote.Content);
-            Assert.AreEqual(addedNote.Created, addedNote.Updated);
-            Assert.IsTrue(addedNote.Updated > DateTimeOffset.Now.AddMinutes(-1));
+            //var addedArticle = unitOfWork.ArticleRepository.Get(addedArticleId);
+            //Assert.IsNotNull(addedArticle);
+            //Assert.AreEqual("New Article", addedArticle.Title);
+            //Assert.AreEqual("ZZZ", addedArticle.Content);
+            //Assert.AreEqual(addedArticle.Created, addedArticle.Updated);
+            //Assert.IsTrue(addedArticle.Updated > DateTimeOffset.Now.AddMinutes(-1));
 
-            var updatedCount = unitOfWork.NoteRepository.Get();
+            var updatedCount = unitOfWork.ArticleRepository.Get();
             Assert.AreEqual(originalNoteCount + 1, updatedCount.Count());
         }
 

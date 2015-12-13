@@ -22,8 +22,8 @@
 
         Task<EditArticleResponse> UpdateArticleAsync(EditArticleRequest request);
 
-        EditArticleResponse DeleteArticle(DeleteArticleRequest request);
+        EditArticleResponse DeleteArticle(int id);
 
-        Task<EditArticleResponse> DeleteArticleAsync(DeleteArticleRequest request);
+        Task<EditArticleResponse> DeleteArticleAsync(int id);
     }
 }
