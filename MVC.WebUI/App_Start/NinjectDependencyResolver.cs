@@ -50,7 +50,7 @@
             this.kernel.Bind<IPageService>().To<PageService>();
             this.kernel.Bind<ISystemSettings>().To<SystemSettings>();
             this.kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
-            kernel.BindFilter<GlobalErrorAttribute>(FilterScope.Action, 0);
+            //this.kernel.BindFilter<GlobalErrorAttribute>(FilterScope.Action, 0);
         }
     }
 }
