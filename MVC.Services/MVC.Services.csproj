@@ -111,9 +111,13 @@
     <Folder Include="Caching\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
-      <Project>{abde2804-fa69-4a8e-8518-d2917af913f4}</Project>
+    <ProjectReference Include="..\..\..\..\..\Dropbox\Websites\ClassLibrary\ClassLibrary\ClassLibrary.csproj">
+      <Project>{ba423f36-50f0-4b17-9903-bf592996e7c7}</Project>
       <Name>ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassLibrary\ClassLibraryOLD.csproj">
+      <Project>{abde2804-fa69-4a8e-8518-d2917af913f4}</Project>
+      <Name>ClassLibraryOLD</Name>
     </ProjectReference>
     <ProjectReference Include="..\MVC.Core\MVC.Core.csproj">
       <Project>{ffec4f14-a2c1-4a7e-9118-6234f96e629f}</Project>

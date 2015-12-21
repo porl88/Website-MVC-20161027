@@ -1,9 +1,10 @@
 ﻿namespace MVC.Services.HTMLTemplate
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
-	using ClassLibrary.Text;
+    using ClassLibrary.Text;
 
     public abstract class HtmlTemplate : IHtmlTemplate
     {
@@ -76,7 +77,8 @@
 
         protected string ConvertToXhtml(string text)
         {
-			return StringUtility.ConvertPlainTextToHtml(text);
+            throw new NotImplementedException();
+			//return StringUtility.ConvertPlainTextToHtml(text);
         }
     }
 }

@@ -9,39 +9,6 @@
     public static class FormatterUtility
     {
 		/// <summary>
-		/// Converts a phrase into an SEO-friendly phrase - i.e. converts to lower case, replaced spaces with hyphens, and removes/converts illegal characters
-		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
-		public static string ConvertToSeoName(string name)
-		{
-			if (!string.IsNullOrWhiteSpace(name))
-			{
-				var seoName = name.RemoveAccents().ToLower().Trim();
-				// remove illegal characters
-				seoName = Regex.Replace(seoName, @"[^\w -]", string.Empty);
-				// replace spaces and underscores with hyphens(-)
-				seoName = Regex.Replace(seoName, @"[ _-]+", "-").Trim('-');
-				return seoName.MaxLength(50);
-			}
-			else
-			{
-				return string.Empty;
-			}
-		}
-
-		/// <summary>
-		/// Removes accents from text - e.g converts ÁÂàáâ to AAaaa, ÈÉÊèéê to EEEeee
-		/// </summary>
-		/// <param name="txt"></param>
-		/// <returns></returns>
-		public static string RemoveAccents(this string txt)
-		{
-			byte[] bytes = Encoding.GetEncoding("Cyrillic").GetBytes(txt);
-			return Encoding.ASCII.GetString(bytes);
-		}
-		
-		/// <summary>
         /// Formats a valid UK post code to upper case with a space between the outward and inward parts of the code.
         /// </summary>
         /// <param name="postCode"></param>

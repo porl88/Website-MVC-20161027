@@ -94,11 +94,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\XML\Countries.xml" />
-    <Content Include="Exceptions\exception-email.html" />
+    <EmbeddedResource Include="Exceptions\exception-email.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibraryOLD.csproj">
+      <Project>{abde2804-fa69-4a8e-8518-d2917af913f4}</Project>
+      <Name>ClassLibraryOLD</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

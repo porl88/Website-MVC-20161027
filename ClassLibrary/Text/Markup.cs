@@ -1,9 +1,10 @@
 ﻿namespace ClassLibrary.Text
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text.RegularExpressions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using Extensions.String;
 
     public class Markup
     {

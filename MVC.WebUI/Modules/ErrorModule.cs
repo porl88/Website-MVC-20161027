@@ -6,8 +6,10 @@
 	using System.Web.Routing;
 	using WebUI.Controllers;
 
-	// NB: Register in web.config System.WebServer/Modules
-	public class ErrorModule : IHttpModule
+    // http://dusted.codes/demystifying-aspnet-mvc-5-error-pages-and-error-logging
+
+    // NB: Register in web.config System.WebServer/Modules
+    public class ErrorModule : IHttpModule
 	{
 		public void Init(HttpApplication context)
 		{

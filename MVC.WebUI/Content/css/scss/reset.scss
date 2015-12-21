@@ -127,10 +127,18 @@ abbr {
 	speak: spell-out;
 }
 
-	abbr[title] {
-		border-bottom: 1px dotted #333;
-		cursor: help;
-	}
+abbr[title] {
+    border-bottom: 1px dotted #333;
+    cursor: help;
+}
+
+@supports (text-decoration-style: dotted) {
+    abbr[title] {
+        border-bottom: none;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+    }
+}
 
 /* definition - marks the first occurrence of a term */
 dfn::before {

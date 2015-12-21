@@ -7,8 +7,8 @@
     <ProjectGuid>{ABDE2804-FA69-4A8E-8518-D2917AF913F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClassLibrary</RootNamespace>
-    <AssemblyName>ClassLibrary</AssemblyName>
+    <RootNamespace>ClassLibraryOLD</RootNamespace>
+    <AssemblyName>ClassLibraryOLD</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -54,8 +54,6 @@
     <Compile Include="WebRequest\WebRequest.cs" />
     <Compile Include="Client\ClientInfo.cs" />
     <Compile Include="Cookies\Cookies.cs" />
-    <Compile Include="Images\ImageEditor.cs" />
-    <Compile Include="Images\ImageUtility.cs" />
     <Compile Include="Map\DistanceUnit.cs" />
     <Compile Include="Map\GeoCoordinate.cs" />
     <Compile Include="Map\MapUtility.cs" />
@@ -64,12 +62,17 @@
     <Compile Include="Text\FormatterUtility.cs" />
     <Compile Include="Text\Markup.cs" />
     <Compile Include="Text\MarkupUtility.cs" />
-    <Compile Include="Text\StringUtility.cs" />
     <Compile Include="Validation\ValidationUtility.cs" />
     <Compile Include="WebRequest\WebRequestEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Dropbox\Websites\ClassLibrary\ClassLibrary\ClassLibrary.csproj">
+      <Project>{ba423f36-50f0-4b17-9903-bf592996e7c7}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

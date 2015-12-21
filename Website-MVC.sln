@@ -23,11 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Services.Tests", "MVC.S
 		{C8FCDE48-38BB-44AB-B07A-656DC5ECE46F} = {C8FCDE48-38BB-44AB-B07A-656DC5ECE46F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{ABDE2804-FA69-4A8E-8518-D2917AF913F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryOLD", "ClassLibrary\ClassLibraryOLD.csproj", "{ABDE2804-FA69-4A8E-8518-D2917AF913F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Core.Tests", "MVC.Core.Tests\MVC.Core.Tests.csproj", "{F159D2D6-7F38-415B-A29A-6D366B58BE56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.WebUI.Tests", "MVC.WebUI.Tests\MVC.WebUI.Tests.csproj", "{487FC379-FF70-458B-9414-FC32857CE3FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "..\..\..\..\Dropbox\Websites\ClassLibrary\ClassLibrary\ClassLibrary.csproj", "{BA423F36-50F0-4B17-9903-BF592996E7C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{487FC379-FF70-458B-9414-FC32857CE3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487FC379-FF70-458B-9414-FC32857CE3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487FC379-FF70-458B-9414-FC32857CE3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA423F36-50F0-4B17-9903-BF592996E7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA423F36-50F0-4B17-9903-BF592996E7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA423F36-50F0-4B17-9903-BF592996E7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA423F36-50F0-4B17-9903-BF592996E7C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

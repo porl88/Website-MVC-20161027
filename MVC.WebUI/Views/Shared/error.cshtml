@@ -6,8 +6,8 @@
 
 <section class="alert error">
 	<h1>Something has gone wrong!</h1>
-	<p>There is a problem with the page you have chosen. This error has been logged automatically and will be investigated in due course. It might, however, be a temporary problem with the server, please try again.</p>
-	<p>If this problem persists, @Html.ActionLink("click here to contact technical support", "index", "contact").</p>
+	<p>There is a problem with the page you have chosen. This error has been logged automatically and will be investigated in due course. It might, however, be a temporary problem with the server. Please try again.</p>
+	<p>If this problem persists, @Html.ActionLink("click here to contact technical support", "Index", "Contact").</p>
 	@if (Request.IsLocal && @Model != null) {
 		<table>
 			<tr>

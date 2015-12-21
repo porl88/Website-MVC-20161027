@@ -1,11 +1,11 @@
 ﻿namespace MVC.Services.Images
 {
-	using System;
-	using System.Drawing;
-	using ClassLibrary.Images;
-	using Services.Images.Transfer;
+    using System;
+    using System.Drawing;
+    using ClassLibrary.Extensions.Image;
+    using Services.Images.Transfer;
 
-	public class ImageService : IImageService
+    public class ImageService : IImageService
 	{
 		private readonly Image image;
 
