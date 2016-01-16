@@ -1,7 +1,7 @@
 ﻿namespace MVC.WebUI.Controllers
 {
 	using System.Web.Mvc;
-	using Domain.Configuration;
+	using Core.Configuration;
 	using MVC.Services.Message;
 	using MVC.WebUI.Models;
 

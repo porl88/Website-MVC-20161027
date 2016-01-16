@@ -106,8 +106,6 @@
     <Compile Include="Shop\IBasketService.cs" />
     <Compile Include="Shop\IOrderService.cs" />
     <Compile Include="Shop\IPaymentService.cs" />
-    <Compile Include="Text\IRichTextService.cs" />
-    <Compile Include="Text\RichTextService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Caching\" />

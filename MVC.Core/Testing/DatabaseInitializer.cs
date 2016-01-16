@@ -1,14 +1,12 @@
 ﻿namespace MVC.Core.Testing
 {
-    using System.Data.Entity;
-    using Entities.Website;
-    using MVC.Core.Data.EntityFramework;
-    using MVC.Core.Entities.Article;
-    using Entities.Website.PageItem;
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Text;
     using Entities.Culture;
+    using MVC.Core.Data.EntityFramework;
+    using MVC.Core.Entities.Article;
 
     // http://www.codeproject.com/Tips/814618/Use-of-Database-SetInitializer-method-in-Code-Firs
 

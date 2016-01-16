@@ -54,6 +54,7 @@
     <Compile Include="Configuration\ConfigSettings.cs" />
     <Compile Include="Configuration\EmailConfig.cs" />
     <Compile Include="Configuration\ISystemSettings.cs" />
+    <Compile Include="Configuration\RegularExpressions.cs" />
     <Compile Include="Configuration\SystemSettings.cs" />
     <Compile Include="Configuration\WebsiteConfig.cs" />
     <Compile Include="Data\EntityFramework\IRepository.cs" />

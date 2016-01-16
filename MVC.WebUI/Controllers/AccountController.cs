@@ -1,14 +1,13 @@
 ﻿namespace MVC.WebUI.Controllers
 {
-	using System;
-	using System.Web.Mvc;
-	using Domain.Configuration;
-	using MVC.Services.Message;
-	using MVC.Services.Account;
-	using MVC.WebUI.Attributes;
-	using MVC.WebUI.Models.Account;
+    using System;
+    using System.Web.Mvc;
+    using MVC.Services.Account;
+    using MVC.Services.Message;
+    using MVC.WebUI.Attributes;
+    using MVC.WebUI.Models.Account;
 
-	[Authorize]
+    [Authorize]
 	public class AccountController : Controller
 	{
 		private readonly ILoginService loginService;
@@ -54,7 +53,7 @@
 				this.messageService.SendMessage(new MessageRequest
 				{
 					ToAddress = model.Email,
-					Subject = "Please confirm your account with " + WebsiteConfig.WebsiteUrl,
+					Subject = "Please confirm your account with ",// + WebsiteConfig.WebsiteUrl,
 					Message = string.Empty
 				});
 			}

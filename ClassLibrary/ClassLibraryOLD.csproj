@@ -58,11 +58,8 @@
     <Compile Include="Map\GeoCoordinate.cs" />
     <Compile Include="Map\MapUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Text\RegularExpressions\RegexUtility.cs" />
-    <Compile Include="Text\FormatterUtility.cs" />
     <Compile Include="Text\Markup.cs" />
     <Compile Include="Text\MarkupUtility.cs" />
-    <Compile Include="Validation\ValidationUtility.cs" />
     <Compile Include="WebRequest\WebRequestEvent.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +70,9 @@
       <Project>{ba423f36-50f0-4b17-9903-bf592996e7c7}</Project>
       <Name>ClassLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Validation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
