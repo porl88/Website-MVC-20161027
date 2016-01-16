@@ -1,4 +1,4 @@
-﻿namespace MVC.WebUI.Models
+﻿namespace MVC.WebUI.Models.Shared
 {
 	using System.ComponentModel.DataAnnotations;
     using Core.Configuration;

@@ -33,21 +33,21 @@
 
             try
             {
-                var pageVersion = this.pageVersionRepository.Get().SingleOrDefault(x => x.PageId == id && x.LanguageCode == languageCode);
-                if (pageVersion != null)
-                {
-                    response.Page = new PageDto
-                    {
-                        Title = pageVersion.Title,
-                        Description = pageVersion.Description,
-                        Keywords = pageVersion.Keywords
-                    };
-                    response.Status = ResponseStatus.OK;
-                }
-                else
-                {
-                    response.Status = ResponseStatus.NotFound;
-                }
+                //var pageVersion = this.pageVersionRepository.Get().SingleOrDefault(x => x.PageId == id && x.LanguageCode == languageCode);
+                //if (pageVersion != null)
+                //{
+                //    response.Page = new PageDto
+                //    {
+                //        Title = pageVersion.Title,
+                //        Description = pageVersion.Description,
+                //        Keywords = pageVersion.Keywords
+                //    };
+                //    response.Status = ResponseStatus.OK;
+                //}
+                //else
+                //{
+                //    response.Status = ResponseStatus.NotFound;
+                //}
             }
             catch (Exception ex)
             {

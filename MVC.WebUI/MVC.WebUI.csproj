@@ -150,6 +150,7 @@
     <Compile Include="Attributes\ValidateHttpReferrerAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
@@ -167,8 +168,9 @@
     <Compile Include="Models\Articles\ArticleDetailsViewModel.cs" />
     <Compile Include="Models\Articles\ArticleEditViewModel.cs" />
     <Compile Include="Models\Articles\ArticleIndexViewModel.cs" />
-    <Compile Include="Models\EmailViewModel.cs" />
+    <Compile Include="Models\Shared\EmailViewModel.cs" />
     <Compile Include="Models\Home\HomeIndexViewModel.cs" />
+    <Compile Include="Models\Shared\LanguageDropdownViewModel.cs" />
     <Compile Include="Modules\CheckBrowserModule.cs" />
     <Compile Include="Modules\ErrorModule.cs" />
     <Compile Include="Modules\SeoRedirectModule.cs" />
@@ -234,6 +236,7 @@
     <Content Include="Views\Contact\email-confirm.cshtml" />
     <Content Include="Views\Contact\email.cshtml" />
     <Content Include="Views\Contact\index.cshtml" />
+    <Content Include="Views\Shared\_languages.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,6 +248,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\js\jquery\" />
     <Folder Include="Content\js\modernizr\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MVC.Core\MVC.Core.csproj">

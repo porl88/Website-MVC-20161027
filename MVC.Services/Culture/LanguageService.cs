@@ -9,18 +9,59 @@
     using Core.Exceptions;
     using Core.Entities.Culture;
     using Transfer;
+    using Storage;
 
     public class LanguageService : ILanguageService
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IRepository<Language> languageRepository;
         private readonly IExceptionHandler exceptionHandler;
+        private readonly IPersistenceService persistenceService;
 
-        public LanguageService(IUnitOfWork unitOfWork, IExceptionHandler exceptionHandler)
+        public LanguageService(IUnitOfWork unitOfWork, IExceptionHandler exceptionHandler, IPersistenceService persistenceService)
         {
             this.unitOfWork = unitOfWork;
             this.languageRepository = unitOfWork.LanguageRepository;
             this.exceptionHandler = exceptionHandler;
+            this.persistenceService = persistenceService;
+        }
+
+        public int GetPreferredLanguage()
+        {
+            return 4;
+            return Convert.ToInt32(this.persistenceService.GetValue("lang"));
+        }
+
+        public void SetPreferredLanguage(int languageId)
+        {
+            this.persistenceService.SaveValue("lang", languageId.ToString());
+        }
+
+        public GetLanguagesResponse GetLanguages(GetLanguagesRequest request)
+        {
+            var response = new GetLanguagesResponse();
+
+            try
+            {
+                response.Languages = this.unitOfWork.LanguageVersionRepository.Get(q => q
+                    .Where(x => x.Language == request.LanguageId)
+                    .OrderBy(x => x.Name)
+                    .Select(x => new LanguageDto
+                    {
+                        Id = x.LanguageId,
+                        Name = x.Name
+                    })
+                );
+
+                response.Status = ResponseStatus.OK;
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = ResponseStatus.SystemError;
+            }
+
+            return response;
         }
 
         public async Task<GetLanguagesResponse> GetLanguagesAsync(GetLanguagesRequest request)

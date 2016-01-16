@@ -98,15 +98,15 @@
                         Id = 3,
                         LanguageId = 1,
                         Language = 3,
-                        Name = "English - German",
-                        Dialect = "British"
+                        Name = "Englisch",
+                        Dialect = "Britisch"
                     },
                     new LanguageVersion
                     {
                         Id = 4,
                         LanguageId = 1,
                         Language = 4,
-                        Name = "English - Spanish",
+                        Name = "Inglés",
                         Dialect = "British"
                     }
                 },
@@ -126,6 +126,27 @@
                         LanguageId = 2,
                         Language = 1,
                         Name = "French"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 6,
+                        LanguageId = 2,
+                        Language = 2,
+                        Name = "Français"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 7,
+                        LanguageId = 2,
+                        Language = 3,
+                        Name = "Französisch"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 8,
+                        LanguageId = 2,
+                        Language = 4,
+                        Name = "Francés"
                     }
                 },
                 LanguageCode = "fr-fr",
@@ -140,10 +161,31 @@
                 {
                     new LanguageVersion
                     {
-                        Id = 7,
+                        Id = 9,
                         LanguageId = 3,
                         Language = 1,
                         Name = "German"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 10,
+                        LanguageId = 3,
+                        Language = 2,
+                        Name = "Allemand"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 11,
+                        LanguageId = 3,
+                        Language = 3,
+                        Name = "Deutsche"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 12,
+                        LanguageId = 3,
+                        Language = 4,
+                        Name = "Alemán"
                     }
                 },
                 LanguageCode = "de-de",
@@ -158,10 +200,31 @@
                 {
                     new LanguageVersion
                     {
-                        Id = 11,
+                        Id = 13,
                         LanguageId = 4,
                         Language = 1,
                         Name = "Spanish"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 14,
+                        LanguageId = 4,
+                        Language = 2,
+                        Name = "Espagnol"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 15,
+                        LanguageId = 4,
+                        Language = 3,
+                        Name = "Spanisch"
+                    },
+                    new LanguageVersion
+                    {
+                        Id = 16,
+                        LanguageId = 4,
+                        Language = 4,
+                        Name = "Español"
                     }
                 },
                 LanguageCode = "es-es",

@@ -19,7 +19,7 @@
         public void Init()
         {
             var unitOfWork = this.CreateMockUnitOfWork();
-            this.languageService = new LanguageService(unitOfWork, new NullExceptionHandler());
+            this.languageService = new LanguageService(unitOfWork, new NullExceptionHandler(), null);
         }
 
         [TestMethod]

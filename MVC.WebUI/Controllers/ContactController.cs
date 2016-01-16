@@ -3,7 +3,7 @@
 	using System.Web.Mvc;
 	using Core.Configuration;
 	using MVC.Services.Message;
-	using MVC.WebUI.Models;
+	using MVC.WebUI.Models.Shared;
 
 	public class ContactController : Controller
     {

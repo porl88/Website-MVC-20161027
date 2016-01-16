@@ -5,15 +5,17 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Models.Article;
+    using Services.Culture;
     using Services;
     using Services.Article;
     using Services.Article.Transfer;
 
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
         private readonly IArticleService articleService;
 
-        public ArticleController(IArticleService articleService)
+        public ArticleController(IArticleService articleService, ILanguageService languageService)
+            :base(languageService)
         {
             this.articleService = articleService;
         }
@@ -21,7 +23,10 @@
         // GET: /article
         public async Task<ViewResult> Index()
         {
-            var response = await this.articleService.GetArticlesAsync(new GetArticlesRequest());
+            var response = await this.articleService.GetArticlesAsync(new GetArticlesRequest
+            {
+                LanguageId = base.LanguageId
+            });
 
             var model = new ArticleIndexViewModel
             {
@@ -38,7 +43,7 @@
         {
             var response = await this.articleService.GetEditArticlesAsync(new GetArticlesRequest
             {
-                LanguageId = 1
+                LanguageId = base.LanguageId
             });
 
             var model = new ArticleIndexViewModel

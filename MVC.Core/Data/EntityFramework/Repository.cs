@@ -66,23 +66,10 @@ namespace MVC.Core.Data.EntityFramework
             return dataset.ToList();
         }
 
-        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query = null)
+        public List<U> Get<U>(Func<IQueryable<T>, IQueryable<U>> query)
         {
-            var dataset = this.databaseSet;
-
-            foreach (var include in this.includes)
-            {
-                dataset.Include(include);
-            }
-
-            if (query == null)
-            {
-                return dataset;
-            }
-            else
-            {
-                return query(dataset);
-            }
+            var dataset = this.GetDbQuery();
+            return query(dataset).ToList();
         }
 
         public virtual IQueryable<T> Query()

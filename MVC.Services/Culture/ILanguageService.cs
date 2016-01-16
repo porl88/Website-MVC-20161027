@@ -5,6 +5,12 @@
 
     public interface ILanguageService
     {
+        GetLanguagesResponse GetLanguages(GetLanguagesRequest request);
+
         Task<GetLanguagesResponse> GetLanguagesAsync(GetLanguagesRequest request);
+
+        int GetPreferredLanguage();
+
+        void SetPreferredLanguage(int languageId);
     }
 }

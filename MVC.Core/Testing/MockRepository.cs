@@ -42,16 +42,9 @@
             }
         }
 
-        public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query = null)
+        public List<U> Get<U>(Func<IQueryable<T>, IQueryable<U>> query)
         {
-            if (query == null)
-            {
-                return this.entities.AsQueryable();
-            }
-            else
-            {
-                return query(this.entities.AsQueryable());
-            }
+            return query(this.entities.AsQueryable()).ToList();
         }
 
         public IQueryable<T> Query()
@@ -153,7 +146,7 @@
 
         public virtual void Delete(int id)
         {
-            var entityToRemove = this.Get().FirstOrDefault(x => x.Id == id);
+            var entityToRemove = this.Get(id);
             if (entityToRemove != null)
             {
                 this.Delete(entityToRemove);

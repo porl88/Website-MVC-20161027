@@ -1,0 +1,14 @@
+﻿@model MVC.WebUI.Models.Shared.LanguageDropdownViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(m => m.LanguageId, Model.Languages)
+    <button>Select Language</button>
+}
+
+@*<form action="@Html.Action("Languages", "Base")" method="post">
+    @Html.DropDownListFor(m => m.LanguageId, Model.Languages)
+    <button>Select Language</button>
+</form>*@
+
+
