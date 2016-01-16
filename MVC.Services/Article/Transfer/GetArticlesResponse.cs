@@ -4,7 +4,7 @@
 
     public class GetArticlesResponse : BaseResponse
     {
-        public GetArticlesResponse()
+        public GetArticlesResponse ()
         {
             this.Articles = new List<ArticleSummaryDto>();
         }

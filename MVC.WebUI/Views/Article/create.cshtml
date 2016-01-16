@@ -1,0 +1,17 @@
+﻿@model MVC.WebUI.Models.Article.ArticleEditViewModel
+@{
+    ViewBag.Title = "Add New Article";
+}
+
+<form action="@Url.Action("Create")" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <h1>Add New Article</h1>
+
+    @Html.Partial("_edit-form")
+
+    <button type="reset">Clear</button>
+    <button>Add</button>
+    @Html.ActionLink("Back", "Index")
+</form>

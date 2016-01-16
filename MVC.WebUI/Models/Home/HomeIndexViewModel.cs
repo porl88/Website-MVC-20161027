@@ -1,4 +1,4 @@
-﻿namespace MVC.WebUI.Models
+﻿namespace MVC.WebUI.Models.Home
 {
     using Services.Page.Transfer;
 

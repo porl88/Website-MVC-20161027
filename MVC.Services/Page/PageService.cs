@@ -63,29 +63,29 @@
         {
             var response = new GetPageResponse();
 
-            try
-            {
-                var pageVersion = await this.pageVersionRepository.GetSingleAsync(q => q.Where(x => x.PageId == id && x.LanguageCode == languageCode).FirstOrDefault());
-                if (pageVersion != null)
-                {
-                    response.Page = new PageDto
-                    {
-                        Title = pageVersion.Title,
-                        Description = pageVersion.Description,
-                        Keywords = pageVersion.Keywords
-                    };
-                    response.Status = ResponseStatus.OK;
-                }
-                else
-                {
-                    response.Status = ResponseStatus.NotFound;
-                }
-            }
-            catch (Exception ex)
-            {
-                this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
-            }
+            //try
+            //{
+            //    var pageVersion = await this.pageVersionRepository.GetSingleAsync(q => q.Where(x => x.PageId == id && x.LanguageCode == languageCode).FirstOrDefault());
+            //    if (pageVersion != null)
+            //    {
+            //        response.Page = new PageDto
+            //        {
+            //            Title = pageVersion.Title,
+            //            Description = pageVersion.Description,
+            //            Keywords = pageVersion.Keywords
+            //        };
+            //        response.Status = ResponseStatus.OK;
+            //    }
+            //    else
+            //    {
+            //        response.Status = ResponseStatus.NotFound;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.exceptionHandler.HandleException(ex);
+            //    response.Status = ResponseStatus.SystemError;
+            //}
 
             return response;
         }

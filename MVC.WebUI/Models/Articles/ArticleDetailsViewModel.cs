@@ -1,4 +1,4 @@
-﻿namespace MVC.WebUI.Models
+﻿namespace MVC.WebUI.Models.Article
 {
     using Services.Article.Transfer;
 

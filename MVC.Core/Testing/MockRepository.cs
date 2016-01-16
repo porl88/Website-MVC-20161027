@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
@@ -26,19 +25,9 @@
             return this.entities.FirstOrDefault(x => x.Id == id);
         }
 
-        public virtual async Task<T> GetAsync(int id)
-        {
-            return this.Get(id);
-        }
-
         public T GetSingle(Func<IQueryable<T>, T> query)
         {
             return query(this.entities.AsQueryable());
-        }
-
-        public async Task<T> GetSingleAsync(Func<IQueryable<T>, T> query)
-        {
-            return this.GetSingle(query);
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> filter = null)
@@ -53,11 +42,6 @@
             }
         }
 
-        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> filter = null)
-        {
-            return this.Find(filter);
-        }
-
         public IEnumerable<T> Get(Func<IQueryable<T>, IQueryable<T>> query = null)
         {
             if (query == null)
@@ -70,14 +54,34 @@
             }
         }
 
-        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query = null)
-        {
-            return this.Get(query);
-        }
-
         public IQueryable<T> Query()
         {
             return this.entities.AsQueryable();
+        }
+
+        public virtual async Task<T> GetAsync(int id)
+        {
+            return this.Get(id);
+        }
+
+        public async Task<U> GetFirstAsync<U>(Func<IQueryable<T>, IQueryable<U>> query)
+        {
+            return query(this.entities.AsQueryable()).FirstOrDefault();
+        }
+
+        public async Task<U> GetSingleAsync<U>(Expression<Func<T, bool>> where, Expression<Func<T, U>> select)
+        {
+            return this.entities.AsQueryable().Where(where).Select(select).SingleOrDefault();
+        }
+
+        public async Task<List<U>> GetAsync<U>(Func<IQueryable<T>, IQueryable<U>> query)
+        {
+            return query(this.entities.AsQueryable()).ToList();
+        }
+
+        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query = null)
+        {
+            return this.Get(query);
         }
 
         public virtual T Insert(T entity)

@@ -1,11 +1,22 @@
-﻿@model WebUI.Models.Article.EditArticleViewModel
+﻿@model MVC.WebUI.Models.Article.ArticleEditViewModel
 @{
-	ViewBag.Title = "Edit Article: " + Model.Title;
+    ViewBag.Title = "Edit Article";
 }
 
-@Html.Partial("_Breadcrumb")
+<form action="@Url.Action("Edit")" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
 
-<section>
-	<h1>Edit Article: @Model.Title</h1>
-	@{ Html.RenderPartial("_EditArticleForm"); }
-</section>
+    <h1>Edit Article</h1>
+
+    @Html.DropDownListFor(m => m.Article.LanguageId, Model.Languages)
+
+    @Html.Partial("_edit-form")
+
+    @Html.HiddenFor(m => m.Article.ArticleId)
+    @Html.HiddenFor(m => m.Article.ArticleVersionId)
+
+    <button type="reset">Clear</button>
+    <button>Update</button>
+    @Html.ActionLink("Back", "Index")
+</form>

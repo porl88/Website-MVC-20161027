@@ -2,15 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using Core.Exceptions;
-    using Core.Testing;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Services.Article;
-    using MVC.Core.Entities.Article;
-    using Services.Article.Transfer;
+    using Core.Entities.Article;
     using Core.Entities.Culture;
+    using Core.Exceptions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Core.Testing;
+    using Services.Article;
+    using Services.Article.Transfer;
 
     [TestClass]
     public class ArticleServiceTests
@@ -25,24 +24,116 @@
         }
 
         [TestMethod]
-        public void GetArticle()
+        public async Task GetArticlesAsync()
         {
             // arrange
-            var request = new GetArticleRequest
+            var request = new GetArticlesRequest
             {
-                ArticleId = 3,
-                LanguageCode = "fr-fr"
+                LanguageId = 3
             };
 
             // act
-            var result = this.articleService.GetArticle(request);
+            var result = await this.articleService.GetArticlesAsync(request);
 
             // assert
             Assert.IsNotNull(result);
             Assert.AreEqual(ResponseStatus.OK, result.Status);
-            var article = result.Article;
-            Assert.IsNotNull(article);
-            Assert.AreEqual("Article 32", article.Title);
+
+            var articles = result.Articles;
+            Assert.IsNotNull(articles);
+            Assert.AreEqual(2, articles.Count);
+
+            var article1 = articles[0];
+            Assert.AreEqual(1, article1.Id);
+            Assert.AreEqual("Bonjour Madam", article1.Title);
+
+            var article2 = articles[1];
+            Assert.AreEqual(2, article2.Id);
+            Assert.AreEqual("Mange Dieu", article2.Title);
+        }
+
+        [TestMethod]
+        public async Task GetEditArticlesAsync()
+        {
+            // arrange
+            var request = new GetArticlesRequest
+            {
+                LanguageId = 3
+            };
+
+            // act
+            var result = await this.articleService.GetEditArticlesAsync(request);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(ResponseStatus.OK, result.Status);
+
+            var articles = result.Articles;
+            Assert.IsNotNull(articles);
+            Assert.AreEqual(3, articles.Count);
+
+            var article1 = articles[0];
+            Assert.AreEqual(1, article1.Id);
+            Assert.AreEqual("Bonjour Madam", article1.Title);
+
+            var article2 = articles[1];
+            Assert.AreEqual(2, article2.Id);
+            Assert.AreEqual("Mange Dieu", article2.Title);
+
+            var article3 = articles[2];
+            Assert.AreEqual(3, article3.Id);
+            Assert.AreEqual("Wuthering Heights", article3.Title);
+        }
+
+        [TestMethod]
+        public async Task GetArticlesAsync_DefaultLanguage()
+        {
+            // arrange
+            var request = new GetArticlesRequest();
+
+            // act
+            var result = await this.articleService.GetArticlesAsync(request);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(ResponseStatus.OK, result.Status);
+
+            var articles = result.Articles;
+            Assert.IsNotNull(articles);
+            Assert.AreEqual(3, articles.Count);
+
+            var article1 = articles[0];
+            Assert.AreEqual(2, article1.Id);
+            Assert.AreEqual("Great Expectations", article1.Title);
+
+            var article2 = articles[1];
+            Assert.AreEqual(1, article2.Id);
+            Assert.AreEqual("Middlemarch", article2.Title);
+
+            var article3 = articles[2];
+            Assert.AreEqual(3, article3.Id);
+            Assert.AreEqual("Wuthering Heights", article3.Title);
+        }
+
+        [TestMethod]
+        public async Task GetArticlesAsync_ContainsUnpublishedArticles()
+        {
+            // arrange
+            var request = new GetArticlesRequest
+            {
+                LanguageId = 2
+            };
+
+            // act
+            var result = await this.articleService.GetArticlesAsync(request);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(ResponseStatus.OK, result.Status);
+
+            var articles = result.Articles;
+            Assert.IsNotNull(articles);
+            Assert.AreEqual(1, articles.Count);
         }
 
         [TestMethod]
@@ -51,8 +142,8 @@
             // arrange
             var request = new GetArticleRequest
             {
-                ArticleId = 3,
-                LanguageCode = "fr-fr"
+                ArticleId = 2,
+                LanguageId = 2
             };
 
             // act
@@ -61,29 +152,12 @@
             // assert
             Assert.IsNotNull(result);
             Assert.AreEqual(ResponseStatus.OK, result.Status);
+
             var article = result.Article;
             Assert.IsNotNull(article);
-            Assert.AreEqual("Article 32", article.Title);
-        }
-
-        [TestMethod]
-        public void GetArticle_DefaultLanguage()
-        {
-            // arrange
-            var request = new GetArticleRequest
-            {
-                ArticleId = 1
-            };
-
-            // act
-            var result = this.articleService.GetArticle(request);
-
-            // assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
-            var article = result.Article;
-            Assert.IsNotNull(article);
-            Assert.AreEqual("Article 2", article.Title);
+            Assert.AreEqual(2, article.Id);
+            Assert.AreEqual("Mein Kampf", article.Title);
+            Assert.AreEqual("Achtung!", article.Content);
         }
 
         [TestMethod]
@@ -92,7 +166,7 @@
             // arrange
             var request = new GetArticleRequest
             {
-                ArticleId = 1
+                ArticleId = 2
             };
 
             // act
@@ -101,186 +175,219 @@
             // assert
             Assert.IsNotNull(result);
             Assert.AreEqual(ResponseStatus.OK, result.Status);
+
             var article = result.Article;
             Assert.IsNotNull(article);
-            Assert.AreEqual("Article 2", article.Title);
+            Assert.AreEqual(2, article.Id);
+            Assert.AreEqual("Great Expectations", article.Title);
+            Assert.AreEqual("Rubbish", article.Content);
+        }
+
+        [TestMethod]
+        public async Task GetArticleAsync_ArticleNotFound()
+        {
+            // arrange
+            var request = new GetArticleRequest
+            {
+                ArticleId = 55
+            };
+
+            // act
+            var result = await this.articleService.GetArticleAsync(request);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+        }
+
+        [TestMethod]
+        public async Task GetArticleAsync_ArticleVersionNotFound()
+        {
+            // arrange
+            var request = new GetArticleRequest
+            {
+                ArticleId = 1,
+                LanguageId = 2
+            };
+
+            // act
+            var result = await this.articleService.GetArticleAsync(request);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
         }
 
         [TestMethod]
         public async Task AddArticleAsync()
         {
             // arrange
-            var id = 4;
             var unitOfWork = this.CreateMockUnitOfWork();
             var articleService = new ArticleService(unitOfWork, new NullExceptionHandler());
-            var originalNoteCount = unitOfWork.ArticleVersionRepository.Get().Count();
 
-            var request = new EditArticleRequest
+            var request = new ArticleEditDto
             {
-                Article = new ArticleDto
-                {
-                    Title = "New Article",
-                    Content = "ZZZ"
-                }
+                LanguageId = 2,
+                Title = "Title",
+                Content = "Content",
+                Publish = true
             };
 
             // act
-            var result = await articleService.AddArticleAsync(request);
+            var result = await this.articleService.AddArticleAsync(request);
 
             // assert
             Assert.IsNotNull(result);
+            Assert.AreEqual(ResponseStatus.OK, result.Status);
 
-            var addedArticleId = result.Article.Id;
-            Assert.IsTrue(addedArticleId > 0);
-
-            //var addedArticle = unitOfWork.ArticleRepository.Get(addedArticleId);
-            //Assert.IsNotNull(addedArticle);
-            //Assert.AreEqual("New Article", addedArticle.Title);
-            //Assert.AreEqual("ZZZ", addedArticle.Content);
-            //Assert.AreEqual(addedArticle.Created, addedArticle.Updated);
-            //Assert.IsTrue(addedArticle.Updated > DateTimeOffset.Now.AddMinutes(-1));
-
-            var updatedCount = unitOfWork.ArticleRepository.Get();
-            Assert.AreEqual(originalNoteCount + 1, updatedCount.Count());
-        }
-
-        [TestMethod]
-        public async Task UpdateArticleAsync()
-        {
-            // arrange
-            var id = 4;
-            var unitOfWork = this.CreateMockUnitOfWork();
-            var articlesService = new ArticleService(unitOfWork, new NullExceptionHandler());
-            var originalNoteCount = unitOfWork.ArticleVersionRepository.Get().Count();
-            var originalNote = unitOfWork.ArticleVersionRepository.Get(id);
-            var originalNoteCreated = originalNote.Created;
-            var originalNoteUpdated = originalNote.Updated;
-
-            var request = new EditArticleRequest
-            {
-                Article = new ArticleDto
-                {
-                    Id = id,
-                    Title = "Hello",
-                    Content = "XXX"
-                }
-            };
-
-            // act
-            var result = await articleService.UpdateArticleAsync(request);
-
-            // assert
-            Assert.IsNotNull(result);
-
-            var updatedNote = unitOfWork.ArticleVersionRepository.Get(id);
-            Assert.IsNotNull(updatedNote);
-            Assert.AreEqual("Hello", updatedNote.Title);
-            Assert.AreEqual("XXX", updatedNote.Content);
-            Assert.AreEqual(originalNoteCreated, updatedNote.Created);
-            Assert.IsTrue(updatedNote.Updated > originalNoteUpdated);
-            Assert.IsTrue(updatedNote.Updated > DateTimeOffset.Now.AddMinutes(-1));
-
-            var updatedCount = unitOfWork.ArticleVersionRepository.Get();
-            Assert.AreEqual(originalNoteCount, updatedCount.Count());
+            var article = result.Article;
+            Assert.AreEqual(4, article.ArticleId);
+            Assert.AreEqual(8, article.ArticleVersionId);
+            Assert.AreEqual("Title", article.Title);
+            Assert.AreEqual("Content", article.Content);
         }
 
         private MockUnitOfWork CreateMockUnitOfWork()
         {
             var unitOfWork = new MockUnitOfWork();
-            var now = DateTimeOffset.Now;
+            var now = DateTimeOffset.Now.AddDays(-3);
 
-            var english = new Language
+            unitOfWork.LanguageRepository.Insert(new Language
             {
                 Id = 1,
                 LanguageCode = "en-gb",
-                Name = "English"
-            };
+                Name = "English",
+                Dialect = "British",
+                Created = now,
+                Updated = now
+            });
 
-            var french = new Language
+            unitOfWork.LanguageRepository.Insert(new Language
             {
                 Id = 2,
-                LanguageCode = "fr-fr",
-                Name = "French"
-            };
+                LanguageCode = "de-de",
+                Name = "German",
+                Created = now,
+                Updated = now
+            });
 
-            var german = new Language
+            unitOfWork.LanguageRepository.Insert(new Language
             {
                 Id = 3,
-                LanguageCode = "de-de",
-                Name = "German"
-            };
+                LanguageCode = "fr-fr",
+                Name = "French",
+                Created = now,
+                Updated = now
+            });
 
-            unitOfWork.ArticleRepository.Insert(new Article()
+            unitOfWork.ArticleRepository.Insert(new Article
             {
                 Id = 1,
                 ArticleVersions = new List<ArticleVersion>
                 {
                     unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
                     {
-                        Id = 11,
+                        Id = 1,
                         ArticleId = 1,
-                        Language = german,
-                        Title = "Article 1"
+                        LanguageId = 1,
+                        Title = "Middlemarch",
+                        Content = "Cheese",
+                        IsPublished = true,
+                        Created = now,
+                        Updated = now
                     }),
                     unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
                     {
-                        Id = 12,
+                        Id = 2,
                         ArticleId = 1,
-                        Language = english,
-                        Title = "Article 2"
-                    }),
-                    unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
-                    {
-                        Id = 13,
-                        ArticleId = 1,
-                        Language = french,
-                        Title = "Article 3"
+                        LanguageId = 3,
+                        Title = "Bonjour Madam",
+                        Content = "Snails",
+                        IsPublished = true,
+                        Created = now,
+                        Updated = now
                     })
-                }
+                },
+                Published = now,
+                Created = now,
+                Updated = now
             });
 
-            unitOfWork.ArticleRepository.Insert(new Article()
+            unitOfWork.ArticleRepository.Insert(new Article
             {
                 Id = 2,
                 ArticleVersions = new List<ArticleVersion>
                 {
                     unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
                     {
-                        Id = 21,
+                        Id = 3,
                         ArticleId = 2,
-                        Language = english,
-                        Title = "Article 21"
+                        LanguageId = 3,
+                        Title = "Mange Dieu",
+                        Content = "Oh la la",
+                        IsPublished = true,
+                        Created = now,
+                        Updated = now
+                    }),
+                    unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
+                    {
+                        Id = 4,
+                        ArticleId = 2,
+                        LanguageId = 2,
+                        Title = "Mein Kampf",
+                        Content = "Achtung!",
+                        IsPublished = true,
+                        Created = now,
+                        Updated = now
+                    }),
+                    unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
+                    {
+                        Id = 5,
+                        ArticleId = 2,
+                        LanguageId = 1,
+                        Title = "Great Expectations",
+                        Content = "Rubbish",
+                        IsPublished = true,
+                        Created = now,
+                        Updated = now
                     })
-                }
+                },
+                Published = now,
+                Created = now,
+                Updated = now
             });
 
-            unitOfWork.ArticleRepository.Insert(new Article()
+            unitOfWork.ArticleRepository.Insert(new Article
             {
                 Id = 3,
                 ArticleVersions = new List<ArticleVersion>
                 {
                     unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
                     {
-                        Id = 31,
+                        Id = 6,
                         ArticleId = 3,
-                        Language = german,
-                        Title = "Article 31"
+                        LanguageId = 1,
+                        Title = "Wuthering Heights",
+                        Content = "Heathcliff, it's me!",
+                        IsPublished = true,
+                        Created = now,
+                        Updated = now
                     }),
                     unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
                     {
-                        Id = 32,
+                        Id = 7,
                         ArticleId = 3,
-                        Language = french,
-                        Title = "Article 32"
-                    }),
-                    unitOfWork.ArticleVersionRepository.Insert(new ArticleVersion
-                    {
-                        Id = 33,
-                        ArticleId = 3,
-                        Language = english,
-                        Title = "Article 33"
+                        LanguageId = 2,
+                        Title = "Kraftwerk",
+                        Content = "Klunk!",
+                        IsPublished = false,
+                        Created = now,
+                        Updated = now
                     })
-                }
+                },
+                Published = now,
+                Created = now,
+                Updated = now
             });
 
             return unitOfWork;

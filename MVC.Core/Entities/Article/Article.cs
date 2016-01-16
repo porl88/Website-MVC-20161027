@@ -1,5 +1,6 @@
 ﻿namespace MVC.Core.Entities.Article
 {
+    using System;
     using System.Collections.Generic;
 
     public class Article : BaseEntity
@@ -10,5 +11,7 @@
         }
 
         public virtual List<ArticleVersion> ArticleVersions { get; set; }
-	}
+
+        public DateTimeOffset? Published { get; set; }
+    }
 }

@@ -1,12 +1,13 @@
 ﻿namespace MVC.WebUI.Controllers
 {
+    using System.Collections.Generic;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using MVC.Services;
-    using MVC.Services.Article;
-    using MVC.Services.Article.Transfer;
-    using Models;
+    using Models.Article;
+    using Services;
+    using Services.Article;
+    using Services.Article.Transfer;
 
     public class ArticleController : Controller
     {
@@ -20,33 +21,55 @@
         // GET: /article
         public async Task<ViewResult> Index()
         {
-            var articles = await this.articleService.GetArticlesAsync();
-            return this.View(articles);
+            var response = await this.articleService.GetArticlesAsync(new GetArticlesRequest());
+
+            var model = new ArticleIndexViewModel
+            {
+                Articles = response.Articles
+            };
+
+            return View(model);
         }
 
-        // GET: /article/details
+        // GET: /article/index-edit
+        [ActionName("index-edit")]
+        [Authorize]
+        public async Task<ViewResult> IndexEdit()
+        {
+            var response = await this.articleService.GetEditArticlesAsync(new GetArticlesRequest
+            {
+                LanguageId = 1
+            });
+
+            var model = new ArticleIndexViewModel
+            {
+                Articles = response.Articles
+            };
+
+            return View("index-edit", model);
+        }
+
+        // GET: /article/details/1
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return this.HttpNotFound();
             }
 
-            var request = new GetArticleRequest
+            var response = await this.articleService.GetArticleAsync(new GetArticleRequest
             {
                 ArticleId = (int)id
-            };
-
-            var response = await this.articleService.GetArticleAsync(request);
+            });
 
             if (response.Status == ResponseStatus.OK)
             {
-                var model = new ArticleDetailsViewModel
+                var article = new ArticleDetailsViewModel
                 {
                     Article = response.Article
                 };
 
-                return this.View(model);
+                return View(article);
             }
             else if (response.Status == ResponseStatus.NotFound)
             {
@@ -58,59 +81,54 @@
             }
         }
 
-        //// GET: /article/add
-        //public ViewResult Add()
-        //{
-        //    return this.View();
-        //}
-
-        //// POST: /article/add
-        //[HttpPost, ValidateAntiForgeryToken]
-        //public ActionResult Add(EditArticleViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var article = new ArticleDto
-        //        {
-        //            Title = model.Title,
-        //            Content = model.Content
-        //        };
-
-        //        this.articleService.AddArticle(article);
-
-        //        TempData["SuccessMessage"] = string.Format("You have successfully added '{0}' as a new article.", article.Title);
-
-        //        return this.RedirectToAction("Index");
-        //    }
-
-        //    return this.View(model);
-        //}
-
-        // GET: /article/edit
-        public async Task<ActionResult> Edit(int? id)
+        // GET: /article/create
+        [Authorize]
+        public ViewResult Create()
         {
-            if (id == null)
+            return View();
+        }
+
+        // POST: /article/create
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(ArticleEditViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                model.Article.LanguageId = 1;
+                var response = await this.articleService.AddArticleAsync(model.Article);
+                if (response.Status == ResponseStatus.OK)
+                {
+                    TempData["SuccessMessage"] = string.Format("You have successfully added '{0}' as a new article.", response.Article.Title);
+                }
+                else
+                {
+                    TempData["FailureMessage"] = "An error has occurred and the article has not been created.";
+                }
+
+                return this.RedirectToAction("Index");
             }
 
-            var request = new GetArticleRequest
-            {
-                ArticleId = (int)id
-            };
+            return View();
+        }
 
-            var response = await this.articleService.GetArticleAsync(request);
+        // GET: /article/edit/1
+        [Authorize]
+        public async Task<ActionResult> Edit(int id)
+        {
+            var response = await this.articleService.GetEditArticleAsync(new GetArticleRequest
+            {
+                ArticleId = id
+            });
 
             if (response.Status == ResponseStatus.OK)
             {
                 var model = new ArticleEditViewModel
                 {
-                    Id = (int)id,
-                    Title = response.Article.Title,
-                    Content = response.Article.Content
+                    Article = response.Article,
+                    Languages = this.GetLanguageListItems()
                 };
 
-                return this.View(model);
+                return View(model);
             }
             else if (response.Status == ResponseStatus.NotFound)
             {
@@ -122,57 +140,84 @@
             }
         }
 
-        // POST: /article/edit
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, ArticleEditViewModel model)
+        // POST: /article/edit/1
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(ArticleEditViewModel model)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             if (ModelState.IsValid)
             {
-                var request = new EditArticleRequest
+                var response = await this.articleService.UpdateArticleAsync(model.Article);
+
+                if (response.Status == ResponseStatus.OK)
                 {
-                    Article = new ArticleDto
-                    {
-                        ArticleVersionId = (int)id,
-                        Title = model.Title,
-                        Content = model.Content
-                    }
-                };
-
-                var response = this.articleService.UpdateArticle(request);
-
-                TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", response.Article.Title);
+                    TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", response.Article.Title);
+                }
+                else
+                {
+                    TempData["FailureMessage"] = "An error has occurred and the article has not been updated.";
+                }
 
                 return this.RedirectToAction("Index");
             }
 
-            return this.View(model);
+            return View();
         }
 
-        //// POST: /article/delete
-        //[HttpPost, ValidateAntiForgeryToken]
-        //public RedirectToRouteResult Delete(int id)
-        //{
-        //    var response = this.articleService.DeleteArticle(id);
+        // POST: /article/delete/1
+        [HttpPost, Authorize, ValidateAntiForgeryToken]
+        public async Task<RedirectToRouteResult> Delete(int id)
+        {
+            var request = new DeleteArticleRequest
+            {
+                ArticleId = id
+            };
 
-        //    if (response.Status == ResponseStatus.OK)
-        //    {
-        //        TempData["SuccessMessage"] = string.Format("You have successfully deleted '{0}'.", response.Title);
-        //    }
-        //    else if (response.Status == ResponseStatus.NotFound)
-        //    {
-        //        TempData["FailureMessage"] = "The article you are trying to delete cannot be found.";
-        //    }
-        //    else
-        //    {
-        //        TempData["FailureMessage"] = "The article has not deleted successfully. Please try again.";
-        //    }
+            var response = await this.articleService.DeleteArticleAsync(request);
 
-        //    return this.RedirectToAction("Index");
-        //}
+            if (response.Status == ResponseStatus.OK)
+            {
+                TempData["SuccessMessage"] = string.Format("You have successfully deleted '{0}'.", response.Title);
+            }
+            else if (response.Status == ResponseStatus.NotFound)
+            {
+                TempData["FailureMessage"] = "The article you are trying to delete cannot be found.";
+            }
+            else
+            {
+                TempData["FailureMessage"] = "The article has not deleted successfully. Please try again.";
+            }
+
+            return this.RedirectToAction("Index");
+        }
+
+        private List<SelectListItem> GetLanguageListItems()
+        {
+            var languages = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "English (American)",
+                    Value = "4"
+                },
+                new SelectListItem
+                {
+                    Text = "English (British)",
+                    Value = "1",
+                    Selected = true
+                },
+                new SelectListItem
+                {
+                    Text = "German",
+                    Value = "2"
+                },
+                new SelectListItem
+                {
+                    Text = "French",
+                    Value = "3"
+                }
+            };
+
+            return languages;
+        }
     }
 }

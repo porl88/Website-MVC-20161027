@@ -1,12 +1,16 @@
-﻿@model Services.Article.Transfer.ArticleDto
+﻿@model MVC.WebUI.Models.Article.ArticleDetailsViewModel
 @{
-	ViewBag.Title = Model.Title;
+    ViewBag.Title = "Article";
 }
 
-@Html.Partial("_Breadcrumb")
-
-<article itemscope="itemscope" itemtype="http://schema.org/Article">
-	<h1 itemprop="name">@Model.Title</h1>
-	@Html.Raw(Model.Content)
+<article>
+    <header>
+        <h1>@Model.Article.Title</h1>
+        <dl>
+            <dt>Last updated</dt>
+            <dd>@Model.Article.LastUpdated.ToString("dd MMMM yyyy")</dd>
+        </dl>
+    </header>
+    @Html.Raw(Model.Article.Content)
 </article>
 

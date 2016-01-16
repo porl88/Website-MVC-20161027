@@ -2,5 +2,6 @@
 {
     public class DeleteArticleRequest
     {
+        public int ArticleId { get; set; }
     }
 }

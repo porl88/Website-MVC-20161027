@@ -1,29 +1,22 @@
 ﻿namespace MVC.Services.Article
 {
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
-	using Services.Article.Transfer;
+    using System.Threading.Tasks;
+    using Article.Transfer;
 
-	public interface IArticleService
+    public interface IArticleService
 	{
-		GetArticleResponse GetArticle(GetArticleRequest request);
+        Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request);
 
         Task<GetArticleResponse> GetArticleAsync(GetArticleRequest request);
 
-        GetArticlesResponse GetArticles(GetArticlesRequest request = null);
+        Task<GetArticlesResponse> GetEditArticlesAsync(GetArticlesRequest request);
 
-        Task<GetArticlesResponse> GetArticlesAsync(GetArticlesRequest request = null);
+        Task<EditArticleResponse> GetEditArticleAsync(GetArticleRequest request);
 
-        EditArticleResponse AddArticle(EditArticleRequest request);
+        Task<EditArticleResponse> AddArticleAsync(ArticleEditDto article);
 
-        Task<EditArticleResponse> AddArticleAsync(EditArticleRequest request);
+        Task<EditArticleResponse> UpdateArticleAsync(ArticleEditDto article);
 
-        EditArticleResponse UpdateArticle(EditArticleRequest request);
-
-        Task<EditArticleResponse> UpdateArticleAsync(EditArticleRequest request);
-
-        EditArticleResponse DeleteArticle(int id);
-
-        Task<EditArticleResponse> DeleteArticleAsync(int id);
+        Task<DeleteArticleResponse> DeleteArticleAsync(DeleteArticleRequest request);
     }
 }

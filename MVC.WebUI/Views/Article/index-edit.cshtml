@@ -1,47 +1,47 @@
-﻿@using Services.Article.Transfer
-@model List<ArticleSummaryDto>
+﻿@model MVC.WebUI.Models.Article.ArticleIndexViewModel
 @{
-	ViewBag.Title = "Articles";
+    ViewBag.Title = "Articles";
 }
 
 <section>
 
-	<h1>Articles</h1>
+    <h1>Articles</h1>
 
-	@if (TempData["SuccessMessage"] != null)
-	{
-		<section class="alert success">
-			<p>@TempData["SuccessMessage"]</p>
-		</section>
-	}
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <section class="alert success">
+            <p>@TempData["SuccessMessage"]</p>
+        </section>
+    }
 
-	@if (TempData["FailureMessage"] != null)
-	{
-		<section class="alert error">
-			<p>@TempData["FailureMessage"]</p>
-		</section>
-	}
+    @if (TempData["FailureMessage"] != null)
+    {
+        <section class="alert error">
+            <p>@TempData["FailureMessage"]</p>
+        </section>
+    }
 
-	@Html.ActionLink("Add new article", "Add")
+    @Html.ActionLink("Add new article", "Create")
 
-	@if (Model != null && Model.Any())
-	{
-		<form action="@Url.Action("Delete")" method="post">
-			@Html.AntiForgeryToken()
-			<ol>
-				@foreach (var article in Model)
-				{
-					<li>
-						<article>
-							<h2>@Html.ActionLink(article.Title, "Details", new { id = article.Id })</h2>
-							<p>@article.Summary</p>
-						</article>
-						@Html.ActionLink("Edit", "Edit", new { id = article.Id })
-						<button name="id" value="@article.Id">Delete</button>
-					</li>
-				}
-			</ol>
-		</form>
-	}
+    @*@Html.DropDownListFor(m => m.Article.LanguageId, Model.Languages)*@
+
+    @if (Model.Articles != null && Model.Articles.Any())
+    {
+        <form action="@Url.Action("Delete")" method="post">
+            @Html.AntiForgeryToken()
+            <ol>
+                @foreach (var article in Model.Articles)
+                {
+                    <li>
+                        <article>
+                            <h2>@Html.ActionLink(article.Title, "Edit", new { id = article.Id })</h2>
+                            @Html.ActionLink("Edit", "Edit", new { id = article.Id })
+                            <button name="id" value="@article.Id">Delete</button>
+                        </article>
+                    </li>
+                }
+            </ol>
+        </form>
+    }
 
 </section>

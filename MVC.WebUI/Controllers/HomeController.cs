@@ -1,12 +1,8 @@
 ﻿namespace MVC.WebUI.Controllers
 {
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.Data.EntityFramework;
-    using Core.Entities.Article;
-    using Core.Entities.Website;
-    using Models;
+    using Models.Home;
     using Services.Page;
 
     public class HomeController : Controller

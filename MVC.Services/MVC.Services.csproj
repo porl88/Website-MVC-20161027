@@ -47,6 +47,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,9 +66,10 @@
     <Compile Include="Article\ArticleService.cs" />
     <Compile Include="Article\IArticleService.cs" />
     <Compile Include="Article\Transfer\ArticleDto.cs" />
+    <Compile Include="Article\Transfer\ArticleEditDto.cs" />
     <Compile Include="Article\Transfer\ArticleSummaryDto.cs" />
     <Compile Include="Article\Transfer\DeleteArticleRequest.cs" />
-    <Compile Include="Article\Transfer\EditArticleRequest.cs" />
+    <Compile Include="Article\Transfer\DeleteArticleResponse.cs" />
     <Compile Include="Article\Transfer\EditArticleResponse.cs" />
     <Compile Include="Article\Transfer\GetArticleRequest.cs" />
     <Compile Include="Article\Transfer\GetArticleResponse.cs" />

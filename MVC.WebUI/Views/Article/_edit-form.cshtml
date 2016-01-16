@@ -1,0 +1,16 @@
+﻿@model MVC.WebUI.Models.Article.ArticleEditViewModel
+
+<ol>
+    <li>
+        @Html.LabelFor(m => m.Article.Title)
+        @Html.TextBoxFor(m => m.Article.Title)
+    </li>
+    <li>
+        @Html.LabelFor(m => m.Article.Content)
+        @Html.TextAreaFor(m => m.Article.Content)
+    </li>
+    <li>
+        @Html.LabelFor(m => m.Article.Publish)
+        @Html.CheckBoxFor(m => m.Article.Publish)
+    </li>
+</ol>

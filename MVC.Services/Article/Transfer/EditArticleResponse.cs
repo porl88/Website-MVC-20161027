@@ -2,6 +2,6 @@
 {
 	public class EditArticleResponse : BaseResponse
 	{
-        public ArticleDto Article { get; set; }
-    }
+        public ArticleEditDto Article { get; set; }
+	}
 }

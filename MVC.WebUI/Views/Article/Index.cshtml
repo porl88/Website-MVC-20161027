@@ -1,25 +1,24 @@
-﻿@model List<Services.Article.Transfer.ArticleSummaryDto>
+﻿@model MVC.WebUI.Models.Article.ArticleIndexViewModel
 @{
-	ViewBag.Title = "Articles";
+    ViewBag.Title = "Articles";
 }
 
 <section>
 
-	<h1>Articles</h1>
+    <h1>Articles</h1>
 
-	@if (Model != null && Model.Any())
-	{
-		<ol>
-			@foreach (var article in Model)
-			{
-				<li>
-					<article itemscope="itemscope" itemtype="http://schema.org/Article">
-						<h2 itemprop="name">@Html.ActionLink(article.Title, "Details", new { id = article.Id })</h2>
-						<p itemprop="description">@article.Summary</p>
-					</article>
-				</li>
-			}
-		</ol>
-	}
+    @if (Model.Articles != null && Model.Articles.Any())
+    {
+        <ol>
+            @foreach (var article in Model.Articles)
+            {
+                <li>
+                    <article itemscope="itemscope" itemtype="http://schema.org/Article">
+                        <h2 itemprop="name">@Html.ActionLink(article.Title, "Details", new { id = article.Id })</h2>
+                    </article>
+                </li>
+            }
+        </ol>
+    }
 
 </section>

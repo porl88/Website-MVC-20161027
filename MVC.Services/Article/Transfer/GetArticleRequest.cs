@@ -4,11 +4,12 @@
     {
         public GetArticleRequest()
         {
-            this.LanguageCode = "en-gb";
+            this.LanguageId = 1;
         }
 
         public int ArticleId { get; set; }
 
-        public string LanguageCode { get; set; }
+        public int LanguageId { get; set; }
     }
 }
+
