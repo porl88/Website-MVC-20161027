@@ -1,4 +1,4 @@
-﻿namespace MVC.Services.Country
+﻿namespace MVC.Services.Location
 {
     using System.Collections.Generic;
 	using MVC.Core.Entities.Location;

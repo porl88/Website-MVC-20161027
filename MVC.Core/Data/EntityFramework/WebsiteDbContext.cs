@@ -19,6 +19,8 @@
 
         public DbSet<Language> Languages { get; set; }
 
+        public DbSet<LanguageVersion> LanguageVersions { get; set; }
+
         public DbSet<Page> Pages { get; set; }
 
         public DbSet<PageVersion> PageVersions { get; set; }

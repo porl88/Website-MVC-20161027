@@ -76,12 +76,17 @@
     <Compile Include="Article\Transfer\GetArticlesRequest.cs" />
     <Compile Include="Article\Transfer\GetArticlesResponse.cs" />
     <Compile Include="BaseResponse.cs" />
-    <Compile Include="Country\ICountryService.cs" />
+    <Compile Include="Culture\LanguageService.cs" />
+    <Compile Include="Culture\Transfer\GetLanguagesRequest.cs" />
+    <Compile Include="Culture\Transfer\GetLanguagesResponse.cs" />
+    <Compile Include="Culture\Transfer\LanguageDto.cs" />
+    <Compile Include="Location\ICountryService.cs" />
     <Compile Include="Crawler\CrawlerService.cs" />
     <Compile Include="Crawler\ICrawlerService.cs" />
     <Compile Include="Crawler\Transfer\CheckLinksRequest.cs" />
     <Compile Include="Crawler\Transfer\CheckLinksResponse.cs" />
     <Compile Include="Crawler\Transfer\PageLinkDto.cs" />
+    <Compile Include="Culture\ILanguageService.cs" />
     <Compile Include="HTMLTemplate\HtmlTemplate.cs" />
     <Compile Include="HTMLTemplate\IHtmlTemplate.cs" />
     <Compile Include="Image\IImageService.cs" />
@@ -106,6 +111,8 @@
     <Compile Include="Shop\IBasketService.cs" />
     <Compile Include="Shop\IOrderService.cs" />
     <Compile Include="Shop\IPaymentService.cs" />
+    <Compile Include="Storage\GlobalCookiePersistenceService.cs" />
+    <Compile Include="Storage\IPersistenceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Caching\" />

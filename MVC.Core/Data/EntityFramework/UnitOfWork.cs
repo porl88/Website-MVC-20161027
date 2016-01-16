@@ -12,6 +12,7 @@
 		private readonly IRepository<Article> articleRepository;
         private readonly IRepository<ArticleVersion> articleVersionRepository;
         private readonly IRepository<Language> languageRepository;
+        private readonly IRepository<LanguageVersion> languageVersionRepository;
         private readonly IRepository<Page> pageRepository;
         private readonly IRepository<PageVersion> pageVersionRepository;
         private readonly IRepository<PlainText> plainTextRepository;
@@ -24,6 +25,7 @@
             this.articleRepository = new Repository<Article>(this.context);
             this.articleVersionRepository = new Repository<ArticleVersion>(this.context);
             this.languageRepository = new Repository<Language>(this.context);
+            this.languageVersionRepository = new Repository<LanguageVersion>(this.context);
             this.pageRepository = new Repository<Page>(this.context);
             this.pageVersionRepository = new Repository<PageVersion>(this.context);
             this.plainTextRepository = new Repository<PlainText>(this.context);
@@ -43,6 +45,11 @@
         public IRepository<Language> LanguageRepository
         {
             get { return this.languageRepository; }
+        }
+
+        public IRepository<LanguageVersion> LanguageVersionRepository
+        {
+            get { return this.languageVersionRepository; }
         }
 
         public IRepository<Page> PageRepository

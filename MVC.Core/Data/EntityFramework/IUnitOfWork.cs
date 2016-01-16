@@ -4,12 +4,17 @@
     using Core.Entities.Article;
     using Entities.Website;
     using Entities.Website.PageItem;
+    using Entities.Culture;
 
     public interface IUnitOfWork
 	{
 		IRepository<Article> ArticleRepository { get; }
 
         IRepository<ArticleVersion> ArticleVersionRepository { get; }
+
+        IRepository<Language> LanguageRepository { get; }
+
+        IRepository<LanguageVersion> LanguageVersionRepository { get; }
 
         IRepository<Page> PageRepository { get; }
 

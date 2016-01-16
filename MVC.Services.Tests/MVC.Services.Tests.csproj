@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Article\ArticleServiceTests.cs" />
+    <Compile Include="Culture\LanguageServiceTests.cs" />
     <Compile Include="Page\PageServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
