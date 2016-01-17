@@ -248,7 +248,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\js\jquery\" />
     <Folder Include="Content\js\modernizr\" />
-    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MVC.Core\MVC.Core.csproj">

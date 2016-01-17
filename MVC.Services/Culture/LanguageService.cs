@@ -28,8 +28,8 @@
 
         public int GetPreferredLanguage()
         {
-            return 4;
-            return Convert.ToInt32(this.persistenceService.GetValue("lang"));
+            var languageId = this.persistenceService.GetValue("lang") ?? "1";
+            return Convert.ToInt32(languageId);
         }
 
         public void SetPreferredLanguage(int languageId)

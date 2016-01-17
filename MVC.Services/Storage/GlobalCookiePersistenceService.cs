@@ -27,6 +27,7 @@
                 cookie = this.CreateCookie();
             }
 
+            cookie.Values.Remove(key);
             cookie.Values.Add(key, value);
 
             this.context.Response.Cookies.Add(cookie);
@@ -56,7 +57,6 @@
         {
             var cookie = new HttpCookie(cookieName);
             cookie.HttpOnly = true;
-            cookie.Domain = this.context?.Request.Url.DnsSafeHost;
             cookie.Expires = DateTime.Now.AddMonths(1);
             return cookie;
         }

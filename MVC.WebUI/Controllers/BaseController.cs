@@ -49,6 +49,8 @@
                 LanguageId = model.LanguageId
             };
 
+            this.languageService.SetPreferredLanguage(model.LanguageId);
+
             var response = this.languageService.GetLanguages(request);
 
             model.Languages = response.Languages.Select(x => new SelectListItem

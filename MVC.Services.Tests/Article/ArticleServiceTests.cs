@@ -369,7 +369,6 @@
                 Updated = now
             });
 
-
             unitOfWork.ArticleRepository.Insert(new Article
             {
                 Id = 1,
