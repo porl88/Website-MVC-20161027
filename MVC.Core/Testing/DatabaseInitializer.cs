@@ -75,42 +75,11 @@
             context.Languages.Add(new Language
             {
                 Id = 1,
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    new LanguageVersion
-                    {
-                        Id = 1,
-                        LanguageId = 1,
-                        Language = 1,
-                        Name = "English",
-                        Dialect = "British"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 2,
-                        LanguageId = 1,
-                        Language = 2,
-                        Name = "Anglais",
-                        Dialect = "Britannique"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 3,
-                        LanguageId = 1,
-                        Language = 3,
-                        Name = "Englisch",
-                        Dialect = "Britisch"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 4,
-                        LanguageId = 1,
-                        Language = 4,
-                        Name = "Inglés",
-                        Dialect = "British"
-                    }
-                },
                 LanguageCode = "en-gb",
+                Name = "English",
+                DialectName = "British",
+                LocalName = "English",
+                LocalDialectName = "British",
                 Created = now,
                 Updated = now
             });
@@ -118,38 +87,9 @@
             context.Languages.Add(new Language
             {
                 Id = 2,
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    new LanguageVersion
-                    {
-                        Id = 5,
-                        LanguageId = 2,
-                        Language = 1,
-                        Name = "French"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 6,
-                        LanguageId = 2,
-                        Language = 2,
-                        Name = "Français"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 7,
-                        LanguageId = 2,
-                        Language = 3,
-                        Name = "Französisch"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 8,
-                        LanguageId = 2,
-                        Language = 4,
-                        Name = "Francés"
-                    }
-                },
                 LanguageCode = "fr-fr",
+                Name = "French",
+                LocalName = "Français",
                 Created = now,
                 Updated = now
             });
@@ -157,38 +97,9 @@
             context.Languages.Add(new Language
             {
                 Id = 3,
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    new LanguageVersion
-                    {
-                        Id = 9,
-                        LanguageId = 3,
-                        Language = 1,
-                        Name = "German"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 10,
-                        LanguageId = 3,
-                        Language = 2,
-                        Name = "Allemand"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 11,
-                        LanguageId = 3,
-                        Language = 3,
-                        Name = "Deutsche"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 12,
-                        LanguageId = 3,
-                        Language = 4,
-                        Name = "Alemán"
-                    }
-                },
                 LanguageCode = "de-de",
+                Name = "German",
+                LocalName = "Deutsche",
                 Created = now,
                 Updated = now
             });
@@ -196,38 +107,9 @@
             context.Languages.Add(new Language
             {
                 Id = 4,
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    new LanguageVersion
-                    {
-                        Id = 13,
-                        LanguageId = 4,
-                        Language = 1,
-                        Name = "Spanish"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 14,
-                        LanguageId = 4,
-                        Language = 2,
-                        Name = "Espagnol"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 15,
-                        LanguageId = 4,
-                        Language = 3,
-                        Name = "Spanisch"
-                    },
-                    new LanguageVersion
-                    {
-                        Id = 16,
-                        LanguageId = 4,
-                        Language = 4,
-                        Name = "Español"
-                    }
-                },
                 LanguageCode = "es-es",
+                Name = "Spanish",
+                LocalName = "Español",
                 Created = now,
                 Updated = now
             });

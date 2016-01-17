@@ -256,39 +256,10 @@
             {
                 Id = 1,
                 LanguageCode = "en-gb",
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 1,
-                        LanguageId = 1,
-                        Language = 1,
-                        Name = "English",
-                        Dialect = "British",
-                        Created = now,
-                        Updated = now
-                    }),
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 2,
-                        LanguageId = 1,
-                        Language = 2,
-                        Name = "Englisch",
-                        Dialect = "Britisches",
-                        Created = now,
-                        Updated = now
-                    }),
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 3,
-                        LanguageId = 1,
-                        Language = 3,
-                        Name = "Anglais",
-                        Dialect = "Britannique",
-                        Created = now,
-                        Updated = now
-                    })
-                },
+                Name = "English",
+                DialectName = "British",
+                LocalName = "English",
+                LocalDialectName = "British",
                 Created = now,
                 Updated = now
             });
@@ -297,36 +268,8 @@
             {
                 Id = 2,
                 LanguageCode = "de-de",
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 4,
-                        LanguageId = 2,
-                        Language = 1,
-                        Name = "German",
-                        Created = now,
-                        Updated = now
-                    }),
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 5,
-                        LanguageId = 2,
-                        Language = 2,
-                        Name = "Deutsche",
-                        Created = now,
-                        Updated = now
-                    }),
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 6,
-                        LanguageId = 2,
-                        Language = 3,
-                        Name = "Allemand",
-                        Created = now,
-                        Updated = now
-                    })
-                },
+                Name = "German",
+                LocalName = "Deutsche",
                 Created = now,
                 Updated = now
             });
@@ -335,36 +278,8 @@
             {
                 Id = 3,
                 LanguageCode = "fr-fr",
-                LanguageVersions = new List<LanguageVersion>
-                {
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 7,
-                        LanguageId = 3,
-                        Language = 1,
-                        Name = "French",
-                        Created = now,
-                        Updated = now
-                    }),
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 8,
-                        LanguageId = 3,
-                        Language = 2,
-                        Name = "Französisch",
-                        Created = now,
-                        Updated = now
-                    }),
-                    unitOfWork.LanguageVersionRepository.Insert(new LanguageVersion
-                    {
-                        Id = 9,
-                        LanguageId = 3,
-                        Language = 3,
-                        Name = "Francais",
-                        Created = now,
-                        Updated = now
-                    })
-                },
+                Name = "French",
+                LocalName = "Francais",
                 Created = now,
                 Updated = now
             });

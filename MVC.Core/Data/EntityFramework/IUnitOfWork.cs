@@ -14,8 +14,6 @@
 
         IRepository<Language> LanguageRepository { get; }
 
-        IRepository<LanguageVersion> LanguageVersionRepository { get; }
-
         IRepository<Page> PageRepository { get; }
 
         IRepository<PageVersion> PageVersionRepository { get; }

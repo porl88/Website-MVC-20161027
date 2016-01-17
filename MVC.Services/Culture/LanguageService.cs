@@ -43,13 +43,12 @@
 
             try
             {
-                response.Languages = this.unitOfWork.LanguageVersionRepository.Get(q => q
-                    .Where(x => x.Language == request.LanguageId)
-                    .OrderBy(x => x.Name)
+                response.Languages = this.unitOfWork.LanguageRepository.Get(q => q
+                    .OrderBy(x => x.LocalName)
                     .Select(x => new LanguageDto
                     {
-                        Id = x.LanguageId,
-                        Name = x.Name
+                        Id = x.Id,
+                        Name = x.LocalName
                     })
                 );
 
@@ -70,13 +69,12 @@
 
             try
             {
-                response.Languages = await this.unitOfWork.LanguageVersionRepository.GetAsync(q => q
-                    .Where(x => x.Language == request.LanguageId)
-                    .OrderBy(x => x.Name)
+                response.Languages = await this.unitOfWork.LanguageRepository.GetAsync(q => q
+                    .OrderBy(x => x.LocalName)
                     .Select(x => new LanguageDto
                     {
-                        Id = x.LanguageId,
-                        Name = x.Name
+                        Id = x.Id,
+                        Name = x.LocalName
                     })
                 );
 
