@@ -13,8 +13,10 @@
 
 		private string subject;
 
+        public string EmailPattern { get; set; }
+
 		[Display(Name = "Your First Name")]
-		[Required, MaxLength(30), RegularExpression(RegularExpressions.Name, ErrorMessage = "'{0}' must be a valid name.")]
+		[Required, MaxLength(30), RegularExpression(RegularExpressions.Name, ErrorMessage = "'{0}' must be a valid name. (Numbers and special characters not allowed).")]
 		public string FirstName
 		{
 			get

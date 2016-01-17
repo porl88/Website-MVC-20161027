@@ -24,7 +24,7 @@
         [ChildActionOnly]
         public PartialViewResult Email()
         {
-			return this.PartialView();
+            return this.PartialView();
         }
 
         // POST: /contact/email

@@ -189,6 +189,14 @@ abbr[title] {
   cursor: help;
 }
 
+@supports (text-decoration-style: dotted) {
+  abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+}
+
 /* definition - marks the first occurrence of a term */
 dfn::before {
   content: open-quote;
@@ -345,6 +353,7 @@ Embedded OpenType (.eot) supported by Internet Explorer 4+
 */
 /*
 http://www.fontspring.com/blog/the-new-bulletproof-font-face-syntax
+https://css-tricks.com/snippets/css/using-font-face/
 */
 @font-face {
   font-family: 'MyWebFont';
@@ -506,6 +515,11 @@ http://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/
 /************************************************************************************************************************************************************************************/
 /* BREADCRUMBS */
 /************************************************************************************************************************************************************************************/
+.breadcrumb {
+  padding: 0.4rem 0;
+  text-transform: capitalize;
+}
+
 .breadcrumb li {
   display: inline-block;
 }

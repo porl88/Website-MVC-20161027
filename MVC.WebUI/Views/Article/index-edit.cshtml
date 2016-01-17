@@ -23,8 +23,6 @@
 
     @Html.ActionLink("Add new article", "Create")
 
-    @*@Html.DropDownListFor(m => m.Article.LanguageId, Model.Languages)*@
-
     @if (Model.Articles != null && Model.Articles.Any())
     {
         <form action="@Url.Action("Delete")" method="post">
@@ -34,7 +32,7 @@
                 {
                     <li>
                         <article>
-                            <h2>@Html.ActionLink(article.Title, "Edit", new { id = article.Id })</h2>
+                            <h2>@Html.ActionLink(article.Title, "Details", new { id = article.Id })</h2>
                             @Html.ActionLink("Edit", "Edit", new { id = article.Id })
                             <button name="id" value="@article.Id">Delete</button>
                         </article>

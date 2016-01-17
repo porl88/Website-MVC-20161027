@@ -4,13 +4,35 @@
     {
         public const string Email = @"^(?!.{256})[a-zA-Z\d!#\$%&'\*\+\-/=\?\^_`\{\|}~]+(\.[a-zA-Z\d!#\$%&'\*\+\-/=\?\^_`\{\|}~]+)*@[a-zA-Z\d]+([\.\-][a-zA-Z\d]+)*(\.[a-zA-Z]{2,})$";
 
+        public static string EmailPattern
+        {
+            get
+            {
+                return $" *{RegularExpressions.Email.TrimStart('^').TrimEnd('$')} *";
+            }
+        }
+
         public const string UkPostCode = @"^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$";
 
-        public const string Name = @"^[a-zA-Z '-]+$";
+        public const string Name = @"^(?=(.*\w{2}))[a-zA-Z '-]+$"; // must contain at least 2 consecutive letters
+
+        public static string NamePattern
+        {
+            get
+            {
+                return Name.TrimStart('^').TrimEnd('$');
+            }
+        }
 
         public const string DomainName = @"^(https?://\.)?(www\.)?(?!www\.)[a-z0-9-]+(\.[a-z]+)+$";
 
-        public const string Uri = @"^(https?://\.)?(www\.)?(?!www\.)[a-z0-9-]+(\.[a-z]+)+(/[\w-])*(\?[^ ]*)+$";
+        public static string Uri
+        {
+            get
+            {
+                return $@"{DomainName.TrimEnd('$')}(/[\w-])*(\?[^ ]*)+$";
+            }
+        }
 
         public const string PasswordWeak = @"^\S{8,}$"; // min 8 characters, no white space characters
 

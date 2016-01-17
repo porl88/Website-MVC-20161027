@@ -5,7 +5,7 @@
 
 <form action="@Url.Action("Create")" method="post">
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    @Html.ValidationSummary(false)
 
     <h1>Add New Article</h1>
 

@@ -1,5 +1,5 @@
-﻿@model WebUI.Models.EmailViewModel
-@using Domain.Helpers
+﻿@model MVC.WebUI.Models.Shared.EmailViewModel
+@using MVC.Core.Configuration
 
 <form action="#email" method="post">
 	@Html.AntiForgeryToken()
@@ -8,17 +8,17 @@
 		<ol>
 			<li>
 				@Html.LabelFor(m => m.FirstName)
-				@Html.TextBoxFor(m => m.FirstName, new { maxlength = "30", required = "required", pattern = string.Format(" *{0} *", RegexHelper.Name), title = "You need to enter a valid name" })
+				@Html.TextBoxFor(m => m.FirstName, new { maxlength = "30", required = "required", pattern = RegularExpressions.NamePattern, title = "You need to enter a valid name" })
 				@Html.ValidationMessageFor(m => m.FirstName)
 			</li>
 			<li>
 				@Html.LabelFor(m => m.LastName)
-				@Html.TextBoxFor(m => m.LastName, new { maxlength = "30", required = "required", pattern = string.Format(" *{0} *", RegexHelper.Name), title = "You need to enter a valid name" })
+				@Html.TextBoxFor(m => m.LastName, new { maxlength = "30", required = "required", pattern = RegularExpressions.NamePattern, title = "You need to enter a valid name" })
 				@Html.ValidationMessageFor(m => m.LastName)
 			</li>
 			<li>
 				@Html.LabelFor(m => m.Email)
-				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = string.Format(" *{0} *", RegexHelper.Email), title = "You need to enter a valid email address" })
+				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = RegularExpressions.EmailPattern, title = "You need to enter a valid email address" })
 				@Html.ValidationMessageFor(m => m.Email)
 			</li>
 			<li>

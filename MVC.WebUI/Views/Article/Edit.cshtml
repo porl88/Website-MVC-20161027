@@ -3,9 +3,14 @@
     ViewBag.Title = "Edit Article";
 }
 
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Articles", "Index", "Article")</li>
+</ol>
+
 <form action="@Url.Action("Edit")" method="post">
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    @Html.ValidationSummary(false)
 
     <h1>Edit Article</h1>
 
