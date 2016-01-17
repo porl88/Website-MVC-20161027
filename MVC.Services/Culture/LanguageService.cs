@@ -44,6 +44,7 @@
             try
             {
                 response.Languages = this.unitOfWork.LanguageRepository.Get(q => q
+                    .Where(x => x.Deactivated == false)
                     .OrderBy(x => x.LocalName)
                     .Select(x => new LanguageDto
                     {
@@ -70,6 +71,7 @@
             try
             {
                 response.Languages = await this.unitOfWork.LanguageRepository.GetAsync(q => q
+                    .Where(x => x.Deactivated == false)
                     .OrderBy(x => x.LocalName)
                     .Select(x => new LanguageDto
                     {

@@ -120,6 +120,17 @@
                 Updated = now
             });
 
+            unitOfWork.LanguageRepository.Insert(new Language
+            {
+                Id = 4,
+                LanguageCode = "es-es",
+                Name = "Spanish",
+                LocalName = "Español",
+                Deactivated = true,
+                Created = now,
+                Updated = now
+            });
+
             return unitOfWork;
         }
     }

@@ -1,6 +1,5 @@
 ﻿namespace MVC.Core.Entities.Culture
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Language : BaseEntity
@@ -18,5 +17,7 @@
         public string LocalName { get; set; }
 
         public string LocalDialectName { get; set; }
+
+        public bool Deactivated { get; set; }
     }
 }

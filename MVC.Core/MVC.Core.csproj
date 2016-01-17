@@ -68,7 +68,6 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Culture\Currency.cs" />
     <Compile Include="Entities\Culture\Language.cs" />
-    <Compile Include="Entities\Culture\LanguageVersion.cs" />
     <Compile Include="Entities\Location\Address.cs" />
     <Compile Include="Entities\Location\Country.cs" />
     <Compile Include="Entities\Media\ImageData.cs" />

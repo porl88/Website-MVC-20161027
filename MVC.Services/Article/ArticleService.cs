@@ -188,7 +188,7 @@
                 response.Article = new ArticleEditDto
                 {
                     ArticleId = add.Id,
-                    ArticleVersionId = addVersion.Id,
+                    ArticleVersionId = addVersion.ArticleId,
                     Title = addVersion.Title,
                     Content = addVersion.Content
                 };
