@@ -1,9 +1,13 @@
-﻿@{
+﻿@using MVC.WebUI.Helpers
+
+@{
     ViewBag.Title = "Contact";
 }
 
+@Html.Breadcrumb()
+
 <article>
     <h1>Contact</h1>
-    @Html.Action("Email")
+    @Html.Action("_Email")
 </article>
 
