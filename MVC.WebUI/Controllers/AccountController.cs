@@ -3,9 +3,12 @@
     using System;
     using System.Web.Mvc;
     using MVC.Services.Account;
+    using Services.Account.Transfer;
     using MVC.Services.Message;
     using MVC.WebUI.Attributes;
     using MVC.WebUI.Models.Account;
+    using Core.Configuration;
+    using Services;
 
     [Authorize]
 	public class AccountController : Controller
@@ -49,13 +52,37 @@
 		{
 			if (ModelState.IsValid)
 			{
-				var activateAccountToken = this.accountService.CreateAccount(model.UserName, model.Password, model.Email);
-				this.messageService.SendMessage(new MessageRequest
-				{
-					ToAddress = model.Email,
-					Subject = "Please confirm your account with ",// + WebsiteConfig.WebsiteUrl,
-					Message = string.Empty
-				});
+                var request = new CreateAccountRequest
+                {
+                    UserName = model.UserName,
+                    Password = model.Password,
+                    Email = model.Email
+                };
+
+				var response = this.accountService.CreateAccount(request);
+
+                if (response.Status == ResponseStatus.OK)
+                {
+                    // sent out activation token
+                    // redirect to login page
+                    // display success message
+
+                    //    var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                    //    var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    //    authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
+                    //    Response.Redirect("~/Login.aspx");
+
+                    this.messageService.SendMessage(new MessageRequest
+                    {
+                        ToAddress = model.Email,
+                        Subject = "Please confirm your account with " + WebsiteConfig.WebsiteUrl,
+                        Message = string.Empty
+                    });
+                }
+                else
+                {
+                    this.ModelState.AddModelError(string.Empty, "Your account was not created for the following reason(s): " + response.Message);
+                }
 			}
 
 			return this.View();

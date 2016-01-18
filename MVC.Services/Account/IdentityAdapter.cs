@@ -8,13 +8,25 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Core.Entities.Account;
+    using Core.Data.EntityFramework;
+    using Transfer;
+    using Core.Exceptions;
+    using System.Web;
 
     public class IdentityAdapter : ILoginService, IAccountService
     {
+        private readonly IExceptionHandler exceptionHandler;
+
+        public IdentityAdapter(IExceptionHandler exceptionHandler)
+        {
+            this.exceptionHandler = exceptionHandler;
+        }
+
         public bool IsAuthenticated
         {
             get
             {
+                return false;
                 //var userStore = new UserStore<IdentityUser>();
                 throw new NotImplementedException();
             }
@@ -30,32 +42,47 @@
             throw new NotImplementedException();
         }
 
-        public string CreateAccount(string email, string password)
+        public CreateAccountResponse CreateAccount(CreateAccountRequest request)
         {
-            return this.CreateAccount(email, password, email);
-        }
+            var response = new CreateAccountResponse();
 
-        public string CreateAccount(string userName, string password, string email)
-        {
-            //// Default UserStore constructor uses the default connection string named: DefaultConnection
-            //var userStore = new UserStore<IdentityUser>();
-            //var manager = new UserManager<IdentityUser>(userStore);
-            //var user = new IdentityUser() { UserName = UserName.Text };
+            try
+            {
+                using (var context = new WebsiteDbContext())
+                {
+                    using (var userStore = new UserStore<IdentityUser>(context))
+                    {
+                        using (var manager = new UserManager<IdentityUser>(userStore))
+                        {
+                            var user = new IdentityUser
+                            {
+                                UserName = request.UserName,
+                                Email = request.Email
+                            };
 
-            //IdentityResult result = manager.Create(user, Password.Text);
+                            var result = manager.Create(user, request.Password);
 
-            //if (result.Succeeded)
-            //{
-            //    var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-            //    var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-            //    authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
-            //    Response.Redirect("~/Login.aspx");
-            //}
-            //else
-            //{
-            //    StatusMessage.Text = result.Errors.FirstOrDefault();
-            //}
-            throw new NotImplementedException();
+                            if (result.Succeeded)
+                            {
+                                response.ActivateAccountToken = "??? not here???";
+                                response.Status = ResponseStatus.OK;
+                            }
+                            else
+                            {
+                                response.Status = ResponseStatus.BadRequest;
+                                response.Message = string.Join(". ", result.Errors);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Status = ResponseStatus.SystemError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
         }
 
         public void DeleteAccount(string userName)
@@ -77,6 +104,7 @@
                     var user = userManager.Find(userName, password);
                     if (user != null)
                     {
+                        //var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
                         return true;
                     }
                 }

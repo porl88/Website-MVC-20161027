@@ -1,13 +1,12 @@
 ﻿namespace MVC.Services.Account
 {
-	using System;
+    using System;
     using Core.Entities.Account;
+    using Transfer;
 
-	public interface IAccountService
+    public interface IAccountService
 	{
-		string CreateAccount(string email, string password);
-
-		string CreateAccount(string userName, string password, string email);
+        CreateAccountResponse CreateAccount(CreateAccountRequest request);
 
 		bool ActivateAccount(string activateAccountToken);
 

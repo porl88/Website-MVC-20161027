@@ -5,8 +5,9 @@
     using Entities.Website;
     using Entities.Website.PageItem;
     using Entities.Culture;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class WebsiteDbContext : DbContext
+    public class WebsiteDbContext : IdentityDbContext //DbContext
 	{
         public WebsiteDbContext()
         : base("WebsiteMvcDatabase") // connection string name

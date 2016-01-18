@@ -11,6 +11,8 @@
 	@using (Html.BeginForm())
 	{
 		@Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+
 		<ol>
 			<li>
 				@Html.LabelFor(m => m.UserName)
@@ -19,7 +21,7 @@
 			</li>
 			<li>
 				@Html.LabelFor(m => m.Email)
-				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = string.Format(" *{0} *", RegexHelper.Email), title = "You need to enter a valid email address" })
+				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = RegularExpressions.EmailPattern, title = "You need to enter a valid email address" })
 				@Html.ValidationMessageFor(m => m.Email)
 			</li>
 			<li>

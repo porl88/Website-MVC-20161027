@@ -72,6 +72,8 @@
     <Compile Include="Account\ILoginService.cs" />
     <Compile Include="Account\IRolesService.cs" />
     <Compile Include="Account\IUserService.cs" />
+    <Compile Include="Account\Transfer\CreateAccountRequest.cs" />
+    <Compile Include="Account\Transfer\CreateAccountResponse.cs" />
     <Compile Include="Article\ArticleService.cs" />
     <Compile Include="Article\IArticleService.cs" />
     <Compile Include="Article\Transfer\ArticleDto.cs" />

@@ -232,11 +232,11 @@
     <Content Include="Views\Account\change-password.cshtml" />
     <Content Include="Views\Account\index.cshtml" />
     <Content Include="Views\Account\login.cshtml" />
-    <Content Include="Views\Account\register.cshtml" />
+    <Content Include="Views\Account\create-account.cshtml" />
     <Content Include="Views\Account\request-password.cshtml" />
     <Content Include="Views\Account\reset-password.cshtml" />
     <Content Include="Views\Contact\email-confirm.cshtml" />
-    <Content Include="Views\Contact\email.cshtml" />
+    <Content Include="Views\Contact\_email.cshtml" />
     <Content Include="Views\Contact\index.cshtml" />
     <Content Include="Views\Shared\_languages.cshtml" />
     <Content Include="Views\Products\products.cshtml" />
