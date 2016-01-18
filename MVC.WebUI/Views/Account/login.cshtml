@@ -6,13 +6,16 @@
 
 <article>
 	<h1>Login</h1>
+
 	@if (TempData["SuccessMessage"] != null)
 	{
 		<section class="alert success">
 			<p>@TempData["SuccessMessage"]</p>
 		</section>
 	}
-    @Html.ValidationSummary()
+    
+    @Html.ValidationSummary(false)
+
 	@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
 	{
 		@Html.AntiForgeryToken()

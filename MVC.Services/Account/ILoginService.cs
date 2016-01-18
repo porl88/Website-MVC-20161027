@@ -1,12 +1,11 @@
 ﻿namespace MVC.Services.Account
 {
-	using System;
+    using System;
+    using Transfer;
 
-	public interface ILoginService
+    public interface ILoginService
 	{
-		bool LogIn(string userName, string password);
-
-		bool LogIn(string userName, string password, TimeSpan persistence);
+		bool LogIn(LogInRequest request);
 
 		void LogOut();
 

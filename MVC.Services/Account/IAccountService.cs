@@ -1,12 +1,13 @@
 ﻿namespace MVC.Services.Account
 {
     using System;
+    using System.Threading.Tasks;
     using Core.Entities.Account;
     using Transfer;
 
     public interface IAccountService
 	{
-        CreateAccountResponse CreateAccount(CreateAccountRequest request);
+        Task<CreateAccountResponse> CreateAccountAsync(CreateAccountRequest request);
 
 		bool ActivateAccount(string activateAccountToken);
 

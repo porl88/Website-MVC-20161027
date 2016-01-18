@@ -1,39 +1,44 @@
 ﻿namespace MVC.Services.Account
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
+    using System.Web;
+    using Core.Data.EntityFramework;
+    using Core.Entities.Account;
+    using Core.Exceptions;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Core.Entities.Account;
-    using Core.Data.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.DataProtection;
     using Transfer;
-    using Core.Exceptions;
-    using System.Web;
 
     public class IdentityAdapter : ILoginService, IAccountService
     {
         private readonly IExceptionHandler exceptionHandler;
+        private readonly IDataProtectionProvider protectionProvider;
+        private readonly IOwinContext context;
 
         public IdentityAdapter(IExceptionHandler exceptionHandler)
         {
             this.exceptionHandler = exceptionHandler;
+            this.protectionProvider = new DpapiDataProtectionProvider("WebsiteMVC");
+            this.context = HttpContext.Current.GetOwinContext();
         }
 
         public bool IsAuthenticated
         {
             get
             {
-                return false;
-                //var userStore = new UserStore<IdentityUser>();
-                throw new NotImplementedException();
+                return this.context.Authentication.User.Identity.IsAuthenticated;
             }
         }
 
         public bool ActivateAccount(string activateAccountToken)
         {
+            // http://bitoftech.net/2015/02/03/asp-net-identity-2-accounts-confirmation-password-user-policy-configuration/
+            // http://www.asp.net/identity/overview/features-api/account-confirmation-and-password-recovery-with-aspnet-identity
             throw new NotImplementedException();
         }
 
@@ -42,7 +47,7 @@
             throw new NotImplementedException();
         }
 
-        public CreateAccountResponse CreateAccount(CreateAccountRequest request)
+        public async Task<CreateAccountResponse> CreateAccountAsync(CreateAccountRequest request)
         {
             var response = new CreateAccountResponse();
 
@@ -52,7 +57,7 @@
                 {
                     using (var userStore = new UserStore<IdentityUser>(context))
                     {
-                        using (var manager = new UserManager<IdentityUser>(userStore))
+                        using (var userManager = new UserManager<IdentityUser>(userStore))
                         {
                             var user = new IdentityUser
                             {
@@ -60,11 +65,12 @@
                                 Email = request.Email
                             };
 
-                            var result = manager.Create(user, request.Password);
+                            var result = await userManager.CreateAsync(user, request.Password);
 
                             if (result.Succeeded)
                             {
-                                response.ActivateAccountToken = "??? not here???";
+                                userManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(this.protectionProvider.Create("EmailConfirmation"));
+                                response.ActivateAccountToken = await userManager.GenerateEmailConfirmationTokenAsync(user.Id);
                                 response.Status = ResponseStatus.OK;
                             }
                             else
@@ -132,17 +138,32 @@
             throw new NotImplementedException();
         }
 
-        public bool LogIn(string userName, string password, TimeSpan persistence)
+        public bool LogIn(LogInRequest request)
         {
+            //var user = await UserManager.FindAsync(model.UserName, model.Password);
+
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            //var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            //AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+
+            //var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            //var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+            //authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
+
+            var authenticationProperties = new AuthenticationProperties();
+
+            if (request.Persistence != null)
+            {
+                authenticationProperties.ExpiresUtc = DateTimeOffset.UtcNow.Add(request.Persistence);
+            }
+
+            this.context.Authentication.SignIn(authenticationProperties);
             throw new NotImplementedException();
         }
 
         public void LogOut()
         {
-            //var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-            //authenticationManager.SignOut();
-            //Response.Redirect("~/Login.aspx");
-            throw new NotImplementedException();
+            this.context.Authentication.SignOut();
         }
 
         public bool ResetPassword(string resetPasswordToken, string newPassword)

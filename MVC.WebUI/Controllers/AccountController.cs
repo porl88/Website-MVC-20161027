@@ -9,14 +9,14 @@
     using MVC.WebUI.Models.Account;
     using Core.Configuration;
     using Services;
+    using System.Threading.Tasks;
+    using System.Web;
 
     [Authorize]
 	public class AccountController : Controller
 	{
 		private readonly ILoginService loginService;
-
 		private readonly IAccountService accountService;
-
 		private readonly IMessageService messageService;
 
 		public AccountController(ILoginService loginService, IAccountService accountService, IMessageService messageService)
@@ -48,7 +48,7 @@
 		// POST: /account/create-account
 		[ActionName("create-account")]
 		[AllowAnonymous, HttpPost, ValidateAntiForgeryToken, ValidateHttpReferrer]
-		public ViewResult CreateAccount(RegisterViewModel model)
+		public async Task<ActionResult> CreateAccount(RegisterViewModel model)
 		{
 			if (ModelState.IsValid)
 			{
@@ -59,11 +59,12 @@
                     Email = model.Email
                 };
 
-				var response = this.accountService.CreateAccount(request);
+				var response = await this.accountService.CreateAccountAsync(request);
 
                 if (response.Status == ResponseStatus.OK)
                 {
-                    // sent out activation token
+                    // send out activation token in email - UrlEncode token
+                    // or log in automatically????
                     // redirect to login page
                     // display success message
 
@@ -76,8 +77,12 @@
                     {
                         ToAddress = model.Email,
                         Subject = "Please confirm your account with " + WebsiteConfig.WebsiteUrl,
-                        Message = string.Empty
+                        Message = HttpUtility.UrlEncode(response.ActivateAccountToken)
                     });
+
+                    TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
+
+                    return this.RedirectToAction("LogIn");
                 }
                 else
                 {
@@ -106,7 +111,13 @@
 		[HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
 		public ActionResult LogIn(LoginViewModel model, string returnUrl)
 		{
-			if (ModelState.IsValid && this.loginService.LogIn(model.UserName, model.Password))
+            var request = new LogInRequest
+            {
+                UserName = model.UserName,
+                Password = model.Password
+            };
+
+			if (ModelState.IsValid && this.loginService.LogIn(request))
 			{
                 return this.SecureRedirect(returnUrl);
 			}
@@ -120,9 +131,15 @@
 		[AllowAnonymous]
 		public RedirectToRouteResult LogOut()
 		{
+            // should be HttpPost ???
 			this.loginService.LogOut();
 			return this.RedirectToAction("Index", "Home");
-		}
+
+
+            TempData["SuccessMessage"] = "You have successfully logged out.";
+
+            return this.RedirectToAction("LogIn");
+        }
 
 		// GET: /account/change-password
 		[ActionName("change-password")]
