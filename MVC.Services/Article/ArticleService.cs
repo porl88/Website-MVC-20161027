@@ -273,9 +273,9 @@
                 var article = await this.articleRepository.GetAsync(request.ArticleId);
                 if (article != null)
                 {
+                    response.Title = article.ArticleVersions.FirstOrDefault(x => x.LanguageId == request.LanguageId)?.Title ?? article.ArticleVersions.FirstOrDefault(x => x.LanguageId == 1)?.Title;
                     this.articleRepository.Delete(article);
                     await this.unitOfWork.CommitAsync();
-                    //response.Title = article.Title;
                     response.Status = ResponseStatus.OK;
                 }
                 else

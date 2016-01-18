@@ -247,6 +247,20 @@
             Assert.AreEqual("Content", article.Content);
         }
 
+        [TestMethod]
+        public async Task EditArticleAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public async Task DeleteArticleAsync()
+        {
+            // check Title
+
+            throw new NotImplementedException();
+        }
+
         private MockUnitOfWork CreateMockUnitOfWork()
         {
             var unitOfWork = new MockUnitOfWork();
