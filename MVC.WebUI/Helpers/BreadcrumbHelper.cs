@@ -5,10 +5,12 @@
 
     public static class BreadcrumbHelper
     {
-        public static MvcHtmlString Breadcrumb(this HtmlHelper html)
+        public static MvcHtmlString Breadcrumb(this HtmlHelper html, string controllerName = null, string actionName = null)
         {
             var controller = html.ViewContext.RouteData.Values["controller"].ToString().ToLower();
             var action = html.ViewContext.RouteData.Values["action"].ToString().ToLower();
+            controllerName = controllerName ?? controller;
+            actionName = actionName ?? action;
 
             if (controller == "home" && action == "index")
             {
@@ -25,18 +27,18 @@
             var secondItem = new TagBuilder("li");
             if (action == "index")
             {
-                secondItem.SetInnerText(controller);
+                secondItem.SetInnerText(controllerName);
             }
             else
             {
-                secondItem.InnerHtml += html.ActionLink(controller, "Index", controller);
+                secondItem.InnerHtml += html.ActionLink(controllerName, "Index", controller);
             }
             orderedList.InnerHtml += secondItem;
 
             if (action != "index")
             {
                 var thirdItem = new TagBuilder("li");
-                thirdItem.SetInnerText(action);
+                thirdItem.SetInnerText(actionName);
                 orderedList.InnerHtml += thirdItem;
             }
 

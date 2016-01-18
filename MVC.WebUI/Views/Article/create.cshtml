@@ -1,7 +1,11 @@
 ﻿@model MVC.WebUI.Models.Article.ArticleEditViewModel
+@using MVC.WebUI.Helpers
+
 @{
     ViewBag.Title = "Add New Article";
 }
+
+@Html.Breadcrumb(actionName: "Add new article")
 
 <form action="@Url.Action("Create")" method="post">
     @Html.AntiForgeryToken()

@@ -1,7 +1,11 @@
 ﻿@model MVC.WebUI.Models.Article.ArticleDetailsViewModel
+@using MVC.WebUI.Helpers
+
 @{
     ViewBag.Title = "Article";
 }
+
+@Html.Breadcrumb(actionName: Model.Article.Title)
 
 <article itemscope="itemscope" itemtype="http://schema.org/Article">
     <header>

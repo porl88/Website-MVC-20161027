@@ -1,12 +1,11 @@
 ﻿@model MVC.WebUI.Models.Article.ArticleEditViewModel
+@using MVC.WebUI.Helpers
+
 @{
     ViewBag.Title = "Edit Article";
 }
 
-<ol class="breadcrumb">
-    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-    <li>@Html.ActionLink("Articles", "Index", "Article")</li>
-</ol>
+@Html.Breadcrumb(actionName: $"Edit: \"{Model.Article.Title}\"")
 
 <form action="@Url.Action("Edit")" method="post">
     @Html.AntiForgeryToken()
