@@ -3,14 +3,20 @@
     ViewBag.Title = "Article";
 }
 
-<article>
+<article itemscope="itemscope" itemtype="http://schema.org/Article">
     <header>
-        <h1>@Model.Article.Title</h1>
+        <h1 itemprop="name">@Model.Article.Title</h1>
         <dl>
+            <dt>Author</dt>
+            <dd itemprop="author">@Model.Article.Author</dd>
+            <dt>Published</dt>
+            <dd><time datetime="@(Model.Article.Published?.ToString("yyyy-MM-dd"))" pubdate="pubdate" itemprop="datePublished">@(Model.Article.Published?.ToString("dd MMMM yyyy"))</time></dd>
             <dt>Last updated</dt>
-            <dd>@Model.Article.LastUpdated.ToString("dd MMMM yyyy")</dd>
+            <dd><time datetime="@Model.Article.LastUpdated.ToString("yyyy-MM-dd")" itemprop="dateModified">@Model.Article.LastUpdated.ToString("dd MMMM yyyy")</time></dd>
         </dl>
     </header>
-    @Html.Raw(Model.Article.Content)
+    <div itemprop="articleBody">
+        @Html.Raw(Model.Article.Content)
+    </div>
 </article>
 

@@ -8,8 +8,12 @@
 
 		public string Title { get; set; }
 
+        public string Author { get; set; }
+
 		public string Content { get; set; }
 
-		public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset? Published { get; set; }
+
+        public DateTimeOffset LastUpdated { get; set; }
 	}
 }

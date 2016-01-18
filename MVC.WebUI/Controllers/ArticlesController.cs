@@ -10,11 +10,11 @@
     using Services.Article;
     using Services.Article.Transfer;
 
-    public class ArticleController : BaseController
+    public class ArticlesController : BaseController
     {
         private readonly IArticleService articleService;
 
-        public ArticleController(IArticleService articleService, ILanguageService languageService)
+        public ArticlesController(IArticleService articleService, ILanguageService languageService)
             :base(languageService)
         {
             this.articleService = articleService;

@@ -217,7 +217,7 @@
 
                     dbArticle.Updated = now;
 
-                    var dbArticleVersion = dbArticle.ArticleVersions.FirstOrDefault(x => x.Id == article.ArticleVersionId && x.LanguageId == article.LanguageId);
+                    var dbArticleVersion = dbArticle.ArticleVersions.FirstOrDefault(x => x.Id == article.ArticleVersionId);
 
                     if (dbArticleVersion != null)
                     {

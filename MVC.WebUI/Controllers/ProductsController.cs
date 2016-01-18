@@ -6,10 +6,10 @@
 	using System.Web;
 	using System.Web.Mvc;
 	
-	public class ProductController : Controller
+	public class ProductsController : Controller
     {
-        // GET: /Product/
-        public ActionResult Index()
+        // GET: /products
+        public ViewResult Index()
         {
             return this.View();
         }

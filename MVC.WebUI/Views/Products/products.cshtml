@@ -1,0 +1,24 @@
+﻿@*@model MVC.WebUI.Models.Article.ProductIndexViewModel*@
+@{
+    ViewBag.Title = "Products";
+}
+
+<section>
+
+    <h1>Products</h1>
+
+    @*@if (Model.Products != null && Model.Products.Any())
+    {
+        <ol>
+            @foreach (var product in Model.Products)
+            {
+                <li>
+                    <article itemscope="itemscope" itemtype="http://schema.org/Product">
+                        <h2 itemprop="name">@Html.ActionLink(product.Title, "Details", new { id = product.Id })</h2>
+                    </article>
+                </li>
+            }
+        </ol>
+    }*@
+
+</section>
