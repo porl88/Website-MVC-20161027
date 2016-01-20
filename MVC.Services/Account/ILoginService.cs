@@ -4,7 +4,7 @@
 
     public interface ILoginService
 	{
-		bool LogIn(LogInRequest request);
+		LogInResponse LogIn(LogInRequest request);
 
 		void LogOut();
 

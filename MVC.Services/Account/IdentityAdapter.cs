@@ -35,8 +35,9 @@
             }
         }
 
-        public bool LogIn(LogInRequest request)
+        public LogInResponse LogIn(LogInRequest request)
         {
+            var response = new LogInResponse();
             //var user = await UserManager.FindAsync(model.UserName, model.Password);
 
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
@@ -55,8 +56,9 @@
             }
 
             this.context.Authentication.SignIn(authenticationProperties);
+            // SignInStatus 
 
-            return true;
+            return response;
         }
 
         //public bool LogIn(string userName, string password)

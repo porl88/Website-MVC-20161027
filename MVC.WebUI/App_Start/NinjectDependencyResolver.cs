@@ -38,6 +38,7 @@
 		private void AddBindings()
 		{
             this.kernel.Bind<HttpContextBase>().ToMethod(ctx => new HttpContextWrapper(HttpContext.Current)).InTransientScope();
+            //this.kernel.Bind<IAccountService>().To<SimpleMembershipAdapter>();
             this.kernel.Bind<IAccountService>().To<IdentityAdapter>();
             this.kernel.Bind<IArticleService>().To<ArticleService>();
 #if DEBUG
@@ -47,7 +48,8 @@
 #endif
             this.kernel.Bind<ILanguageService>().To<LanguageService>();
             //this.kernel.Bind<ILoginService>().To<FormsAuthenticationAdapter>();
-            this.kernel.Bind<ILoginService>().To<IdentityAdapter>();
+            this.kernel.Bind<ILoginService>().To<SimpleMembershipAdapter>();
+            //this.kernel.Bind<ILoginService>().To<IdentityAdapter>();
             this.kernel.Bind<IMessageService>().To<EmailService>();
             this.kernel.Bind<IPageService>().To<PageService>();
             this.kernel.Bind<IPersistenceService>().To<GlobalCookiePersistenceService>();

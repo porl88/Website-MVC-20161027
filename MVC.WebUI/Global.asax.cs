@@ -6,6 +6,7 @@
     using System.Web.Optimization;
     using System.Web.Routing;
     using Core.Testing;
+    using WebMatrix.WebData;
 
     public class MvcApplication : HttpApplication
     {
@@ -23,6 +24,11 @@
 #if DEBUG
             //Database.SetInitializer(new DatabaseInitializer()); // Recreates database with test data. A call needs to be made to the database before this will run. N.B. This can alternatively be configured in the configuration/entityFramework/contexts section of the web.config file
 #endif
+
+            if (!WebSecurity.Initialized)
+            {
+                WebSecurity.InitializeDatabaseConnection("WebsiteMvcDatabase", "Users", "UserId", "UserName", true);
+            }
         }
 
         private void SetViewEngines()
