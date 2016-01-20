@@ -6,6 +6,8 @@
     using Core.Entities.Account;
     using WebMatrix.WebData;
 
+    // install-package Microsoft.AspNet.WebPages.WebData
+
     public class SimpleMembershipAdapter : IAccountService
     {
         public string CreateAccount(string email, string password)

@@ -1,6 +1,5 @@
 ﻿namespace MVC.Services.Account
 {
-    using System;
     using Transfer;
 
     public interface ILoginService

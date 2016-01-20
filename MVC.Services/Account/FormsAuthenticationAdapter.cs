@@ -3,26 +3,23 @@
     using System;
     using System.Web;
     using System.Web.Security;
+    using Transfer;
 
     /// <summary>
     /// Login service. Use when storing credentials in the web.config file.
     /// </summary>
     public class FormsAuthenticationAdapter : ILoginService
 	{
-		public bool LogIn(string userName, string password)
+		public bool LogIn(LogInRequest request)
 		{
-			if (FormsAuthentication.Authenticate(userName, password))
+			if (FormsAuthentication.Authenticate(request.UserName, request.Password))
 			{
-				FormsAuthentication.SetAuthCookie(userName, false);
+                var persitentCookie = request.Persistence != null;
+				FormsAuthentication.SetAuthCookie(request.UserName, persitentCookie);
 				return true;
 			}
 
 			return false;
-		}
-
-		public bool LogIn(string userName, string password, TimeSpan persistence)
-		{
-			throw new NotImplementedException();
 		}
 
 		public void LogOut()

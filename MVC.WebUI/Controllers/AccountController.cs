@@ -1,16 +1,15 @@
 ﻿namespace MVC.WebUI.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Configuration;
     using MVC.Services.Account;
-    using Services.Account.Transfer;
     using MVC.Services.Message;
     using MVC.WebUI.Attributes;
     using MVC.WebUI.Models.Account;
-    using Core.Configuration;
     using Services;
-    using System.Threading.Tasks;
-    using System.Web;
+    using Services.Account.Transfer;
 
     [Authorize]
 	public class AccountController : Controller
@@ -73,12 +72,7 @@
                     //    authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
                     //    Response.Redirect("~/Login.aspx");
 
-                    this.messageService.SendMessage(new MessageRequest
-                    {
-                        ToAddress = model.Email,
-                        Subject = "Please confirm your account with " + WebsiteConfig.WebsiteUrl,
-                        Message = HttpUtility.UrlEncode(response.ActivateAccountToken)
-                    });
+                    this.SendActivateAccountEmail(model.Email, response.ActivateAccountToken);
 
                     TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
 
@@ -132,12 +126,9 @@
 		public RedirectToRouteResult LogOut()
 		{
             // should be HttpPost ???
+            // show failure message ???
 			this.loginService.LogOut();
-			return this.RedirectToAction("Index", "Home");
-
-
             TempData["SuccessMessage"] = "You have successfully logged out.";
-
             return this.RedirectToAction("LogIn");
         }
 
@@ -158,7 +149,7 @@
 				if (this.accountService.ChangePassword(model.OldPassword, model.NewPassword))
 				{
 					this.TempData["SuccessMessage"] = "You have successfully changed your password.";
-					return this.RedirectToAction("index");
+					return this.RedirectToAction("Index");
 				}
 				else
 				{
@@ -177,7 +168,7 @@
 		{
 			if (this.loginService.IsAuthenticated)
             {
-				return this.RedirectToAction("index");
+				return this.RedirectToAction("Index");
             }
 
 			return this.View();
@@ -253,5 +244,30 @@
 				return this.RedirectToAction("Index", "Home");
 			}
 		}
-	}
+
+        private void SendActivateAccountEmail(string email, string activateAccountToken)
+        {
+            var activateUrl = new UriBuilder
+            {
+                Scheme = "https",
+                Host = this.Request.Url.DnsSafeHost,
+                Path = "/account/login",
+                Query = "id=" + activateAccountToken // HttpUtility.UrlEncode(response.ActivateAccountToken)
+            };
+
+            var filePath = "/content/html/emails/activate-account.html";
+            var message = System.IO.File.ReadAllText(Server.MapPath(filePath));
+            message = message
+                .Replace("##Name##", "XXX")
+                .Replace("##DomainName##", WebsiteConfig.WebsiteUrl)
+                .Replace("##ActivateUrl##", activateUrl.ToString());
+
+            this.messageService.SendMessage(new MessageRequest
+            {
+                ToAddress = email,
+                Subject = "Please activate your account with " + WebsiteConfig.WebsiteUrl,
+                Message = message
+            });
+        }
+    }
 }

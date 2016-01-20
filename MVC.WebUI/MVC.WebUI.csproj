@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\html\emails\activate-account.html" />
     <Content Include="Content\html\emails\password.html" />
     <Content Include="Content\html\emails\standard.html" />
     <Content Include="Content\images\browser\chrome.png" />
