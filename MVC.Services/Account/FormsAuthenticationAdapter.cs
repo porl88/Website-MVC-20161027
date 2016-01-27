@@ -9,7 +9,7 @@
     /// <summary>
     /// Login service. Use when storing credentials in the web.config file.
     /// </summary>
-    public class FormsAuthenticationAdapter : ILoginService
+    public class FormsAuthenticationAdapter : IAuthenticationService
 	{
         private readonly HttpContext context;
         private readonly IExceptionHandler exceptionHandler;

@@ -131,16 +131,22 @@
 /************************************************************************************************************************************************************************************/
 
 .breadcrumb {
-    padding: 0.4rem 0;
+    padding: 0.5rem 0;
     text-transform: capitalize;
 }
 
 .breadcrumb li {
+    position: relative;
     display: inline-block;
 }
 
 .breadcrumb li::before {
-    content: " > ";
+    display: inline-block;
+    margin: 0 8px;
+    content: "";
+    border: 5px solid transparent;
+    border-right: none;
+    border-left-color: black;
 }
 
 .breadcrumb li:first-child::before {

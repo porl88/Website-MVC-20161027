@@ -213,11 +213,11 @@ sup, sub {
 }
 
 sup {
-  bottom: 0.5em;
+  bottom: 1ex;
 }
 
 sub {
-  top: 0.5em;
+  bottom: -1ex;
 }
 
 /* LIST ELEMENTS *********************************************************************************************************************************************************************************************/
@@ -521,11 +521,17 @@ http://www.paulirish.com/2009/bulletproof-font-face-implementation-syntax/
 }
 
 .breadcrumb li {
+  position: relative;
   display: inline-block;
 }
 
 .breadcrumb li::before {
-  content: " > ";
+  display: inline-block;
+  margin: 0 8px;
+  content: "";
+  border: 5px solid transparent;
+  border-right: none;
+  border-left-color: black;
 }
 
 .breadcrumb li:first-child::before {

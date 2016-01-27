@@ -164,6 +164,7 @@
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Errors\ErrorMessageHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,12 +232,12 @@
     <Content Include="Content\fonts\sorts-mill-goudy.zip" />
     <Content Include="Content\css\scss\default.scss" />
     <Content Include="Content\css\scss\website\shared\_layout.scss" />
-    <Content Include="Views\Article\details.cshtml" />
-    <Content Include="Views\Article\edit.cshtml" />
-    <Content Include="Views\Article\index-edit.cshtml" />
-    <Content Include="Views\Article\index.cshtml" />
-    <Content Include="Views\Article\create.cshtml" />
-    <Content Include="Views\Article\_edit-form.cshtml" />
+    <Content Include="Views\Articles\details.cshtml" />
+    <Content Include="Views\Articles\edit.cshtml" />
+    <Content Include="Views\Articles\index-edit.cshtml" />
+    <Content Include="Views\Articles\index.cshtml" />
+    <Content Include="Views\Articles\create.cshtml" />
+    <Content Include="Views\Articles\_edit-form.cshtml" />
     <Content Include="Views\Account\change-password.cshtml" />
     <Content Include="Views\Account\index.cshtml" />
     <Content Include="Views\Account\login.cshtml" />

@@ -2,7 +2,7 @@
 {
     using Transfer;
 
-    public interface ILoginService
+    public interface IAuthenticationService
 	{
 		LogInResponse LogIn(LogInRequest request);
 

@@ -48,7 +48,7 @@
 #endif
             this.kernel.Bind<ILanguageService>().To<LanguageService>();
             //this.kernel.Bind<ILoginService>().To<FormsAuthenticationAdapter>();
-            this.kernel.Bind<ILoginService>().To<SimpleMembershipAdapter>();
+            this.kernel.Bind<IAuthenticationService>().To<SimpleMembershipAdapter>();
             //this.kernel.Bind<ILoginService>().To<IdentityAdapter>();
             this.kernel.Bind<IMessageService>().To<EmailService>();
             this.kernel.Bind<IPageService>().To<PageService>();

@@ -28,7 +28,7 @@
 
     */
 
-    public class SimpleMembershipAdapter : ILoginService, IAccountService
+    public class SimpleMembershipAdapter : IAuthenticationService, IAccountService
     {
         private readonly HttpContext context;
         private readonly IExceptionHandler exceptionHandler;
@@ -112,13 +112,12 @@
             catch (MembershipCreateUserException ex)
             {
                 response.Status = StatusCode.BadRequest;
-                response.Message = ex.ToString();
+                response.CreateAccountStatus = this.MapCreateAccountStatus(ex.StatusCode);
             }
             catch (Exception ex)
             {
                 response.Status = StatusCode.InternalServerError;
                 this.exceptionHandler.HandleException(ex);
-                response.Message = ex.ToString();
             }
 
             return response;
@@ -142,6 +141,33 @@
         public string ResetPasswordRequest(string userName, TimeSpan expires)
         {
             throw new NotImplementedException();
+        }
+
+        private CreateAccountStatus MapCreateAccountStatus(MembershipCreateStatus status)
+        {
+            switch(status)
+            {
+                case MembershipCreateStatus.DuplicateUserName:
+                    return CreateAccountStatus.DuplicateUserName;
+                case MembershipCreateStatus.DuplicateEmail:
+                    return CreateAccountStatus.DuplicateEmail;
+                case MembershipCreateStatus.InvalidUserName:
+                    return CreateAccountStatus.InvalidUserName;
+                case MembershipCreateStatus.InvalidEmail:
+                    return CreateAccountStatus.InvalidEmail;
+                case MembershipCreateStatus.InvalidPassword:
+                    return CreateAccountStatus.InvalidPassword;
+                case MembershipCreateStatus.InvalidAnswer:
+                    return CreateAccountStatus.InvalidAnswer;
+                case MembershipCreateStatus.InvalidQuestion:
+                    return CreateAccountStatus.InvalidQuestion;
+                case MembershipCreateStatus.ProviderError:
+                    return CreateAccountStatus.ProviderError;
+                case MembershipCreateStatus.UserRejected:
+                    return CreateAccountStatus.UserRejected;
+                default:
+                    return CreateAccountStatus.Unknown;
+            }
         }
     }
 }

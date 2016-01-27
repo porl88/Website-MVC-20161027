@@ -14,7 +14,7 @@
     using Microsoft.Owin.Security.DataProtection;
     using Transfer;
 
-    public class IdentityAdapter : ILoginService, IAccountService
+    public class IdentityAdapter : IAuthenticationService, IAccountService
     {
         private readonly IExceptionHandler exceptionHandler;
         private readonly IDataProtectionProvider protectionProvider;
@@ -176,7 +176,7 @@
                             else
                             {
                                 response.Status = StatusCode.BadRequest;
-                                response.Message = string.Join(". ", result.Errors);
+                                //response.Message = string.Join(". ", result.Errors);
                             }
                         }
                     }

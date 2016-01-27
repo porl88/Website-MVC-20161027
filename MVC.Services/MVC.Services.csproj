@@ -106,10 +106,9 @@
     <Compile Include="Account\FormsAuthenticationAdapter.cs" />
     <Compile Include="Account\IAccountService.cs" />
     <Compile Include="Account\IdentityAdapter.cs" />
-    <Compile Include="Account\ILoginService.cs" />
+    <Compile Include="Account\IAuthenticationService.cs" />
     <Compile Include="Account\IRolesService.cs" />
     <Compile Include="Account\IUserService.cs" />
-    <Compile Include="Account\MembershipCreateStatus.cs" />
     <Compile Include="Account\SimpleMembershipAdapter.cs" />
     <Compile Include="Account\Transfer\CreateAccountRequest.cs" />
     <Compile Include="Account\Transfer\CreateAccountResponse.cs" />

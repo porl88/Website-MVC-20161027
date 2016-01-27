@@ -8,19 +8,20 @@
     using Services.Account;
     using Core.Exceptions;
     using Services.Account.Transfer;
+    using Models.Account;
 
     // http://www.asp.net/mvc/overview/older-versions-1/unit-testing/creating-unit-tests-for-asp-net-mvc-applications-cs
 
     [TestClass]
     public class AccountControllerTests
     {
-        private ILoginService loginService;
+        private IAuthenticationService loginService;
         private IAccountService accountService;
 
         [TestInitialize]
         public void Init()
         {
-            this.loginService = this.CreateMockLoginService();
+            this.loginService = new MockLoginService();
             this.accountService = this.CreateMockAccountService();
         }
 
@@ -35,18 +36,47 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("LogIn", result.ViewName);
         }
 
-        private class MockLoginService : ILoginService
+        //[TestMethod]
+        //public void LogIn_AlreadyAuthenticated()
+        //{
+        //    // arrange
+        //    var controller = new AccountController(this.loginService, this.accountService, new NullMessageService());
+        //    controller.LogIn("Hello", "Sailor");
+
+        //    // act
+        //    var result = controller.LogIn() as RedirectToRouteResult;
+
+        //    // assert
+        //    Assert.IsNotNull(result);
+        //}
+
+        [TestMethod]
+        public void LogIn_ValidCredentials()
         {
-            private readonly bool isAuthenticated;
-
-            public MockLoginService(bool isAuthenticated)
+            // arrange
+            var controller = new AccountController(this.loginService, this.accountService, new NullMessageService());
+            var returnUrl = string.Empty;
+            var model = new LoginViewModel
             {
-                this.isAuthenticated = isAuthenticated;
-            }
+                UserName = "Hello",
+                Password = "Sailor"
+            };
 
+            // act
+            var result = controller.LogIn(model, returnUrl) as RedirectToRouteResult;
+
+            // assert
+            //Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RedirectResult));
+            //Assert.AreEqual("/MyURL", ((RedirectResult)result).Url);
+        }
+
+        private class MockLoginService : IAuthenticationService
+        {
+            public static bool isAuthenticated;
+           
             public bool IsAuthenticated
             {
                 get
@@ -57,11 +87,24 @@
 
             public LogInResponse LogIn(LogInRequest request)
             {
-                throw new NotImplementedException();
+                var response = new LogInResponse();
+
+                if (request.UserName == "Hello" && request.Password == "Sailor")
+                {
+                    isAuthenticated = true;
+                    response.Status = StatusCode.OK;
+                }
+                else
+                {
+                    response.Status = StatusCode.Unauthorized;
+                }
+
+                return response;
             }
 
             public void LogOut()
             {
+                isAuthenticated = false;
             }
         }
 

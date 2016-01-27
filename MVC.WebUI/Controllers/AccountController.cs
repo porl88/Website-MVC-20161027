@@ -1,28 +1,26 @@
 ﻿namespace MVC.WebUI.Controllers
 {
     using System;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Configuration;
     using Core.Exceptions;
+    using Errors;
     using MVC.Services.Account;
     using MVC.Services.Message;
     using MVC.WebUI.Attributes;
     using MVC.WebUI.Models.Account;
-    using Services;
     using Services.Account.Transfer;
-    using WebMatrix.WebData;
 
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly ILoginService loginService;
+        private readonly IAuthenticationService authenticationService;
         private readonly IAccountService accountService;
         private readonly IMessageService messageService;
 
-        public AccountController(ILoginService loginService, IAccountService accountService, IMessageService messageService)
+        public AccountController(IAuthenticationService authenticationService, IAccountService accountService, IMessageService messageService)
         {
-            this.loginService = loginService;
+            this.authenticationService = authenticationService;
             this.accountService = accountService;
             this.messageService = messageService;
         }
@@ -38,7 +36,7 @@
         [AllowAnonymous]
         public ActionResult CreateAccount()
         {
-            if (this.loginService.IsAuthenticated)
+            if (this.authenticationService.IsAuthenticated)
             {
                 return this.RedirectToAction("Index", "Home");
             }
@@ -64,25 +62,18 @@
 
                 if (response.Status == StatusCode.OK)
                 {
-                    // send out activation token in email - UrlEncode token
-                    // or log in automatically????
-                    // redirect to login page
-                    // display success message
-
-                    //    var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-                    //    var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                    //    authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
-                    //    Response.Redirect("~/Login.aspx");
-
-                    //this.SendActivateAccountEmail(model.Email, response.ActivateAccountToken);
-
+                    // send activation email???
                     TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
 
                     return this.RedirectToAction("LogIn");
                 }
+                else if (response.Status == StatusCode.BadRequest)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Your account was not created for the following reason: " + this.GetErrorMessage(response.CreateAccountStatus));
+                }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "Your account was not created for the following reason(s): " + response.Message);
+                    ModelState.AddModelError(string.Empty, ErrorMessageHelper.GetErrorMessage(StatusCode.InternalServerError));
                 }
             }
 
@@ -93,25 +84,13 @@
         [AllowAnonymous]
         public ActionResult LogIn()
         {
-            if (this.loginService.IsAuthenticated)
+            if (this.authenticationService.IsAuthenticated)
             {
                 return this.RedirectToAction("Index", "Home");
             }
 
             return this.View();
         }
-
-
-        //        if (ModelState.IsValid) {
-        //if (authProvider.Authenticate(model.UserName, model.Password)) {
-        //return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
-        //} else {
-        //ModelState.AddModelError("", "Incorrect username or password");
-        //return View();
-        //}
-        //} else {
-        //return View();
-
 
         // POST: /account/login
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
@@ -122,7 +101,7 @@
                 var request = new LogInRequest
                 {
                     UserName = model.UserName,
-                    Password = model.Password,
+                    Password = model.Password
                 };
 
                 if (model.Persist)
@@ -130,14 +109,19 @@
                     request.Persistence = TimeSpan.FromDays(7);
                 }
 
-                var response = this.loginService.LogIn(request);
+                var response = this.authenticationService.LogIn(request);
+
                 if (response.Status == StatusCode.OK)
                 {
                     return this.SecureRedirect(returnUrl);
                 }
-                else // need different message for system error and login error
+                else if (response.Status == StatusCode.Unauthorized)
                 {
                     ModelState.AddModelError(string.Empty, "Your user name and/or password are incorrect.");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, ErrorMessageHelper.GetErrorMessage(StatusCode.InternalServerError));
                 }
             }
 
@@ -150,7 +134,7 @@
         {
             // should be HttpPost ???
             // show failure message ???
-            this.loginService.LogOut();
+            this.authenticationService.LogOut();
             TempData["SuccessMessage"] = "You have successfully logged out.";
             return this.RedirectToAction("LogIn");
         }
@@ -189,7 +173,7 @@
         [ActionName("request-password")]
         public ActionResult RequestPassword()
         {
-            if (this.loginService.IsAuthenticated)
+            if (this.authenticationService.IsAuthenticated)
             {
                 return this.RedirectToAction("Index");
             }
@@ -293,37 +277,28 @@
             });
         }
 
-        private string GetErrorMessage(MembershipCreateStatus status)
+        private string GetErrorMessage(CreateAccountStatus status)
         {
             switch (status)
             {
-                case MembershipCreateStatus.DuplicateUserName:
+                case CreateAccountStatus.DuplicateUserName:
                     return "Username already exists. Please enter a different user name.";
-
-                case MembershipCreateStatus.DuplicateEmail:
+                case CreateAccountStatus.DuplicateEmail:
                     return "A username for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
+                case CreateAccountStatus.InvalidUserName:
                     return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
+                case CreateAccountStatus.InvalidPassword:
+                    return "The password provided is invalid. Please enter a valid password value.";
+                case CreateAccountStatus.InvalidEmail:
+                    return "The e-mail address provided is invalid. Please check the value and try again.";
+                case CreateAccountStatus.InvalidAnswer:
+                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
+                case CreateAccountStatus.InvalidQuestion:
+                    return "The password retrieval question provided is invalid. Please check the value and try again.";
+                case CreateAccountStatus.ProviderError:
                     return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
+                case CreateAccountStatus.UserRejected:
                     return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
