@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Configuration;
+    using Core.Exceptions;
     using MVC.Services.Account;
     using MVC.Services.Message;
     using MVC.WebUI.Attributes;
@@ -61,7 +62,7 @@
 
                 var response = this.accountService.CreateAccount(request);
 
-                if (response.Status == ResponseStatus.OK)
+                if (response.Status == StatusCode.OK)
                 {
                     // send out activation token in email - UrlEncode token
                     // or log in automatically????
@@ -130,7 +131,7 @@
                 }
 
                 var response = this.loginService.LogIn(request);
-                if (response.Status == ResponseStatus.OK)
+                if (response.Status == StatusCode.OK)
                 {
                     return this.SecureRedirect(returnUrl);
                 }

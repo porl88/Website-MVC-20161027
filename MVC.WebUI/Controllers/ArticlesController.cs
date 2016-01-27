@@ -9,6 +9,7 @@
     using Services;
     using Services.Article;
     using Services.Article.Transfer;
+    using Core.Exceptions;
 
     public class ArticlesController : BaseController
     {
@@ -67,7 +68,7 @@
                 ArticleId = (int)id
             });
 
-            if (response.Status == ResponseStatus.OK)
+            if (response.Status == StatusCode.OK)
             {
                 var article = new ArticleDetailsViewModel
                 {
@@ -76,7 +77,7 @@
 
                 return View(article);
             }
-            else if (response.Status == ResponseStatus.NotFound)
+            else if (response.Status == StatusCode.NotFound)
             {
                 return this.HttpNotFound();
             }
@@ -101,7 +102,7 @@
             {
                 model.Article.LanguageId = 1;
                 var response = await this.articleService.AddArticleAsync(model.Article);
-                if (response.Status == ResponseStatus.OK)
+                if (response.Status == StatusCode.OK)
                 {
                     TempData["SuccessMessage"] = string.Format("You have successfully added '{0}' as a new article.", response.Article.Title);
                 }
@@ -125,7 +126,7 @@
                 ArticleId = id
             });
 
-            if (response.Status == ResponseStatus.OK)
+            if (response.Status == StatusCode.OK)
             {
                 var model = new ArticleEditViewModel
                 {
@@ -135,7 +136,7 @@
 
                 return View(model);
             }
-            else if (response.Status == ResponseStatus.NotFound)
+            else if (response.Status == StatusCode.NotFound)
             {
                 return this.HttpNotFound();
             }
@@ -153,7 +154,7 @@
             {
                 var response = await this.articleService.UpdateArticleAsync(model.Article);
 
-                if (response.Status == ResponseStatus.OK)
+                if (response.Status == StatusCode.OK)
                 {
                     TempData["SuccessMessage"] = string.Format("You have successfully updated '{0}'.", response.Article.Title);
                 }
@@ -179,11 +180,11 @@
 
             var response = await this.articleService.DeleteArticleAsync(request);
 
-            if (response.Status == ResponseStatus.OK)
+            if (response.Status == StatusCode.OK)
             {
                 TempData["SuccessMessage"] = string.Format("You have successfully deleted '{0}'.", response.Title);
             }
-            else if (response.Status == ResponseStatus.NotFound)
+            else if (response.Status == StatusCode.NotFound)
             {
                 TempData["FailureMessage"] = "The article you are trying to delete cannot be found.";
             }

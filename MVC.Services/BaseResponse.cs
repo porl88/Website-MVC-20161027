@@ -1,16 +1,10 @@
 ﻿namespace MVC.Services
 {
-	public enum ResponseStatus
-	{
-		OK,
-		NotFound,
-		BadRequest,
-		SystemError
-	}
+    using MVC.Core.Exceptions;
 
-	public abstract class BaseResponse
+    public abstract class BaseResponse
 	{
-		public ResponseStatus Status { get; set; }
+		public StatusCode Status { get; set; }
 
         public string Message { get; set; }
 	}

@@ -39,12 +39,12 @@
                     })
                 );
 
-                response.Status = ResponseStatus.OK;
+                response.Status = StatusCode.OK;
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -69,17 +69,17 @@
 
                 if (response.Article != null)
                 {
-                    response.Status = ResponseStatus.OK;
+                    response.Status = StatusCode.OK;
                 }
                 else
                 {
-                    response.Status = ResponseStatus.NotFound;
+                    response.Status = StatusCode.NotFound;
                 }
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -103,12 +103,12 @@
                     })
                  );
 
-                response.Status = ResponseStatus.OK;
+                response.Status = StatusCode.OK;
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -135,17 +135,17 @@
 
                 if (response.Article != null)
                 {
-                    response.Status = ResponseStatus.OK;
+                    response.Status = StatusCode.OK;
                 }
                 else
                 {
-                    response.Status = ResponseStatus.NotFound;
+                    response.Status = StatusCode.NotFound;
                 }
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -193,12 +193,12 @@
                     Content = addVersion.Content
                 };
 
-                response.Status = ResponseStatus.OK;
+                response.Status = StatusCode.OK;
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -248,17 +248,17 @@
                         Title = updatedVersion.Title
                     };
 
-                    response.Status = ResponseStatus.OK;
+                    response.Status = StatusCode.OK;
                 }
                 else
                 {
-                    response.Status = ResponseStatus.NotFound;
+                    response.Status = StatusCode.NotFound;
                 }
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -276,17 +276,17 @@
                     response.Title = article.ArticleVersions.FirstOrDefault(x => x.LanguageId == request.LanguageId)?.Title ?? article.ArticleVersions.FirstOrDefault(x => x.LanguageId == 1)?.Title;
                     this.articleRepository.Delete(article);
                     await this.unitOfWork.CommitAsync();
-                    response.Status = ResponseStatus.OK;
+                    response.Status = StatusCode.OK;
                 }
                 else
                 {
-                    response.Status = ResponseStatus.NotFound;
+                    response.Status = StatusCode.NotFound;
                 }
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;

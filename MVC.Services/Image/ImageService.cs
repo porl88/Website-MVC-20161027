@@ -3,6 +3,7 @@
     using System;
     using System.Drawing;
     using ClassLibrary.Extensions.Image;
+    using Core.Exceptions;
     using Services.Images.Transfer;
 
     public class ImageService : IImageService
@@ -31,7 +32,7 @@
 				if (image.Width == crop.TargetWidth && image.Height == crop.TargetHeight)
 				{
 					// if the image is the same size as the target crop:
-					response.Status = ResponseStatus.OK;
+					response.Status = StatusCode.OK;
 					response.CroppedImage = this.image;
 				}
 				else if (selectedAspectRatio == targetAspectRatio)
@@ -40,7 +41,7 @@
 					if (image.Width == crop.SelectedWidth && image.Height == crop.SelectedHeight)
 					{
 						// if the selected crop is the same size as the original image, no crop is needed:
-						response.Status = ResponseStatus.OK;
+						response.Status = StatusCode.OK;
 						response.CroppedImage = this.image.Resize(crop.TargetWidth);
 					}
 					else
@@ -51,12 +52,12 @@
 						{
 							if (croppedImage.Width == crop.TargetWidth && croppedImage.Height == crop.TargetHeight)
 							{
-								response.Status = ResponseStatus.OK;
+								response.Status = StatusCode.OK;
 								response.CroppedImage = (Image)croppedImage.Clone();
 							}
 							else
 							{
-								response.Status = ResponseStatus.OK;
+								response.Status = StatusCode.OK;
 								response.CroppedImage = croppedImage.Resize(crop.TargetWidth);
 							}
 						}
@@ -65,7 +66,7 @@
 			}
 			else
 			{
-				response.Status = ResponseStatus.BadRequest;
+				response.Status = StatusCode.BadRequest;
 			}
 
 			return response;

@@ -95,6 +95,7 @@
     <Compile Include="Exceptions\EmailExceptionHandler.cs" />
     <Compile Include="Exceptions\IExceptionHandler.cs" />
     <Compile Include="Exceptions\NullExceptionHandler.cs" />
+    <Compile Include="Exceptions\StatusCode.cs" />
     <Compile Include="Helpers\EntityFrameworkHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

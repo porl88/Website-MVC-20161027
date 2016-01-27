@@ -42,17 +42,17 @@
                 //        Description = pageVersion.Description,
                 //        Keywords = pageVersion.Keywords
                 //    };
-                //    response.Status = ResponseStatus.OK;
+                //    response.Status = StatusCode.OK;
                 //}
                 //else
                 //{
-                //    response.Status = ResponseStatus.NotFound;
+                //    response.Status = StatusCode.NotFound;
                 //}
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -73,17 +73,17 @@
             //            Description = pageVersion.Description,
             //            Keywords = pageVersion.Keywords
             //        };
-            //        response.Status = ResponseStatus.OK;
+            //        response.Status = StatusCode.OK;
             //    }
             //    else
             //    {
-            //        response.Status = ResponseStatus.NotFound;
+            //        response.Status = StatusCode.NotFound;
             //    }
             //}
             //catch (Exception ex)
             //{
             //    this.exceptionHandler.HandleException(ex);
-            //    response.Status = ResponseStatus.SystemError;
+            //    response.Status = StatusCode.InternalServerError;
             //}
 
             return response;

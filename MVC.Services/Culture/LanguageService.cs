@@ -53,12 +53,12 @@
                     })
                 );
 
-                response.Status = ResponseStatus.OK;
+                response.Status = StatusCode.OK;
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
@@ -80,12 +80,12 @@
                     })
                 );
 
-                response.Status = ResponseStatus.OK;
+                response.Status = StatusCode.OK;
             }
             catch (Exception ex)
             {
                 this.exceptionHandler.HandleException(ex);
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;

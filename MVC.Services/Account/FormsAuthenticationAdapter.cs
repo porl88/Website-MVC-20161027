@@ -45,7 +45,7 @@
                 if (FormsAuthentication.Authenticate(request.UserName, request.Password))
                 {
                     FormsAuthentication.SetAuthCookie(request.UserName, persist);
-                    response.Status = ResponseStatus.OK;
+                    response.Status = StatusCode.OK;
                 }
                 else
                 {
@@ -54,7 +54,7 @@
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
                 this.exceptionHandler.HandleException(ex);
             }
 

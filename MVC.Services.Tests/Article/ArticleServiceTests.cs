@@ -37,7 +37,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var articles = result.Articles;
             Assert.IsNotNull(articles);
@@ -66,7 +66,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var articles = result.Articles;
             Assert.IsNotNull(articles);
@@ -96,7 +96,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var articles = result.Articles;
             Assert.IsNotNull(articles);
@@ -129,7 +129,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var articles = result.Articles;
             Assert.IsNotNull(articles);
@@ -151,7 +151,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var article = result.Article;
             Assert.IsNotNull(article);
@@ -174,7 +174,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var article = result.Article;
             Assert.IsNotNull(article);
@@ -197,7 +197,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+            Assert.AreEqual(StatusCode.NotFound, result.Status);
         }
 
         [TestMethod]
@@ -215,7 +215,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+            Assert.AreEqual(StatusCode.NotFound, result.Status);
         }
 
         [TestMethod]
@@ -238,7 +238,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var article = result.Article;
             Assert.AreEqual(4, article.ArticleId);

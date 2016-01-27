@@ -171,11 +171,11 @@
                             {
                                 userManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(this.protectionProvider.Create("EmailConfirmation"));
                                 response.ActivateAccountToken = await userManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                                response.Status = ResponseStatus.OK;
+                                response.Status = StatusCode.OK;
                             }
                             else
                             {
-                                response.Status = ResponseStatus.BadRequest;
+                                response.Status = StatusCode.BadRequest;
                                 response.Message = string.Join(". ", result.Errors);
                             }
                         }
@@ -184,7 +184,7 @@
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
                 this.exceptionHandler.HandleException(ex);
             }
 

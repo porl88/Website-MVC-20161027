@@ -36,7 +36,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var languages = result.Languages;
             Assert.AreEqual(3, languages.Count);
@@ -65,7 +65,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
 
             var languages = result.Languages;
             Assert.AreEqual(3, languages.Count);

@@ -33,12 +33,12 @@
 				catch (Exception ex)
 				{
 					this.exceptionHandler.HandleException(ex);
-					response.Status = ResponseStatus.SystemError;
+					response.Status = StatusCode.InternalServerError;
 				}
 			}
 			else
 			{
-				response.Status = ResponseStatus.BadRequest;
+				response.Status = StatusCode.BadRequest;
 			}
 
 			return response;
@@ -83,7 +83,7 @@
 							double longitude, latitude;
 							if (double.TryParse(addressDetails.geometry.location.lat.ToString(), out latitude) & double.TryParse(addressDetails.geometry.location.lng.ToString(), out longitude))
 							{
-								response.Status = ResponseStatus.OK;
+								response.Status = StatusCode.OK;
 								response.GeoCoordinate = new GeoCoordinate(latitude, longitude);
 							}
 						}
@@ -91,7 +91,7 @@
 					else
 					{
 						this.exceptionHandler.HandleException(new Exception("GetGeoCoordinatesAsync: " + responseJson.ReasonPhrase));
-						response.Status = ResponseStatus.SystemError;
+						response.Status = StatusCode.InternalServerError;
 					}
 				}
 			}

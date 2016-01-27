@@ -63,25 +63,16 @@
 
                 if (WebSecurity.Login(request.UserName, request.Password, persist))
                 {
-                    response.Status = ResponseStatus.OK;
+                    response.Status = StatusCode.OK;
                 }
                 else
                 {
-                    // ???
+                    response.Status = StatusCode.Unauthorized;
                 }
-
-            }
-            catch (MembershipCreateUserException ex)
-            {
-                // MembershipCreateStatus
-                // https://msdn.microsoft.com/en-us/library/system.web.security.membershipcreateuserexception.statuscode(v=vs.110).aspx
-                //e.
-                //ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                response.Status = ResponseStatus.BadRequest;
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
                 this.exceptionHandler.HandleException(ex);
             }
 
@@ -115,16 +106,17 @@
                 };
 
                 response.ActivateAccountToken = WebSecurity.CreateUserAndAccount(request.UserName, request.Password, propertyValues, requireConfirmationToken: true);
-                response.Status = ResponseStatus.OK;
+                response.Status = StatusCode.OK;
             }
+            // https://msdn.microsoft.com/en-us/library/system.web.security.membershipcreateuserexception.statuscode(v=vs.110).aspx
             catch (MembershipCreateUserException ex)
             {
-                response.Status = ResponseStatus.BadRequest;
+                response.Status = StatusCode.BadRequest;
                 response.Message = ex.ToString();
             }
             catch (Exception ex)
             {
-                response.Status = ResponseStatus.SystemError;
+                response.Status = StatusCode.InternalServerError;
                 this.exceptionHandler.HandleException(ex);
                 response.Message = ex.ToString();
             }

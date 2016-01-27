@@ -1,16 +1,17 @@
 ﻿namespace MVC.Services.Crawler
 {
-	using System;
-	using System.Collections.Concurrent;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Net.Http;
-	using System.Text.RegularExpressions;
-	using System.Threading.Tasks;
-	using ClassLibrary.WebRequest;
-	using MVC.Services.Crawler.Transfer;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using ClassLibrary.WebRequest;
+    using Core.Exceptions;
+    using MVC.Services.Crawler.Transfer;
 
-	public class CrawlerService : ICrawlerService
+    public class CrawlerService : ICrawlerService
 	{
 		private class UnprocessedLink
 		{
@@ -49,7 +50,7 @@
 			}
 			else
 			{
-				this.response.Status = ResponseStatus.BadRequest;
+				this.response.Status = StatusCode.BadRequest;
 			}
 
 			return this.response;

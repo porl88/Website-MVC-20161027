@@ -21,7 +21,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
             var page = result.Page;
             Assert.AreEqual("Hello", page.Title);
             Assert.AreEqual("A nice page.", page.Description);
@@ -39,7 +39,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
             var page = result.Page;
             Assert.AreEqual("Achtung!", page.Title);
             Assert.AreEqual("Das is goot!", page.Description);
@@ -57,7 +57,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+            Assert.AreEqual(StatusCode.NotFound, result.Status);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+            Assert.AreEqual(StatusCode.NotFound, result.Status);
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
             var page = result.Page;
             Assert.AreEqual("Hello", page.Title);
             Assert.AreEqual("A nice page.", page.Description);
@@ -103,7 +103,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.OK, result.Status);
+            Assert.AreEqual(StatusCode.OK, result.Status);
             var page = result.Page;
             Assert.AreEqual("Achtung!", page.Title);
             Assert.AreEqual("Das is goot!", page.Description);
@@ -121,7 +121,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+            Assert.AreEqual(StatusCode.NotFound, result.Status);
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@
 
             // assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(ResponseStatus.NotFound, result.Status);
+            Assert.AreEqual(StatusCode.NotFound, result.Status);
         }
 
         private PageService CreatePageService()

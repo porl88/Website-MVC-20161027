@@ -40,11 +40,18 @@
 
         private class MockLoginService : ILoginService
         {
+            private readonly bool isAuthenticated;
+
+            public MockLoginService(bool isAuthenticated)
+            {
+                this.isAuthenticated = isAuthenticated;
+            }
+
             public bool IsAuthenticated
             {
                 get
                 {
-                    throw new NotImplementedException();
+                    return isAuthenticated;
                 }
             }
 
@@ -55,7 +62,6 @@
 
             public void LogOut()
             {
-                throw new NotImplementedException();
             }
         }
 
