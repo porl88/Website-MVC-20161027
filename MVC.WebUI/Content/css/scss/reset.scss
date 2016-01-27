@@ -151,16 +151,16 @@ dfn::after {
 
 /* sup & sub - stops them affecting the line-height */
 sup, sub {
-	position: relative;
-	vertical-align: baseline;
+    position: relative;
+    vertical-align: baseline;
 }
 
 sup {
-	bottom: 0.5em;
+    bottom: 1ex;
 }
 
 sub {
-	top: 0.5em;
+    bottom: -1ex;
 }
 
 

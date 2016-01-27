@@ -38,8 +38,8 @@
 		private void AddBindings()
 		{
             this.kernel.Bind<HttpContextBase>().ToMethod(ctx => new HttpContextWrapper(HttpContext.Current)).InTransientScope();
-            //this.kernel.Bind<IAccountService>().To<SimpleMembershipAdapter>();
-            this.kernel.Bind<IAccountService>().To<IdentityAdapter>();
+            this.kernel.Bind<IAccountService>().To<SimpleMembershipAdapter>();
+            //this.kernel.Bind<IAccountService>().To<IdentityAdapter>();
             this.kernel.Bind<IArticleService>().To<ArticleService>();
 #if DEBUG
             this.kernel.Bind<IExceptionHandler>().To<NullExceptionHandler>();

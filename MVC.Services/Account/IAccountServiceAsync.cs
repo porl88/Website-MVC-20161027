@@ -7,7 +7,7 @@
 
     public interface IAccountService
 	{
-        CreateAccountResponse CreateAccount(CreateAccountRequest request);
+        Task<CreateAccountResponse> CreateAccountAsync(CreateAccountRequest request);
 
         bool ActivateAccount(string activateAccountToken);
 

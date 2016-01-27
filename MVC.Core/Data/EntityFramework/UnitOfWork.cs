@@ -20,7 +20,9 @@
         public UnitOfWork()
 		{
             // http://www.codeproject.com/Tips/814618/Use-of-Database-SetInitializer-method-in-Code-Firs
-            this.context.Database.Initialize(false);
+#if DEBUG
+            //this.context.Database.Initialize(false);
+#endif
             this.articleRepository = new Repository<Article>(this.context);
             this.articleVersionRepository = new Repository<ArticleVersion>(this.context);
             this.languageRepository = new Repository<Language>(this.context);

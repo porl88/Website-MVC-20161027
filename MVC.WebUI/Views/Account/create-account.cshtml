@@ -21,17 +21,17 @@
 			</li>
 			<li>
 				@Html.LabelFor(m => m.Email)
-				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = RegularExpressions.EmailPattern, title = "You need to enter a valid email address" })
+				@Html.TextBoxFor(m => m.Email, new { type = "email", required = "required", maxlength = "256", pattern = FormPatterns.PasswordWeak, title = "You need to enter a valid email address" })
 				@Html.ValidationMessageFor(m => m.Email)
 			</li>
 			<li>
 				@Html.LabelFor(m => m.Password)
-				@Html.PasswordFor(m => m.Password, new { required = "required", pattern = RegularExpressions.PasswordWeakPattern, title = "Your password must be at least 8 characters long and cannot contain spaces" })
+				@Html.PasswordFor(m => m.Password, new { required = "required", minlength = "8", pattern = FormPatterns.PasswordWeak, title = "Your password must be at least 8 characters long and cannot contain spaces" })
 				@Html.ValidationMessageFor(m => m.Password)
 			</li>
 			<li>
 				@Html.LabelFor(m => m.ConfirmPassword)
-				@Html.PasswordFor(m => m.ConfirmPassword, new { required = "required" })
+                @Html.PasswordFor(m => m.ConfirmPassword, new { required = "required", minlength = "8", pattern = FormPatterns.PasswordWeak, title = "Your password must be at least 8 characters long and cannot contain spaces" })
 				@Html.ValidationMessageFor(m => m.ConfirmPassword)
 			</li>
 		</ol>

@@ -6,9 +6,11 @@
     using Entities.Website.PageItem;
     using Entities.Culture;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Entities.Account;
 
-    public class WebsiteDbContext : IdentityDbContext //DbContext
-	{
+    public class WebsiteDbContext : DbContext
+    //public class WebsiteDbContext : IdentityDbContext
+    {
         public WebsiteDbContext()
         : base("WebsiteMvcDatabase") // connection string name
         {
@@ -27,5 +29,7 @@
         public DbSet<PlainText> PlainTexts { get; set; }
 
         public DbSet<RichText> RichTexts { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -77,6 +77,7 @@
                 // https://msdn.microsoft.com/en-us/library/system.web.security.membershipcreateuserexception.statuscode(v=vs.110).aspx
                 //e.
                 //ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                response.Status = ResponseStatus.BadRequest;
             }
             catch (Exception ex)
             {
@@ -102,9 +103,33 @@
             throw new NotImplementedException();
         }
 
-        public Task<CreateAccountResponse> CreateAccountAsync(CreateAccountRequest request)
+        public CreateAccountResponse CreateAccount(CreateAccountRequest request)
         {
-            throw new NotImplementedException();
+            var response = new CreateAccountResponse();
+
+            try
+            {
+                var propertyValues = new
+                {
+                    Email = request.Email
+                };
+
+                response.ActivateAccountToken = WebSecurity.CreateUserAndAccount(request.UserName, request.Password, propertyValues, requireConfirmationToken: true);
+                response.Status = ResponseStatus.OK;
+            }
+            catch (MembershipCreateUserException ex)
+            {
+                response.Status = ResponseStatus.BadRequest;
+                response.Message = ex.ToString();
+            }
+            catch (Exception ex)
+            {
+                response.Status = ResponseStatus.SystemError;
+                this.exceptionHandler.HandleException(ex);
+                response.Message = ex.ToString();
+            }
+
+            return response;
         }
 
         public void DeleteAccount(string userName)

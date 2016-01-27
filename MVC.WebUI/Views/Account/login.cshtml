@@ -22,14 +22,18 @@
 		<ol>
 			<li>
 				@Html.LabelFor(m => m.UserName)
-				@Html.TextBoxFor(m => m.UserName, new { required = "required", autofocus = "autofocus" })
+				@Html.TextBoxFor(m => m.UserName, new { required = "required", maxlength = "30", autofocus = "autofocus" })
 				@Html.ValidationMessageFor(m => m.UserName)
 			</li>
 			<li>
 				@Html.LabelFor(m => m.Password)
-				@Html.PasswordFor(m => m.Password, new { required = "required" })
+				@Html.PasswordFor(m => m.Password, new { required = "required", minlength = "8" })
 				@Html.ValidationMessageFor(m => m.Password)
 			</li>
+            <li>
+                @Html.CheckBoxFor(m => m.Persist)
+                @Html.LabelFor(m => m.Persist, "Remain logged in for 7 days")
+            </li>
 		</ol>
 		@Html.ActionLink("Forgotten Password", "request-password")
 		<button>Login</button>

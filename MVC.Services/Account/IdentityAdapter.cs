@@ -138,6 +138,12 @@
                 }
             }
         }
+
+        public CreateAccountResponse CreateAccount(CreateAccountRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<CreateAccountResponse> CreateAccountAsync(CreateAccountRequest request)
         {
             var response = new CreateAccountResponse();
