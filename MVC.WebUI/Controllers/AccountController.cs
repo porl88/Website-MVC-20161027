@@ -64,7 +64,6 @@
                 {
                     // send activation email???
                     TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
-
                     return this.RedirectToAction("LogIn");
                 }
                 else if (response.Status == StatusCode.BadRequest)
