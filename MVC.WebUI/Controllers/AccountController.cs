@@ -1,6 +1,7 @@
 ﻿namespace MVC.WebUI.Controllers
 {
     using System;
+    using System.Web;
     using System.Web.Mvc;
     using Core.Configuration;
     using Core.Exceptions;
@@ -62,7 +63,7 @@
 
                 if (response.Status == StatusCode.OK)
                 {
-                    // send activation email???
+                    this.SendActivateAccountToken(model.Email, response.ActivateAccountToken);
                     TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
                     return this.RedirectToAction("LogIn");
                 }
@@ -251,14 +252,14 @@
             }
         }
 
-        private void SendActivateAccountEmail(string email, string activateAccountToken)
+        private void SendActivateAccountToken(string email, string activateAccountToken)
         {
             var activateUrl = new UriBuilder
             {
                 Scheme = "https",
                 Host = this.Request.Url.DnsSafeHost,
                 Path = "/account/login",
-                Query = "id=" + activateAccountToken // HttpUtility.UrlEncode(response.ActivateAccountToken)
+                Query = "id=" + HttpUtility.UrlEncode(activateAccountToken)
             };
 
             var filePath = "/content/html/emails/activate-account.html";
