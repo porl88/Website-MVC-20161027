@@ -3,10 +3,15 @@
 /***********************************************************************************************************************************************/
 
 html, body {
-    height: 100%;
+    height: 100%; /* not needed if using vh values (work in IE9+) */
 }
 
 body {
+    font: 100%/1.2 Verdana, Geneva, sans-serif; /* using font with rem does not work on Internet Explorer 10- - use percentage instead */
+	font-family: Verdana, Geneva, sans-serif; /* web safe fonts: http://cssfontstack.com/ */
+	font-size: 100%; /* http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/ */
+	font-size-adjust: 0.545; /* http://fontdeck.com/support/fontsizeadjust */
+    line-height: 1.2;
     background-color: #EEE;
 }
 
@@ -15,6 +20,7 @@ body {
     min-width: 320px;
     max-width: 1000px;
     min-height: 100%;
+    min-height: 100vh; /* IE9+ */
     margin: 0 auto;
     background-color: #FFF;
 }
