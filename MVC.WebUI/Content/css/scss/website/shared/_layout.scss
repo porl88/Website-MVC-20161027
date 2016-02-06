@@ -10,7 +10,7 @@ body {
     font: 100%/1.2 Verdana, Geneva, sans-serif; /* using font with rem does not work on Internet Explorer 10- - use percentage instead */
 	font-family: Verdana, Geneva, sans-serif; /* web safe fonts: http://cssfontstack.com/ */
 	font-size: 100%; /* http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/ */
-	font-size-adjust: 0.545; /* http://fontdeck.com/support/fontsizeadjust */
+	font-size-adjust: 0.545; /* http://fontdeck.com/support/fontsizeadjust - doesn't appear to give correct values */
     line-height: 1.2;
     background-color: #EEE;
 }
