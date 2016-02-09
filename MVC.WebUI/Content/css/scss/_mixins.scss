@@ -1,104 +1,6 @@
-﻿/* converts px to rem - need to define a $base-font-size-px variable and use it to set the html font-size value */
-/* http://drublic.de/blog/rem-fallback-sass-less/ */
-
-$media-phone: "screen and (max-width: 450px)";
-$media-tablet: "screen and (max-width: 768px)";
-$media-desktop: "screen and (max-width: 1280px)";
-
-/*
-e.g.
-
-@media #{$media-tablet} {
-    #content {
-        font-size: 12px;
-    }
-}
-*/
-
-
-/* 
-
-$media-phone: 450px;
-$media-tablet: 768px;
-
-@mixin responsive($width) {
-    @if $width == phone {
-        @media only screen and (max-width: $media-phone) { @content; }
-    }
-    @else if $width == tablet {
-        @media only screen and (max-width: $media-tablet) { @content; }
-    }
-}
-
-
-e.g.
-
-    #content {
-        font-size: 12px;
-        @include responsive(phone) {
-            font-size: 10px;
-        }
-    }
-
-outputs:
-
-    #content {
-        font-size: 12px;
-    }
-
-     @media only screen and (max-width: $media-phone) {
-        font-size: 10px;
-    }
-*/
-
-@mixin retinise($file, $type, $width, $height) {
-    background-image: url("../img/" + $file + "." + $type);
-
-    @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-        & {
-            background-image: url("../img/" + $file + "-2x." + $type);
-        }
-    }
-}
-
- /* assumes a default size of 16px - needs to be set in HTML tag when in development */
-@mixin px-to-rem($property, $px) {
-  #{$property}: #{$px}px;
-  #{$property}: #{$px / 16}rem;
-}
-
-@mixin border-radius($px) {
-  @include pxtorem(-webkit-border-radius, $px);
-  @include pxtorem(-moz-border-radius, $px);
-  @include pxtorem(border-radius, $px);
-}
-
-@mixin box-sizing($model: border-box) {
-    -moz-box-sizing: $model;
-    -webkit-box-sizing: $model;
-    box-sizing: $model;
-}
-
-@mixin shadow($x, $y, $blur, $colour) {
-    -webkit-box-shadow: $x $y $blur $colour;
-    -moz-box-shadow: $x $y $blur $colour;
-    box-shadow: $x $y $blur $colour;
-}
-
-@mixin box-shadow ($string) {
-  -webkit-box-shadow: $string;
-  -moz-box-shadow:    $string;
-  box-shadow:         $string;
-}
-
-@mixin columns($columnCount, $columnGap) {
-    -moz-column-count: $columnCount;
-    -moz-column-gap: $columnGap;
-    -webkit-column-count: $columnCount;
-    -webkit-column-gap: $columnGap;
-    column-count: $columnCount;
-    column-gap: $columnGap;
-}
+﻿/***********************************************************************************************************************/
+/* BACKGROUNDS */
+/***********************************************************************************************************************/
 
 @mixin gradient($startColour, $endColour, $startPercent: 0%, $endPercent: 100%) {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$startColour}', endColorstr='#{$endColour}', GradientType=0);
@@ -116,6 +18,102 @@ outputs:
     background-image: linear-gradient(to bottom, $startColour $startPercent, $endColour $endPercent);
 }
 
+
+
+/***********************************************************************************************************************/
+/* BORDERS */
+/***********************************************************************************************************************/
+
+@mixin border-radius($px) {
+  @include pxtorem(-webkit-border-radius, $px);
+  @include pxtorem(-moz-border-radius, $px);
+  @include pxtorem(border-radius, $px);
+}
+
+
+
+/***********************************************************************************************************************/
+/* BOX SHADOW */
+/***********************************************************************************************************************/
+
+@mixin shadow($x, $y, $blur, $colour) {
+    -webkit-box-shadow: $x $y $blur $colour;
+    -moz-box-shadow: $x $y $blur $colour;
+    box-shadow: $x $y $blur $colour;
+}
+
+@mixin box-shadow ($string) {
+  -webkit-box-shadow: $string;
+  -moz-box-shadow:    $string;
+  box-shadow:         $string;
+}
+
+
+/***********************************************************************************************************************/
+/* BOX SIZING */
+/***********************************************************************************************************************/
+@mixin box-sizing($model: border-box) {
+    -moz-box-sizing: $model;
+    -webkit-box-sizing: $model;
+    box-sizing: $model;
+}
+
+
+
+/***********************************************************************************************************************/
+/* COLUMNS */
+/***********************************************************************************************************************/
+@mixin columns($columnCount, $columnGap) {
+    -moz-column-count: $columnCount;
+    -moz-column-gap: $columnGap;
+    -webkit-column-count: $columnCount;
+    -webkit-column-gap: $columnGap;
+    column-count: $columnCount;
+    column-gap: $columnGap;
+}
+
+
+
+/***********************************************************************************************************************/
+/* FLEXBOX */
+/***********************************************************************************************************************/
+
+@mixin display-flex {
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Chrome */
+    display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin align-items($value) {
+    -ms-flex-align: $value;
+    -webkit-align-items: $value;
+    align-items: $value;
+}
+
+@mixin flex($value) {
+    -webkit-box-flex: $value; /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: $value; /* OLD - Firefox 19- */
+    -ms-flex: $value; /* IE 10 */
+    -webkit-flex: $value; /* Chrome */
+    flex: $value; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin order($value) {
+    -webkit-box-ordinal-group: $value; /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-ordinal-group: $value; /* OLD - Firefox 19- */
+    -ms-flex-order: $value; /* TWEENER - IE 10 */
+    -webkit-order: $value; /* NEW - Chrome */
+    order: $value; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+
+/***********************************************************************************************************************/
+/* FONTS */
+/***********************************************************************************************************************/
+
 @mixin font-face($font-family, $font-path, $font-weight: normal, $font-style: normal, $font-stretch: normal) {
     @font-face {
         font-family: '#{$font-family}';
@@ -129,6 +127,121 @@ outputs:
         font-stretch: $font-stretch;
     }
 }
+
+
+/* PX TO PX + REM *****************************************************************************************************/
+/*https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/*/
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@mixin rem($property, $values...) {
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i));
+    $pxValues: #{$pxValues + $value};
+
+    @if $value != 0 {
+        $pxValues: #{$pxValues}px;
+    }
+
+    @if $i < $max {
+      $pxValues: #{$pxValues + " "};
+    }
+  } 
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i));
+    $remValues: #{$remValues + $value/16};
+
+    @if $value != 0 {
+        $remValues: #{$remValues}rem;
+    }
+
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+    }
+  } 
+  
+  #{$property}: $pxValues; 
+  #{$property}: $remValues; 
+}
+
+
+
+/* PX TO REM ONLY *****************************************************************************************************/
+
+/*https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/*/
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@mixin rem($property, $values...) {
+  $max: length($values);
+  $remValues: '';
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i));
+    $remValues: #{$remValues + $value/16};
+
+    @if $value != 0 {
+        $remValues: #{$remValues}rem;
+    }
+
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+    }
+  } 
+  
+  #{$property}: $remValues; 
+}
+
+
+
+/***********************************************************************************************************************/
+/* MEDIA QUERIES */
+/***********************************************************************************************************************/
+
+/* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
+
+$phone-max-width: 450px;
+$tablet-max-width: 768px;
+
+@mixin respond-to($media) {
+  @if $media == phone {
+    @media only screen and (max-width: $phone-max-width) { @content; }
+  }
+  @else if $media == phone-tablet {
+    @media only screen and (max-width: $tablet-max-width) { @content; }
+  }
+  @else if $media == tablet {
+    @media only screen and (min-width: $phone-max-width + 1) and (max-width: $tablet-max-width) { @content; }
+  }
+  @else if $media == desktop {
+    @media only screen and (min-width: $tablet-max-width + 1) { @content; }
+  }
+}
+
+
+
+@mixin retinise($file, $type, $width, $height) {
+    background-image: url("../img/" + $file + "." + $type);
+
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+        & {
+            background-image: url("../img/" + $file + "-2x." + $type);
+        }
+    }
+}
+
+
+
+
 
 @mixin opacity($opacity) {
     filter: alpha(opacity=$opacity * 100);
