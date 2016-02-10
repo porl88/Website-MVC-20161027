@@ -48,26 +48,42 @@
 
     @Styles.Render("~/css/website")
 
-    @*http://css-tricks.com/favicon-quiz/*@
-    <link rel="shortcut icon" href="~/favicon.ico" /> @*for IE10-*@
-    <link rel="icon" type="image/png" href="~/favicon-16x16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="~/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="~/favicon-96x96.png" sizes="96x96" />
+    @*
+    FAVICONS: minimum master favicon size: 260x260
+    http://css-tricks.com/favicon-quiz/
+    http://realfavicongenerator.net/
+    *@
 
-    <link rel="apple-touch-icon" sizes="57x57" href="~/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="~/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="~/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="~/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="~/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="~/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="~/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="~/apple-touch-icon-152x152.png" />
+    @*ICO FAVICONS (deprecated): for IE10-
+    rel="shortcut icon" - for IE8+
+    rel="icon" type="image/x-icon" - for IE9+
+    rel="icon" - for IE11+
+    *@
+    <link rel="shortcut icon" href="~/content/images/favicon/favicon.ico" />
+
+    @*SVG FAVICONS: Firefox 41+ (4+), Safari (9)*@
+    <link rel="icon" type="image/svg+xml" sizes="any" href="~/content/images/favicon/favicon.svg" />
+
+    @*PNG FAVICONS: IE11, Edge, Firefox 2+, Chrome 4+, Safari 3.1+ (not IOS), Opera 10.1+*@
+    <link rel="icon" type="image/png" sizes="16x16" href="~/content/images/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/content/images/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="~/content/images/favicon/favicon-96x96.png" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="~/content/images/favicon/favicon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="~/content/images/favicon/favicon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="~/content/images/favicon/favicon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="~/content/images/favicon/favicon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="~/content/images/favicon/favicon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="~/content/images/favicon/favicon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/content/images/favicon/favicon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/content/images/favicon/favicon-152x152.png" />
 
     <!--[if lte IE 8]>
-        <link type="text/css" rel="stylesheet" href="~/content/css/website_ie.css" />
-        <link type="image/x-icon" rel="shortcut icon" href="~/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="~/content/css/website_ie.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="~/content/images/favicon/favicon.ico" />
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <script src="~/content/scripts/html5-shiv.js"></script>
+        <script src="~/content/js/html5-shiv/html5shiv.min.js"></script>
+        <script src="~/content/js/html5-shiv/html5shiv-printshiv.min.js"></script>
     <![endif]-->
 
     @*For framebusting:*@
@@ -165,6 +181,7 @@
     <!--[if lte IE 8]>
         <script type="text/javascript" src="~/content/scripts/website_ie.js" defer="defer"></script>
     <![endif]-->
+
     @RenderSection("Scripts", required: false)
 
 </body>
