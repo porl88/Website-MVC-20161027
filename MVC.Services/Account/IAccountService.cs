@@ -15,10 +15,10 @@
 
 		bool ChangePassword(string oldPassword, string newPassword);
 
-		string ResetPasswordRequest(string userName, TimeSpan expires); // creates token
+		string ResetPasswordRequest(string userName, TimeSpan expires); // creates token - should be in IAuthenticationService???
 
 		bool ResetPassword(string resetPasswordToken, string newPassword);
 
-        User GetUser(string userName);
+        User GetUser(string userName); // ??? 
 	}
 }

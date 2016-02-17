@@ -47,6 +47,14 @@
             }
         }
 
+        //public int CurrentUserId
+        //{
+        //    get
+        //    {
+        //        return WebSecurity.CurrentUserId;
+        //    }
+        //}
+
         public LogInResponse LogIn(LogInRequest request)
         {
             var response = new LogInResponse();

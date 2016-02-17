@@ -177,11 +177,7 @@
 
 /*https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/*/
 
-@function strip-unit($num) {
-  @return $num / ($num * 0 + 1);
-}
-
-@mixin rem($property, $values...) {
+@mixin rem-only($property, $values...) {
   $max: length($values);
   $remValues: '';
 
@@ -242,10 +238,21 @@ $tablet-max-width: 768px;
 
 
 
-
+/* https://css-tricks.com/snippets/css/cross-browser-opacity/ */
 @mixin opacity($opacity) {
-    filter: alpha(opacity=$opacity * 100);
-    opacity: $opacity;
+    /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$opacity * 100)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=$opacity * 100);
+
+  /* Netscape */
+  -moz-opacity: $opacity;
+
+  /* Safari 1.x */
+  -khtml-opacity: $opacity;
+
+  opacity: $opacity;
 }
 
 @mixin animation($animation) {
