@@ -1,18 +1,14 @@
 ﻿namespace MVC.Services.Account
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Security; // in System.Web.ApplicationServices
     using Core.Exceptions;
-    using Core.Entities.Account;
     using Transfer;
     using WebMatrix.WebData;
 
-    /*
+    /***********************************************************************************************************************
 
     nuget:
 
@@ -26,9 +22,9 @@
         WebSecurity.InitializeDatabaseConnection("YOUR_DB_CONTEXT", "USER_TABLE", "ID_COLUMN", "USERNAME_COLUMN", true);
     }
 
-    */
+    *************************************************************************************************************************/
 
-    public class SimpleMembershipAdapter : IAuthenticationService, IAccountService
+    public class SimpleMembershipAdapter : IAuthenticationService, IAccountService, IUserService
     {
         private readonly HttpContext context;
         private readonly IExceptionHandler exceptionHandler;
@@ -47,17 +43,9 @@
             }
         }
 
-        //public int CurrentUserId
-        //{
-        //    get
-        //    {
-        //        return WebSecurity.CurrentUserId;
-        //    }
-        //}
-
-        public LogInResponse LogIn(LogInRequest request)
+        public LoginResponse LogIn(LoginRequest request)
         {
-            var response = new LogInResponse();
+            var response = new LoginResponse();
 
             try
             {
@@ -92,14 +80,101 @@
             WebSecurity.Logout();
         }
 
-        public bool ActivateAccount(string activateAccountToken)
+        public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
         {
-            throw new NotImplementedException();
+            var response = new ResetPasswordRequestResponse();
+
+            try
+            {
+                if (WebSecurity.UserExists(request.UserName))
+                {
+                    response.ResetPasswordToken = WebSecurity.GeneratePasswordResetToken(request.UserName, (int)request.Expires.TotalMinutes);
+                    response.Status = StatusCode.OK;
+                }
+                else
+                {
+                    response.Status = StatusCode.Unauthorized;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Status = StatusCode.InternalServerError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
         }
 
-        public bool ChangePassword(string oldPassword, string newPassword)
+        public ResetPasswordResponse ResetPassword(ResetPasswordRequest request)
         {
-            throw new NotImplementedException();
+            var response = new ResetPasswordResponse();
+
+            try
+            {
+                if (WebSecurity.ResetPassword(request.ResetPasswordToken, request.NewPassword))
+                {
+                    response.Status = StatusCode.OK;
+                }
+                else
+                {
+                    response.Status = StatusCode.Unauthorized;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Status = StatusCode.InternalServerError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
+        }
+
+        public ActivateAccountResponse ActivateAccount(ActivateAccountRequest request)
+        {
+            var response = new ActivateAccountResponse();
+
+            try
+            {
+                if (WebSecurity.ConfirmAccount(request.ActivateAccountToken))
+                {
+                    response.Status = StatusCode.OK;
+                }
+                else
+                {
+                    response.Status = StatusCode.Unauthorized;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Status = StatusCode.InternalServerError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
+        }
+
+        public ChangePasswordResponse ChangePassword(ChangePasswordRequest request)
+        {
+            var response = new ChangePasswordResponse();
+
+            try
+            {
+                if (WebSecurity.ChangePassword(request.UserName, request.OldPassword, request.NewPassword))
+                {
+                    response.Status = StatusCode.OK;
+                }
+                else
+                {
+                    response.Status = StatusCode.Unauthorized;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Status = StatusCode.InternalServerError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
         }
 
         public CreateAccountResponse CreateAccount(CreateAccountRequest request)
@@ -131,29 +206,67 @@
             return response;
         }
 
-        public void DeleteAccount(string userName)
+        public DeleteAccountResponse DeleteAccount(DeleteAccountRequest request)
         {
-            throw new NotImplementedException();
+            var response = new DeleteAccountResponse();
+
+            try
+            {
+                var userName = request.UserName;
+                var roles = Roles.GetRolesForUser(userName);
+                if (roles.Any())
+                {
+                    Roles.RemoveUserFromRoles(userName, roles);
+                }
+
+                var membership = (SimpleMembershipProvider)Membership.Provider;
+                membership.DeleteAccount(userName); // deletes record from webpages_Membership table
+                membership.DeleteUser(userName, true); // deletes record from UserProfile table
+            }
+            catch (Exception ex)
+            {
+                response.Status = StatusCode.InternalServerError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
         }
 
-        public User GetUser(string userName)
+        public CreateUserResponse CreateUser(CreateUserRequest request)
         {
-            throw new NotImplementedException();
-        }
+            var response = new CreateUserResponse();
 
-        public bool ResetPassword(string resetPasswordToken, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var user = request.User;
+                var password = Membership.GeneratePassword(14, 5);
 
-        public string ResetPasswordRequest(string userName, TimeSpan expires)
-        {
-            throw new NotImplementedException();
+                var propertyValues = new
+                {
+                    Email = user.Email
+                };
+
+                WebSecurity.CreateUserAndAccount(user.UserName, password, propertyValues, requireConfirmationToken: false);
+                response.Status = StatusCode.OK;
+            }
+            // https://msdn.microsoft.com/en-us/library/system.web.security.membershipcreateuserexception.statuscode(v=vs.110).aspx
+            catch (MembershipCreateUserException ex)
+            {
+                response.Status = StatusCode.BadRequest;
+                response.CreateAccountStatus = this.MapCreateAccountStatus(ex.StatusCode);
+            }
+            catch (Exception ex)
+            {
+                response.Status = StatusCode.InternalServerError;
+                this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
         }
 
         private CreateAccountStatus MapCreateAccountStatus(MembershipCreateStatus status)
         {
-            switch(status)
+            switch (status)
             {
                 case MembershipCreateStatus.DuplicateUserName:
                     return CreateAccountStatus.DuplicateUserName;

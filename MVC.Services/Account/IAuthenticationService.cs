@@ -4,10 +4,14 @@
 
     public interface IAuthenticationService
 	{
-		LogInResponse LogIn(LogInRequest request);
+        bool IsAuthenticated { get; }
+
+        LoginResponse LogIn(LoginRequest request);
 
 		void LogOut();
 
-		bool IsAuthenticated { get; }
-	}
+        ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request);
+
+        ResetPasswordResponse ResetPassword(ResetPasswordRequest request);
+    }
 }

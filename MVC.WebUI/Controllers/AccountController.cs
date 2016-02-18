@@ -98,7 +98,7 @@
         {
             if (ModelState.IsValid)
             {
-                var request = new LogInRequest
+                var request = new LoginRequest
                 {
                     UserName = model.UserName,
                     Password = model.Password
@@ -153,7 +153,15 @@
         {
             if (ModelState.IsValid)
             {
-                if (this.accountService.ChangePassword(model.OldPassword, model.NewPassword))
+                var request = new ChangePasswordRequest
+                {
+                    UserName = "???",
+                    OldPassword = model.OldPassword,
+                    NewPassword = model.NewPassword
+                };
+
+                var response = this.accountService.ChangePassword(request);
+                if (response.Status == StatusCode.OK)
                 {
                     this.TempData["SuccessMessage"] = "You have successfully changed your password.";
                     return this.RedirectToAction("Index");
@@ -188,17 +196,25 @@
         {
             if (ModelState.IsValid)
             {
-                var expires = new TimeSpan(2, 0, 0);
-                var resetPasswordToken = this.accountService.ResetPasswordRequest(model.UserName, expires);
-                var message = new MessageRequest
+                var request = new ResetPasswordRequestRequest
                 {
-                    ToAddress = string.Empty,
-                    Subject = "You have requested to reset your password",
-                    Message = resetPasswordToken
+                    UserName = model.UserName,
+                    Expires = TimeSpan.FromHours(2)
                 };
-                this.messageService.SendMessage(message);
-                this.TempData["SuccessMessage"] = "You have successfully requested a new password. You should receive an email presently with instructions on how to reset your password. If you do not receive an email within 15 minutes, please check that you have the correct user name and try again." + resetPasswordToken;
-                return this.RedirectToAction("Login");
+
+                var response = this.authenticationService.ResetPasswordRequest(request);
+                if (response.Status == StatusCode.OK)
+                {
+                    var message = new MessageRequest
+                    {
+                        ToAddress = string.Empty,
+                        Subject = "You have requested to reset your password",
+                        Message = response.ResetPasswordToken
+                    };
+                    this.messageService.SendMessage(message);
+                    this.TempData["SuccessMessage"] = "You have successfully requested a new password. You should receive an email presently with instructions on how to reset your password. If you do not receive an email within 15 minutes, please check that you have the correct user name and try again.";
+                    return this.RedirectToAction("Login");
+                }
             }
 
             return this.View();
@@ -225,7 +241,15 @@
         {
             if (ModelState.IsValid)
             {
-                if (this.accountService.ResetPassword(model.ResetPasswordToken, model.NewPassword))
+                var request = new ResetPasswordRequest
+                {
+                    ResetPasswordToken = model.ResetPasswordToken,
+                    NewPassword = model.NewPassword
+                };
+
+                var response = this.authenticationService.ResetPassword(request);
+
+                if (response.Status == StatusCode.OK)
                 {
                     this.TempData["SuccessMessage"] = "You have successfully reset your password. Please login with your new credentials.";
                     return this.RedirectToAction("login");

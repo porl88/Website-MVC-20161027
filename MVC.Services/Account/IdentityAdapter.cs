@@ -35,9 +35,9 @@
             }
         }
 
-        public LogInResponse LogIn(LogInRequest request)
+        public LoginResponse LogIn(LoginRequest request)
         {
-            var response = new LogInResponse();
+            var response = new LoginResponse();
             //var user = await UserManager.FindAsync(model.UserName, model.Password);
 
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
@@ -115,30 +115,6 @@
             throw new NotImplementedException();
         }
 
-        public class Wanker : IUser
-        {
-            public string Id
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public string UserName
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-
-                set
-                {
-                    throw new NotImplementedException();
-                }
-            }
-        }
-
         public CreateAccountResponse CreateAccount(CreateAccountRequest request)
         {
             throw new NotImplementedException();
@@ -191,22 +167,27 @@
             return response;
         }
 
-        public void DeleteAccount(string userName)
+        public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public User GetUser(string userName)
+        public ResetPasswordResponse ResetPassword(ResetPasswordRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public bool ResetPassword(string resetPasswordToken, string newPassword)
+        public ActivateAccountResponse ActivateAccount(ActivateAccountRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public string ResetPasswordRequest(string userName, TimeSpan expires)
+        public DeleteAccountResponse DeleteAccount(DeleteAccountRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ChangePasswordResponse ChangePassword(ChangePasswordRequest request)
         {
             throw new NotImplementedException();
         }

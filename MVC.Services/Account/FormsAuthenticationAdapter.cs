@@ -28,9 +28,9 @@
             }
         }
 
-        public LogInResponse LogIn(LogInRequest request)
+        public LoginResponse LogIn(LoginRequest request)
 		{
-            var response = new LogInResponse();
+            var response = new LoginResponse();
 
             try
             {
@@ -49,7 +49,7 @@
                 }
                 else
                 {
-                    // ???
+                    response.Status = StatusCode.Unauthorized;
                 }
             }
             catch (Exception ex)
@@ -65,5 +65,15 @@
 		{
 			FormsAuthentication.SignOut();
 		}
+
+        public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResetPasswordResponse ResetPassword(ResetPasswordRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

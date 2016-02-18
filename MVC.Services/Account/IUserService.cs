@@ -1,26 +1,21 @@
 ﻿namespace MVC.Services.Account
 {
-    using System.Collections.Generic;
-    using Core.Entities.Account;
+    using Transfer;
 
     public interface IUserService
     {
-        User GetUser(int userId);
+        CreateUserResponse CreateUser(CreateUserRequest request);
 
-        IEnumerable<User> GetUsers();
+        //User GetUser(int userId);
 
-        void CreateUser(User user); /* 
-        overlaps with AuthenticationService.CreateAccount, but that is OK
-        auto generates password if none is supplied - or perhaps no passowrd
-                                        doesn't make sense for user to have password!
-                                        either generate accountConfimation token - or auto-confirm and send password reset token*/
+        //IEnumerable<User> GetUsers();
 
-        void UpdateUser(User user);
+        //      void UpdateUser(User user);
 
-        void DeleteUser(int userId);
+        //      void DeleteUser(int userId);
 
-        void SuspendUser(int userId);
+        //      void SuspendUser(int userId);
 
-		void UnlockUser(int userId);
+        //void UnlockUser(int userId);
     }
 }

@@ -80,6 +80,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -110,10 +111,23 @@
     <Compile Include="Account\IRolesService.cs" />
     <Compile Include="Account\IUserService.cs" />
     <Compile Include="Account\SimpleMembershipAdapter.cs" />
+    <Compile Include="Account\Transfer\ActivateAccountRequest.cs" />
+    <Compile Include="Account\Transfer\ActivateAccountResponse.cs" />
+    <Compile Include="Account\Transfer\ChangePasswordRequest.cs" />
+    <Compile Include="Account\Transfer\ChangePasswordResponse.cs" />
     <Compile Include="Account\Transfer\CreateAccountRequest.cs" />
     <Compile Include="Account\Transfer\CreateAccountResponse.cs" />
-    <Compile Include="Account\Transfer\LogInRequest.cs" />
-    <Compile Include="Account\Transfer\LogInResponse.cs" />
+    <Compile Include="Account\Transfer\CreateUserRequest.cs" />
+    <Compile Include="Account\Transfer\CreateUserResponse.cs" />
+    <Compile Include="Account\Transfer\DeleteAccountRequest.cs" />
+    <Compile Include="Account\Transfer\DeleteAccountResponse.cs" />
+    <Compile Include="Account\Transfer\LoginRequest.cs" />
+    <Compile Include="Account\Transfer\LoginResponse.cs" />
+    <Compile Include="Account\Transfer\ResetPasswordRequest.cs" />
+    <Compile Include="Account\Transfer\ResetPasswordRequestRequest.cs" />
+    <Compile Include="Account\Transfer\ResetPasswordRequestResponse.cs" />
+    <Compile Include="Account\Transfer\ResetPasswordResponse.cs" />
+    <Compile Include="Account\Transfer\UserDto.cs" />
     <Compile Include="Article\ArticleService.cs" />
     <Compile Include="Article\IArticleService.cs" />
     <Compile Include="Article\Transfer\ArticleDto.cs" />

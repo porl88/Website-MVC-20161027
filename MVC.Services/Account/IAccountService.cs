@@ -1,24 +1,15 @@
 ﻿namespace MVC.Services.Account
 {
-    using System;
-    using System.Threading.Tasks;
-    using Core.Entities.Account;
     using Transfer;
 
     public interface IAccountService
 	{
         CreateAccountResponse CreateAccount(CreateAccountRequest request);
 
-        bool ActivateAccount(string activateAccountToken);
+        ActivateAccountResponse ActivateAccount(ActivateAccountRequest request);
 
-		void DeleteAccount(string userName);
+		DeleteAccountResponse DeleteAccount(DeleteAccountRequest request);
 
-		bool ChangePassword(string oldPassword, string newPassword);
-
-		string ResetPasswordRequest(string userName, TimeSpan expires); // creates token - should be in IAuthenticationService???
-
-		bool ResetPassword(string resetPasswordToken, string newPassword);
-
-        User GetUser(string userName); // ??? 
+		ChangePasswordResponse ChangePassword(ChangePasswordRequest request);
 	}
 }
