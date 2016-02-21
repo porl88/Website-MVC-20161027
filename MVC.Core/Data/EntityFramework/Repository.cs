@@ -66,6 +66,11 @@ namespace MVC.Core.Data.EntityFramework
             return dataset.ToList();
         }
 
+        public List<T> Get()
+        {
+            return this.databaseSet.ToList();
+        }
+
         public List<U> Get<U>(Func<IQueryable<T>, IQueryable<U>> query)
         {
             var dataset = this.GetDbQuery();

@@ -12,6 +12,8 @@
 
         T GetSingle(Func<IQueryable<T>, T> query);
 
+        List<T> Get();
+
         List<U> Get<U>(Func<IQueryable<T>, IQueryable<U>> query);
 
         IEnumerable<T> Find(Expression<Func<T, bool>> filter = null);

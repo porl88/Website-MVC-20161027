@@ -1,14 +1,18 @@
 ﻿namespace MVC.Services.Account
 {
-    using Transfer;
+    using MVC.Services.Account.Transfer;
 
     public interface IAuthenticationService
-	{
-        bool IsAuthenticated { get; }
-
+    {
         LoginResponse LogIn(LoginRequest request);
 
-		void LogOut();
+        void LogOut();
+
+        bool IsAuthenticated { get; }
+
+        int CurrentUserId { get; }
+
+        string CurrentUserName { get; }
 
         ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request);
 

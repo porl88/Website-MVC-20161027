@@ -1,12 +1,11 @@
 ﻿namespace MVC.Core.Data.EntityFramework
 {
     using System.Data.Entity;
+    using Entities.Account;
     using Entities.Article;
+    using Entities.Culture;
     using Entities.Website;
     using Entities.Website.PageItem;
-    using Entities.Culture;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Entities.Account;
 
     public class WebsiteDbContext : DbContext
     //public class WebsiteDbContext : IdentityDbContext

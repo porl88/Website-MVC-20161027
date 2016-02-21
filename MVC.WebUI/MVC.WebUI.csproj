@@ -164,6 +164,7 @@
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Errors\ErrorMessageHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,6 +183,8 @@
     <Compile Include="Models\Shared\EmailViewModel.cs" />
     <Compile Include="Models\Home\HomeIndexViewModel.cs" />
     <Compile Include="Models\Shared\LanguageDropdownViewModel.cs" />
+    <Compile Include="Models\Users\UsersCreateViewModel.cs" />
+    <Compile Include="Models\Users\UsersIndexViewModel.cs" />
     <Compile Include="Modules\CheckBrowserModule.cs" />
     <Compile Include="Modules\ErrorModule.cs" />
     <Compile Include="Modules\SeoRedirectModule.cs" />
@@ -249,6 +252,8 @@
     <Content Include="Views\Contact\index.cshtml" />
     <Content Include="Views\Shared\_languages.cshtml" />
     <Content Include="Views\Products\products.cshtml" />
+    <Content Include="Views\Users\index.cshtml" />
+    <Content Include="Views\Users\reate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

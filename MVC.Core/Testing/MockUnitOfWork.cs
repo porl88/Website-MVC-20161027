@@ -6,6 +6,7 @@
     using Entities.Website;
     using Entities.Website.PageItem;
     using Entities.Culture;
+    using Entities.Account;
 
     public class MockUnitOfWork : IUnitOfWork
 	{
@@ -16,6 +17,7 @@
         private readonly IRepository<PageVersion> pageVersionRepository;
         private readonly IRepository<PlainText> plainTextRepository;
         private readonly IRepository<RichText> richTextRepository;
+        private readonly IRepository<User> userRepository;
 
         public MockUnitOfWork()
 		{
@@ -26,6 +28,7 @@
             this.pageVersionRepository = new MockRepository<PageVersion>();
             this.plainTextRepository = new MockRepository<PlainText>();
             this.richTextRepository = new MockRepository<RichText>();
+            this.userRepository = new MockRepository<User>();
         }
 
         public IRepository<Article> ArticleRepository
@@ -61,6 +64,11 @@
         public IRepository<RichText> RichTextRepository
         {
             get { return this.richTextRepository; }
+        }
+
+        public IRepository<User> UserRepository
+        {
+            get { return this.userRepository; }
         }
 
         public void Commit()

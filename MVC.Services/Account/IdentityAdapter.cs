@@ -52,7 +52,7 @@
 
             if (request.Persistence != null)
             {
-                authenticationProperties.ExpiresUtc = DateTimeOffset.UtcNow.Add(request.Persistence);
+                authenticationProperties.ExpiresUtc = DateTimeOffset.UtcNow.Add((TimeSpan)request.Persistence);
             }
 
             this.context.Authentication.SignIn(authenticationProperties);

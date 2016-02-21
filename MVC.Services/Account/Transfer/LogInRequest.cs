@@ -8,6 +8,6 @@
 
         public string Password { get; set; }
 
-        public TimeSpan Persistence { get; set; }
+        public TimeSpan? Persistence { get; set; }
     }
 }

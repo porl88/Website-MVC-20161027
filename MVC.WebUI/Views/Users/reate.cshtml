@@ -1,0 +1,33 @@
+﻿@model MVC.WebUI.Models.Users.UsersCreateViewModel
+@using MVC.Core.Configuration
+@{
+    ViewBag.Title = "Users | Add New User";
+}
+
+<form action="@Url.Action("Create")" method="post">
+    @Html.ValidationSummary(false)
+
+    <fieldset>
+        <legend>Name</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, new { minlength = "2", maxlength = "50", required = "required", autofocus = "autofocus", pattern = FormPatterns.Name, title = FormPatterns.NameMessage })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { minlength = "2", maxlength = "50", required = "required", pattern = FormPatterns.Name, title = FormPatterns.NameMessage })
+            </li>
+        </ol>
+    </fieldset>
+    <fieldset>
+        <legend>Contact Details</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { type = "email", size = "40", maxlength = "256", required = "required", pattern = FormPatterns.Email, title = FormPatterns.EmailMessage })
+            </li>
+        </ol>
+    </fieldset>
+    <button>Save</button>
+</form>

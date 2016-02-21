@@ -69,7 +69,7 @@
                 }
                 else if (response.Status == StatusCode.BadRequest)
                 {
-                    this.ModelState.AddModelError(string.Empty, "Your account was not created for the following reason: " + this.GetErrorMessage(response.CreateAccountStatus));
+                    this.ModelState.AddModelError(string.Empty, "Your account was not created for the following reason: " + ErrorMessageHelper.GetErrorMessage(response.CreateAccountStatus));
                 }
                 else
                 {
@@ -82,13 +82,14 @@
 
         // GET: /account/login
         [AllowAnonymous]
-        public ActionResult LogIn()
+        public ActionResult LogIn(string returnUrl)
         {
             if (this.authenticationService.IsAuthenticated)
             {
                 return this.RedirectToAction("Index", "Home");
             }
 
+            ViewBag.ReturnUrl = returnUrl;
             return this.View();
         }
 
@@ -299,33 +300,6 @@
                 Subject = "Please activate your account with " + WebsiteConfig.WebsiteUrl,
                 Message = message
             });
-        }
-
-        private string GetErrorMessage(CreateAccountStatus status)
-        {
-            switch (status)
-            {
-                case CreateAccountStatus.DuplicateUserName:
-                    return "Username already exists. Please enter a different user name.";
-                case CreateAccountStatus.DuplicateEmail:
-                    return "A username for that e-mail address already exists. Please enter a different e-mail address.";
-                case CreateAccountStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-                case CreateAccountStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-                case CreateAccountStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-                case CreateAccountStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-                case CreateAccountStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-                case CreateAccountStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-                case CreateAccountStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
         }
     }
 }

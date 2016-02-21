@@ -4,9 +4,13 @@
     {
         public const string Email = @" *[a-zA-Z\d!#\$%&'\*\+\-/=\?\^_`\{\|}~]+(\.[a-zA-Z\d!#\$%&'\*\+\-/=\?\^_`\{\|}~]+)*@[a-zA-Z\d]+([\.\-][a-zA-Z\d]+)*(\.[a-zA-Z]{2,}) *";
 
+        public const string EmailMessage = "Must be a valid email address";
+
         public const string UkPostCode = @" *[a-zA-Z]{1,2}\d[a-zA-Z\d]? *\d[a-zA-Z]{2} *";
 
-        public const string Name = @"(?=.*\w{2})[a-zA-Z '-]"; // must contain at least 2 consecutive letters
+        public const string Name = @" *[a-zA-Z]+([ '-][a-zA-Z]+)* *";
+
+        public const string NameMessage = "Must be a valid name. Special characters and numbers are not allowed (apart from apostrophes(') and hyphens (-))";
 
         public const string DomainName = @"(https?://\.)?(www\.)?(?!www\.)[a-z0-9-]+(\.[a-z]+)+";
 

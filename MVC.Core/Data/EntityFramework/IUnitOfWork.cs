@@ -5,6 +5,7 @@
     using Entities.Website;
     using Entities.Website.PageItem;
     using Entities.Culture;
+    using Entities.Account;
 
     public interface IUnitOfWork
 	{
@@ -21,6 +22,8 @@
         IRepository<PlainText> PlainTextRepository { get; }
 
         IRepository<RichText> RichTextRepository { get; }
+
+        IRepository<User> UserRepository { get; }
 
         void Commit();
 

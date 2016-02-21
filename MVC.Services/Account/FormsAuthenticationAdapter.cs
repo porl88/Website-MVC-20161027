@@ -6,11 +6,8 @@
     using Core.Exceptions;
     using Transfer;
 
-    /// <summary>
-    /// Login service. Use when storing credentials in the web.config file.
-    /// </summary>
     public class FormsAuthenticationAdapter : IAuthenticationService
-	{
+    {
         private readonly HttpContext context;
         private readonly IExceptionHandler exceptionHandler;
 
@@ -28,8 +25,24 @@
             }
         }
 
+        public int CurrentUserId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string CurrentUserName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public LoginResponse LogIn(LoginRequest request)
-		{
+        {
             var response = new LoginResponse();
 
             try
@@ -38,8 +51,9 @@
 
                 if (request.Persistence != null)
                 {
+                    //var x = new FormsAuthenticationTicket("authentication", true, (int)request.Persistence.Value.TotalMinutes);
                     persist = true;
-                    this.context.Response.Cookies[0].Expires = DateTime.Now.Add(request.Persistence);
+                    this.context.Response.Cookies[0].Expires = DateTime.Now.Add((TimeSpan)request.Persistence);
                 }
 
                 if (FormsAuthentication.Authenticate(request.UserName, request.Password))
@@ -59,12 +73,12 @@
             }
 
             return response;
-		}
+        }
 
-		public void LogOut()
-		{
-			FormsAuthentication.SignOut();
-		}
+        public void LogOut()
+        {
+            FormsAuthentication.SignOut();
+        }
 
         public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
         {

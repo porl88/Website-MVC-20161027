@@ -11,5 +11,8 @@
 		DeleteAccountResponse DeleteAccount(DeleteAccountRequest request);
 
 		ChangePasswordResponse ChangePassword(ChangePasswordRequest request);
+
+        // UpdateAccount???
+        // GetAccountActivationToken???
 	}
 }

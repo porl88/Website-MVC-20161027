@@ -102,25 +102,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\ChangePasswordStatus.cs" />
     <Compile Include="Account\CreateAccountStatus.cs" />
     <Compile Include="Account\FormsAuthenticationAdapter.cs" />
-    <Compile Include="Account\IAccountService.cs" />
-    <Compile Include="Account\IdentityAdapter.cs" />
-    <Compile Include="Account\IAuthenticationService.cs" />
-    <Compile Include="Account\IRolesService.cs" />
-    <Compile Include="Account\IUserService.cs" />
-    <Compile Include="Account\SimpleMembershipAdapter.cs" />
     <Compile Include="Account\Transfer\ActivateAccountRequest.cs" />
     <Compile Include="Account\Transfer\ActivateAccountResponse.cs" />
     <Compile Include="Account\Transfer\ChangePasswordRequest.cs" />
     <Compile Include="Account\Transfer\ChangePasswordResponse.cs" />
     <Compile Include="Account\Transfer\CreateAccountRequest.cs" />
     <Compile Include="Account\Transfer\CreateAccountResponse.cs" />
-    <Compile Include="Account\Transfer\CreateUserRequest.cs" />
-    <Compile Include="Account\Transfer\CreateUserResponse.cs" />
     <Compile Include="Account\Transfer\DeleteAccountRequest.cs" />
     <Compile Include="Account\Transfer\DeleteAccountResponse.cs" />
+    <Compile Include="Account\IAccountService.cs" />
+    <Compile Include="Account\IAuthenticationService.cs" />
+    <Compile Include="Account\IUserService.cs" />
+    <Compile Include="Account\SimpleMembershipAdapter.cs" />
+    <Compile Include="Account\Transfer\CreateUserRequest.cs" />
+    <Compile Include="Account\Transfer\CreateUserResponse.cs" />
+    <Compile Include="Account\Transfer\GetUsersRequest.cs" />
+    <Compile Include="Account\Transfer\GetUsersResponse.cs" />
     <Compile Include="Account\Transfer\LoginRequest.cs" />
     <Compile Include="Account\Transfer\LoginResponse.cs" />
     <Compile Include="Account\Transfer\ResetPasswordRequest.cs" />

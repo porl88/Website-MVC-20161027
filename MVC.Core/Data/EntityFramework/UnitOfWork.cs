@@ -5,6 +5,7 @@
     using Entities.Website;
     using Entities.Website.PageItem;
     using Entities.Culture;
+    using Entities.Account;
 
     public class UnitOfWork : IUnitOfWork
 	{
@@ -16,6 +17,7 @@
         private readonly IRepository<PageVersion> pageVersionRepository;
         private readonly IRepository<PlainText> plainTextRepository;
         private readonly IRepository<RichText> richTextRepository;
+        private readonly IRepository<User> userRepository;
 
         public UnitOfWork()
 		{
@@ -30,6 +32,7 @@
             this.pageVersionRepository = new Repository<PageVersion>(this.context);
             this.plainTextRepository = new Repository<PlainText>(this.context);
             this.richTextRepository = new Repository<RichText>(this.context);
+            this.userRepository = new Repository<User>(this.context);
         }
 
         public IRepository<Article> ArticleRepository
@@ -65,6 +68,11 @@
         public IRepository<RichText> RichTextRepository
         {
             get { return this.richTextRepository; }
+        }
+
+        public IRepository<User> UserRepository
+        {
+            get { return this.userRepository; }
         }
 
         public void Commit()

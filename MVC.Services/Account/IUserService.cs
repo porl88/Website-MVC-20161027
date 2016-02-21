@@ -1,21 +1,23 @@
 ﻿namespace MVC.Services.Account
 {
-    using Transfer;
+    using MVC.Services.Account.Transfer;
 
     public interface IUserService
     {
         CreateUserResponse CreateUser(CreateUserRequest request);
 
-        //User GetUser(int userId);
+        // GetUserResponse GetUser(GetUserRequest request) - userId, userName, email
 
-        //IEnumerable<User> GetUsers();
+        GetUsersResponse GetUsers(GetUsersRequest request);
 
-        //      void UpdateUser(User user);
+        // EditUserResponse UpdateUser(EditUserRequest request);
 
-        //      void DeleteUser(int userId);
+        // DeleteUserResponse DeleteUser(DeleteUserRequest request);
 
-        //      void SuspendUser(int userId);
+        // SuspendUserResponse SuspendUser(SuspendUserRequest request);
 
-        //void UnlockUser(int userId);
+        // UnlockUserResponse UnlockUser(UnlockUserRequest request);
+
+        // GetAccountActivationToken???
     }
 }

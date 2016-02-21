@@ -42,6 +42,11 @@
             }
         }
 
+        public List<T> Get()
+        {
+            return this.entities.ToList();
+        }
+
         public List<U> Get<U>(Func<IQueryable<T>, IQueryable<U>> query)
         {
             return query(this.entities.AsQueryable()).ToList();

@@ -1,19 +1,19 @@
 ﻿namespace MVC.Services.Account
 {
     using System;
-    using System.Linq;
     using System.Web;
     using System.Web.Security; // in System.Web.ApplicationServices
     using Core.Exceptions;
     using Transfer;
     using WebMatrix.WebData;
+    using Core.Data.EntityFramework;
+    using System.Linq;
 
     /***********************************************************************************************************************
 
-    nuget:
+    nuget: install-package Microsoft.AspNet.WebPages.WebData
 
-    install-package Microsoft.AspNet.WebPages.WebData
-
+    Membership: uses System.Web.Security which is in System.Web.ApplicationServices
 
     in Global.asax:
 
@@ -27,12 +27,14 @@
     public class SimpleMembershipAdapter : IAuthenticationService, IAccountService, IUserService
     {
         private readonly HttpContext context;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IExceptionHandler exceptionHandler;
 
-        public SimpleMembershipAdapter(IExceptionHandler exceptionHandler)
+        public SimpleMembershipAdapter(IUnitOfWork unitOfWork, IExceptionHandler exceptionHandler)
         {
             this.context = HttpContext.Current;
             this.exceptionHandler = exceptionHandler;
+            this.unitOfWork = unitOfWork;
         }
 
         public bool IsAuthenticated
@@ -40,6 +42,22 @@
             get
             {
                 return WebSecurity.IsAuthenticated;
+            }
+        }
+
+        public int CurrentUserId
+        {
+            get
+            {
+                return WebSecurity.CurrentUserId;
+            }
+        }
+
+        public string CurrentUserName
+        {
+            get
+            {
+                return WebSecurity.CurrentUserName;
             }
         }
 
@@ -54,7 +72,7 @@
                 if (request.Persistence != null)
                 {
                     persist = true;
-                    this.context.Response.Cookies[0].Expires = DateTime.Now.Add(request.Persistence);
+                    this.context.Response.Cookies[0].Expires = DateTime.Now.Add((TimeSpan)request.Persistence);
                 }
 
                 if (WebSecurity.Login(request.UserName, request.Password, persist))
@@ -239,14 +257,20 @@
             try
             {
                 var user = request.User;
-                var password = Membership.GeneratePassword(14, 5);
+                var password = request.Password ?? Membership.GeneratePassword(14, 5);
+                var now = DateTimeOffset.Now;
 
                 var propertyValues = new
                 {
-                    Email = user.Email
+                    FirstName = user.FirstName.Trim(),
+                    LastName = user.LastName.Trim(),
+                    Email = user.Email.Trim().ToLower(),
+                    Created = now,
+                    Updated = now
                 };
 
-                WebSecurity.CreateUserAndAccount(user.UserName, password, propertyValues, requireConfirmationToken: false);
+                WebSecurity.CreateUserAndAccount(user.UserName.Trim(), password, propertyValues, requireConfirmationToken: false);
+                response.Password = password;
                 response.Status = StatusCode.OK;
             }
             // https://msdn.microsoft.com/en-us/library/system.web.security.membershipcreateuserexception.statuscode(v=vs.110).aspx
@@ -259,6 +283,33 @@
             {
                 response.Status = StatusCode.InternalServerError;
                 this.exceptionHandler.HandleException(ex);
+            }
+
+            return response;
+        }
+
+        public GetUsersResponse GetUsers(GetUsersRequest request)
+        {
+            var response = new GetUsersResponse();
+
+            try
+            {
+                var users = this.unitOfWork.UserRepository.Get();
+
+                response.Users = users.Select(x => new UserDto
+                {
+                    UserName = x.UserName,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email
+                }).ToList();
+
+                response.Status = StatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                this.exceptionHandler.HandleException(ex);
+                response.Status = StatusCode.InternalServerError;
             }
 
             return response;
