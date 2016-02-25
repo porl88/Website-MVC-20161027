@@ -49,6 +49,7 @@ Install from Nuget:
     Ninject.Web.WebApi ("Ninject Integration for WebApi 2")
 
 Install Ninject.Web.WebApi and Ninject.WebApi.WebHost first as they include the other namespaces as dependencies
+(Make sure you upgrade to latest versions)
 
 After you install all of those, you'll find a pre-built NinjectWebCommon class in your App_Start folder. Just add you bindings to the RegisterServices() method.
 

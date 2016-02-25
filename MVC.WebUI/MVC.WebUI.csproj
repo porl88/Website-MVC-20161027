@@ -146,7 +146,9 @@
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="robots.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -171,6 +173,7 @@
     </Compile>
     <Compile Include="Helpers\BreadcrumbHelper.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />
+    <Compile Include="Helpers\ValidationSummaryHelper.cs" />
     <Compile Include="Helpers\XmlHelpers.cs" />
     <Compile Include="Models\Account\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
