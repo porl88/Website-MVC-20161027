@@ -84,11 +84,6 @@
         [AllowAnonymous]
         public ActionResult LogIn(string returnUrl)
         {
-            if (this.authenticationService.IsAuthenticated)
-            {
-                return this.RedirectToAction("Index", "Home");
-            }
-
             ViewBag.ReturnUrl = returnUrl;
             return this.View();
         }
@@ -130,11 +125,8 @@
         }
 
         // GET: /account/logout
-        [AllowAnonymous]
         public RedirectToRouteResult LogOut()
         {
-            // should be HttpPost ???
-            // show failure message ???
             this.authenticationService.LogOut();
             TempData["SuccessMessage"] = "You have successfully logged out.";
             return this.RedirectToAction("LogIn");

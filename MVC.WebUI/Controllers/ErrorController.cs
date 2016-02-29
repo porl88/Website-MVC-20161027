@@ -1,11 +1,13 @@
 ﻿namespace MVC.WebUI.Controllers
 {
+    using System;
     using System.Net;
     using System.Web.Mvc;
 
     /// <summary>
     /// Error pages that fall outside the 500 Status Code range.
     /// </summary>
+    [Obsolete("Use <httpErrors> section in web.config file instead.")]
     internal class ErrorController : Controller
 	{
 		[ActionName("error-404")]

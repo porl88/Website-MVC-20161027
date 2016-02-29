@@ -143,6 +143,11 @@
     <Content Include="Content\js\website\account\website-account-index.js" />
     <Content Include="Content\js\website\account\website-account-login.js" />
     <Content Include="Content\js\website\home\website-home-index.js" />
+    <Content Include="Errors\404-13.html" />
+    <Content Include="Errors\404.aspx" />
+    <Content Include="Errors\404.html" />
+    <Content Include="Errors\500.aspx" />
+    <Content Include="Errors\500.html" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="robots.txt" />
@@ -199,12 +204,6 @@
     <Content Include="Views\_viewstart.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Home\index.cshtml" />
-    <Content Include="Views\Shared\error-401.cshtml" />
-    <Content Include="Views\Shared\error-404.cshtml" />
-    <Content Include="Views\Shared\error-cookies-disabled.cshtml" />
-    <Content Include="Views\Shared\error-file-upload-size.cshtml" />
-    <Content Include="Views\Shared\error-request-validation.cshtml" />
-    <Content Include="Views\Shared\error.cshtml" />
     <Content Include="Views\Shared\_sitemap.cshtml" />
     <Content Include="App_Code\helpers.cshtml" />
     <Content Include="Helpers\ListHelper.cshtml" />
@@ -257,6 +256,9 @@
     <Content Include="Views\Products\products.cshtml" />
     <Content Include="Views\Users\index.cshtml" />
     <Content Include="Views\Users\reate.cshtml" />
+    <Content Include="Views\Shared\errors\error.cshtml" />
+    <Content Include="Views\Shared\errors\httpantiforgeryexception.cshtml" />
+    <Content Include="Views\Shared\errors\httprequestvalidationexception.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

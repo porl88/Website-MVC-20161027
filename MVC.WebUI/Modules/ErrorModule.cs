@@ -9,6 +9,7 @@
     // http://dusted.codes/demystifying-aspnet-mvc-5-error-pages-and-error-logging
 
     // NB: Register in web.config System.WebServer/Modules
+    [Obsolete("Use <httpErrors> section in web.config file instead.")]
     public class ErrorModule : IHttpModule
 	{
 		public void Init(HttpApplication context)

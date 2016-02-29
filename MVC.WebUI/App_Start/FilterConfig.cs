@@ -16,22 +16,27 @@
 
             // http://community.codesmithtools.com/CodeSmith_Community/b/tdupont/archive/2011/03/01/error-handling-and-customerrors-and-mvc3-oh-my.aspx
             filters.Add(new HandleErrorAttribute
-			{
-				ExceptionType = typeof(HttpRequestValidationException),
-				View = "error-request-validation",
+            {
+                ExceptionType = typeof(HttpRequestValidationException),
+                View = "~/views/shared/errors/httprequestvalidationexception.cshtml",
                 Order = 1
-			});
+            });
 
-			filters.Add(new HandleErrorAttribute
-			{
-				ExceptionType = typeof(HttpAntiForgeryException),
-				View = "error-cookies-disabled",
+            filters.Add(new HandleErrorAttribute
+            {
+                ExceptionType = typeof(HttpAntiForgeryException),
+                View = "~/views/shared/errors/httpantiforgeryexception.cshtml",
                 Order = 1
-			});
+            });
 
-			filters.Add(new GlobalErrorAttribute());
+            // custom error attribute to log all errors
+            filters.Add(new GlobalErrorAttribute());
 
-            filters.Add(new HandleErrorAttribute());
-		}
-	}
+            // enables the default error page
+            filters.Add(new HandleErrorAttribute
+            {
+                View = "~/views/shared/errors/error.cshtml"
+            });
+        }
+    }
 }

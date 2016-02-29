@@ -111,6 +111,9 @@
 </head>
 <body>
 
+    @*http://webaim.org/techniques/skipnav/*@
+    <a class="skip" href="#main">Skip to main content</a>
+
     @*http://www.enable-javascript.com/*@
     <noscript>
         <section class="alert error compact">
@@ -125,7 +128,7 @@
 
         <header class="page-header" role="banner">
             <a href="/" title="Click here to return to the home page">
-                <img src="" alt="Website logo" width="50" height="50" />
+                <img src="~/content/images/_layout/website-logo.png" alt="Website logo" width="50" height="50" />
             </a>
             <nav role="navigation">
                 <ul>
@@ -139,7 +142,7 @@
             @Html.Action("Languages", "Base")
         </header>
 
-        <main role="main">
+        <main id="main" role="main">
             @RenderBody()
         </main>
 
