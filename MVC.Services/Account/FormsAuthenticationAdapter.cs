@@ -80,7 +80,7 @@
             FormsAuthentication.SignOut();
         }
 
-        public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
+        public ResetPasswordRequestResponse ResetPasswordRequest(RequestPasswordRequest request)
         {
             throw new NotImplementedException();
         }

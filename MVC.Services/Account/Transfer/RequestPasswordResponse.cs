@@ -1,6 +1,6 @@
 ﻿namespace MVC.Services.Account.Transfer
 {
-    public class ResetPasswordRequestResponse : BaseResponse
+    public class RequestPasswordResponse : BaseResponse
     {
         public string ResetPasswordToken { get; set; }
     }

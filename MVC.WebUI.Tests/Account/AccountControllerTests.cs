@@ -1,200 +1,170 @@
 ﻿namespace MVC.WebUI.Tests.Account
 {
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Controllers;
+    using System.Web;
     using System.Web.Mvc;
-    using Services.Message;
-    using Services.Account;
+    using System.Web.Routing;
+    using Controllers;
     using Core.Exceptions;
-    using Services.Account.Transfer;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models.Account;
+    using Moq;
+    using Services.Account;
+    using Services.Account.Transfer;
 
     // http://www.asp.net/mvc/overview/older-versions-1/unit-testing/creating-unit-tests-for-asp-net-mvc-applications-cs
 
     [TestClass]
     public class AccountControllerTests
     {
-        private IAuthenticationService loginService;
-        private IAccountService accountService;
+        private Mock<HttpContextBase> mockContext;
 
         [TestInitialize]
         public void Init()
         {
-            this.loginService = new MockLoginService();
-            this.accountService = this.CreateMockAccountService();
+            this.mockContext = new Mock<HttpContextBase>();
         }
 
-        //[TestMethod]
-        //public void LogIn()
-        //{
-        //    // arrange
-        //    var controller = new AccountController(this.loginService, this.accountService, new NullMessageService());
-
-        //    // act
-        //    var result = controller.LogIn() as ViewResult;
-
-        //    // assert
-        //    Assert.IsNotNull(result);
-        //}
-
-        //[TestMethod]
-        //public void LogIn_AlreadyAuthenticated()
-        //{
-        //    // arrange
-        //    var controller = new AccountController(this.loginService, this.accountService, new NullMessageService());
-        //    controller.LogIn("Hello", "Sailor");
-
-        //    // act
-        //    var result = controller.LogIn() as RedirectToRouteResult;
-
-        //    // assert
-        //    Assert.IsNotNull(result);
-        //}
-
         [TestMethod]
-        public void LogIn_ValidCredentials()
+        public void Login()
         {
             // arrange
-            var controller = new AccountController(this.loginService, this.accountService, new NullMessageService());
-            var returnUrl = string.Empty;
+            var mockAuthenticationService = new Mock<IAuthenticationService>();
+            var returnUrl = "xxxx";
+            var controller = new AccountController(mockAuthenticationService.Object, null, null);
+
+            // act
+            var result = controller.LogIn(returnUrl) as ViewResult;
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(string.Empty, result.ViewName);
+            Assert.AreEqual(returnUrl, result.ViewData["returnUrl"]);
+        }
+
+        [TestMethod]
+        public void Login_Post_Success()
+        {
+            // arrange
+            var mockAuthenticationService = new Mock<IAuthenticationService>();
+            mockAuthenticationService.Setup(m => m.LogIn(It.Is<LoginRequest>(x => x.UserName == "YYY" && x.Password == "ZZZ")))
+                .Returns(new LoginResponse
+                {
+                    Status = StatusCode.OK,
+                    IsAuthenticated = true
+                });
+
+            var returnUrl = "/home";
             var model = new LoginViewModel
             {
-                UserName = "Hello",
-                Password = "Sailor"
+                UserName = "YYY",
+                Password = "ZZZ",
             };
+
+            var controller = new AccountController(mockAuthenticationService.Object, null, null);
+            var requestContext = new RequestContext(this.mockContext.Object, new RouteData());
+            controller.Url = new UrlHelper(requestContext);
+
+            // act
+            var result = controller.LogIn(model, returnUrl) as RedirectResult;
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(returnUrl, result.Url);
+        }
+
+        [TestMethod]
+        public void Login_Post_Success_InvalidReturnUrl()
+        {
+            // arrange
+            var mockAuthenticationService = new Mock<IAuthenticationService>();
+            mockAuthenticationService.Setup(m => m.LogIn(It.Is<LoginRequest>(x => x.UserName == "YYY" && x.Password == "ZZZ")))
+                .Returns(new LoginResponse
+                {
+                    Status = StatusCode.OK,
+                    IsAuthenticated = true
+                });
+
+            var returnUrl = "http://home";
+            var model = new LoginViewModel
+            {
+                UserName = "YYY",
+                Password = "ZZZ",
+            };
+
+            var controller = new AccountController(mockAuthenticationService.Object, null, null);
+
+            // mock the UrlHelper
+            var requestContext = new RequestContext(this.mockContext.Object, new RouteData());
+            controller.Url = new UrlHelper(requestContext);
 
             // act
             var result = controller.LogIn(model, returnUrl) as RedirectToRouteResult;
 
             // assert
-            //Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(RedirectResult));
-            //Assert.AreEqual("/MyURL", ((RedirectResult)result).Url);
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Home", result.RouteValues["controller"]);
         }
 
-        private class MockLoginService : IAuthenticationService
+        [TestMethod]
+        public void Login_Post_Unauthenticated()
         {
-            public static bool isAuthenticated;
-
-            public int CurrentUserId
-            {
-                get
+            // arrange
+            var mockAuthenticationService = new Mock<IAuthenticationService>();
+            mockAuthenticationService.Setup(m => m.LogIn(It.IsAny<LoginRequest>()))
+                .Returns(new LoginResponse
                 {
-                    throw new NotImplementedException();
-                }
-            }
+                    Status = StatusCode.Unauthorized,
+                    IsAuthenticated = false
+                });
 
-            public string CurrentUserName
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            var controller = new AccountController(mockAuthenticationService.Object, null, null);
 
-            public bool IsAuthenticated
-            {
-                get
-                {
-                    return isAuthenticated;
-                }
-            }
+            // act
+            var result = controller.LogIn(new LoginViewModel(), string.Empty) as ViewResult;
 
-            public LoginResponse LogIn(LoginRequest request)
-            {
-                var response = new LoginResponse();
-
-                if (request.UserName == "Hello" && request.Password == "Sailor")
-                {
-                    isAuthenticated = true;
-                    response.Status = StatusCode.OK;
-                }
-                else
-                {
-                    response.Status = StatusCode.Unauthorized;
-                }
-
-                return response;
-            }
-
-            public void LogOut()
-            {
-                isAuthenticated = false;
-            }
-
-            public ResetPasswordResponse ResetPassword(ResetPasswordRequest request)
-            {
-                throw new NotImplementedException();
-            }
-
-            public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
-            {
-                throw new NotImplementedException();
-            }
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.ViewData.ModelState.IsValid);
         }
 
-        private SimpleMembershipAdapter CreateMockLoginService()
+        [TestMethod]
+        public void Login_Post_ServerError()
         {
-            var loginService = new SimpleMembershipAdapter(null, new NullExceptionHandler());
-            return loginService;
+            // arrange
+            var mockAuthenticationService = new Mock<IAuthenticationService>();
+            mockAuthenticationService.Setup(m => m.LogIn(It.IsAny<LoginRequest>()))
+                .Returns(new LoginResponse
+                {
+                    Status = StatusCode.InternalServerError,
+                    IsAuthenticated = false
+                });
+
+            var controller = new AccountController(mockAuthenticationService.Object, null, null);
+
+            // act
+            var result = controller.LogIn(new LoginViewModel(), string.Empty) as ViewResult;
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.ViewData.ModelState.IsValid);
         }
 
-        private SimpleMembershipAdapter CreateMockAccountService()
+        [TestMethod]
+        public void LogOut()
         {
-            var accountService = new SimpleMembershipAdapter(null, new NullExceptionHandler());
-            return accountService;
+            // arrange
+            var mockAuthenticationService = new Mock<IAuthenticationService>();
+            var controller = new AccountController(mockAuthenticationService.Object, null, null);
+
+            // act
+            var result = controller.LogOut() as RedirectToRouteResult;
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.AreEqual("Home", result.RouteValues["controller"]);
+            Assert.IsNotNull(controller.TempData["SuccessMessage"]);
         }
     }
 }
-
-
-
-/*
-
-    using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using SportsStore.WebUI.Controllers;
-using SportsStore.WebUI.Infrastructure.Abstract;
-using SportsStore.WebUI.Models;
-namespace SportsStore.UnitTests {
-[TestClass]
-public class AdminSecurityTests {
-[TestMethod]
-public void Can_Login_With_Valid_Credentials() {
-// Arrange - create a mock authentication provider
-Mock<IAuthProvider> mock = new Mock<IAuthProvider>();
-mock.Setup(m => m.Authenticate("admin", "secret")).Returns(true);
-// Arrange - create the view model
-LoginViewModel model = new LoginViewModel {
-UserName = "admin",
-Password = "secret"
-};
-// Arrange - create the controller
-AccountController target = new AccountController(mock.Object);
-// Act - authenticate using valid credentials
-ActionResult result = target.Login(model, "/MyURL");
-// Assert
-Assert.IsInstanceOfType(result, typeof(RedirectResult));
-Assert.AreEqual("/MyURL", ((RedirectResult)result).Url);
-}
-[TestMethod]
-public void Cannot_Login_With_Invalid_Credentials() {
-// Arrange - create a mock authentication provider
-Mock<IAuthProvider> mock = new Mock<IAuthProvider>();
-mock.Setup(m => m.Authenticate("badUser", "badPass")).Returns(false);
-// Arrange - create the view model
-LoginViewModel model = new LoginViewModel {
-UserName = "badUser",
-Password = "badPass"
-};
-// Arrange - create the controller
-AccountController target = new AccountController(mock.Object);
-// Act - authenticate using valid credentials
-ActionResult result = target.Login(model, "/MyURL");
-// Assert
-Assert.IsInstanceOfType(result, typeof(ViewResult));
-Assert.IsFalse(((ViewResult)result).ViewData.ModelState.IsValid);
-}}
-*/

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ResetPasswordRequestRequest
+    public class RequestPasswordRequest
     {
         public string UserName { get; set; }
 

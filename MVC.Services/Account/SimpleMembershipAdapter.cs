@@ -98,7 +98,7 @@
             WebSecurity.Logout();
         }
 
-        public ResetPasswordRequestResponse ResetPasswordRequest(ResetPasswordRequestRequest request)
+        public ResetPasswordRequestResponse ResetPasswordRequest(RequestPasswordRequest request)
         {
             var response = new ResetPasswordRequestResponse();
 

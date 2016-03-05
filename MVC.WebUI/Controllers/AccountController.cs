@@ -50,7 +50,7 @@
         [AllowAnonymous, HttpPost, ValidateAntiForgeryToken, ValidateHttpReferrer]
         public ActionResult CreateAccount(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var request = new CreateAccountRequest
                 {
@@ -64,7 +64,7 @@
                 if (response.Status == StatusCode.OK)
                 {
                     this.SendActivateAccountToken(model.Email, response.ActivateAccountToken);
-                    TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
+                    this.TempData["SuccessMessage"] = "You have successfully created a new account. An activation code has been sent to you by email. When you receive the this email, click on the link to activate your account.";
                     return this.RedirectToAction("LogIn");
                 }
                 else if (response.Status == StatusCode.BadRequest)
@@ -73,7 +73,7 @@
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, ErrorMessageHelper.GetErrorMessage(StatusCode.InternalServerError));
+                    this.ModelState.AddModelError(string.Empty, ErrorMessageHelper.GetErrorMessage(StatusCode.InternalServerError));
                 }
             }
 
@@ -84,7 +84,7 @@
         [AllowAnonymous]
         public ActionResult LogIn(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            this.ViewBag.ReturnUrl = returnUrl;
             return this.View();
         }
 
@@ -92,7 +92,7 @@
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult LogIn(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var request = new LoginRequest
                 {
@@ -113,11 +113,11 @@
                 }
                 else if (response.Status == StatusCode.Unauthorized)
                 {
-                    ModelState.AddModelError(string.Empty, "Your user name and/or password are incorrect.");
+                    this.ModelState.AddModelError(string.Empty, "Your user name and/or password are incorrect.");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, ErrorMessageHelper.GetErrorMessage(StatusCode.InternalServerError));
+                    this.ModelState.AddModelError(string.Empty, ErrorMessageHelper.GetErrorMessage(StatusCode.InternalServerError));
                 }
             }
 
@@ -128,8 +128,8 @@
         public RedirectToRouteResult LogOut()
         {
             this.authenticationService.LogOut();
-            TempData["SuccessMessage"] = "You have successfully logged out.";
-            return this.RedirectToAction("LogIn");
+            this.TempData["SuccessMessage"] = "You have successfully logged out.";
+            return this.RedirectToAction("Index", "Home");
         }
 
         // GET: /account/change-password
@@ -144,7 +144,7 @@
         [HttpPost, ValidateAntiForgeryToken, ValidateHttpReferrer]
         public ActionResult ChangePassword(ChangePasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var request = new ChangePasswordRequest
                 {
@@ -161,8 +161,8 @@
                 }
                 else
                 {
-                    ViewBag.DisplaySummary = "yes";
-                    ModelState.AddModelError(string.Empty, "Your old password has not been recognised. Please try again.");
+                    this.ViewBag.DisplaySummary = "yes";
+                    this.ModelState.AddModelError(string.Empty, "Your old password has not been recognised. Please try again.");
                 }
             }
 
@@ -187,9 +187,9 @@
         [ActionName("request-password")]
         public ActionResult RequestPassword(RequestPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var request = new ResetPasswordRequestRequest
+                var request = new RequestPasswordRequest
                 {
                     UserName = model.UserName,
                     Expires = TimeSpan.FromHours(2)
@@ -232,7 +232,7 @@
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken, ValidateHttpReferrer]
         public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var request = new ResetPasswordRequest
                 {
@@ -249,7 +249,7 @@
                 }
                 else
                 {
-                    TempData.Add("ResetPasswordFail", "XXX");
+                    this.TempData.Add("ResetPasswordFail", "XXX");
                     return this.RedirectToAction("request-password");
                 }
             }
@@ -259,7 +259,7 @@
 
         private ActionResult SecureRedirect(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (this.Url.IsLocalUrl(returnUrl))
             {
                 return this.Redirect(returnUrl);
             }
