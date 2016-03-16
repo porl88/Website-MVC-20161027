@@ -14,7 +14,7 @@
 
         string CurrentUserName { get; }
 
-        ResetPasswordRequestResponse ResetPasswordRequest(RequestPasswordRequest request);
+        RequestPasswordResponse ResetPasswordRequest(RequestPasswordRequest request);
 
         ResetPasswordResponse ResetPassword(ResetPasswordRequest request);
     }

@@ -166,5 +166,35 @@
             Assert.AreEqual("Home", result.RouteValues["controller"]);
             Assert.IsNotNull(controller.TempData["SuccessMessage"]);
         }
+
+        [TestMethod]
+        public void RequestPassword()
+        {
+            // arrange
+            var controller = new AccountController(null, null, null);
+
+            // act
+            var result = controller.RequestPassword() as ViewResult;
+
+            // assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void RequestPassword_Post()
+        {
+            // arrange
+            var controller = new AccountController(null, null, null);
+            var model = new RequestPasswordViewModel
+            {
+
+            };
+
+            // act
+            var result = controller.RequestPassword(model) as ViewResult;
+
+            // assert
+            Assert.IsNotNull(result);
+        }
     }
 }

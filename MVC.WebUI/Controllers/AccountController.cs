@@ -82,7 +82,7 @@
 
         // GET: /account/login
         [AllowAnonymous]
-        public ActionResult LogIn(string returnUrl)
+        public ViewResult LogIn(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
             return this.View();
@@ -172,13 +172,8 @@
         // GET: /account/request-password
         [AllowAnonymous]
         [ActionName("request-password")]
-        public ActionResult RequestPassword()
+        public ViewResult RequestPassword()
         {
-            if (this.authenticationService.IsAuthenticated)
-            {
-                return this.RedirectToAction("Index");
-            }
-
             return this.View();
         }
 

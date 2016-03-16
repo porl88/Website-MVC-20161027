@@ -123,8 +123,8 @@
     <Compile Include="Account\Transfer\LoginRequest.cs" />
     <Compile Include="Account\Transfer\LoginResponse.cs" />
     <Compile Include="Account\Transfer\ResetPasswordRequest.cs" />
-    <Compile Include="Account\Transfer\ResetPasswordRequestRequest.cs" />
-    <Compile Include="Account\Transfer\ResetPasswordRequestResponse.cs" />
+    <Compile Include="Account\Transfer\RequestPasswordRequest.cs" />
+    <Compile Include="Account\Transfer\RequestPasswordResponse.cs" />
     <Compile Include="Account\Transfer\ResetPasswordResponse.cs" />
     <Compile Include="Account\Transfer\UserDto.cs" />
     <Compile Include="Article\ArticleService.cs" />

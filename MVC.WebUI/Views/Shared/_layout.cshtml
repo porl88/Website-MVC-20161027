@@ -6,10 +6,12 @@
     http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 
     <!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-    <!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-    <!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-    <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-    <!--[if (gt IE 9)|!(IE)]><!--> <html> <!--<![endif]-->
+    <!--[if IE 7 ]> <html class="ie7"> <![endif]-->
+    <!--[if IE 8 ]> <html class="ie8"> <![endif]-->
+    <!--[if IE 9 ]> <html class="ie9"> <![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <html>
+    <!--<![endif]-->
 
 *@
 
@@ -47,6 +49,9 @@
     <meta name="Author" content="Paul Arnold" />
 
     @Styles.Render("~/css/website")
+
+    @*Canonical URL*@
+    <link rel="canonical" href="http://website.com" />
 
     @*
     FAVICONS: minimum master favicon size: 260x260
@@ -169,18 +174,19 @@
     </div>
 
     <!--[if gte IE 9]><!-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
     <!--<![endif]-->
-    <!--[if lte IE 8]>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <![endif]-->
     <script>
         // <![CDATA[
-        if (!window.jQuery) document.write('<script src="/scripts/jquery-1.11.1.min.js"><\/script>');
+        if (!window.jQuery) document.write('<script src="/content/js/jquery/jquery-2.2.1.min.js"><\/script>');
         // ]]>
     </script>
+    <!--[if lte IE 8]>
+        <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
+    <![endif]-->
 
     @Scripts.RenderFormat("<script src=\"{0}\" async=\"async\"></script>", "~/js/website")
+
     <!--[if lte IE 8]>
         <script type="text/javascript" src="~/content/scripts/website_ie.js" defer="defer"></script>
     <![endif]-->
