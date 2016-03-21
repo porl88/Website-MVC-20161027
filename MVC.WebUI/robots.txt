@@ -1,4 +1,5 @@
 ﻿User-Agent: *
 Sitemap: http://www.WebSite.com/sitemap.xml
 Disallow: /Account/
+Disallow: /Content/
 Disallow: /Error/

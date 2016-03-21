@@ -64,24 +64,29 @@
     rel="icon" type="image/x-icon" - for IE9+
     rel="icon" - for IE11+
     *@
-    <link rel="shortcut icon" href="~/content/images/favicon/favicon.ico" />
+    <link rel="shortcut icon" href="~/content/images/favicons/favicon.ico" />
 
     @*SVG FAVICONS: Firefox 41+ (4+), Safari (9)*@
-    <link rel="icon" type="image/svg+xml" sizes="any" href="~/content/images/favicon/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="~/content/images/favicons/favicon.svg" />
 
     @*PNG FAVICONS: IE11, Edge, Firefox 2+, Chrome 4+, Safari 3.1+ (not IOS), Opera 10.1+*@
-    <link rel="icon" type="image/png" sizes="16x16" href="~/content/images/favicon/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="~/content/images/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="~/content/images/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/content/images/favicons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/content/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="~/content/images/favicons/favicon-96x96.png" />
 
-    <link rel="apple-touch-icon" sizes="57x57" href="~/content/images/favicon/favicon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="~/content/images/favicon/favicon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="~/content/images/favicon/favicon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="~/content/images/favicon/favicon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="~/content/images/favicon/favicon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="~/content/images/favicon/favicon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="~/content/images/favicon/favicon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="~/content/images/favicon/favicon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/content/images/favicons/favicon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="~/content/images/favicons/favicon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="~/content/images/favicons/favicon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="~/content/images/favicons/favicon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="~/content/images/favicons/favicon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="~/content/images/favicons/favicon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/content/images/favicons/favicon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/content/images/favicons/favicon-152x152.png" />
+
+    @*OPEN SEARCH
+    http://www.opensearch.org
+    https://developer.mozilla.org/en-US/Add-ons/Creating_OpenSearch_plugins_for_Firefox*@
+    <link rel="search" type="application/opensearchdescription+xml" href="~/content/xml/open-search/search.xml" title="Website Search" />
 
     <!--[if lte IE 8]>
         <link rel="stylesheet" type="text/css" href="~/content/css/website_ie.css" />
@@ -97,6 +102,19 @@
     @*no-js: http://www.paulirish.com/2009/avoiding-the-fouc-v3/ - also used in Modernizr*@
     <script>(function (H) { H.className = H.className.replace(/\bno-js\b/, 'js') })(document.documentElement)</script>
     @*<script>document.documentElement.classList.remove('no-js')</script>*@
+
+    @*WEB APPLICATION*@
+
+    @*The Web Manifest specification*@
+    @*https://developer.mozilla.org/en-US/docs/Web/Manifest
+    http://html5doctor.com/web-manifest-specification/*@
+    <link rel="manifest" href="/manifest.json" />
+    
+    @* IOS:
+    https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html*@
+    <link rel="apple-touch-startup-image" href="/content/images/web-app/startup.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     @*Hide URL bar on mobile devices - for iPhones up to IOS6 - does not work in IOS7+ *@
     <script>
