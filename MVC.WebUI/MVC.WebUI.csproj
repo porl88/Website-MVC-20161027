@@ -143,7 +143,9 @@
     <Content Include="Content\js\website\account\website-account-index.js" />
     <Content Include="Content\js\website\account\website-account-login.js" />
     <Content Include="Content\js\website\home\website-home-index.js" />
-    <Content Include="Content\xml\open-search\search.xml" />
+    <Content Include="Content\xml\open-search\search.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Errors\404-13.html" />
     <Content Include="Errors\404.aspx" />
     <Content Include="Errors\404.html" />

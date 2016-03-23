@@ -253,7 +253,6 @@ input[type="reset"],
 input[type="button"],
 button {
     cursor: pointer;
-    -webkit-appearance: none;
 }
 
 input[type="image"],
@@ -267,6 +266,11 @@ input[readonly] {
     line-height: inherit;
     vertical-align: baseline;
     background-color: transparent;
+}
+
+/* switch off default styling in webkit browsers */
+input, textarea, select {
+   -webkit-appearance: none;
 }
 
 /* removes the extra padding and border on buttons and input tags for Firefox browsers
