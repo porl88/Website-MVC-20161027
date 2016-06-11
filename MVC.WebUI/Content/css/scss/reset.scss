@@ -226,6 +226,10 @@ caption {
 		button, select, textarea
 */
 
+legend {
+    color: inherit; /* fix for Internet Explorer */
+}
+
 label[for] {
     cursor: pointer;
 }
@@ -239,6 +243,17 @@ input, textarea, select, button {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+/*Number display spinner only on hover or focus - same behaviour as Chrome*/
+input[type='number'] {
+     -moz-appearance: textfield;
+}
+
+input[type='number']:focus,
+input[type='number']:hover {
+
+     -moz-appearance: initial;
 }
 
 /* Checkbox/Radio Fields */
@@ -292,6 +307,13 @@ textarea {
 select {
     cursor: pointer;
 }
+
+// remove default error styling
+:invalid {
+    box-shadow: none; /* FF */
+    outline: 0;       /* IE 10 */
+}
+
 
 /* EMBEDDED CONTENT *********************************************************************************************************************************************************************************************/
 audio, video,
