@@ -46,6 +46,12 @@ html {
     display: none; /* fix for browsers that do not support the HTML5 hidden attribute */
 }
 
+/* UNIVERSAL PSEUDO-CLASSES *********************************************************************************************************************************************************************************************/
+:active {
+    cursor: wait;
+}
+
+
 /* BLOCK-LEVEL ELEMENTS *********************************************************************************************************************************************************************************************/
 body,
 main,
@@ -123,6 +129,7 @@ code, var, samp, kbd {
     font-family: "Courier New", Courier, monospace;
     font-size: 0.85em;
     font-size: 0.85rem;
+    hyphens: manual;
 }
 
 abbr {
@@ -305,6 +312,7 @@ textarea {
 }
 
 select {
+    -webkit-appearance: none; /* fix for Safari */
     cursor: pointer;
 }
 
