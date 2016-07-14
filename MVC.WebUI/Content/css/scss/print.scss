@@ -7,86 +7,90 @@
 
 @media print {
 
-/*
+	/*
 =========================================================================================================================================
  DEFAULT STYLES
 =========================================================================================================================================
 */
 
-    * {
-        background-color: #FFFFFF !important;
-        background-image: none !important;
-        border-color: #000000 !important;
-        color: #000000 !important;
-        font-family: Georgia, "Times New Roman", Times, serif !important;
-    }
+	* {
+		background-color: #FFF !important;
+		background-image: none !important;
+		border-color: #000 !important;
+		color: #000 !important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+	}
 
-    body {
-        font-size: 10pt !important;
-    }
+	/*html {
+		font-size: 10pt !important;
+	}*/
 
-    table th, table td {
-        border: 1px dotted #000 !important;
-    }
+	noscript, template {
+		display: none !important;
+	}
 
-    input, textarea, select, noscript {
-        display: none !important;
-    }
+	main {
+		table th,
+		table td {
+			border: 1px dotted #000 !important;
+			border-collapse: collapse;
+		}
 
-    p > a, li > a {
-        font-weight: bold;
-        text-decoration: none;
-    }
+		p a,
+		li a {
+			font-weight: bold;
+			text-decoration: none;
+		}
 
-    p > a[href]:after,
-    li > a[href]:after {
-        content: " [http://www.WebSite.com" attr(href) "]";
-        font-family: 'Courier New', Courier, monospace !important;
-        font-size: 9pt !important;
-    }
+		p a[href]::after,
+		li a[href]::after {
+			content: " [http://www.website.com" attr(href) "]";
+			font-family: 'Courier New', Courier, monospace !important;
+			font-size: 9pt !important;
+		}
 
-    p > a[href^="http"]:after,
-    li > a[href^="http"]:after {
-        content: " [" attr(href) "]";
-    }
+		p a[href^="http"]::after,
+		li a[href^="http"]::after {
+			content: " [" attr(href) "]";
+		}
 
-    p > a[href^="#"]:after,
-    li > a[href^="#"]:after {
-        content: normal;
-    }
+		p a[href^="#"]::after,
+		li a[href^="#"]::after {
+			content: none;
+		}
 
-    p > a[href^="http"],
-    li > a[href^="http"],
-    p > a[href$=".doc"],
-    li > a[href$=".doc"],
-    p > a[href$=".pdf"],
-    li > a[href$=".pdf"] {
-        padding: 0;
-    }
+		/*p a[href^="http"],
+		li a[href^="http"],
+		p a[href$=".doc"],
+		li a[href$=".doc"],
+		p a[href$=".pdf"],
+		li a[href$=".pdf"] {
+			padding: 0;
+		}*/
 
-    ul {
-        list-style-type: disc !important;
-        padding-left: 3em !important;
-    }
+		ul {
+			list-style-type: disc !important;
+			padding-left: 3em !important;
+		}
 
-    ul > li > ul {
-        list-style-type: circle !important;
-    }
+		ul > li > ul {
+			list-style-type: circle !important;
+		}
 
-    kbd, tt, code, pre, samp {
-        font-size: 1em;
-    }
+		kbd, tt, code, pre, samp {
+			font-size: 1em;
+		}
+	}
 
 
-
-    /*
+	/*
 =========================================================================================================================================
  CLASSES
 =========================================================================================================================================
 */
 
-    /* noprint - hides markup that should not be printed */
-    .noprint {
-        display: none !important;
-    }
+	/* no-print - hides markup that should not be printed */
+	.no-print {
+		display: none !important;
+	}
 }
