@@ -88,6 +88,11 @@
     display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
+@mixin flex-direction($value) {
+    -webkit-flex-direction: $value;
+    flex-direction: $value;
+}
+
 @mixin align-items($value) {
     -ms-flex-align: $value;
     -webkit-align-items: $value;
@@ -217,6 +222,27 @@
 
     #{$selector}:-ms-input-placeholder {
         @content;
+    }
+}
+
+
+
+
+
+/***********************************************************************************************************************/
+/* HACKS */
+/***********************************************************************************************************************/
+@mixin hack-ie10 {
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        @content;
+    }
+}
+
+@mixin hack-ie11 {
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        *::-ms-backdrop, body {
+            @content;
+        }
     }
 }
 
