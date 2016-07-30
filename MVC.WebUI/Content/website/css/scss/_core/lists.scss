@@ -8,6 +8,7 @@
 .dl-table {
     margin: 0;
     padding: 0;
+    font-size: 1rem;
     overflow: hidden;
 
     dt,
@@ -45,13 +46,13 @@
     dd {
         display: inline-block;
         margin: 0;
-        padding: 5px 0;
+        padding: 0.42rem 0;
         box-sizing: border-box;
     }
 
     dt {
         width: 76%;
-        font-size: 12px;
+        font-size: 0.75rem;
         vertical-align: top;
         letter-spacing: 0.1em;
         white-space: nowrap;
@@ -67,14 +68,14 @@
 
     dt::after {
         letter-spacing: 0;
-        word-spacing: 4px;
+        word-spacing: 0.33333333em;
         content: " : _______________________________________________________________________________________________________________";
     }
 
     dd {
         width: 24%;
-        padding-left: 15px;
-        font-size: 14px;
+        padding-left: 1.1em;
+        font-size: 0.875rem;
         font-weight: bold;
     }
 }

@@ -38,7 +38,7 @@ html {
 	2. a:visited
 	3. a:focus
 	4. a:hover
-	5. a:active
+	5. a:active - equivalent to JavaScript onkeypress/onmousedown event
 */
 
 /* input[type="image"] is included so that it behaves like a link when the image is missing */
@@ -80,6 +80,9 @@ a {
 		button, checkbox, color, date, datetime, datetime-local, email, file,
 		hidden, image, month, number, password, radio, range, reset, search,
 		submit, tel, text, time, url, week
+
+    'button' input types:
+        button, file, image, reset, submit
 
 	other field elements:
 		button, select, textarea

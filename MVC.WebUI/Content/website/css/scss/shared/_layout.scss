@@ -19,7 +19,7 @@ body {
     position: relative;
     min-width: 320px;
     max-width: 1000px;
-    min-height: 100%;
+    min-height: 100%; /* IE8- */
     min-height: 100vh; /* IE9+ */
     margin: 0 auto;
     background-color: #FFF;
