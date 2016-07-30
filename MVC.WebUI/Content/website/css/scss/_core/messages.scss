@@ -3,71 +3,98 @@
 /*******************************************************************************************************************************/
 
 /*******************************************************************************************************************************/
+/* Alert Colours */
+.ok {
+    color: $ok-colour !important;
+}
+
+.warning {
+    color: $warning-colour !important;
+}
+
+.error {
+    color: $error-colour !important;
+}
+
+.bg-ok {
+    /* set currentColor on the original element instead */
+    /*border-color: currentColor !important;*/
+    color: #FFF !important;
+    background-color: $ok-colour !important;
+}
+
+.bg-warning {
+    /* set currentColor on the original element instead */
+    /*border-color: currentColor !important;*/
+    color: #FFF !important;
+    background-color: $warning-colour !important;
+}
+
+.bg-error {
+    /* set currentColor on the original element instead */
+    /*border-color: currentColor !important;*/
+    color: #FFF !important;
+    background-color: $error-colour !important;
+}
+
+
+
+/*******************************************************************************************************************************/
 /* Alerts */
 
 .alert {
     margin: 1em 0;
-    padding: 1em;
+    padding: 0.8em 1em;
     border: 2px solid currentColor;
+    font-size: 1rem;
     color: #000;
     background-color: #FFF;
 
     h1, h2, h3, h4 {
-        margin-bottom: 0.8em;
+        margin: 0;
+        font-size: 1.1em;
         font-weight: bold;
     }
 
     p {
         margin-top: 0.8em;
         margin-bottom: 0;
+        line-height: 1.2;
     }
 
     p:first-child {
         margin-top: 0;
     }
+
+    /* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
+    &.ok {
+        background-color: #EEFFEE;
+    }
+
+    /* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
+    &.warning {
+        background-color: #FFFACD;
+    }
+
+    /* error alerts - shown when something has failed - e.g. form validation, 404 error, etc. */
+    &.error {
+        background-color: #FFEEEE;
+    }
+
+    /* compact alert - puts all the text on to one line to save vertical space */
+    &.compact {
+        text-align: center;
+
+        h1, h2, h3, h4, p {
+            display: inline;
+        }
+
+        h1::after, h2::after, h3::after, h4::after {
+            content: ": ";
+        }
+    }
 }
 
-
-/* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
-.alert.ok {
-    background-color: #EEFFEE;
-    border: 2px solid #336633;
-}
-
-/* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
-.alert.warning {
-    background-color: #FFFACD;
-    border: 2px solid #336633;
-}
-
-/* error alerts - shown when something has failed - e.g. form validation, 404 error, etc. */
-.alert.error {
-    background-color: #FFEEEE;
-    border: 2px solid #CC0000;
-}
-
-
-
-
-/* compact alert - puts all the text on to one line to save vertical space */
-.alert.compact {
-    text-align: center;
-}
-
-.alert.compact h1,
-.alert.compact h2,
-.alert.compact h3,
-.alert.compact h4,
-.alert.compact p {
-    display: inline;
-}
-
-.alert.compact h1::after,
-.alert.compact h2::after,
-.alert.compact h3::after,
-.alert.compact h4::after {
-    content: ".";
-}
 
 
 
@@ -77,12 +104,12 @@
 
 .badge {
     display: inline-block;
-    @include rem(width, 20);
-    @include rem(height, 20);
+    width: 2em;
+    height: 2em;
     border-radius: 100%;
-    @include rem(font-size, 10);
+    font-size: 1rem;
     font-weight: 600;
-    @include rem(line-height, 20);
+    line-height: 2em;
     text-align: center;
     letter-spacing: 0;
     color: #FFF;

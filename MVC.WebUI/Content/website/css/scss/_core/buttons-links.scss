@@ -11,10 +11,12 @@ a.skip {
     left: 0;
     z-index: 99999999;
     display: block;
-    padding: 0.375rem;
-    border: 1px solid #FFF;
+    padding: 0.3em 0.6em;
+    border: 0.0625em solid currentColor;
     border-top: none;
     border-left: none;
+    font-size: 1rem;
+    text-decoration: underline;
     color: #FFF;
     transform: translateY(-100%);
     -webkit-transition: -webkit-transform 1s ease-out, background-color 1s linear;
@@ -25,20 +27,27 @@ a.skip {
         outline: 0;
         transform: translateY(0);
     }
+
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 
 
 
+
+
 /************************************************************************************************************************************************************************************/
-/* Menu Button */
+/* Menu Button - striped 'hamburger' button */
 
 .btn-menu {
     width: 1em;
     height: 1em;
     margin: 0;
     padding: 0;
-    background: repeating-linear-gradient(0deg, #000, #000 20%, transparent 20%, transparent 40%);
     border: none;
+    font-size: 1rem;
     text-indent: -9999px;
+    background: repeating-linear-gradient(0deg, #000, #000 20%, transparent 20%, transparent 40%);
 }

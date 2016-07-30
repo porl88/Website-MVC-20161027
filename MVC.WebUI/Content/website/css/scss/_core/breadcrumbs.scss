@@ -5,20 +5,25 @@
 /************************************************************************************************************************************************************************************/
 /* Standard Breadcrumb */
 
-.breadcrumb {
-    padding: 0.5rem 0;
+ol.breadcrumb {
+    font-size: 5rem;
+    background: red;
+    margin: 0;
+    padding: 0.5em 0;
     text-transform: capitalize;
 
     li {
         position: relative;
         display: inline-block;
+        margin: 0;
+        padding: 0;
     }
 
     li::before {
         display: inline-block;
-        margin: 0 8px;
+        margin: 0 0.5em;
         content: "";
-        border: 5px solid transparent;
+        border: 0.3125em solid transparent;
         border-right: none;
         border-left-color: black;
     }

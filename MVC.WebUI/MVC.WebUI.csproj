@@ -216,8 +216,6 @@
     <Content Include="Content\website\css\scss\_variables.scss" />
     <Content Include="Content\website\css\scss\styles.scss" />
     <Content Include="Content\website\css\scss\reset.scss" />
-    <Content Include="Content\website\css\scss\website\fonts.scss" />
-    <Content Include="Content\website\css\scss\website\bootstrap.scss" />
     <Content Include="Content\website\css\scss\print.scss" />
     <Content Include="Content\website\fonts\blackout.zip" />
     <Content Include="Content\website\fonts\chunk.zip" />
@@ -240,7 +238,6 @@
     <Content Include="Content\website\fonts\sniglet.zip" />
     <Content Include="Content\website\fonts\sorts-mill-goudy.zip" />
     <Content Include="Content\website\css\scss\default.scss" />
-    <Content Include="Content\website\css\scss\website\shared\_layout.scss" />
     <Content Include="Views\Articles\details.cshtml" />
     <Content Include="Views\Articles\edit.cshtml" />
     <Content Include="Views\Articles\index-edit.cshtml" />
@@ -277,6 +274,9 @@
     <Content Include="Content\website\css\scss\_core\tables.scss" />
     <Content Include="Content\website\css\scss\_core\grid-layout.scss" />
     <Content Include="Content\website\css\scss\_core\breadcrumbs.scss" />
+    <Content Include="Content\website\css\scss\fonts.scss" />
+    <Content Include="Content\website\css\scss\shared\_layout.scss" />
+    <Content Include="Content\website\css\scss\_core\miscellaneous.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
