@@ -1,0 +1,117 @@
+﻿/*******************************************************************************************************************************/
+/* HEADERS & SECTIONS */
+/*******************************************************************************************************************************/
+
+/*******************************************************************************************************************************/
+/* Page */
+
+.page {
+    /* the main page title should always be an h1 tag */
+    h1.page-title {
+
+    }
+
+    /* styling is applied to the headers - class names for the section elements are not needed (unless styling needs to be applied) */
+    .heading-1 {
+
+    }
+
+    .heading-2 {
+
+    }
+
+    .heading-3 {
+
+    }
+}
+
+/* alternate version - needed if styles need to be applied to the sections - otherwise, use the version above */
+.page {
+    h1.page-title {
+
+    }
+
+    .section1 {
+        .heading-1 {
+
+        }
+    }
+
+    .section2 {
+        .heading-2 {
+
+        }
+    }
+
+    .section2 {
+        .heading-2 {
+
+        }
+    }
+}
+
+/* another alternate version - if you want to impose restrictions on the type of elements used for headers */
+.page {
+    h1.page-title {
+
+    }
+
+    .section1 {
+        & > h2:first-of-type {
+
+        }
+    }
+
+    .section2 {
+        & > h34:first-of-type {
+
+        }
+    }
+
+    .section2 {
+        & > h4:first-of-type {
+
+        }
+    }
+}
+
+
+/*******************************************************************************************************************************/
+/* Article */
+
+/* assumes that classes cannot be applied to article contents */
+/* styling is applied to the headings - <section> elements are optional and do not need styling */
+
+.article {
+    /* page title - for SEO purposes, the main page title should be an H1 element */
+    & > h1:first-of-type {
+
+    }
+
+    /* heading 1 */
+    h2 {
+
+    }
+
+    /* heading 2 */
+    h3 {
+
+    }
+
+    /* heading 3 */
+    h4 {
+
+    }
+
+    p {
+
+    }
+
+    ul {
+
+    }
+
+    ol {
+
+    }
+}

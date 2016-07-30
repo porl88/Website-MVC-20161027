@@ -1,0 +1,80 @@
+﻿/*******************************************************************************************************************************/
+/* LISTS & GALLERIES */
+/*******************************************************************************************************************************/
+
+/************************************************************************************************************************************************************************************/
+/* Description List Table - <dl> description lists formatted like a 2-column table */
+
+.dl-table {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    dt,
+    dd {
+        display: block;
+        width: 50%;
+        margin: 0;
+        margin-bottom: 0.3em;
+        box-sizing: border-box;
+    }
+
+    dt {
+        float: left;
+        clear: both;
+        padding-right: 1em;
+    }
+
+    dd {
+        float: right;
+    }
+}
+
+
+
+/************************************************************************************************************************************************************************************/
+/* Contents List */
+
+.dl-contents {
+    font-size: 0;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+
+    dt,
+    dd {
+        display: inline-block;
+        margin: 0;
+        padding: 5px 0;
+        box-sizing: border-box;
+    }
+
+    dt {
+        width: 76%;
+        font-size: 12px;
+        vertical-align: top;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+        overflow: hidden;
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    dt::before {
+        content: "- ";
+    }
+
+    dt::after {
+        letter-spacing: 0;
+        word-spacing: 4px;
+        content: " : _______________________________________________________________________________________________________________";
+    }
+
+    dd {
+        width: 24%;
+        padding-left: 15px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,54 @@
+﻿/*******************************************************************************************************************************/
+/* CODE */
+/*******************************************************************************************************************************/
+
+/*******************************************************************************************************************************/
+/* Code Block */
+
+pre.code-block {
+    min-width: 100%;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border: 1px dotted #CCCC99;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+    color: #000;
+    background-color: #FFFFEE;
+    overflow: auto;
+    word-wrap: normal; /* word-wrap has been renamed to overflow-wrap */
+    overflow-wrap: normal;
+    resize: horizontal;
+
+    & > code:only-of-type {
+        display: block;
+        min-height: 1.2rem;
+        font-weight: normal;
+    }
+
+    var {
+        color: #CC0000;
+    }
+}
+
+
+
+
+/*******************************************************************************************************************************/
+/* Inline Code - normally .article code */
+
+p, li {
+    code {
+        padding: 2px 4px;
+        border: 1px solid #E1E1E1;
+        font-size: 0.9em;
+        color: #C7254E;
+        background-color: #F9F2F4;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    var {
+        color: #CC0000;
+    }
+}

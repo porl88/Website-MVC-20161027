@@ -126,24 +126,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\styles.css" />
-    <Content Include="Content\html\emails\activate-account.html" />
-    <Content Include="Content\html\emails\password.html" />
-    <Content Include="Content\html\emails\standard.html" />
-    <Content Include="Content\images\browser\chrome.png" />
-    <Content Include="Content\images\browser\firefox.png" />
-    <Content Include="Content\images\browser\ie.png" />
-    <Content Include="Content\images\browser\opera.png" />
-    <Content Include="Content\images\browser\safari.png" />
-    <Content Include="Content\js\html5-shiv\html5shiv-printshiv.js" />
-    <Content Include="Content\js\html5-shiv\html5shiv-printshiv.min.js" />
-    <Content Include="Content\js\html5-shiv\html5shiv.js" />
-    <Content Include="Content\js\html5-shiv\html5shiv.min.js" />
-    <Content Include="Content\js\plugins\drag-and-drop.js" />
-    <Content Include="Content\js\website\account\website-account-index.js" />
-    <Content Include="Content\js\website\account\website-account-login.js" />
-    <Content Include="Content\js\website\home\website-home-index.js" />
-    <Content Include="Content\xml\open-search\search.xml">
+    <Content Include="Content\website\css\bootstrap.html" />
+    <Content Include="Content\website\css\styles.css" />
+    <Content Include="Content\website\html\emails\activate-account.html" />
+    <Content Include="Content\website\html\emails\password.html" />
+    <Content Include="Content\website\html\emails\standard.html" />
+    <Content Include="Content\website\images\browser\chrome.png" />
+    <Content Include="Content\website\images\browser\firefox.png" />
+    <Content Include="Content\website\images\browser\ie.png" />
+    <Content Include="Content\website\images\browser\opera.png" />
+    <Content Include="Content\website\images\browser\safari.png" />
+    <Content Include="Content\html5-shiv\html5shiv-printshiv.js" />
+    <Content Include="Content\html5-shiv\html5shiv-printshiv.min.js" />
+    <Content Include="Content\html5-shiv\html5shiv.js" />
+    <Content Include="Content\html5-shiv\html5shiv.min.js" />
+    <Content Include="Content\website\js\plugins\drag-and-drop.js" />
+    <Content Include="Content\website\js\website\account\website-account-index.js" />
+    <Content Include="Content\website\js\website\account\website-account-login.js" />
+    <Content Include="Content\website\js\website\home\website-home-index.js" />
+    <Content Include="Content\website\xml\open-search\search.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Errors\404-13.html" />
@@ -211,35 +212,35 @@
     <Content Include="App_Code\helpers.cshtml" />
     <Content Include="Helpers\ListHelper.cshtml" />
     <Content Include="package.json" />
-    <Content Include="Content\css\scss\_mixins.scss" />
-    <Content Include="Content\css\scss\_variables.scss" />
-    <Content Include="Content\css\scss\styles.scss" />
-    <Content Include="Content\css\scss\reset.scss" />
-    <Content Include="Content\css\scss\website\fonts.scss" />
-    <Content Include="Content\css\scss\website\bootstrap.scss" />
-    <Content Include="Content\css\scss\print.scss" />
-    <Content Include="Content\fonts\blackout.zip" />
-    <Content Include="Content\fonts\chunk.zip" />
-    <Content Include="Content\fonts\entypo.zip" />
-    <Content Include="Content\fonts\fanwood.zip" />
-    <Content Include="Content\fonts\goudy-bookletter.zip" />
-    <Content Include="Content\fonts\junction.zip" />
-    <Content Include="Content\fonts\knewave.zip" />
-    <Content Include="Content\fonts\league-gothic.zip" />
-    <Content Include="Content\fonts\league-script.zip" />
-    <Content Include="Content\fonts\linden-hill.zip" />
-    <Content Include="Content\fonts\lucida-grande.zip" />
-    <Content Include="Content\fonts\museu.zip" />
-    <Content Include="Content\fonts\orbitron.zip" />
-    <Content Include="Content\fonts\ostrich.zip" />
-    <Content Include="Content\fonts\pictos.zip" />
-    <Content Include="Content\fonts\practique.zip" />
-    <Content Include="Content\fonts\prociono.zip" />
-    <Content Include="Content\fonts\raleway.zip" />
-    <Content Include="Content\fonts\sniglet.zip" />
-    <Content Include="Content\fonts\sorts-mill-goudy.zip" />
-    <Content Include="Content\css\scss\default.scss" />
-    <Content Include="Content\css\scss\website\shared\_layout.scss" />
+    <Content Include="Content\website\css\scss\_mixins.scss" />
+    <Content Include="Content\website\css\scss\_variables.scss" />
+    <Content Include="Content\website\css\scss\styles.scss" />
+    <Content Include="Content\website\css\scss\reset.scss" />
+    <Content Include="Content\website\css\scss\website\fonts.scss" />
+    <Content Include="Content\website\css\scss\website\bootstrap.scss" />
+    <Content Include="Content\website\css\scss\print.scss" />
+    <Content Include="Content\website\fonts\blackout.zip" />
+    <Content Include="Content\website\fonts\chunk.zip" />
+    <Content Include="Content\website\fonts\entypo.zip" />
+    <Content Include="Content\website\fonts\fanwood.zip" />
+    <Content Include="Content\website\fonts\goudy-bookletter.zip" />
+    <Content Include="Content\website\fonts\junction.zip" />
+    <Content Include="Content\website\fonts\knewave.zip" />
+    <Content Include="Content\website\fonts\league-gothic.zip" />
+    <Content Include="Content\website\fonts\league-script.zip" />
+    <Content Include="Content\website\fonts\linden-hill.zip" />
+    <Content Include="Content\website\fonts\lucida-grande.zip" />
+    <Content Include="Content\website\fonts\museu.zip" />
+    <Content Include="Content\website\fonts\orbitron.zip" />
+    <Content Include="Content\website\fonts\ostrich.zip" />
+    <Content Include="Content\website\fonts\pictos.zip" />
+    <Content Include="Content\website\fonts\practique.zip" />
+    <Content Include="Content\website\fonts\prociono.zip" />
+    <Content Include="Content\website\fonts\raleway.zip" />
+    <Content Include="Content\website\fonts\sniglet.zip" />
+    <Content Include="Content\website\fonts\sorts-mill-goudy.zip" />
+    <Content Include="Content\website\css\scss\default.scss" />
+    <Content Include="Content\website\css\scss\website\shared\_layout.scss" />
     <Content Include="Views\Articles\details.cshtml" />
     <Content Include="Views\Articles\edit.cshtml" />
     <Content Include="Views\Articles\index-edit.cshtml" />
@@ -262,6 +263,20 @@
     <Content Include="Views\Shared\errors\error.cshtml" />
     <Content Include="Views\Shared\errors\httpantiforgeryexception.cshtml" />
     <Content Include="Views\Shared\errors\httprequestvalidationexception.cshtml" />
+    <Content Include="Content\website\css\scss\_core\accordions.scss" />
+    <Content Include="Content\website\css\scss\_core\buttons-links.scss" />
+    <Content Include="Content\website\css\scss\_core\code.scss" />
+    <Content Include="Content\website\css\scss\_core\dialogs.scss" />
+    <Content Include="Content\website\css\scss\_core\forms.scss" />
+    <Content Include="Content\website\css\scss\_core\headers-sections.scss" />
+    <Content Include="Content\website\css\scss\_core\lists.scss" />
+    <Content Include="Content\website\css\scss\_core\menus.scss" />
+    <Content Include="Content\website\css\scss\_core\messages.scss" />
+    <Content Include="Content\website\css\scss\_core\animation.scss" />
+    <Content Include="Content\website\css\scss\_core\tabs.scss" />
+    <Content Include="Content\website\css\scss\_core\tables.scss" />
+    <Content Include="Content\website\css\scss\_core\grid-layout.scss" />
+    <Content Include="Content\website\css\scss\_core\breadcrumbs.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -271,9 +286,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\favicons\" />
-    <Folder Include="Content\js\jquery\" />
-    <Folder Include="Content\js\modernizr\" />
+    <Folder Include="Content\jquery-ui\" />
+    <Folder Include="Content\jquery\" />
+    <Folder Include="Content\modernizr\" />
+    <Folder Include="Content\website\images\favicons\" />
     <Folder Include="Models\Products\" />
   </ItemGroup>
   <ItemGroup>

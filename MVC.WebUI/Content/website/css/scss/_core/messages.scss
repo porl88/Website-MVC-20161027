@@ -1,0 +1,95 @@
+﻿/*******************************************************************************************************************************/
+/* MESSAGES */
+/*******************************************************************************************************************************/
+
+/*******************************************************************************************************************************/
+/* Alerts */
+
+.alert {
+    margin: 1em 0;
+    padding: 1em;
+    border: 2px solid currentColor;
+    color: #000;
+    background-color: #FFF;
+
+    h1, h2, h3, h4 {
+        margin-bottom: 0.8em;
+        font-weight: bold;
+    }
+
+    p {
+        margin-top: 0.8em;
+        margin-bottom: 0;
+    }
+
+    p:first-child {
+        margin-top: 0;
+    }
+}
+
+
+/* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
+.alert.ok {
+    background-color: #EEFFEE;
+    border: 2px solid #336633;
+}
+
+/* success alerts - shown when something has succeeded - e.g. when a form has been submitted properly, when an email has been sent successfully */
+.alert.warning {
+    background-color: #FFFACD;
+    border: 2px solid #336633;
+}
+
+/* error alerts - shown when something has failed - e.g. form validation, 404 error, etc. */
+.alert.error {
+    background-color: #FFEEEE;
+    border: 2px solid #CC0000;
+}
+
+
+
+
+/* compact alert - puts all the text on to one line to save vertical space */
+.alert.compact {
+    text-align: center;
+}
+
+.alert.compact h1,
+.alert.compact h2,
+.alert.compact h3,
+.alert.compact h4,
+.alert.compact p {
+    display: inline;
+}
+
+.alert.compact h1::after,
+.alert.compact h2::after,
+.alert.compact h3::after,
+.alert.compact h4::after {
+    content: ".";
+}
+
+
+
+
+/*******************************************************************************************************************************/
+/* Badges */
+
+.badge {
+    display: inline-block;
+    @include rem(width, 20);
+    @include rem(height, 20);
+    border-radius: 100%;
+    @include rem(font-size, 10);
+    font-weight: 600;
+    @include rem(line-height, 20);
+    text-align: center;
+    letter-spacing: 0;
+    color: #FFF;
+    background-color: #000;
+    /* fixes vertical align for empty badges */
+    &:empty::before {
+        content: "X";
+        visibility: hidden;
+    }
+}

@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Core CSS Styles</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .bootstrap {
+            max-width: 1000px;
+            min-width: 768px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-image: none;
+        }
+
+            .bootstrap > h1:first-child {
+                font-size: 1.3rem;
+                text-align: center;
+                text-transform: uppercase;
+            }
+
+            .bootstrap .bs-section-1 {
+                margin-top: 5rem;
+            }
+
+                .bootstrap .bs-section-1 > h1:first-child {
+                    padding-bottom: 0.3rem;
+                    border-bottom: 2px solid red;
+                    font-size: 1.1rem;
+                    margin-bottom: 0.8em;
+                    text-transform: uppercase;
+                }
+
+            .bootstrap .bs-section-2 {
+                margin-top: 3rem;
+                margin-left: 3rem;
+            }
+
+                .bootstrap .bs-section-2 > h1:first-child {
+                    font-size: 1rem;
+                    margin-bottom: 0.8em;
+                }
+
+            .bootstrap code {
+                text-transform: lowercase;
+            }
+    </style>>
+</head>
+<body>
+    <article class="bootstrap">
+        <h1>Core CSS Styles</h1>
+
+        <section class="bs-section-1">
+            <h1>Accordion</h1>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Breadcrumbs (<code>&lt;ol&gt;</code>)</h1>
+
+            <section class="bs-section-2">
+                <h1>Standard Breadcrumb (<code>.breadcrumb</code>)</h1>
+
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li>Article Title</li>
+                </ol>
+            </section>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Buttons &amp; Links (<code>&lt;a&gt;, &lt;button&gt;</code>)</h1>
+
+            <section class="bs-section-2">
+                <h1>'Skip to Main Content' Link (<code>a.skip</code>)</h1>
+                <p>Visible only when receives focus from tabbing.</p>
+                <a href="#" class="skip">Skip to main content</a>
+            </section>
+
+            <section class="bs-section-2">
+                <h1>Menu Button (<code>.btn-menu</code>)</h1>
+
+                <button class="btn-menu">Menu</button>
+            </section>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Code (<code>&lt;pre&gt;, &lt;code&gt;, &lt;var&gt;, &lt;samp&gt;</code>)</h1>
+
+            <section class="bs-section-2">
+                <h1>Code Block (<code>pre.code-block</code>)</h1>
+
+                <pre class="code-block">
+                <code>
+                    var <var>articles</var> = new List&lt;Article&gt;();
+                </code>
+            </pre>
+            </section>
+
+            <section class="bs-section-2">
+                <h1>Inline Code (<code>.btn-menu</code>)</h1>
+
+                <p>Here is the code: <code>var <var>articles</var> = new List&lt;Article&gt;();</code></p>
+            </section>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Dialogs (<code>&lt;dialog&gt;</code>)</h1>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Forms (<code>&lt;form&gt;</code>)</h1>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Grid Layout</h1>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Headers &amp; Sections (<code>&lt;h1&gt;, &lt;section&gt;, &lt;article&gt;</code>)</h1>
+
+            <section class="bs-section-2">
+                <h1>Page (<code>.page</code>)</h1>
+                <p>The styling is applied to the header element and <code>&lt;section&gt;</code> elements do not need a class name (unless additional styling is needed).</p>
+                <p><code>&lt;section&gt;</code> class names should be <code>.heading-1</code>, <code>.heading-2</code>, etc.</p>
+                <p>The main page header should be an <code>&lt;h1&gt;</code> element. Headings can be any heading element except <code>&lt;h1&gt;</code>.</p>
+
+                <section class="page">
+                    <h1 class="page-title">Page Title</h1>
+
+                    <section>
+                        <h2 class="heading-1">Heading 1</h2>
+
+                        <section>
+                            <h3 class="heading-2">Heading 2</h3>
+
+                            <section>
+                                <h4 class="heading-3">Heading 3</h4>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+
+                <!--
+                ALTERNATE VERSION:
+
+                <section class="page">
+                    <h1 class="page-title">Page Title</h1>
+
+                    <section class="section-1">
+                        <h2 class="heading-1">Heading 1</h2>
+
+                        <section class="section-2">
+                            <h3 class="heading-2">Heading 2</h3>
+
+                            <section class="section-3">
+                                <h4 class="heading-3">Heading 3</h4>
+                            </section>
+                        </section>
+                    </section>
+                </section>-->
+
+            </section>
+
+            <section class="bs-section-2">
+                <h1>Article (<code>.article</code>)</h1>
+                <p><code>&lt;section&gt;</code> elements are optional. Styles are applied to the headings.</p>
+
+                <article class="article">
+                    <h1>Article Title</h1>
+                    <section>
+                        <h2>Heading 1</h2>
+                        <section>
+                            <h3>Heading 2</h3>
+                            <section>
+                                <h4>Heading 3</h4>
+                            </section>
+                        </section>
+                    </section>
+                </article>
+
+            </section>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Lists &amp; Galleries (<code>&lt;ol&gt;, &lt;ul&gt;, &lt;dl&gt;</code>)</h1>
+
+            <section class="bs-section-2">
+                <h1>Description List Table (<code>.dl-table</code>)</h1>
+                <p>A description list (<code>&lt;dl&gt;</code>) formatted as a 2-column table.</p>
+                <dl class="dl-table">
+                    <dt>Term 1</dt>
+                    <dd>Definition 1</dd>
+                    <dt>Term 2</dt>
+                    <dd>Definition 2</dd>
+                    <dt>Term 2</dt>
+                    <dd>Definition 2</dd>
+                </dl>
+            </section>
+
+            <section class="bs-section-2">
+                <h1>Contents List (<code>.dl-contents</code>)</h1>
+                <dl class="dl-contents">
+                    <dt>Poids</dt>
+                    <dd>1071 kg</dd>
+                    <dt>Rejet CO2</dt>
+                    <dd>82 g</dd>
+                    <dt>Puissance</dt>
+                    <dd>66 W</dd>
+                    <dt>Place assises</dt>
+                    <dd>5</dd>
+                    <dt>Conso urbaine</dt>
+                    <dd>3,5</dd>
+                    <dt>Conso extra urbaine</dt>
+                    <dd>2,9</dd>
+                    <dt>Conso mixte</dt>
+                    <dd>3,1</dd>
+                </dl>
+            </section>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Menus</h1>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Messages</h1>
+
+            <section class="bs-section-2">
+                <h1>Alerts (<code>.alert</code>)</h1>
+                <section class="alert">
+                    <h1>Here is the title</h1>
+                    <p>Here is the error message.</p>
+                </section>
+
+                <section class="alert ok">
+                    <h1>Here is the title</h1>
+                    <p>Here is the error message.</p>
+                </section>
+
+                <section class="alert warning">
+                    <h1>Here is the title</h1>
+                    <p>Here is the error message.</p>
+                </section>
+
+                <section class="alert error">
+                    <h1>Here is the title</h1>
+                    <p>Here is the error message.</p>
+                </section>
+            </section>
+
+            <section class="bs-section-2">
+                <h1>Badges (<code>.badge</code>)</h1>
+                <span class="badge">2</span> <span class="badge ok"></span> <span class="badge warning">X</span> <span class="badge error">88</span>
+            </section>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Tables (<code>&lt;table&gt;</code>)</h1>
+        </section>
+
+        <section class="bs-section-1">
+            <h1>Tabs</h1>
+        </section>
+    </article>
+</body>
+</html>
