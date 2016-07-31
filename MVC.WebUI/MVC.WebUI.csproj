@@ -140,10 +140,10 @@
     <Content Include="Content\html5-shiv\html5shiv-printshiv.min.js" />
     <Content Include="Content\html5-shiv\html5shiv.js" />
     <Content Include="Content\html5-shiv\html5shiv.min.js" />
-    <Content Include="Content\website\js\plugins\drag-and-drop.js" />
-    <Content Include="Content\website\js\website\account\website-account-index.js" />
-    <Content Include="Content\website\js\website\account\website-account-login.js" />
-    <Content Include="Content\website\js\website\home\website-home-index.js" />
+    <Content Include="Content\website\js\_core\drag-and-drop.js" />
+    <Content Include="Content\website\js\account\account-index.js" />
+    <Content Include="Content\website\js\account\account-login.js" />
+    <Content Include="Content\website\js\home\home-index.js" />
     <Content Include="Content\website\xml\open-search\search.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -214,7 +214,7 @@
     <Content Include="package.json" />
     <Content Include="Content\website\css\scss\_mixins.scss" />
     <Content Include="Content\website\css\scss\_variables.scss" />
-    <Content Include="Content\website\css\scss\styles.scss" />
+    <Content Include="Content\website\css\scss\website.scss" />
     <Content Include="Content\website\css\scss\reset.scss" />
     <Content Include="Content\website\css\scss\print.scss" />
     <Content Include="Content\website\fonts\blackout.zip" />
@@ -277,6 +277,7 @@
     <Content Include="Content\website\css\scss\fonts.scss" />
     <Content Include="Content\website\css\scss\shared\_layout.scss" />
     <Content Include="Content\website\css\scss\_core\miscellaneous.scss" />
+    <Content Include="Content\website\fonts\gliphicons-halflings.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -286,9 +287,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\angularjs\" />
     <Folder Include="Content\jquery-ui\" />
     <Folder Include="Content\jquery\" />
     <Folder Include="Content\modernizr\" />
+    <Folder Include="Content\react\" />
     <Folder Include="Content\website\images\favicons\" />
     <Folder Include="Models\Products\" />
   </ItemGroup>
