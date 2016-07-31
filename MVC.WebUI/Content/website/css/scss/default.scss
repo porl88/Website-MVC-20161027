@@ -1,17 +1,29 @@
 ﻿/***********************************************************************************************************************************************/
-/* DEFAULT STYLE SHEET - SETS ALL THE DEFAULT STYLING FOR THE SITE */
+/* DEFAULT STYLE SHEET - SETS ALL THE DEFAULT STYLING ELEMENTS/PSEUDO-ELEMENTS/PSEUDO-CLASSES FOR THE SITE */
 /***********************************************************************************************************************************************/
 
-/* ROOT ELEMENT *********************************************************************************************************************************************************************************************/
+/*
+    IS THIS NEEDED??? COULD THE STYLES GO IN THE RESET STYLE SHEET???
+*/
 
-html {
-	color: ORANGE;
+
+
+/***********************************************************************************************************************************************/
+/* ROOT ELEMENT */
+
+/* for setting default styles that will be inherited - use _layout style sheet for non-inherited values */
+/* use :root element in reset style sheet instead??? */
+body {
 	font-family: Verdana, Geneva, sans-serif; /* web safe fonts: http://cssfontstack.com/ */
 	font-size: 100%; /* http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/ */
 	font-size-adjust: 0.545; /* http://fontdeck.com/support/fontsizeadjust */
+	color: ORANGE;
 }
 
-/* UNIVERSAL PSEUDO-ELEMENTS *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* UNIVERSAL PSEUDO-ELEMENTS */
 
 ::-moz-selection {
 	background-color: #FE4902;
@@ -25,12 +37,19 @@ html {
 	color: #FFF;
 }
 
+
+
+/***********************************************************************************************************************************************/
+/* UNIVERSAL PSEUDO-CLASSES */
+
 :target {
 	background-color: #DDEEFF;
 }
 
 
-/* ANCHOR ELEMENT *********************************************************************************************************************************************************************************************/
+
+/***********************************************************************************************************************************************/
+/* ANCHOR LINKS */
 
 /*
 	ORDER:
@@ -54,7 +73,7 @@ a {
 		text-decoration: underline;
 	}
 
-	/* input[type="image"] does not appear to suport :visited */
+	/* input[type="image"] does not appear to support :visited */
 	a:visited {
 		color: YELLOW;
 	}
@@ -73,7 +92,10 @@ a {
 		cursor: wait;
 	}
 
-/* FORM ELEMENTS *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* FORM ELEMENTS */
 
 /*
 	input types:
@@ -89,8 +111,6 @@ a {
 */
 
 /* Text Fields */
-textarea,
-select,
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -103,7 +123,9 @@ input[type="date"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="week"],
-input[type="month"] {
+input[type="month"],
+textarea,
+select {
 	border: 1px solid LIME;
 	background-color: #FFF;
 }

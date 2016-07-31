@@ -3,26 +3,41 @@
 /***********************************************************************************************************************************************/
 
 /*
-	* Designed to work with IE8+
-	* Avoid setting properties explicitly wherever possible and instead rely on an element's default inheritance to inherit properties from the root element. Those elements that do not by default inherit, such as margin and padding, are set explicitly. Otherwise values are explicitly set to inherit from the root element. The idea behind this is so that these default settings will be easy to override and will not interfere with 3rd party stylesheets.
+	* Avoid setting properties explicitly wherever possible. Instead, rely on an element's default inheritance to inherit properties from the root element. Those elements that do not by default inherit, such as margin and padding, are set explicitly. Otherwise values are explicitly set to inherit from the root element. The idea behind this is so that these default settings will be easy to override and will not interfere with 3rd party stylesheets.
 	* This style sheet is just a starting point. It should be adapted to your personal preferences and to your individual site requirements. Ideally you should be creating a reset/default stylesheet that is unique to each site.
 */
 
-/* ROOT ELEMENT *********************************************************************************************************************************************************************************************/
 
-html {
+
+/***********************************************************************************************************************************************/
+/* ROOT ELEMENT */
+
+/*
+    * :root - supported in IE9+ - has higher specifity than 'html' - for IE8-, use 'html'
+    * for setting default styles that will be inherited - use _layout style sheet for non-inherited values such as background-color, width, height, etc.
+    * don't set font-size in the :root element - this value should come from the browser's settings - usual default: 16px
+*/
+
+:root {
+    /* box-sizing (N.B. Opera & IE have never had vendor prefixes) */
+    -moz-box-sizing: border-box; /* Firefox 2-28 */
+    -webkit-box-sizing: border-box; /* Chrome 4-9, Safari 3.1-5, IOS Safari 3.2-4.3 */
+    box-sizing: border-box; /* Chrome 10+, Firefox 29+, IE 8+, Edge, Opera 10.1+, Safari 5.1+, IOS Safari 5.1+ */
     font-family: sans-serif; /* web safe fonts: http://cssfontstack.com/ */
+    /*font-size-adjust: 0.545;*/ /* http://fontdeck.com/support/fontsizeadjust */
+    -webkit-font-smoothing: antialiased; /* maxvoltar.com/archive/-webkit-font-smoothing */
     line-height: 1; /* prefer unitless numbers for line-height values: https://developer.mozilla.org/en-US/docs/Web/CSS/line-height */
     word-wrap: break-word; /* word-wrap has been renamed to overflow-wrap */
     overflow-wrap: break-word; /* word-wrap/overflow-wrap does not work with dynamic widths (e.g. percentage widths, tables that are not set to layout="fixed") - you will need to use word-break instead for these */
-    -webkit-font-smoothing: antialiased; /* maxvoltar.com/archive/-webkit-font-smoothing */
-    /* box-sizing (N.B. Opera & IE have never had vendor prefixes) */
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    color: $text-color;
+    background-color: $background-color;
 }
 
-/* UNIVERSAL ELEMENTS *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* ALL ELEMENTS (Universal Selector) */
+
 *, *:before, *:after {
     /* http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
     -moz-box-sizing: inherit;
@@ -30,15 +45,32 @@ html {
     box-sizing: inherit;
 }
 
-/* UNIVERSAL ATTRIBUTES *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* UNIVERSAL PSEUDO-ELEMENTS */
+
 ::-moz-selection {
-    /*color: #FFF;
-    background-color: #000;*/
+	background-color: $selection-background-colour;
+	color: $selection-colour;
 }
 
 ::selection {
-    /*color: #FFF;
-    background-color: #000;*/
+	background-color: $selection-background-colour;
+	color: $selection-colour;
+}
+
+
+
+/***********************************************************************************************************************************************/
+/* UNIVERSAL PSEUDO-CLASSES */
+
+:active {
+    cursor: wait;
+}
+
+:target {
+
 }
 
 /* Blink - emulate Gecko behaviour to make content stretch to fill the screen */
@@ -46,6 +78,11 @@ html {
     width: 100%;
     height: 100%;
 }
+
+
+
+/***********************************************************************************************************************************************/
+/* GLOBAL ATTRIBUTES */
 
 [disabled] {
     opacity: 0.5;
@@ -61,13 +98,11 @@ html {
     display: none; /* fix for browsers that do not support the HTML5 hidden attribute */
 }
 
-/* UNIVERSAL PSEUDO-CLASSES *********************************************************************************************************************************************************************************************/
-:active {
-    cursor: wait;
-}
 
 
-/* BLOCK-LEVEL ELEMENTS *********************************************************************************************************************************************************************************************/
+/***********************************************************************************************************************************************/
+/* BLOCK-LEVEL ELEMENTS */
+
 body,
 main,
 section,
@@ -107,10 +142,10 @@ h1, h2, h3, h4, h5, h6, address {
 }
 
 p {
-    -moz-hyphens: auto; /* Firefox 6+ */
-    -webkit-hyphens: auto; /* Safari 5.1+, IOS Safari 4.3+ */
-    -ms-hyphens: auto; /* IE 10+ */
-    hyphens: auto;
+    -moz-hyphens: auto; /* Firefox 6-42 */
+    -webkit-hyphens: auto; /* Safari 5.1+, IOS Safari 4.3+ - not supported by Blink browsers Chrome and Opera */
+    -ms-hyphens: auto; /* IE 10+, Edge 12+ */
+    hyphens: auto; /* Firefox 43+ */
 }
 
 template,
@@ -118,7 +153,11 @@ dialog {
     display: none; /* fix for browsers that do not support the HTML5 <template> or <dialog> tags - browser support: Firefox 22+, Chrome 26+, Safari 8+, IOS Safari 8+, Opera 15+ */
 }
 
-/* INLINE ELEMENTS *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* INLINE ELEMENTS */
+
 a,
 em, i,
 strong, b,
@@ -140,19 +179,22 @@ span {
     vertical-align: baseline;
 }
 
+
+/* Code - <code>, <var>, <samp>, <kbd> *********************************************************************************************************/
 code, var, samp, kbd {
     font-family: "Courier New", Courier, monospace;
     font-size: 0.85em;
-    font-size: 0.85rem;
     hyphens: manual;
 }
 
+
+/* Abbreviations *******************************************************************************************************************************/
 abbr {
     speak: spell-out;
 }
 
 abbr[title] {
-    border-bottom: 1px dotted #333;
+    border-bottom: 0.0625em dotted #333;
     cursor: help;
 }
 
@@ -164,7 +206,8 @@ abbr[title] {
     }
 }
 
-/* definition - marks the first occurrence of a term */
+
+/* Definitions - <dfn> - marks the first occurrence of a term **********************************************************************************/
 dfn::before {
     content: open-quote;
 }
@@ -173,7 +216,10 @@ dfn::after {
     content: close-quote;
 }
 
-/* sup & sub - stops them affecting the line-height */
+
+/* Superscript & Subscript - <sup>, <sub> ******************************************************************************************************/
+
+/* prevent <sup> and <sub> affecting the line-height: */
 sup, sub {
     position: relative;
     vertical-align: baseline;
@@ -188,38 +234,89 @@ sub {
 }
 
 
-/* ANCHOR LINKS *********************************************************************************************************************************************************************************************/
+
+/***********************************************************************************************************************************************/
+/* ANCHOR LINKS */
 
 /*
 	ORDER:
-	1. a:link - link must have an href for this to work
-	2. a:visited
-	3. a:focus
-	4. a:hover
-	5. a:active
+    1. a - default - does not require an href attribute
+	2. a:link - unvisited link - link must have an href attribute for this to work
+	3. a:visited
+	4. a:focus (:focus can be before or after :hover depending on the expected behaviour)
+	5. a:hover
+	6. a:active
 */
 
+/* default - used to style links without an href */
+a {
+    color: red;
+    text-decoration: underline;
+    /*transition-property: background-color, border-color, color;
+    transition-duration: 0.6s;*/
+}
+
+/* a:any-link - https://developer.mozilla.org/en-US/docs/Web/CSS/:any-link */
+a:link, a:visited {
+    color: $link-colour;
+    text-decoration: underline;
+}
+
+/* unvisited links - requires an href attribute that has a value */
+a:link {
+    color: DARKGREEN;
+}
+
+a:visited {
+    color: LIME;
+}
+
+a:focus,
+a:hover {
+    color: $link-colour-hover;
+    text-decoration: none;
+}
+
+a:focus {
+
+}
+
+a:hover {
+
+}
+
 a:active {
+    color: $link-colour-active;
     cursor: wait;
 }
 
-/* LIST ELEMENTS *********************************************************************************************************************************************************************************************/
 
+
+/***********************************************************************************************************************************************/
+/* LIST ELEMENTS */
+
+/*
+not needed as these elements have been set to display:block above
 ul, ol {
     list-style: none;
 }
+*/
 
-/* TABLE ELEMENTS *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* TABLE ELEMENTS */
+
 table, thead, tfoot {
     margin: 0;
     padding: 0;
 }
 
 table {
-    table-layout: auto;
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
+    table-layout: auto;
 }
 
 th, td {
@@ -236,7 +333,10 @@ caption {
     caption-side: top;
 }
 
-/* FORM ELEMENTS *********************************************************************************************************************************************************************************************/
+
+
+/***********************************************************************************************************************************************/
+/* FORM ELEMENTS */
 
 /*
 	input types:
@@ -245,18 +345,23 @@ caption {
 		submit, tel, text, time, url, week
 
 	other field elements:
-		button, select, textarea
+		button, select, datalist, textarea
 */
 
+
+/* Fieldsets & Legends - <fieldset>, <legend> **************************************************************************************************/
 legend {
     color: inherit; /* fix for Internet Explorer */
 }
 
+
+/* Labels - <label> ****************************************************************************************************************************/
 label[for] {
     cursor: pointer;
 }
 
-/* all form fields */
+
+/* Form Fields - <input>, <textarea>, <select>, <button> ***************************************************************************************/
 input, textarea, select, button {
     font-family: inherit; /* do not use font - do not want to inherit line-height */
     font-size: inherit;
@@ -267,57 +372,22 @@ input, textarea, select, button {
     box-sizing: border-box;
 }
 
-/*Number display spinner only on hover or focus - same behaviour as Chrome*/
-input[type='number'] {
-     -moz-appearance: textfield;
-}
-
-input[type='number']:focus,
-input[type='number']:hover {
-
-     -moz-appearance: initial;
-}
-
-/* Checkbox/Radio Fields */
-input[type="checkbox"],
-input[type="radio"] {
-    cursor: pointer;
-}
-
-/* Buttons */
-input[type="submit"],
-input[type="reset"],
-input[type="button"],
-button {
-    cursor: pointer;
-}
-
-input[type="image"],
-input[type="file"] {
-    cursor: pointer;
-}
-
-input[readonly] {
-    border: none;
-    font: inherit;
-    line-height: inherit;
-    vertical-align: baseline;
-    background-color: transparent;
-}
-
 /* switch off default styling in webkit browsers */
 input, textarea, select {
-   -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
-/* removes the extra padding and border on buttons and input tags for Firefox browsers
-			   http://css-tricks.com/forums/topic/button-padding-issue/ */
-button::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+
+/* Text Fields - <input type="color|date|datetime|datetime-local|email|month|number|password|search|tel|text|time|url|week">, <textarea> *******/
+
+/* Number display spinner only on hover or focus - same behaviour as Blink */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]:focus,
+input[type="number"]:hover {
+    -moz-appearance: initial;
 }
 
 textarea {
@@ -326,19 +396,54 @@ textarea {
     resize: vertical;
 }
 
+
+/* Checkboxes & Radio Buttons - <input type="checkbox|radio"> **********************************************************************************/
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer;
+}
+
+
+/* Dropdown Lists - <select>, <datalist> *******************************************************************************************************/
 select {
     -webkit-appearance: none; /* fix for Safari */
     cursor: pointer;
 }
 
-// remove default error styling
-:invalid {
-    box-shadow: none; /* FF */
-    outline: 0;       /* IE 10 */
+
+/* Buttons - <button>, <input type="button|image|reset|submit"> ********************************************************************************/
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="image"],
+input[type="file"] button {
+    cursor: pointer;
+}
+
+/* removes the extra padding and border on buttons and input tags for Firefox browsers
+   http://css-tricks.com/forums/topic/button-padding-issue/ */
+button::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner {
+    padding: 0;
+    border: 0;
 }
 
 
-/* EMBEDDED CONTENT *********************************************************************************************************************************************************************************************/
+/* Errors **************************************************************************************************************************************/
+
+/* remove default error styling - WARNING: needs to be replaced with something equivalent! */
+:invalid {
+    box-shadow: none; /* Firefox */
+    outline: 0; /* IE 10 */
+}
+
+
+
+/***********************************************************************************************************************************************/
+/* EMBEDDED CONTENT */
+
 audio, video,
 iframe, object, embed {
     margin: 0;
@@ -352,7 +457,10 @@ img {
 }
 
 
-/* SVG *********************************************************************************************************************************************************************************************/
+
+/***********************************************************************************************************************************************/
+/* SVG */
+
 svg {
     fill: currentColor;
 }

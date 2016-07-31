@@ -1,11 +1,77 @@
-﻿$base-font-size: 16;
-/* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
-$phone-width: "only screen and (max-width: 400px)";
-$tablet-width: "only screen and (min-width: 401px) and (max-width: 800px)";
+﻿/***********************************************************************************************************************************************/
+/* VARIABLES */
+/***********************************************************************************************************************************************/
 
 
+/***********************************************************************************************************************************************/
+/* Colours */
 
+$background-colour: #FFF;
+
+$selection-background-color: #FE4902;
+$selection-color: #FFF;
+
+$text-colour: RED;
+
+$link-colour: ORANGE;
+$link-colour-hover: LIME;
+$link-colour-active: PINK;
+
+$primary-colour: #000;
+$primary-colour-hover: #000;
+$primary-colour-active: #000;
+
+/*
+e.g.
+    $primary-blue-light: #000;
+    $primary-blue-light-hover: #000;
+    $primary-blue-light-active: #000;
+
+    $primary-blue-medium: #000;
+    $primary-blue-medium-hover: #000;
+    $primary-blue-medium-active: #000;
+
+    $primary-blue-dark: #000;
+    $primary-blue-dark-hover: #000;
+    $primary-blue-dark-active: #000;
+
+OR
+
+    $primary-colour-1: #000;
+    $primary-colour-1-hover: #000;
+    $primary-colour-1-active: #000;
+
+    $primary-colour-2: #000;
+    $primary-colour-2-hover: #000;
+    $primary-colour-2-active: #000;
+
+OR
+
+    $primary-light: #000;
+    $primary-light-hover: #000;
+    $primary-light-active: #000;
+
+    $primary-medium: #000;
+    $primary-medium-hover: #000;
+    $primary-medium-active: #000;
+
+    $primary-dark: #000;
+    $primary-dark-hover: #000;
+    $primary-dark-active: #000;
+
+*/
 
 $ok-colour: #336633;
 $warning-color: yellow;
 $error-color: #CC0000;
+
+
+
+
+/***********************************************************************************************************************************************/
+/* Layout */
+
+/* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
+$phone-width: "only screen and (max-width: 400px)";
+$tablet-width: "only screen and (min-width: 401px) and (max-width: 800px)";
+

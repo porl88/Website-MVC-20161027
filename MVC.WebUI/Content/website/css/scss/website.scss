@@ -1,0 +1,47 @@
+﻿/***********************************************************************************************************************************************/
+/* STYLE SHEET IMPORT RULES */
+/***********************************************************************************************************************************************/
+
+/*
+    IMPORTANT: PRESERVE THE NATURAL CASCADE ORDER FROM GENERIC TO SPECIFIC
+*/
+
+@import '_variables.scss';
+@import '_mixins.scss';
+
+/* FOR GENERIC SELECTOR STYLING */
+@import 'reset.scss';
+@import 'fonts.scss';
+/*@import 'default.scss';*/ /* sets default styles for selectors ??? */
+
+/* FOR SITE-WIDE, REUSABLE CLASSES - KEEP SPECIVITY LOW */
+@import '_core/accordions.scss';
+@import '_core/animation.scss';
+@import '_core/breadcrumbs.scss';
+@import '_core/button-links.scss';
+@import '_core/code.scss';
+@import '_core/dialogs.scss';
+@import '_core/forms.scss';
+@import '_core/grid-layout.scss';
+@import '_core/headers-sections.scss';
+@import '_core/lists.scss';
+@import '_core/menus.scss';
+@import '_core/messages.scss';
+@import '_core/miscellaneous.scss';
+@import '_core/tables.scss';
+@import '_core/tabs.scss';
+
+/* FOR PAGE-SPECIFIC STYLING - USE THE HIERARCHY PROVIDED BY THE PHYSICAL FILE PATH */
+/* <controller-name>/<controller-name>-<action-name>.scss */
+/* all classes must be prefixed with a namespace unique to each file - e.g. the file name .account-index */
+@import 'shared/_layout.scss';
+@import 'account/account-index.scss';
+@import 'home/home-index.scss';
+
+/* THEMES - for basic skins - e.g. change fonts, colours */
+/*@import '_themes/theme1.scss';*/
+
+/* SPECIAL STYLE SHEETS */
+@import 'print.scss';
+/*@import 'website-ie.scss';*/
+
