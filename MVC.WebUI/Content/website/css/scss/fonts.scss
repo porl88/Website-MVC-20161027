@@ -17,15 +17,18 @@ https://css-tricks.com/snippets/css/using-font-face/
 */
 
 @font-face {
-	font-family: 'MyWebFont';
+    font-family: 'Web Font Name';
     font-style: normal;
     font-weight: 400;
-	src: url('webfont.eot'); /* IE9 Compat Modes */
-	src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-	     url('webfont.woff') format('woff'), /* Modern Browsers */
-	     url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-	     url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
-	}
+    /*font-size-adjust: 0.545;*/ /* http://fontdeck.com/support/fontsizeadjust */
+    src: url('webfont.eot'); /* IE6-11 only */
+    src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('webfont.woff2') format('woff2'), /* Edge 14+, Firefox 39+, Chrome 36+, Safari 10+, Opera 23+ - no support: IE, IOS Safari */
+    url('webfont.woff') format('woff'), /* IE9+, Edge, Firefox 3.6+, Chrome 5+, Safari 5.1+, IOS Safari 5.1+, Opera 11.5+ */
+    url('webfont.ttf') format('truetype'), /* IE9+ (only when set to 'installable'), Edge, Firefox 3.5+, Chrome 4+, Safari 3.1+, IOS Safari 4.3+, Opera 10.1+  */
+    url('webfont.svg#svgFontName') format('svg'); /* Chrome 4-37, Safari 3.2+, IOS Safari 3.2+, Opera 10.1-24 - no support: IE, Edge, Firefox */
+    unicode-range: initial;
+}
 
 /*
 http://sixrevisions.com/css/font-face-guide/

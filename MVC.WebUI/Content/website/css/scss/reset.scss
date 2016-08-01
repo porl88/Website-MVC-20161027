@@ -24,13 +24,14 @@
     -webkit-box-sizing: border-box; /* Chrome 4-9, Safari 3.1-5, IOS Safari 3.2-4.3 */
     box-sizing: border-box; /* Chrome 10+, Firefox 29+, IE 8+, Edge, Opera 10.1+, Safari 5.1+, IOS Safari 5.1+ */
     font-family: sans-serif; /* web safe fonts: http://cssfontstack.com/ */
+    /* N.B. each @font-face should have its own font-size-adjust setting */
     /*font-size-adjust: 0.545;*/ /* http://fontdeck.com/support/fontsizeadjust */
     -webkit-font-smoothing: antialiased; /* maxvoltar.com/archive/-webkit-font-smoothing */
     line-height: 1; /* prefer unitless numbers for line-height values: https://developer.mozilla.org/en-US/docs/Web/CSS/line-height */
     word-wrap: break-word; /* word-wrap has been renamed to overflow-wrap */
     overflow-wrap: break-word; /* word-wrap/overflow-wrap does not work with dynamic widths (e.g. percentage widths, tables that are not set to layout="fixed") - you will need to use word-break instead for these */
-    color: $text-color;
-    background-color: $background-color;
+    color: $text-colour;
+    background-color: $background-colour;
 }
 
 
@@ -50,6 +51,7 @@
 /***********************************************************************************************************************************************/
 /* UNIVERSAL PSEUDO-ELEMENTS */
 
+/* Selection ***********************************************************************************************************************************/
 ::-moz-selection {
 	background-color: $selection-background-colour;
 	color: $selection-colour;
@@ -58,6 +60,28 @@
 ::selection {
 	background-color: $selection-background-colour;
 	color: $selection-colour;
+}
+
+
+/* Scrollbars **********************************************************************************************************************************/
+::-webkit-scrollbar {
+
+}
+
+::-webkit-scrollbar:horizontal {
+
+}
+
+::-webkit-scrollbar-button {
+
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-thumb {
+
 }
 
 
@@ -188,7 +212,7 @@ code, var, samp, kbd {
 }
 
 
-/* Abbreviations *******************************************************************************************************************************/
+/* Abbreviations - <abbr> **********************************************************************************************************************/
 abbr {
     speak: spell-out;
 }
@@ -380,7 +404,7 @@ input, textarea, select {
 
 /* Text Fields - <input type="color|date|datetime|datetime-local|email|month|number|password|search|tel|text|time|url|week">, <textarea> *******/
 
-/* Number display spinner only on hover or focus - same behaviour as Blink */
+/* Number - display spinner only on hover or focus - same behaviour as Blink */
 input[type="number"] {
     -moz-appearance: textfield;
 }
@@ -389,6 +413,17 @@ input[type="number"]:focus,
 input[type="number"]:hover {
     -moz-appearance: initial;
 }
+
+/* Number - disable spinner altogether
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+*/
 
 textarea {
     min-height: 1.5em;
@@ -406,17 +441,17 @@ input[type="radio"] {
 
 /* Dropdown Lists - <select>, <datalist> *******************************************************************************************************/
 select {
-    -webkit-appearance: none; /* fix for Safari */
     cursor: pointer;
 }
 
 
 /* Buttons - <button>, <input type="button|image|reset|submit"> ********************************************************************************/
+button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
 input[type="image"],
-input[type="file"] button {
+input[type="file"] {
     cursor: pointer;
 }
 
@@ -437,6 +472,12 @@ input[type="reset"]::-moz-focus-inner {
 :invalid {
     box-shadow: none; /* Firefox */
     outline: 0; /* IE 10 */
+}
+
+/* invalid field formatting in Gecko */
+input:-moz-ui-invalid,
+textarea:-moz-ui-invalid {
+    box-shadow: none;
 }
 
 
