@@ -97,6 +97,9 @@
 
 }
 
+
+/* Full Screen API *****************************************************************************************************************************/
+
 /* Blink - emulate Gecko behaviour to make content stretch to fill the screen */
 :-webkit-full-screen {
     width: 100%;
@@ -279,6 +282,12 @@ a {
     /*transition-property: background-color, border-color, color;
     transition-duration: 0.6s;*/
 }
+
+/*a::before,
+a::after {
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.6s;
+}*/
 
 /* a:any-link - https://developer.mozilla.org/en-US/docs/Web/CSS/:any-link */
 a:link, a:visited {

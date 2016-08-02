@@ -14,7 +14,7 @@
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(#{$startPercent / 100%}, $startColour), color-stop(#{$endPercent / 100%}, $endColour));
     /* Webkit (Chrome 11+) */
     background-image: -webkit-linear-gradient(top, $startColour $startPercent, $endColour $endPercent);
-    /* W3C */
+    /* W3C - IE10+, Edge, Firefox 16+, Chrome 26+, Safari 6.1+, IOS Safari 7.1+, Opera 12.1+ */
     background-image: linear-gradient(to bottom, $startColour $startPercent, $endColour $endPercent);
 }
 
@@ -77,20 +77,61 @@
 
 
 /***********************************************************************************************************************/
+/* CSS Transforms, Transitions & Animation */
+/***********************************************************************************************************************/
+
+@mixin animation($animation) {
+    -moz-animation: $animation;
+    -o-animation: $animation;
+    -webkit-animation: $animation;
+    animation: $animation;
+}
+
+@mixin transform($transform) {
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    -webkit-transform: $transform;
+    transform: $transform;
+}
+
+@mixin transition($transition) {
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    -webkit-transition: $transition;
+    transition: $transition;
+}
+
+
+
+/***********************************************************************************************************************/
 /* FLEXBOX */
 /***********************************************************************************************************************/
 
+/* Flex Container ******************************************************************************************************/
 @mixin display-flex {
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
-    display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -webkit-box; /* OLD - Chrome 4-20, iOS 6-, Safari 3.1-6 */
+    display: -moz-box; /* OLD - Firefox 2-21 */
     display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Chrome */
-    display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: -webkit-flex; /* NEW - Chrome 21-28 */
+    display: flex; /* NEW - Chrome 29+, Firefox 28+ (22+), IE (11), Edge, Opera 17+, Safari 9+, IOS Safari 9.2+ */
+}
+
+@mixin flex-flow {
+
 }
 
 @mixin flex-direction($value) {
     -webkit-flex-direction: $value;
     flex-direction: $value;
+}
+
+@mixin flex-wrap {
+
+}
+
+@mixin align-content {
+
 }
 
 @mixin align-items($value) {
@@ -99,12 +140,39 @@
     align-items: $value;
 }
 
+@mixin justify-content {
+
+}
+
+
+/* Flex Items *********************************************************************************************************/
+
 @mixin flex($value) {
-    -webkit-box-flex: $value; /* OLD - iOS 6-, Safari 3.1-6 */
-    -moz-box-flex: $value; /* OLD - Firefox 19- */
-    -ms-flex: $value; /* IE 10 */
-    -webkit-flex: $value; /* Chrome */
-    flex: $value; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-box-flex: $value; /* OLD - Chrome 4-20, iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: $value; /* OLD - Firefox 2-21 */
+    -ms-flex: $value; /* TWEENER - IE 10 */
+    -webkit-flex: $value; /* NEW - Chrome 21-28 */
+    flex: $value; /* NEW - Chrome 29+, Firefox 28+ (22+), IE (11), Edge, Opera 17+, Safari 9+, IOS Safari 9.2+ */
+}
+
+@mixin flex-grow {
+
+}
+
+@mixin flex-shrink {
+
+}
+
+@mixin flex-basis {
+
+}
+
+@mixin align-self {
+
+}
+
+@mixin justify-self {
+
 }
 
 @mixin order($value) {
@@ -112,7 +180,7 @@
     -moz-box-ordinal-group: $value; /* OLD - Firefox 19- */
     -ms-flex-order: $value; /* TWEENER - IE 10 */
     -webkit-order: $value; /* NEW - Chrome */
-    order: $value; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    order: $value; /* NEW - Opera 12.1, Firefox 20+ */
 }
 
 
@@ -133,7 +201,7 @@
 }
 
 
-/* PX TO PX + REM *****************************************************************************************************/
+/* Convert PX to REM *****************************************************************************************************/
 /*https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/*/
 
 @function strip-unit($num) {
@@ -177,7 +245,7 @@
 
 
 
-/* PX TO REM ONLY *****************************************************************************************************/
+/* Convert PX to REM only *****************************************************************************************************/
 
 /*https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/*/
 
@@ -202,30 +270,45 @@
 }
 
 
+
 /***********************************************************************************************************************/
 /* FORMS */
 /***********************************************************************************************************************/
 
+/* https://css-tricks.com/almanac/selectors/p/placeholder/ */
+/* ::placeholder - styles placeholder text */
 @mixin placeholder($selector) {
 
+    /* Chrome, Opera 15+, Safari 5+, IOS Safari 4.3+ */
     #{$selector}::-webkit-input-placeholder {
         @content;
     }
-    /* Firefox 18- */
+
+    /* Firefox 1-18 */
     #{$selector}:-moz-placeholder {
         @content;
     }
+
     /* Firefox 19+ */
     #{$selector}::-moz-placeholder {
         @content;
     }
 
+    /* IE 10+ */
     #{$selector}:-ms-input-placeholder {
         @content;
     }
+
+    /* Edge */
+    #{$selector}::-ms-input-placeholder {
+        @content;
+    }
+
+    /* ::placeholder not yet fully finilised - may end up as ::input-placeholder or ::placeholder-text */
+    #{$selector}::placeholder {
+
+    }
 }
-
-
 
 
 
@@ -248,9 +331,74 @@
 
 
 
+
+/***********************************************************************************************************************/
+/* IMAGES */
+/***********************************************************************************************************************/
+
+/*
+    - resizes an image within an image sprite
+    - use spritecow.com to get the original dimensions and position of images within the SVG sprite (works best in Chrome)
+    - all parameter units should be pixels
+
+params:
+    spriteWidth, spriteHeight - 'width' and 'height' attributes in pixels of the <svg> element in the SVG image sprite file
+    originalWidth, originalHeight - the actual width and height of the icon in pixels in the SVG file
+    bgPosLeft, bgPosRight - the left and right position in pixels of the image within the SVG image sprite
+    newWidth, newHeight - the height and width in pixels of the image as it will be displayed on the HTML page
+*/
+
+@mixin scaleImage($spriteWidth, $spriteHeight, $originalWidth, $originalHeight, $bgPosLeft, $bgPosRight, $newWidth: 0, $newHeight: 0) {
+    $scale: 1;
+
+    @if $newWidth > 0 {
+        $scale: $newWidth / $originalWidth;
+        width: #{$newWidth / 16}rem;
+        height: #{($originalHeight * $scale) / 16}rem;
+        background-size: #{($spriteWidth * $scale) / 16}rem #{($spriteHeight * $scale) / 16}rem;
+    }
+    @else {
+        $scale: $newHeight / $originalHeight;
+        width: #{($originalWidth * $scale) / 16}rem;
+        height: #{$newHeight / 16}rem;
+        background-size: #{($spriteWidth * $scale) / 16}rem #{($spriteHeight * $scale) / 16}rem;
+    }
+
+    background-position: #{($bgPosLeft * $scale) / 16}rem #{($bgPosRight * $scale) / 16}rem;
+}
+
+
+
 /***********************************************************************************************************************/
 /* MEDIA QUERIES */
 /***********************************************************************************************************************/
+
+/*
+    should media be screen or all??? - or have desktop as @media (screen or print) and (min-width: 769px)???
+    is it easier to create a print style sheet from scratch???? or just adapt the default stylings????
+    phone/tablet/desktop or small/medium/large???
+    overrideable - can change if needed
+*/
+
+/* Phone - not needed if using mobile-first approach */
+@mixin phone($max-width: 450px) {
+    @media only screen and (max-width: $max-width) {
+
+    }
+}
+
+@mixin tablet($min-width: 451px, $max-width: 768px) {
+    @media only screen and (min-width: $min-width) and (max-width: $max-width) {
+
+    }
+}
+
+@mixin desktop($min-width: 769px) {
+    @media only screen and (min-width: $min-width) {
+
+    }
+}
+
 
 /* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
 
@@ -295,46 +443,38 @@ $tablet-max-width: 768px;
 
 
 
-/* https://css-tricks.com/snippets/css/cross-browser-opacity/ */
-@mixin opacity($opacity) {
-    /* IE 8 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$opacity * 100)";
-    /* IE 5-7 */
-    filter: alpha(opacity=$opacity * 100);
-    /* Netscape */
-    -moz-opacity: $opacity;
-    /* Safari 1.x */
-    -khtml-opacity: $opacity;
-    opacity: $opacity;
-}
+/***********************************************************************************************************************/
+/* TEXT */
+/***********************************************************************************************************************/
 
-@mixin animation($animation) {
-    -moz-animation: $animation;
-    -o-animation: $animation;
-    -webkit-animation: $animation;
-    animation: $animation;
-}
-
-@mixin transform($transform) {
-    -moz-transform: $transform;
-    -ms-transform: $transform;
-    -o-transform: $transform;
-    -webkit-transform: $transform;
-    transform: $transform;
-}
-
-@mixin transition($transition) {
-    -moz-transition: $transition;
-    -o-transition: $transition;
-    -webkit-transition: $transition;
-    transition: $transition;
+@mixin hyphens($hyphens: auto) {
+    -moz-hyphens: $hyphens; /* Firefox 6-42 */
+    -webkit-hyphens: $hyphens; /* Safari 5.1+, IOS Safari 4.3+ */
+    -ms-hyphens: $hyphens; /* IE 10+, Edge 12+ */
+    hyphens: $hyphens; /* Firefox 43+ */
 }
 
 @mixin word-wrap() {
     word-break: break-word;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    hyphens: auto;
+    @include hyphens;
+}
+
+
+
+
+/***********************************************************************************************************************/
+/* MISCELLANEOUS */
+/***********************************************************************************************************************/
+
+/* https://css-tricks.com/css-transparency-settings-for-all-broswers/ */
+/* https://css-tricks.com/snippets/css/cross-browser-opacity/ */
+@mixin opacity($opacity) {
+    -khtml-opacity: $opacity; /* Safari 1.x (pre-WebKit) */
+    -moz-opacity: $opacity; /* Firefox 0-0.9 */
+    zoom: 1; /* required for IE5-7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$opacity * 100)"; /* IE8-9 - should come BEFORE 'filter' */
+	filter: alpha(opacity=$opacity * 100); /* IE5-9 */
+	opacity: $opacity;
 }
 
 @mixin ellipsis() {
@@ -351,20 +491,12 @@ $tablet-max-width: 768px;
     left: 0;
 }
 
-@mixin hyphens($hyphens: auto) {
-    -moz-hyphens: $hyphens; /* Firefox 6+ */
-    -webkit-hyphens: $hyphens; /* Safari 5.1+, IOS Safari 4.3+ */
-    -ms-hyphens: $hyphens; /* IE 10+ */
-    hyphens: $hyphens;
-}
-
 @mixin centre() {
     position: absolute;
     top: 50%;
     left: 50%;
     @include transform(translate(-50%, -50%));
 }
-
 
 @mixin unselectable() {
     -webkit-touch-callout: none;

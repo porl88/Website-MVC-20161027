@@ -1,0 +1,161 @@
+﻿/***********************************************************************************************************************************************/
+/* Home Index */
+/***********************************************************************************************************************************************/
+
+/*
+    DIFFERENT METHODS:
+
+    Separate Style Sheets:
+    <link rel="stylesheet" media="screen" />
+    <link rel="stylesheet" media="max-width(450px)" />
+    <link rel="stylesheet" media="print" />
+
+    <link media="not print" />
+    <link media="print" />
+
+    all screen print handheld
+
+    should the page be split into components???
+
+    do I have one file for each page, or do I split page components up into separate files????
+    have namespace in main website.scss file:
+    .home-index {
+        @import 'home/home-index-menu.scss';
+        @import 'home/home-index-map.scss';
+    }
+
+    then, in each component file:
+    .component {
+    }
+
+    .ie9 & .component {
+    }
+*/
+
+/***********************************************************************************************************************************************/
+/* Default (Phone) - mobile-first */
+
+/* split page into separate components - a component must be a self-contained unit - e.g. .menu, .header */
+.home-index {
+
+    /* Component Name **************************************************************************************************************************/
+    .component {
+
+        /* hacks + media queries come at the end of a component */
+        @include tablet {
+
+        }
+
+        @include desktop {
+
+        }
+
+        @include hack-ie10 {
+
+            @include tablet {
+
+            }
+
+            @include desktop {
+
+            }
+        }
+
+        .ie9 & {
+            @include tablet {
+
+            }
+
+            @include desktop {
+
+            }
+        }
+
+        /* IE8 - desktop only */
+        .ie8 & {
+
+        }
+    }
+
+    /*@include hack-ie10 {
+        .component {
+
+        }
+    }
+
+    .ie9 & .component {
+
+    }
+
+    @include tablet {
+        .component {
+
+        }
+    }
+
+    @include desktop {
+        .component {
+
+        }
+    }*/
+}
+
+
+
+
+/***********************************************************************************************************************************************/
+/* Phone - not needed if doing mobile-first */
+
+@include phone {
+    .home-index {
+    }
+
+    @include hack-ie10 {
+    }
+
+    .ie9 home-index {
+    }
+}
+
+
+/***********************************************************************************************************************************************/
+/* Tablet */
+
+@include tablet {
+    .home-index {
+    }
+
+    @include hack-ie10 {
+    }
+
+    .ie9 .home-index {
+    }
+}
+
+
+/***********************************************************************************************************************************************/
+/* Desktop */
+
+@include desktop {
+    .home-index {
+    }
+
+    @include hack-ie10 {
+    }
+
+    .ie9 .home-index {
+    }
+    /* IE8 - desktop only */
+    .ie8 .home-index {
+    }
+}
+
+
+
+/***********************************************************************************************************************************************/
+/* Print */
+
+@media print {
+    .home-index {
+    }
+}
