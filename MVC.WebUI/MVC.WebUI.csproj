@@ -278,6 +278,7 @@
     <Content Include="Content\website\css\scss\shared\_layout.scss" />
     <Content Include="Content\website\css\scss\_core\miscellaneous.scss" />
     <Content Include="Content\website\fonts\gliphicons-halflings.zip" />
+    <Content Include="Content\website\css\scss\home\home-index.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

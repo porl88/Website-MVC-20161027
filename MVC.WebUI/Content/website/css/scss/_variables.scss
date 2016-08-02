@@ -7,6 +7,25 @@
 */
 
 /***********************************************************************************************************************************************/
+/* Layout */
+
+/* Desktop only designs */
+$page-min-width: 768; /* min page width in pixels */
+$page-max-width: 1000; /* max page width in pixels */
+
+/* Responsive designs for phone, tablet and desktop */
+$page-min-width: 320; /* min page width in pixels */
+$phone-width: 450; /* max phone width in pixels */
+$tablet-width: 768; /* max tablet width in pixels */
+$desktop-width: 1000; /* max desktop width in pixels */
+
+/* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
+/*$phone-width: "only screen and (max-width: 400px)";
+$tablet-width: "only screen and (min-width: 401px) and (max-width: 800px)";*/
+
+
+
+/***********************************************************************************************************************************************/
 /* Colours */
 
 $background-colour: #FFF;
@@ -67,14 +86,4 @@ OR
 $ok-colour: #336633;
 $warning-color: yellow;
 $error-color: #CC0000;
-
-
-
-
-/***********************************************************************************************************************************************/
-/* Layout */
-
-/* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
-$phone-width: "only screen and (max-width: 400px)";
-$tablet-width: "only screen and (min-width: 401px) and (max-width: 800px)";
 

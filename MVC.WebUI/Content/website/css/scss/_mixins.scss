@@ -380,29 +380,32 @@ params:
     overrideable - can change if needed
 */
 
+$phone-width: 450; /* max phone width in pixels */
+$tablet-width: 768; /* max tablet width in pixels */
+
 /* Phone - not needed if using mobile-first approach */
-@mixin phone($max-width: 450px) {
-    @media only screen and (max-width: $max-width) {
-
+@mixin phone($max-width: $phone-width) {
+    @media only screen and (max-width: #{$max-width / 16}rem) {
+        @content;
     }
 }
 
-@mixin tablet($min-width: 451px, $max-width: 768px) {
-    @media only screen and (min-width: $min-width) and (max-width: $max-width) {
-
+@mixin tablet($min-width: $phone-width + 1, $max-width: $tablet-width) {
+    @media only screen and (min-width: #{$min-width / 16}rem) and (max-width: #{$max-width / 16}rem) {
+        @content;
     }
 }
 
-@mixin desktop($min-width: 769px) {
-    @media only screen and (min-width: $min-width) {
-
+@mixin desktop($min-width: $tablet-width + 1) {
+    @media only screen and (min-width: #{$min-width / 16}rem) {
+        @content;
     }
 }
 
 
 /* http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32 */
 
-$phone-max-width: 450px;
+/*$phone-max-width: 450px;
 $tablet-max-width: 768px;
 
 @mixin respond-to($media) {
@@ -426,7 +429,7 @@ $tablet-max-width: 768px;
             @content;
         }
     }
-}
+}*/
 
 
 

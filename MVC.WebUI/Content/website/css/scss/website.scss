@@ -34,9 +34,23 @@
 /* FOR PAGE-SPECIFIC STYLING - USE THE HIERARCHY PROVIDED BY THE PHYSICAL FILE PATH */
 /* <controller-name>/<controller-name>-<action-name>.scss */
 /* all classes must be prefixed with a namespace unique to each file - e.g. the file name .account-index */
+
 @import 'shared/_layout.scss';
-@import 'account/account-index.scss';
-@import 'home/home-index.scss';
+
+.account-index {
+    @import 'account/account-index.scss';
+}
+
+.home-index {
+    @import 'home/home-index.scss';
+
+    /*
+    The components of a page-specific file can be split up into individual files like thus:
+    @import 'home/home-index-menu.scss';
+    @import 'home/home-index-map.scss';
+    @import 'home/home-index-gallery.scss';
+    */
+}
 
 /* THEMES - for basic skins - e.g. change fonts, colours */
 /*@import '_themes/theme1.scss';*/

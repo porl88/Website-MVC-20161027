@@ -97,8 +97,6 @@
 
 
 
-
-
 /*******************************************************************************************************************************/
 /* Badges */
 
@@ -119,4 +117,97 @@
         content: "X";
         visibility: hidden;
     }
+}
+
+
+
+/***********************************************************************************************************************************/
+/* Loading */
+
+/* CSS only loading image - adds loading image to centre of page with backdrop */
+.loading::before,
+.loading dialog::before {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    content: "";
+    background-color: #000;
+    opacity: 0.6;
+}
+
+.loading::after,
+.loading dialog::after {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 2005;
+    display: block;
+    box-sizing: border-box;
+    width: 5rem;
+    height: 5rem;
+    margin-left: -2.5rem;
+    margin-top: -2.5rem;
+    border: 0.625rem solid rgba(14, 68, 70, 0.5);
+    border-top-color: #16b0b5;
+    border-radius: 100%;
+    content: "";
+    @include animation(spin 1s infinite linear);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* adds loading image to centre of a given block-level element */
+.block-loading {
+    position: relative;
+}
+
+.block-loading::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background-color: #000;
+    opacity: 0.6;
+}
+
+.block-loading::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    box-sizing: border-box;
+    width: 5rem;
+    height: 5rem;
+    margin-left: -2.5rem;
+    margin-top: -2.5rem;
+    border: 0.625rem solid rgba(14, 68, 70, 0.5);
+    border-top-color: #16b0b5;
+    border-radius: 100%;
+    content: "";
+    @include animation(spin 1s infinite linear);
 }
