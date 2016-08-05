@@ -18,7 +18,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-gb" data-lang="@UICulture" dir="ltr" class="no-js">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title</title> @*max length 70 characters*@
+    @*<title>@(ViewBag.Title ?? "Default Title")</title>*@
 
     @*Mobile device settings*@
     @*https://css-tricks.com/probably-use-initial-scale1/*@
@@ -147,6 +148,7 @@
 
     @*ARIA: not needed http://html5doctor.com/on-html-belts-and-aria-braces/*@
 
+    @*page not usually needed nowadays*@
     <div class="page">
 
         <header class="page-header" role="banner">
@@ -165,7 +167,11 @@
             @Html.Action("Languages", "Base")
         </header>
 
-        <main id="main" role="main">
+        @*<nav role="navigation">
+            // navigation can go in <header> or not
+        </nav>*@
+
+        <main id="main" class="@ViewBag.PageClass" role="main">
             @RenderBody()
         </main>
 
@@ -191,14 +197,20 @@
 
     </div>
 
+    @* IE 9 and below do not support 'defer' attribute properly - and so you need to add <script> files to the bottom of the file
+       otherwise, add 'defer' attribute and put <script> files in <head>
+       browsers that support 'defer' properly: IE 10+, Edge, Firefox 3.5+, Chrome 8+, Opera 15+, Safari 5+, IOS Safari 5.1+ *@
+
     <!--[if gte IE 9]><!-->
     <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
     <!--<![endif]-->
+
     <script>
         // <![CDATA[
         if (!window.jQuery) document.write('<script src="/content/js/jquery/jquery-2.2.1.min.js"><\/script>');
         // ]]>
     </script>
+
     <!--[if lte IE 8]>
         <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
     <![endif]-->

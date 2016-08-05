@@ -9,12 +9,14 @@
 @import '_variables.scss';
 @import '_mixins.scss';
 
-/* FOR GENERIC SELECTOR STYLING */
+
+/* GENERIC SELECTOR STYLING */
 @import 'reset.scss';
 @import 'fonts.scss';
 /*@import 'default.scss';*/ /* sets default styles for selectors ??? */
 
-/* FOR SITE-WIDE, REUSABLE CLASSES - KEEP SPECIVITY LOW */
+
+/* SITE-WIDE, REUSABLE CLASSES - keep specifity low */
 @import '_core/accordions.scss';
 @import '_core/animation.scss';
 @import '_core/breadcrumbs.scss';
@@ -31,9 +33,11 @@
 @import '_core/tables.scss';
 @import '_core/tabs.scss';
 
-/* FOR PAGE-SPECIFIC STYLING - USE THE HIERARCHY PROVIDED BY THE PHYSICAL FILE PATH */
+
+/* PAGE-SPECIFIC STYLING - use the hierarchy provided by the virtual file path */
 /* <controller-name>/<controller-name>-<action-name>.scss */
 /* all classes must be prefixed with a namespace unique to each file - e.g. the file name .account-index */
+/* use ViewBag.PageClass to add page class to <main> element */
 
 @import 'shared/_layout.scss';
 

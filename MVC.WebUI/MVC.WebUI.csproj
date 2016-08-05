@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\website\css\bootstrap.html" />
-    <Content Include="Content\website\css\styles.css" />
+    <Content Include="Content\website\css\website.css" />
     <Content Include="Content\website\html\emails\activate-account.html" />
     <Content Include="Content\website\html\emails\password.html" />
     <Content Include="Content\website\html\emails\standard.html" />

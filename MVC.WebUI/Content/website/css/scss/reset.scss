@@ -118,7 +118,7 @@
 }
 
 [hidden] {
-    display: none; /* fix for browsers that do not support the HTML5 hidden attribute */
+    display: none; /* fix for browsers that do not support the HTML5 hidden attribute - support: IE11, Edge, Firefox 4+, Chrome 6+, Safari 5.1+, IOS Safari 5.1+, Opera 11.5+ */
 }
 
 

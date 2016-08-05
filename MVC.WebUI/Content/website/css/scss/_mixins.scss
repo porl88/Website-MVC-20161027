@@ -51,6 +51,7 @@
 }
 
 
+
 /***********************************************************************************************************************/
 /* BOX SIZING */
 /***********************************************************************************************************************/
@@ -81,25 +82,25 @@
 /***********************************************************************************************************************/
 
 @mixin animation($animation) {
-    -moz-animation: $animation;
-    -o-animation: $animation;
-    -webkit-animation: $animation;
-    animation: $animation;
+    -moz-animation: $animation; /* Firefox 5-15 */
+    -o-animation: $animation; /* ??? */
+    -webkit-animation: $animation; /* Chrome 4-42, Safari 4-8, IOS Safari 3.2-8.4, Opera 15-29 */
+    animation: $animation; /* Firefox 16+, IE 10+, Edge, Chrome 43+, Opera 30+, Safari 9+, IOS Safari 9.2+ */
 }
 
 @mixin transform($transform) {
-    -moz-transform: $transform;
-    -ms-transform: $transform;
-    -o-transform: $transform;
-    -webkit-transform: $transform;
-    transform: $transform;
+    -moz-transform: $transform; /* Firefox 3.5-15 */
+    -ms-transform: $transform; /* IE 9 */
+    -o-transform: $transform; /* Opera 11.5 */
+    -webkit-transform: $transform; /* Chrome 4-35, Opera 15-22, Safari 3.1-8, IOS Safari 3.2-8.4 */
+    transform: $transform; /* Firefox 16+, IE 10+, Edge, Opera 12.1 + 23+, Safari 9+, IOS Safari 9.2+ */
 }
 
 @mixin transition($transition) {
-    -moz-transition: $transition;
-    -o-transition: $transition;
-    -webkit-transition: $transition;
-    transition: $transition;
+    -moz-transition: $transition; /* Firefox 4-15 */
+    -o-transition: $transition; /* Opera 11.5 */
+    -webkit-transition: $transition; /* Safari 3.1-6, IOS Safari 3.2-6.1 */
+    transition: $transition; /* Firefox 16+, IE 10+, Edge, Chrome 26+, Opera 12.1+, Safari 6.1+, IOS Safari 7.1+ */
 }
 
 
@@ -109,6 +110,7 @@
 /***********************************************************************************************************************/
 
 /* Flex Container ******************************************************************************************************/
+
 @mixin display-flex {
     display: -webkit-box; /* OLD - Chrome 4-20, iOS 6-, Safari 3.1-6 */
     display: -moz-box; /* OLD - Firefox 2-21 */
@@ -315,7 +317,7 @@
 /***********************************************************************************************************************/
 /* HACKS */
 /***********************************************************************************************************************/
-@mixin hack-ie10 {
+@mixin hack-ie10-11 {
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
         @content;
     }
