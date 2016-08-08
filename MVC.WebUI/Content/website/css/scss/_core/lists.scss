@@ -3,6 +3,34 @@
 /*******************************************************************************************************************************/
 
 /************************************************************************************************************************************************************************************/
+/* Custom List - list with custom bullet - can be a different colour or contain a background image */
+
+.ul {
+    margin: 1em 0;
+    padding-left: 1em;
+    line-height: 1.2;
+
+    li {
+        position: relative;
+        padding: 0.2em 0 0.2em 1.2em;
+    }
+
+    li::before {
+        position: absolute;
+        left: 0;
+        top: 0.42em;
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        background: red;
+        border-radius: 100%;
+        content: "";
+    }
+}
+
+
+
+/************************************************************************************************************************************************************************************/
 /* Description List Table - <dl> description lists formatted like a 2-column table */
 
 .dl-table {

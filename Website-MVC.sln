@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.WebUI", "MVC.WebUI\MVC.WebUI.csproj", "{7B97D4E8-9AEC-4795-8360-2FD1B6A1F725}"
 	ProjectSection(ProjectDependencies) = postProject
