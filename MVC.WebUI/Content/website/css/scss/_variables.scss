@@ -2,9 +2,58 @@
 /* VARIABLES */
 /***********************************************************************************************************************************************/
 
-/*
-    CSS Variables: Firefox 31+, Chrome 49+, Opera 36+, Safari 9.1+, Safari IOS 9.3+ - not IE or Edge
-*/
+
+
+/***********************************************************************************************************************************************/
+/* CSS VARIABLES: Firefox 31+, Chrome 49+, Opera 36+, Safari 9.1+, Safari IOS 9.3+ - not IE or Edge */
+/***********************************************************************************************************************************************/
+
+:root {
+    /***********************************************************************************************************************************************/
+    /* Layout */
+
+    /* Desktop only designs */
+    --page-min-width: 768; /* min page width in pixels */
+    --page-max-width: 1000; /* max page width in pixels */
+
+    /* Responsive designs for phone, tablet and desktop */
+    --page-min-width: 320; /* min page width in pixels */
+    --phone-width: 450; /* max phone width in pixels */
+    --tablet-width: 768; /* max tablet width in pixels */
+    --desktop-width: 1000; /* max desktop width in pixels */
+
+    /***********************************************************************************************************************************************/
+    /* Colours */
+
+    --bg-colour: #FFF;
+
+    --selection-bg-colour: #FE4902;
+    --selection-colour: #FFF;
+
+    --text-colour: RED;
+
+    --link-colour: ORANGE;
+    --link-colour-hover: LIME;
+    --link-colour-active: PINK;
+
+    --primary-colour: #000;
+    --primary-colour-hover: #000;
+    --primary-colour-active: #000;
+
+    --ok-colour: #336633;
+    --warning-colour: yellow;
+    --error-colour: #CC0000;
+}
+
+
+
+
+
+
+
+/***********************************************************************************************************************************************/
+/* SASS VARIABLES
+/***********************************************************************************************************************************************/
 
 /***********************************************************************************************************************************************/
 /* Layout */
@@ -28,10 +77,10 @@ $tablet-width: "only screen and (min-width: 401px) and (max-width: 800px)";*/
 /***********************************************************************************************************************************************/
 /* Colours */
 
-$background-colour: #FFF;
+$bg-colour: #FFF;
 
-$selection-background-color: #FE4902;
-$selection-color: #FFF;
+$selection-bg-colour: #FE4902;
+$selection-colour: #FFF;
 
 $text-colour: RED;
 
@@ -84,6 +133,6 @@ OR
 */
 
 $ok-colour: #336633;
-$warning-color: yellow;
-$error-color: #CC0000;
+$warning-colour: yellow;
+$error-colour: #CC0000;
 
