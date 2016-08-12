@@ -341,13 +341,13 @@
 /***********************************************************************************************************************/
 /* HACKS */
 /***********************************************************************************************************************/
-@mixin hack-ie10-11 {
+@mixin hack-ie-10-plus {
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
         @content;
     }
 }
 
-@mixin hack-ie11 {
+@mixin hack-ie-11 {
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
         *::-ms-backdrop, body {
             @content;
@@ -355,6 +355,13 @@
     }
 }
 
+@mixin hack-safari-6-plus {
+    @media screen and (min-color-index: 0) and (-webkit-min-device-pixel-ratio: 0) {
+        @media {
+            @content;
+        }
+    }
+}
 
 
 
