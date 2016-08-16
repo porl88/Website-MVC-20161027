@@ -73,21 +73,21 @@
     /* page title - for SEO purposes, the main page title should be an H1 element */
     & > h1:first-of-type {
     }
-
     /* heading 1 */
     h2 {
     }
-
     /* heading 2 */
     h3 {
     }
-
     /* heading 3 */
     h4 {
     }
 
     p {
-        hyphens: auto;
+        -moz-hyphens: auto; /* Firefox 6-42 */
+        -webkit-hyphens: auto; /* Safari 5.1+, IOS Safari 4.3+ - not supported by Blink browsers Chrome and Opera */
+        -ms-hyphens: auto; /* IE 10+, Edge 12+ */
+        hyphens: auto; /* Firefox 43+ */
     }
 
     ul {
@@ -116,10 +116,13 @@
         code {
             padding: 0.125em 0.25em;
             border: 0.0625em solid #E1E1E1;
-            font-size: 0.9em;
             color: #C7254E;
             background-color: #F9F2F4;
             box-shadow: 0 0.0625em 0.25em rgba(0, 0, 0, 0.1);
+        }
+
+        > code {
+            font-size: 0.9em;
         }
 
         dfn::before {
@@ -137,11 +140,9 @@
 
     figure {
         img {
-
         }
 
         figcaption {
-
         }
     }
 }
