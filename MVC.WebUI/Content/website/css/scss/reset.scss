@@ -212,8 +212,20 @@ span {
 /* Code - <code>, <var>, <samp>, <kbd> *********************************************************************************************************/
 code, var, samp, kbd {
     font-family: "Courier New", Courier, monospace;
+    font-size: 0.9em;
     hyphens: manual;
 }
+
+code var {
+    font-size: 1em;
+}
+
+/*:any(code, var, samp, kbd) code,
+:any(code, var, samp, kbd) var,
+:any(code, var, samp, kbd) samp,
+:any(code, var, samp, kbd) kbd {
+    font-size: 1em;
+}*/
 
 
 /* Abbreviations - <abbr> **********************************************************************************************************************/

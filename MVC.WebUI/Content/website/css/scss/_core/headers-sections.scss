@@ -84,10 +84,6 @@
     }
 
     p {
-        -moz-hyphens: auto; /* Firefox 6-42 */
-        -webkit-hyphens: auto; /* Safari 5.1+, IOS Safari 4.3+ - not supported by Blink browsers Chrome and Opera */
-        -ms-hyphens: auto; /* IE 10+, Edge 12+ */
-        hyphens: auto; /* Firefox 43+ */
     }
 
     ul {
@@ -99,7 +95,12 @@
     blockquote {
     }
 
-    p, li {
+    p, li, dd {
+        -moz-hyphens: auto; /* Firefox 6-42 */
+        -webkit-hyphens: auto; /* Safari 5.1+, IOS Safari 4.3+ - not supported by Blink browsers Chrome and Opera */
+        -ms-hyphens: auto; /* IE 10+, Edge 12+ */
+        hyphens: auto; /* Firefox 43+ */
+
         abbr[title] {
             border-bottom: 0.0625em dotted #333;
             cursor: help;

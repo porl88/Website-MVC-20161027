@@ -120,7 +120,6 @@
 }
 
 @mixin flex-flow {
-
 }
 
 @mixin flex-direction($value) {
@@ -129,11 +128,9 @@
 }
 
 @mixin flex-wrap {
-
 }
 
 @mixin align-content {
-
 }
 
 @mixin align-items($value) {
@@ -143,7 +140,6 @@
 }
 
 @mixin justify-content {
-
 }
 
 
@@ -158,23 +154,18 @@
 }
 
 @mixin flex-grow {
-
 }
 
 @mixin flex-shrink {
-
 }
 
 @mixin flex-basis {
-
 }
 
 @mixin align-self {
-
 }
 
 @mixin justify-self {
-
 }
 
 @mixin order($value) {
@@ -280,35 +271,28 @@
 /* https://css-tricks.com/almanac/selectors/p/placeholder/ */
 /* ::placeholder - styles placeholder text */
 @mixin placeholder($selector) {
-
     /* Chrome, Opera 15+, Safari 5+, IOS Safari 4.3+ */
     #{$selector}::-webkit-input-placeholder {
         @content;
     }
-
     /* Firefox 1-18 */
     #{$selector}:-moz-placeholder {
         @content;
     }
-
     /* Firefox 19+ */
     #{$selector}::-moz-placeholder {
         @content;
     }
-
     /* IE 10+ */
     #{$selector}:-ms-input-placeholder {
         @content;
     }
-
     /* Edge */
     #{$selector}::-ms-input-placeholder {
         @content;
     }
-
     /* ::placeholder not yet fully finilised - may end up as ::input-placeholder or ::placeholder-text */
     #{$selector}::placeholder {
-
     }
 }
 
@@ -319,7 +303,7 @@
 /***********************************************************************************************************************/
 
 @mixin fullscreen($selector) {
-   :-webkit-full-screen #{$selector} {
+    :-webkit-full-screen #{$selector} {
         @content;
     }
 
@@ -355,14 +339,19 @@
     }
 }
 
+/* N.B. There must be no space between 'and' and '(-webkit-min-device-pixel-ratio: 0)' */
+/* N.B. The space gets added back when compiled - so this is useless!!! */
 @mixin hack-safari-6-plus {
-    @media screen and (min-color-index: 0) and (-webkit-min-device-pixel-ratio: 0) {
-        @media {
-            @content;
-        }
+    @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio: 0) {
+        @content;
     }
 }
 
+@mixin chrome {
+    @media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+        @content;
+    }
+}
 
 
 /***********************************************************************************************************************/
@@ -377,27 +366,26 @@
 params:
     spriteWidth, spriteHeight - 'width' and 'height' attributes in pixels of the <svg> element in the SVG image sprite file
     originalWidth, originalHeight - the actual width and height of the icon in pixels in the SVG file
-    bgPosLeft, bgPosRight - the left and right position in pixels of the image within the SVG image sprite
+    bgPosLeft, bgPosTop - the left and top position in pixels of the image within the SVG image sprite
     newWidth, newHeight - the height and width in pixels of the image as it will be displayed on the HTML page
 */
 
-@mixin scaleImage($spriteWidth, $spriteHeight, $originalWidth, $originalHeight, $bgPosLeft, $bgPosRight, $newWidth: 0, $newHeight: 0) {
+@mixin scaleSVG($spriteWidth, $spriteHeight, $originalWidth, $originalHeight, $bgPosLeft, $bgPosTop, $newWidth: 0, $newHeight: 0) {
     $scale: 1;
 
     @if $newWidth > 0 {
         $scale: $newWidth / $originalWidth;
         width: #{$newWidth / 16}rem;
         height: #{($originalHeight * $scale) / 16}rem;
-        background-size: #{($spriteWidth * $scale) / 16}rem #{($spriteHeight * $scale) / 16}rem;
     }
     @else {
         $scale: $newHeight / $originalHeight;
         width: #{($originalWidth * $scale) / 16}rem;
         height: #{$newHeight / 16}rem;
-        background-size: #{($spriteWidth * $scale) / 16}rem #{($spriteHeight * $scale) / 16}rem;
     }
-
-    background-position: #{($bgPosLeft * $scale) / 16}rem #{($bgPosRight * $scale) / 16}rem;
+    
+    background-size: #{($spriteWidth * $scale) / 16}rem #{($spriteHeight * $scale) / 16}rem;
+    background-position: #{($bgPosLeft * $scale) / 16}rem #{($bgPosTop * $scale) / 16}rem;
 }
 
 
@@ -509,8 +497,8 @@ $tablet-max-width: 768px;
     -moz-opacity: $opacity; /* Firefox 0-0.9 */
     zoom: 1; /* required for IE5-7 */
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$opacity * 100)"; /* IE8-9 - should come BEFORE 'filter' */
-	filter: alpha(opacity=$opacity * 100); /* IE5-9 */
-	opacity: $opacity;
+    filter: alpha(opacity=$opacity * 100); /* IE5-9 */
+    opacity: $opacity;
 }
 
 @mixin ellipsis() {
