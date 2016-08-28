@@ -16,9 +16,11 @@ var autoprefixerOptions = {
 };
 
 gulp.task('minify-js', function () {
-    gulp.src(['./content/js/xxx.js', './content/js/yyy.js'])
+    gulp.src(['./content/website/js/_polyfill/*.js', './content/website/js/_core/*.js'])
+      .pipe(sourcemaps.init())
       .pipe(concat('website.min.js'))
       .pipe(minifyjs())
+      .pipe(sourcemaps.write('_maps'))
       .pipe(gulp.dest('./content/js'));
 });
 
@@ -27,7 +29,7 @@ gulp.task('sass-compile', function () {
         .pipe(sourcemaps.init())
         .pipe(autoprefixer(autoprefixerOptions)) // does not work with SASS??? - possibly issue with sourcemaps - might need to call sourcemaps twice: https://github.com/sindresorhus/gulp-autoprefixer/issues/8, https://github.com/floridoo/gulp-sourcemaps/issues/60
         .pipe(sass({ outputStyle: 'compressed' }))
-        .pipe(sourcemaps.write('maps'))
+        .pipe(sourcemaps.write('_maps'))
         .pipe(gulp.dest('./content/css'));
 });
 
