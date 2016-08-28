@@ -347,6 +347,13 @@
     }
 }
 
+/* hack for Safari 7.1+ */
+@mixin hack-safari-7-plus {
+    _::-webkit-full-page-media, _:future, :root {
+        @content;
+    }
+}
+
 @mixin chrome {
     @media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
         @content;
