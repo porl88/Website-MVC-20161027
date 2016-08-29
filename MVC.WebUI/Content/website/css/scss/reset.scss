@@ -104,8 +104,8 @@
 
 /* Blink/WebKit - emulate Gecko behaviour to make content stretch to fill the screen */
 :-webkit-full-screen {
-    width: 100%;
-    height: 100%;
+    width: 100vw !important;
+    height: 100vh !important;
 }
 
 
