@@ -5,6 +5,9 @@
 
     public class GlobalCookiePersistenceService : IPersistenceService
     {
+        // needs a namespace value!!!!! - preferably in constructor - e.g. "global", "shopping-basket"
+        // use parameter attributes (?) and ToMethod()/ToConstructor() (?) - http://stackoverflow.com/questions/7982893/injecting-multiple-constructor-parameters-of-the-same-type-with-ninject-2-0
+        // https://github.com/ninject/ninject/wiki/Contextual-Binding
         private const string cookieName = "global";
         private readonly HttpContextBase context;
 
