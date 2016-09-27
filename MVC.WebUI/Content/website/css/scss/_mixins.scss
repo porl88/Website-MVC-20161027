@@ -377,7 +377,7 @@ params:
     newWidth, newHeight - the height and width in pixels of the image as it will be displayed on the HTML page
 */
 
-@mixin scaleSVG($spriteWidth, $spriteHeight, $originalWidth, $originalHeight, $bgPosLeft, $bgPosTop, $newWidth: 0, $newHeight: 0) {
+@mixin scaleImage($spriteWidth, $spriteHeight, $originalWidth, $originalHeight, $bgPosLeft, $bgPosTop, $newWidth: 0, $newHeight: 0) {
     $scale: 1;
 
     @if $newWidth > 0 {

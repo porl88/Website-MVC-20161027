@@ -9,6 +9,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer'); // https://www.npmjs.com/package/gulp-autoprefixer - does not work with SASS??? need to use Post CSS instead???
 var minifyjs = require('gulp-uglify');
 var concat = require('gulp-concat');
+var eslint = require('gulp-eslint');
 
 // browserlist config: https://github.com/ai/browserslist#queries
 var autoprefixerOptions = {
@@ -16,6 +17,12 @@ var autoprefixerOptions = {
 };
 
 gulp.task('minify-js', function () {
+
+    /* ESLint - does not appear to work on directories starting with an underscore (_) */
+    gulp.src(['./content/website/js/_polyfill/*.js', './content/website/js/_core/*.js'])
+      .pipe(eslint())
+      .pipe(eslint.format());
+
     gulp.src(['./content/website/js/_polyfill/*.js', './content/website/js/_core/*.js'])
       .pipe(sourcemaps.init())
       .pipe(concat('website.min.js'))

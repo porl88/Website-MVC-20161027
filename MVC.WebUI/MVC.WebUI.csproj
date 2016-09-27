@@ -126,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".eslintrc.js" />
     <Content Include="Content\website\css\bootstrap.html" />
     <Content Include="Content\website\css\website.css" />
     <Content Include="Content\website\html\emails\activate-account.html" />
@@ -158,7 +159,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="xxx.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
