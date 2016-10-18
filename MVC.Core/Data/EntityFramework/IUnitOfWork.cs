@@ -1,13 +1,14 @@
 ﻿namespace MVC.Core.Data.EntityFramework
 {
+    using System;
     using System.Threading.Tasks;
     using Core.Entities.Article;
+    using Entities.Account;
+    using Entities.Culture;
     using Entities.Website;
     using Entities.Website.PageItem;
-    using Entities.Culture;
-    using Entities.Account;
 
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
 	{
 		IRepository<Article> ArticleRepository { get; }
 

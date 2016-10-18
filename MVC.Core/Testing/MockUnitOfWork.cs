@@ -1,12 +1,13 @@
 ﻿namespace MVC.Core.Testing
 {
+    using System;
     using System.Threading.Tasks;
-    using MVC.Core.Data.EntityFramework;
-    using MVC.Core.Entities.Article;
+    using Entities.Account;
+    using Entities.Culture;
     using Entities.Website;
     using Entities.Website.PageItem;
-    using Entities.Culture;
-    using Entities.Account;
+    using MVC.Core.Data.EntityFramework;
+    using MVC.Core.Entities.Article;
 
     public class MockUnitOfWork : IUnitOfWork
 	{
@@ -78,5 +79,10 @@
 		public async Task CommitAsync()
 		{
 		}
-	}
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

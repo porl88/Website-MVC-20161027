@@ -20,142 +20,155 @@
             }
         }
 
-        public virtual T Get(int id)
+        public T GetById(object id)
         {
-            return this.entities.FirstOrDefault(x => x.Id == id);
+            return this.entities.FirstOrDefault(x => x.Id == (int)id);
         }
 
-        public T GetSingle(Func<IQueryable<T>, T> query)
+        public List<TResult> Get<TResult>(Func<IQueryable<T>, IQueryable<TResult>> query, params string[] includes)
         {
-            return query(this.entities.AsQueryable());
+            var q = this.entities.AsQueryable();
+            return query(q).ToList();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> filter = null)
+        public TResult GetSingle<TResult>(Func<IQueryable<T>, IQueryable<TResult>> query, params string[] includes)
         {
-            if (filter != null)
+            var q = this.entities.AsQueryable();
+            return query(q).SingleOrDefault();
+        }
+
+        public TResult GetFirst<TResult>(Func<IQueryable<T>, IQueryable<TResult>> query, params string[] includes)
+        {
+            var q = this.entities.AsQueryable();
+            return query(q).FirstOrDefault();
+        }
+
+        public T Insert(T entityToInsert)
+        {
+            if (entityToInsert.Id > 0)
             {
-                return this.entities.AsQueryable().Where(filter);
-            }
-            else
-            {
-                return this.entities;
-            }
-        }
-
-        public List<T> Get()
-        {
-            return this.entities.ToList();
-        }
-
-        public List<U> Get<U>(Func<IQueryable<T>, IQueryable<U>> query)
-        {
-            return query(this.entities.AsQueryable()).ToList();
-        }
-
-        public IQueryable<T> Query()
-        {
-            return this.entities.AsQueryable();
-        }
-
-        public virtual async Task<T> GetAsync(int id)
-        {
-            return this.Get(id);
-        }
-
-        public async Task<U> GetFirstAsync<U>(Func<IQueryable<T>, IQueryable<U>> query)
-        {
-            return query(this.entities.AsQueryable()).FirstOrDefault();
-        }
-
-        public async Task<U> GetSingleAsync<U>(Expression<Func<T, bool>> where, Expression<Func<T, U>> select)
-        {
-            return this.entities.AsQueryable().Where(where).Select(select).SingleOrDefault();
-        }
-
-        public async Task<List<U>> GetAsync<U>(Func<IQueryable<T>, IQueryable<U>> query)
-        {
-            return query(this.entities.AsQueryable()).ToList();
-        }
-
-        public async Task<IEnumerable<T>> GetAsync(Func<IQueryable<T>, IQueryable<T>> query = null)
-        {
-            return this.Get(query);
-        }
-
-        public virtual T Insert(T entity)
-        {
-            if (entity.Id > 0)
-            {
-                var entityInList = this.entities.FirstOrDefault(x => x.Id == entity.Id);
+                var entityInList = this.entities.FirstOrDefault(x => x.Id == entityToInsert.Id);
                 if (entityInList != null)
                 {
-                    entityInList = entity;
+                    entityInList = entityToInsert;
                 }
                 else
                 {
-                    this.entities.Add(entity);
+                    this.entities.Add(entityToInsert);
                 }
             }
             else
             {
                 if (this.entities.Count > 0)
                 {
-                    entity.Id = this.entities.Max(x => x.Id) + 1;
+                    entityToInsert.Id = this.entities.Max(x => x.Id) + 1;
                 }
                 else
                 {
-                    entity.Id = 1;
+                    entityToInsert.Id = 1;
                 }
 
-                this.entities.Add(entity);
+                this.entities.Add(entityToInsert);
             }
 
-            return entity;
+            return entityToInsert;
         }
 
-        public virtual T Update(T entity)
+        public T Update(T entityToUpdate)
         {
-            if (entity.Id > 0)
+            if (entityToUpdate.Id > 0)
             {
-                var entityInList = this.entities.FirstOrDefault(x => x.Id == entity.Id);
+                var entityInList = this.entities.FirstOrDefault(x => x.Id == entityToUpdate.Id);
                 if (entityInList != null)
                 {
-                    entityInList = entity;
+                    entityInList = entityToUpdate;
                 }
                 else
                 {
-                    this.entities.Add(entity);
+                    this.entities.Add(entityToUpdate);
                 }
             }
             else
             {
                 if (this.entities.Count > 0)
                 {
-                    entity.Id = this.entities.Max(x => x.Id) + 1;
+                    entityToUpdate.Id = this.entities.Max(x => x.Id) + 1;
                 }
                 else
                 {
-                    entity.Id = 1;
+                    entityToUpdate.Id = 1;
                 }
 
-                this.entities.Add(entity);
+                this.entities.Add(entityToUpdate);
             }
 
-            return entity;
+            return entityToUpdate;
         }
 
-        public virtual void Delete(T entity)
+        public void Delete(T entityToDelete)
         {
-            this.entities.Remove(entity);
+            this.entities.Remove(entityToDelete);
         }
 
-        public virtual void Delete(int id)
+        public void Delete(object id)
         {
-            var entityToRemove = this.Get(id);
+            var entityToRemove = this.GetById(id);
             if (entityToRemove != null)
             {
                 this.Delete(entityToRemove);
             }
+        }
+
+        public int GetCount(Expression<Func<T, bool>> where = null)
+        {
+            var q = this.entities.AsQueryable();
+            return q.Where(where).Count();
+        }
+
+        public bool Exists(Expression<Func<T, bool>> where = null)
+        {
+            var q = this.entities.AsQueryable();
+            return q.Where(where).Any();
+        }
+
+        public Task<bool> ExistsAsync(Expression<Func<T, bool>> where = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<T> GetByIdAsync(object id)
+        {
+            return this.GetById(id);
+        }
+
+        public async Task<List<TResult>> GetAsync<TResult>(Func<IQueryable<T>, IQueryable<TResult>> query, params string[] includes)
+        {
+            return this.Get(query);
+        }
+
+        public async Task<TResult> GetSingleAsync<TResult>(Func<IQueryable<T>, IQueryable<TResult>> query, params string[] includes)
+        {
+            return this.GetSingle(query);
+        }
+
+        public async Task<TResult> GetFirstAsync<TResult>(Func<IQueryable<T>, IQueryable<TResult>> query, params string[] includes)
+        {
+            return this.GetFirst(query);
+        }
+
+        public async Task<int> GetCountAsync(Expression<Func<T, bool>> where = null)
+        {
+            return this.GetCount(where);
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

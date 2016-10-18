@@ -66,9 +66,11 @@
     <Compile Include="Configuration\RegularExpressions.cs" />
     <Compile Include="Configuration\SystemSettings.cs" />
     <Compile Include="Configuration\WebsiteConfig.cs" />
+    <Compile Include="Data\EntityFramework\IReadOnlyRepository.cs" />
     <Compile Include="Data\EntityFramework\IRepository.cs" />
     <Compile Include="Data\EntityFramework\IUnitOfWork.cs" />
-    <Compile Include="Data\EntityFramework\Repository.cs" />
+    <Compile Include="Data\EntityFramework\EntityFrameworkReadOnlyRepository.cs" />
+    <Compile Include="Data\EntityFramework\EntityFrameworkRepository.cs" />
     <Compile Include="Data\EntityFramework\UnitOfWork.cs" />
     <Compile Include="Data\EntityFramework\WebsiteDbContext.cs" />
     <Compile Include="Entities\Account\User.cs" />
